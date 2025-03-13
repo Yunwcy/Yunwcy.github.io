@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yun | Welcome</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            flex-direction: column;
+        }
+        .container {
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .dropdown {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .dropdown-btn {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dropdown-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function toggleInfo() {
+            var info = document.getElementById("info-content");
+            if (info.style.display === "none" || info.style.display === "") {
+                info.style.display = "block";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 歡迎來到 Yun 的網站！</h1>
+        <p>這是一個 GitHub Pages 測試頁面。</p>
+        <p>查看我的 <a href="https://yunwcy.github.io/imyunzzz/githubTest.html" target="_blank">GitHub</a></p>
+    </div>
+    <div class="dropdown">
+        <button class="dropdown-btn" onclick="toggleInfo()">查看個人資料</button>
+        <div id="info-content" class="dropdown-content">
+            <p><strong>Name: </strong>Yun</p>
+            <p><strong>School: </strong>Institute of Information Management, NTPU</p>
+            <p><strong>Research Assistant</strong></p>
+            <p><strong>Thesis: </strong>Multimodal Dialogue System for Chinese Taipei University Sport Federation</p>
+        </div>
+    </div>
+</body>
+</html>
