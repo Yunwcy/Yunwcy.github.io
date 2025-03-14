@@ -3,90 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yun | Welcome</title>
+    <title>Yun | Personal Website</title>
     <style>
         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #5A4A42;
+            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5)); 
+            opacity: 0.8;
+        }
+        .navbar {
             display: flex;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #2E8B57;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background: rgba(46, 139, 87, 0.2);
+            border-radius: 5px;
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-            flex-direction: column;
+            padding-top: 50px;
         }
-        .container {
-            padding: 20px;
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            font-size: 2.5rem;
-        }
-        p {
-            font-size: 1.2rem;
-        }
-        a {
-            color: white;
-            text-decoration: none;
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
             font-weight: bold;
+            color: #5A4A42; /* 深棕色文字 */
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        .dropdown {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .dropdown-btn {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
+        .hero p {
             font-size: 1.2rem;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s;
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.6;
         }
-        .dropdown-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
-        .dropdown-content {
-            display: none;
-            margin-top: 10px;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+        .hero-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
         }
     </style>
-    <script>
-        function toggleInfo() {
-            var info = document.getElementById("info-content");
-            if (info.style.display === "none" || info.style.display === "") {
-                info.style.display = "block";
-            } else {
-                info.style.display = "none";
-            }
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 歡迎來到 Yun 的網站！</h1>
-        <p>這是一個 GitHub Pages 測試頁面。</p>
-        <p>查看我的 <a href="https://yunwcy.github.io/githubTest.html" target="_blank">GitHub</a></p>
+    <div class="navbar">
+        <a href="https://yunwcy.github.io/about.html">Introduction</a>
+        <a href="https://yunwcy.github.io/research.html">Projects</a>
+        <a href="https://yunwcy.github.io/contact.html">Contact</a>
     </div>
-    <div class="dropdown">
-        <button class="dropdown-btn" onclick="toggleInfo()">查看個人資料</button>
-        <div id="info-content" class="dropdown-content">
-            <p><strong>Name: </strong>Yun</p>
-            <p><strong>School: </strong>Institute of Information Management, NTPU</p>
-            <p><strong>Research Assistant</strong></p>
-            <p><strong>Thesis: </strong>Multimodal Dialogue System for Chinese Taipei University Sport Federation</p>
-        </div>
+    
+    <div class="hero">
+        <h1>Welcome to My Page!</h1>
+        <p>Hi, I'm Yun! A research assistant at <strong>IFIT Lab</strong>, focusing on <strong>AI</strong> and <strong>multimodal</strong> applications. Passionate about developing intelligent systems that enhance communication and accessibility.</p>
+        <p>Currently pursuing my studies at <strong>National Taipei University, Institute of Information Management</strong>.</p>
+        <p>Explore my <a href="https://yunwcy.github.io/research" style="color: #2E8B57; font-weight: bold;">research projects</a> and <a href="https://yunwcy.github.io/contact" style="color: #2E8B57; font-weight: bold;">get in touch</a> with me!</p>
+        <img src="images/forest.png" alt="Hero Image" class="hero-image">
     </div>
 </body>
 </html>
