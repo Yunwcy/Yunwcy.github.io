@@ -25,16 +25,44 @@
             left: 0;
             z-index: 1000;
         }
-        .navbar a {
+        .menu-icon {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .menu-items {
+            display: flex;
+            gap: 20px;
+        }
+        .menu-items a {
             color: #2E8B57;
             text-decoration: none;
             font-size: 1rem;
             padding: 10px 15px;
             font-weight: bold;
         }
-        .navbar a:hover {
+        .menu-items a:hover {
             background: rgba(46, 139, 87, 0.2);
             border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+            .menu-items {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 10px 0;
+                text-align: center;
+            }
+            .menu-items.active {
+                display: flex;
+            }
         }
         .hero {
             position: relative;
@@ -72,29 +100,24 @@
             font-size: 1.1rem;
             line-height: 1.6;
         }
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                align-items: center;
-            }
-            .hero-content {
-                max-width: 95%;
-                padding: 15px;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-        }
     </style>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
+        }
+    </script>
 </head>
 <body>
     <div class="navbar">
-        <a href="https://yunwcy.github.io/about">About me</a>
-        <a href="https://yunwcy.github.io/research">Projects</a>
-        <a href="https://yunwcy.github.io/contact">Contact</a>
+        <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
+        <div class="menu-items" id="menu-items">
+            <a href="https://yunwcy.github.io/about">About me</a>
+            <a href="https://yunwcy.github.io/research">Projects</a>
+            <a href="https://yunwcy.github.io/contact">Contact</a>
+        </div>
     </div>
     
     <div class="hero">
