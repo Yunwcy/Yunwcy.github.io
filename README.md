@@ -9,7 +9,8 @@
 - **Focus:** AI
 
 ## 🛠 Research Projects
-- 🔹 **[Research on speech processing, synthesis, recognition, and sentence construction of people with language disabilities: Multimodal Cross-lingual Task-Oriented Dialogue System](#)** - This research project primarily focuses on developing a multimodal (text, speech, etc.) dialogue system to assist individuals with speech impairments in communicating more effectively and conveniently.
+- 🔹 **[Research on speech processing, synthesis, recognition, and sentence construction of people with language disabilities: Multimodal Cross-lingual Task-Oriented Dialogue System]** 
+-- This research project primarily focuses on developing a multimodal (text, speech, etc.) dialogue system to assist individuals with speech impairments in communicating more effectively and conveniently.
 
 ## 🎤 Conferences & Publications
 - 📌 **[NTCIR-18]** - IMNTPU at the NTCIR-18 MedNLP-CHAT Task: Agentic AI for Multilingual Medical Chatbot Risk Assessment: A Hybrid Approach with Fine-tuning and Few-shot Prompting /2025
