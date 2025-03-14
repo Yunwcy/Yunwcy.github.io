@@ -1,6 +1,29 @@
-## Hi there 👋
+# 👋 Hi, I'm Yun!
 
-I’m currently studying in National Taipei University.
+## 🎓 Education
+- **Current School:** National Taipei University, Institute of Information Management
+- **Field of Study:** Multimodal, AI
+
+## 💼 Work Experience
+- **Research Assistant** in IFIT Lab
+- **Focus:** AI
+
+## 🛠 Research Projects
+- 🔹 **[Research on speech processing, synthesis, recognition, and sentence construction of people with language disabilities: Multimodal Cross-lingual Task-Oriented Dialogue System](#)** - This research project primarily focuses on developing a multimodal (text, speech, etc.) dialogue system to assist individuals with speech impairments in communicating more effectively and conveniently.
+
+## 🎤 Conferences & Publications
+- 📌 **[NTCIR-18]** - IMNTPU at the NTCIR-18 MedNLP-CHAT Task: Agentic AI for Multilingual Medical Chatbot Risk Assessment: A Hybrid Approach with Fine-tuning and Few-shot Prompting /2025
+
+
+## 🌐 Personal Website & Links
+- 🔗 [GitHub](https://yunwcy.github.io/)
+
+
+---
+> "You create your luck by working for what you want."
+
+🌟 **Let's connect and create something amazing!**
+
 
 <!--
 **Yunwcy/Yunwcy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
