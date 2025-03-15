@@ -76,6 +76,8 @@
         }
         .dropdown-container {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
         }
         select {
             padding: 10px;
@@ -83,6 +85,7 @@
             border-radius: 5px;
             border: 1px solid #5A4A42;
             background: white;
+            max-width: 80%;
         }
         .slideshow-container {
             position: relative;
@@ -97,9 +100,9 @@
         }
         .slide {
             display: none;
-            width: 100%;
-            max-height: 500px;
-            object-fit: cover;
+            width: auto;
+            max-height: 100%;
+            object-fit: contain;
             border-radius: 10px;
         }
         @media (max-width: 768px) {
@@ -110,9 +113,17 @@
             h1 {
                 font-size: 2rem;
             }
+            .dropdown-container {
+                flex-direction: column;
+                align-items: center;
+            }
             select {
                 font-size: 1rem;
-                padding: 8px;
+                padding: 12px;
+                width: 90%;
+            }
+            .slideshow-container {
+                height: 300px;
             }
         }
     </style>
