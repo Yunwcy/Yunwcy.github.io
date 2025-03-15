@@ -80,10 +80,11 @@
             margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 30px; /* 增加間距 */
+            gap: 30px;
         }
         .social-icons a {
             text-decoration: none;
+            position: relative;
         }
         .social-icons img {
             width: 30px;
@@ -92,6 +93,24 @@
         }
         .social-icons img:hover {
             transform: scale(1.1);
+        }
+        .social-icons a::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .social-icons a:hover::after {
+            opacity: 1;
         }
     </style>
     <script>
@@ -118,13 +137,13 @@
     <div class="content">
         <h1>Contact Information</h1>
         <div class="social-icons">
-            <a href="https://github.com/Yunwcy/Yunwcy.github.io" target="_blank">
+            <a href="https://github.com/Yunwcy/Yunwcy.github.io" target="_blank" data-tooltip="GitHub">
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Icon">
             </a>
-            <a href="https://www.linkedin.com/in/cheng-yun-wu-143530356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+            <a href="https://www.linkedin.com/in/cheng-yun-wu-143530356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" data-tooltip="LinkedIn">
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon">
             </a>
-            <a href="mailto:yunwcy.im@gmail.com">
+            <a href="mailto:your-email@example.com" data-tooltip="Gmail">
                 <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail Icon">
             </a>
         </div>
