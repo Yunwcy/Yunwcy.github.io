@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Yun</title>
+    <title>Projects | Yun</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            color: #5A4A42; /* 深棕色 */
-            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5)); /* 漸層背景 */
-            opacity: 0.9; /* 透明度 */
+            color: #5A4A42;
+            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5));
         }
         .navbar {
             display: flex;
@@ -65,40 +64,30 @@
             }
         }
         .content {
-            max-width: 800px;
-            margin: 150px auto;
+            max-width: 900px;
+            margin: 100px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.7);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
         }
         h1 {
             font-size: 2.5rem;
             color: #5A4A42;
         }
-        .github-icon {
+        .project-container {
             margin-top: 20px;
+            display: none; /* Commented out content */
         }
-        .github-icon a {
-            text-decoration: none;
-        }
-        .github-icon img {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s;
-        }
-        .github-icon img:hover {
-            transform: scale(1.1);
+        .project {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
     </style>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu-items');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
-        }
-    </script>
 </head>
 <body>
     <div class="navbar">
@@ -113,12 +102,25 @@
     </div>
     
     <div class="content">
-        <h1>Contact Information</h1>
-        <div class="github-icon">
-            <a href="https://github.com/Yunwcy/Yunwcy.github.io" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Icon">
-            </a>
-        </div>
+        <h1>Projects</h1>
+        <p>TBA.</p>
+        <!-- <div class="project-container">
+            <p>This page will showcase various projects, including descriptions, links, and images (e.g., QR codes for LineBot, execution pages, or project demos).</p>
+            
+            <div class="project">
+                <h3>Example Project</h3>
+                <p>Description of the project will go here. This may include functionalities, technologies used, and impact.</p>
+                <a href="#" style="color: #2E8B57; font-weight: bold;">View Project</a>
+            </div>
+        </div> -->
     </div>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
+        }
+    </script>
 </body>
 </html>

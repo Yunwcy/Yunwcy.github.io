@@ -87,7 +87,7 @@
         .slideshow-container {
             position: relative;
             max-width: 100%;
-            margin: 30px auto;
+            margin: 500px auto;
         }
         .slide {
             display: none;
@@ -128,9 +128,9 @@
             currentIndex = 0;
             
             if (selectedEvent === "event1") {
-                images = ["images/nstc/image1.jpg", "images/nstc/image2.jpg", "images/nstc/image3.jpg", "images/nstc/image4.jpg"];
+                images = ["images/nstc/image1.JPG", "images/nstc/image2.JPG", "images/nstc/image3.JPG", "images/nstc/image4.JPG"];
             } else if (selectedEvent === "event2") {
-                images = ["images/fintech2024/image1.jpg", "images/fintech2024/image2.jpg", "images/fintech2024/image3.jpg", , "images/fintech2024/image4.jpg"];
+                images = ["images/fintech2024/image1.JPG", "images/fintech2024/image2.JPG", "images/fintech2024/image3.JPG", , "images/fintech2024/image4.JPG"];
             } else if (selectedEvent === "event3") {
                 images = ["images/japan2024/image1.jpg", "images/japan2024/image2.jpg", "images/japan2024/image3.jpg", "images/japan2024/image4.jpg", "images/japan2024/image5.jpg", "images/japan2024/image7.jpg", "images/japan2024/image8.jpg", "images/japan2024/image9.jpg", "images/japan2024/image10.jpg", "images/japan2024/image11.jpg", "images/japan2024/image12.jpg", "images/japan2024/image13.jpg", "images/japan2024/image14.jpg", "images/japan2024/image15.jpg"];
             }
@@ -138,7 +138,7 @@
             if (images.length > 0) {
                 showSlide();
                 clearInterval(slideShowInterval);
-                slideShowInterval = setInterval(nextSlide, 3000);
+                slideShowInterval = setInterval(nextSlide, 6000);
             }
         }
         
@@ -160,6 +160,7 @@
             <a href="https://yunwcy.github.io/">Home</a>
             <a href="https://yunwcy.github.io/about">About me</a>
             <a href="https://yunwcy.github.io/research">Experiences</a>
+            <a href="https://yunwcy.github.io/project">Projects</a>
             <a href="https://yunwcy.github.io/contact">Contact</a>
         </div>
     </div>
