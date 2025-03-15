@@ -9,9 +9,9 @@
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            color: #5A4A42; /* 深棕色 */
+            color: #5A4A42;
             background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5)); /* 漸層背景 */
-            opacity: 0.9; /* 透明度 */
+            opacity: 0.9;
         }
         .navbar {
             display: flex;
@@ -76,18 +76,21 @@
             font-size: 2.5rem;
             color: #5A4A42;
         }
-        .github-icon {
+        .social-icons {
             margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* 增加間距 */
         }
-        .github-icon a {
+        .social-icons a {
             text-decoration: none;
         }
-        .github-icon img {
+        .social-icons img {
             width: 30px;
             height: 30px;
             transition: transform 0.3s;
         }
-        .github-icon img:hover {
+        .social-icons img:hover {
             transform: scale(1.1);
         }
     </style>
@@ -114,9 +117,15 @@
     
     <div class="content">
         <h1>Contact Information</h1>
-        <div class="github-icon">
+        <div class="social-icons">
             <a href="https://github.com/Yunwcy/Yunwcy.github.io" target="_blank">
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Icon">
+            </a>
+            <a href="https://www.linkedin.com/in/cheng-yun-wu-143530356?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon">
+            </a>
+            <a href="mailto:yunwcy.im@gmail.com">
+                <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Gmail Icon">
             </a>
         </div>
     </div>
