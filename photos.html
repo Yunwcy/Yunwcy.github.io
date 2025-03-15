@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #5A4A42;
+            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5));
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .menu-icon {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .menu-items {
+            display: flex;
+            gap: 20px;
+        }
+        .menu-items a {
+            color: #2E8B57;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        .menu-items a:hover {
+            background: rgba(46, 139, 87, 0.2);
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+            .menu-items {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 10px 0;
+                text-align: center;
+            }
+            .menu-items.active {
+                display: flex;
+            }
+        }
+        .content {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+        .dropdown-container {
+            margin-top: 20px;
+        }
+        select {
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: 1px solid #5A4A42;
+            background: white;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 30px auto;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            .content {
+                max-width: 95%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            select {
+                font-size: 1rem;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
+        }
+        
+        let currentIndex = 0;
+        let images = [];
+        let slideShowInterval;
+        
+        function loadImages(event) {
+            const selectedEvent = event.target.value;
+            images = [];
+            currentIndex = 0;
+            
+            if (selectedEvent === "event1") {
+                images = ["images/nstc/image1.jpg", "images/nstc/image2.jpg", "images/nstc/image3.jpg", "images/nstc/image4.jpg"];
+            } else if (selectedEvent === "event2") {
+                images = ["images/fintech2024/image1.jpg", "images/fintech2024/image2.jpg", "images/fintech2024/image3.jpg", , "images/fintech2024/image4.jpg"];
+            } else if (selectedEvent === "event3") {
+                images = ["images/japan2024/image1.jpg", "images/japan2024/image2.jpg", "images/japan2024/image3.jpg", "images/japan2024/image4.jpg", "images/japan2024/image5.jpg", "images/japan2024/image7.jpg", "images/japan2024/image8.jpg", "images/japan2024/image9.jpg", "images/japan2024/image10.jpg", "images/japan2024/image11.jpg", "images/japan2024/image12.jpg", "images/japan2024/image13.jpg", "images/japan2024/image14.jpg", "images/japan2024/image15.jpg"];
+            }
+            
+            if (images.length > 0) {
+                showSlide();
+                clearInterval(slideShowInterval);
+                slideShowInterval = setInterval(nextSlide, 3000);
+            }
+        }
+        
+        function showSlide() {
+            const slideshowContainer = document.getElementById("slideshow");
+            slideshowContainer.innerHTML = `<img class='slide' src='${images[currentIndex]}' style='display:block;'>`;
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showSlide();
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
+        <div class="menu-items" id="menu-items">
+            <a href="https://yunwcy.github.io/">Home</a>
+            <a href="https://yunwcy.github.io/about">About me</a>
+            <a href="https://yunwcy.github.io/research">Experiences</a>
+            <a href="https://yunwcy.github.io/contact">Contact</a>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h1>Photos</h1>
+        <div class="dropdown-container">
+            <select onchange="loadImages(event)">
+                <option value="">Select an Event</option>
+                <option value="event1">Technology Inclusion Projects Achievement Presentation</option>
+                <option value="event2">FinTech Taipei 2024</option>
+                <option value="event3">Academic exchange visit to Japan, 2024/11/04 - 2024/11/08</option>
+            </select>
+        </div>
+        <div class="slideshow-container" id="slideshow"></div>
+    </div>
+</body>
+</html>
