@@ -44,25 +44,6 @@
             background: rgba(46, 139, 87, 0.2);
             border-radius: 5px;
         }
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-            .menu-items {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 10px 0;
-                text-align: center;
-            }
-            .menu-items.active {
-                display: flex;
-            }
-        }
         .content {
             max-width: 900px;
             margin: 100px auto;
@@ -87,44 +68,47 @@
             background: white;
             max-width: 80%;
         }
-        .slideshow-container {
-            position: relative;
-            max-width: 100%;
-            height: 500px;
-            margin: 30px auto;
+        .photo-gallery {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
+            gap: 10px;
+            margin-top: 20px;
         }
-        .slide {
+        .photo-gallery img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.1);
+        }
+        .lightbox {
             display: none;
-            width: auto;
-            max-height: 100%;
-            object-fit: contain;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
             border-radius: 10px;
         }
-        @media (max-width: 768px) {
-            .content {
-                max-width: 95%;
-                padding: 15px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .dropdown-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            select {
-                font-size: 1rem;
-                padding: 12px;
-                width: 90%;
-            }
-            .slideshow-container {
-                height: 300px;
-            }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
         }
     </style>
     <script>
@@ -135,38 +119,31 @@
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
         }
         
-        let currentIndex = 0;
-        let images = [];
-        let slideShowInterval;
-        
         function loadImages(event) {
             const selectedEvent = event.target.value;
-            images = [];
-            currentIndex = 0;
-            
-            if (selectedEvent === "event1") {
-                images = ["images/nstc/image1.JPG", "images/nstc/image2.JPG", "images/nstc/image3.JPG", "images/nstc/image4.JPG"];
-            } else if (selectedEvent === "event2") {
-                images = ["images/fintech2024/image1.JPG", "images/fintech2024/image2.JPG", "images/fintech2024/image3.JPG", , "images/fintech2024/image4.JPG"];
-            } else if (selectedEvent === "event3") {
-                images = ["images/japan2024/image1.jpg", "images/japan2024/image2.jpg", "images/japan2024/image3.jpg", "images/japan2024/image4.jpg", "images/japan2024/image5.jpg", "images/japan2024/image7.jpg", "images/japan2024/image8.jpg", "images/japan2024/image9.jpg", "images/japan2024/image10.jpg", "images/japan2024/image11.jpg", "images/japan2024/image12.jpg", "images/japan2024/image13.jpg", "images/japan2024/image14.jpg", "images/japan2024/image15.jpg"];
+            const galleryContainer = document.getElementById("photo-gallery");
+            galleryContainer.innerHTML = "";
+
+            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15 };
+            if (selectedEvent) {
+                let numImages = imageNum[selectedEvent] || 0;
+                for (let i = 1; i <= numImages; i++) {
+                    let imgSrc = `images/${selectedEvent}/image${i}.jpg`;
+                    let imgElement = document.createElement("img");
+                    imgElement.src = imgSrc;
+                    imgElement.onclick = () => openLightbox(imgSrc);
+                    galleryContainer.appendChild(imgElement);
+                }
             }
-            
-            if (images.length > 0) {
-                showSlide();
-                clearInterval(slideShowInterval);
-                slideShowInterval = setInterval(nextSlide, 6000);
-            }
+
         }
         
-        function showSlide() {
-            const slideshowContainer = document.getElementById("slideshow");
-            slideshowContainer.innerHTML = `<img class='slide' src='${images[currentIndex]}' style='display:block;'>`;
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
         }
-        
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % images.length;
-            showSlide();
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
         }
     </script>
 </head>
@@ -187,12 +164,17 @@
         <div class="dropdown-container">
             <select onchange="loadImages(event)">
                 <option value="">Select an Event</option>
-                <option value="event1">Technology Inclusion Projects Achievement Presentation</option>
-                <option value="event2">FinTech Taipei 2024</option>
-                <option value="event3">Academic exchange visit to Japan</option>
+                <option value="nstc">Technology Inclusion Projects Achievement Presentation</option>
+                <option value="fintech2024">FinTech Taipei 2024</option>
+                <option value="japan2024">Academic exchange visit to Japan</option>
             </select>
         </div>
-        <div class="slideshow-container" id="slideshow"></div>
+        <div class="photo-gallery" id="photo-gallery"></div>
+    </div>
+    
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img">
     </div>
 </body>
 </html>
