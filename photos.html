@@ -123,24 +123,27 @@
             const selectedEvent = event.target.value;
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
-
+        
             imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15 };
+        
             if (selectedEvent) {
                 let numImages = imageNum[selectedEvent] || 0;
                 for (let i = 1; i <= numImages; i++) {
-                    if (selectedEvent == 'nstc' || selectedEvent == 'fintech2024'){
-                        let imgSrc = `images/${selectedEvent}/image${i}.JPG`;
-                    } else{
-                        let imgSrc = `images/${selectedEvent}/image${i}.jpg`;
+                    let imgSrc = ""; // Declare imgSrc before the if-else block
+        
+                    if (selectedEvent === 'nstc' || selectedEvent === 'fintech2024') {
+                        imgSrc = `images/${selectedEvent}/image${i}.JPG`;
+                    } else {
+                        imgSrc = `images/${selectedEvent}/image${i}.jpg`;
                     }
+        
                     let imgElement = document.createElement("img");
                     imgElement.src = imgSrc;
                     imgElement.onclick = () => openLightbox(imgSrc);
                     galleryContainer.appendChild(imgElement);
                 }
             }
-
-        }
+        }        
         
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
