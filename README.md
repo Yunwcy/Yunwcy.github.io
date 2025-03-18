@@ -13,7 +13,7 @@
     - This research project primarily focuses on developing a multimodal (text, speech, etc.) dialogue system to assist individuals with speech impairments in communicating more effectively and conveniently.
 
 ## 🎤 Conferences & Publications
-- 📌 **[NTCIR-18]** - IMNTPU at the NTCIR-18 MedNLP-CHAT Task: Agentic AI for Multilingual Medical Chatbot Risk Assessment: A Hybrid Approach with Fine-tuning and Few-shot Prompting /2025
+<!-- - 📌 **[NTCIR-18]** - IMNTPU at the NTCIR-18 MedNLP-CHAT Task: Agentic AI for Multilingual Medical Chatbot Risk Assessment: A Hybrid Approach with Fine-tuning and Few-shot Prompting -->
 
 
 ## 🌐 Personal Website & Links
@@ -26,17 +26,3 @@
 🌟 **Let's connect and create something amazing!**
 
 
-<!--
-**Yunwcy/Yunwcy** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
