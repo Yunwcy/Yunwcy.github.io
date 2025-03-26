@@ -17,7 +17,7 @@
 
 
 ## 🌐 Personal Website & Links
-- 🔗 [GitHub](https://yunwcy.github.io/)
+- 🔗 [Personal website](https://yunwcy.github.io/)
 
 
 ---
