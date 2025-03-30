@@ -29,19 +29,19 @@
         h1 { font-size: 2.5rem; text-align: center; }
         h2 { font-size: 1.8rem; color: #2E8B57; border-bottom: 2px solid #2E8B57; padding-bottom: 5px; text-align: center; }
         h3 { font-size: 1.4rem; color: #5A4A42; }
-        h1, h2, h3, strong {
-            font-weight: 700; /* 真正有載入的粗體 */
-        }
+        h1, h2, h3, strong { font-weight: 700; }
         p, ul { font-size: 1.2rem; line-height: 1.6; }
         ul { list-style-type: square; padding-left: 30px; }
         .photo-link { display: inline-block; background: linear-gradient(135deg, rgba(213, 236, 198, 0.6), rgba(220, 233, 190, 0.6), rgba(180, 218, 144, 0.6)); color: #5A4A42; padding: 4px 10px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
         .photo-link:hover { background: #E6DCB3; }
         .certificates { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; }
-        .cert-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 15px; width: 220px; height: 320px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
-        .cert-card img { max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 5px; align-self: center; }
-        .cert-card .cert-text { margin-top: auto; display: flex; flex-direction: column; justify-content: flex-end; }
-        .cert-card h4 { font-size: 1rem; color: #5A4A42; margin: 5px 0 0 0; }
-        .cert-card p { font-size: 0.9rem; color: #5A4A42; }
+        .cert-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 15px; width: 220px; height: 320px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; cursor: pointer; transition: transform 0.2s; }
+        .cert-card:hover { transform: scale(1.02); }
+        .cert-card img { max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 5px; }
+        .cert-card h4, .cert-card p { margin: 0; padding: 2px; }
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 2000; }
+        .lightbox img { max-width: 80%; max-height: 80%; border-radius: 10px; }
+        .lightbox.active { display: flex; }
     </style>
     <script>
         function toggleMenu() {
@@ -49,6 +49,17 @@
             const icon = document.getElementById('menu-icon');
             menu.classList.toggle('active');
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
+        }
+
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
         }
     </script>
 </head>
@@ -82,23 +93,23 @@
 
         <h2>證照 Certificates</h2>
         <div class="certificates">
-            <div class="cert-card">
-                <img src="certificates/Introduction to Programming using Python.png" alt="Certificate 3">
+            <div class="cert-card" onclick="openLightbox('certificates/Introduction to Programming using Python.png')">
+                <img src="certificates/Introduction to Programming using Python.png" alt="Certificate 1">
                 <h4>2021/6/9</h4>
                 <p>98-381:MTA:Introduction to Programming using Python 證書</p>
             </div>
-            <div class="cert-card">
+            <div class="cert-card" onclick="openLightbox('certificates/Database Administration Fundamentals.png')">
                 <img src="certificates/Database Administration Fundamentals.png" alt="Certificate 2">
                 <h4>2021/6/10</h4>
                 <p>98-364:MTA:Database Fundamentals 證書</p>
             </div>
-            <div class="cert-card">
-                <img src="certificates/ERP.png" alt="Certificate 4">
+            <div class="cert-card" onclick="openLightbox('certificates/ERP.png')">
+                <img src="certificates/ERP.png" alt="Certificate 3">
                 <h4>2022/06</h4>
                 <p>ERP 軟體應用師 配銷模組 (鼎新電腦 GP4.X 版) 證書</p>
             </div>
-            <div class="cert-card">
-                <img src="certificates/NVIDIA_Building RAG Agents with LLMs_Certificate.png" alt="Certificate 5">
+            <div class="cert-card" onclick="openLightbox('certificates/NVIDIA_Building RAG Agents with LLMs_Certificate.png')">
+                <img src="certificates/NVIDIA_Building RAG Agents with LLMs_Certificate.png" alt="Certificate 4">
                 <h4>2024/10/12</h4>
                 <p>NVIDIA_Building RAG Agents with LLMs_Certificate</p>
             </div>
@@ -116,10 +127,16 @@
 
         <h2>其他經驗 Other Experiences <a href="https://yunwcy.github.io/photos" class="photo-link">📸 View Photos</a></h2>
         <ul>
-            <li>Technology Inclusion Projects Achievement Presentation</li>
-            <li>FinTech Taipei 2024 <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;">News</a></li>
+            <li>A teaching assistant for programming courses, 2020/09 - 2022/06</li>
+            <li>Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
+            <li>FinTech Taipei 2024, 2024/11/01 - 2024/11/02 <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;">News</a></li>
             <li>Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
         </ul>
     </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" alt="certificate full">
+    </div>
 </body>
 </html>
+
