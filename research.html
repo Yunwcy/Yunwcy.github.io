@@ -37,10 +37,11 @@
         .photo-link { display: inline-block; background: linear-gradient(135deg, rgba(213, 236, 198, 0.6), rgba(220, 233, 190, 0.6), rgba(180, 218, 144, 0.6)); color: #5A4A42; padding: 4px 10px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
         .photo-link:hover { background: #E6DCB3; }
         .certificates { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; }
-        .cert-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 15px; width: 220px; height: 320px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; }
-        .cert-card img { max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 5px; }
-        .cert-card h4 { margin-top: 10px; font-size: 1rem; color: #5A4A42; }
-        .cert-card p { font-size: 0.9rem; color: #5A4A42; margin-top: auto; }
+        .cert-card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); padding: 15px; width: 220px; height: 320px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
+        .cert-card img { max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 5px; align-self: center; }
+        .cert-card .cert-text { margin-top: auto; display: flex; flex-direction: column; justify-content: flex-end; }
+        .cert-card h4 { font-size: 1rem; color: #5A4A42; margin: 5px 0 0 0; }
+        .cert-card p { font-size: 0.9rem; color: #5A4A42; }
     </style>
     <script>
         function toggleMenu() {
