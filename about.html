@@ -64,9 +64,16 @@
             .menu-items.active {
                 display: flex;
             }
+            .two-column {
+                flex-direction: column;
+            }
+            .left-column, .right-column {
+                width: 100%;
+                padding: 10px;
+            }
         }
         .content {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 100px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.7);
@@ -74,9 +81,27 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             font-family: 'Noto Serif TC', serif;
         }
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .left-column, .right-column {
+            flex: 1 1 45%;
+            text-align: left;
+            min-width: 280px;
+        }
         h1 {
             font-size: 2.5rem;
             color: #5A4A42;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.6rem;
+            color: #2E8B57;
+            border-bottom: 2px solid #2E8B57;
+            padding-bottom: 5px;
         }
         p {
             font-size: 1.2rem;
@@ -90,8 +115,64 @@
             line-height: 1.8;
         }
         h1, h2, h3, strong {
-            font-weight: 700; /* 真正有載入的粗體 */
+            font-weight: 700;
         }
+        .header-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(213, 236, 198, 0.6), rgba(202, 226, 167, 0.6));
+            padding: 30px 20px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 4px 8px rgba(90, 74, 66, 0.2);
+            text-align: left;
+            flex-wrap: wrap;
+        }
+        
+        .profile-photo img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 30px;
+            border: 3px solid #5A4A42;
+        }
+        
+        .profile-info {
+            max-width: 500px;
+        }
+        
+        .name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #5A4A42; /* 咖啡色 */
+            margin: 0;
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            color: #2E8B57; /* 綠色 */
+            margin-top: 5px;
+        }
+        .contact-info {
+            border: 2px dashed #90C49E;  /* 綠色虛線邊框 */
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin: 30px auto;
+            max-width: 400px;
+            font-size: 1rem;
+            color: #333;
+            font-family: 'Noto Serif TC', serif;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        .detail-link { display: inline-block; background: linear-gradient(135deg, rgba(213, 236, 198, 0.6), rgba(220, 233, 190, 0.6), rgba(180, 218, 144, 0.6)); color: #5A4A42; padding: 4px 10px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 3px; }
+        .detail-link:hover { background: #E6DCB3; }
         .footer-note {
             font-size: 0.8rem;
             color: #444;
@@ -120,21 +201,38 @@
             <a href="https://yunwcy.github.io/contact">Contact</a>
         </div>
     </div>
-    
+
     <div class="content">
-        <h1>About Me</h1>
-        <p>Hi, I'm Cheng-Yun Wu (Yun)! A master's student passionate about AI and multimodal technologies.</p>
-        <ul>
-            <li><strong>Education:</strong>
+        <div class="header-card">
+          <div class="profile-photo">
+            <img src="images/profile.jpg" alt="Profile Photo">
+          </div>
+          <div class="profile-info">
+            <h1 class="name">Cheng-Yun Wu (Yun)</h1>
+            <h2 class="title">Master Student | Research Assistant</h2>
+          </div>
+        </div>
+        <div class="two-column">
+            <div class="left-column">
+                <div class="contact-info">
+                  <div class="info-item">
+                    📞 <span>+886-9-55924587</span>
+                  </div>
+                  <div class="info-item">
+                    📧 <span>yunwcy.im@gmail.com</span>
+                  </div>
+                  <div class="info-item">
+                    📍 <span>New Taipei City, Taiwan</span>
+                  </div>
+                </div>
+
+                <h2>Education</h2>
                 <ul>
-                    <li>Master: Institute of Information Management, National Taipei University (2024/09 - 2026/06)</li>
-                    <li>Bachelor: Department of Information Management, Ming Chuan University (2019/09 - 2023/06)</li>
-                    <li>High School: Taipei JingMei Girls High School (2016/09 - 2019/06)</li>
+                    <li><strong>Master:</strong> Institute of Information Management, National Taipei University (2024/09 - 2026/06)</li>
+                    <li><strong>Bachelor:</strong> Department of Information Management, Ming Chuan University (2019/09 - 2023/06)</li>
+                    <li><strong>High School:</strong> Taipei JingMei Girls High School (2016/09 - 2019/06)</li>
                 </ul>
-            </li>
-            <li><strong>Field of Study:</strong> Multimodal, AI</li>
-            <li><strong>Work:</strong> Research Assistant at IFIT Lab</li>
-            <li><strong>Skills:</strong>
+                <h2>Skills</h2>
                 <ul>
                     <li>Python</li>
                     <li>Java</li>
@@ -142,11 +240,48 @@
                     <li>Large language model (LLM)</li>
                     <li>Retrieval-augmented generation (RAG)</li>
                 </ul>
-            </li>
-            <li><strong>Research Focus:</strong> AI-driven dialogue systems</li>
-            <li><strong>Conferences:</strong> NTCIR-18 MedNLP-CHAT Task</li>
-        </ul>
+                <h2>Language</h2>
+                <ul>
+                    <li>Chinese</li>
+                    <li>English</li>
+                </ul>
+            </div>
+            <div class="right-column">
+                <h2>About me</h2>
+                <p>Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.</p>
+                <h2>Experience</h2><a href="https://yunwcy.github.io/research" class="detail-link">For more details</a>
+                <div class="experience-section">
+                    <ul>
+                        <li>
+                            <strong>Research Project:</strong> Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices  
+                            <br>
+                            <em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>  
+                            <br>
+                            National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30  
+                            <br>
+                            Position: Research Assistant, 2024/09 - Now
+                        </li>
+                        <li>
+                            <strong>Conferences:</strong> NTCIR-18, 2025, Tokyo, Japan
+                        </li>
+                        <li>
+                            <strong>Other Experiences:</strong>  
+                            <ul>
+                                <li>A teaching assistant for programming courses, 2020/09 - 2022/06</li>
+                                <li>Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
+                                <li>
+                                    FinTech Taipei 2024, 2024/11/01 - 2024/11/02
+                                    <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;">News</a>
+                                </li>
+                                <li>Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="footer-note">
         本頁面為個人作品展示用途，資料皆經本人授權使用，並尊重所有隱私與著作權規範。<br/>
         This page is for personal portfolio purposes. All content is used with permission and in compliance with privacy and copyright regulations.
