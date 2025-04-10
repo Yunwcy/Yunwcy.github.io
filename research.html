@@ -44,12 +44,59 @@
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 2000; }
         .lightbox img { max-width: 80%; max-height: 80%; border-radius: 10px; }
         .lightbox.active { display: flex; }
-        .footer-note {
+        footer {
+            background: rgba(213, 236, 198, 0.7);
+            padding: 40px 20px;
+            color: #5A4A42;
+            font-family: 'Noto Serif TC', serif;
             font-size: 0.8rem;
-            color: #444;
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
+        }
+        .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        }
+    
+        .footer-column {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 20px;
+        }
+    
+        .footer-column h3 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        }
+    
+        .footer-column p, .footer-column a {
+        font-size: 0.7rem;
+        margin: 5px 0;
+        text-decoration: none;
+        color: #2E8B57;
+        }
+    
+        .footer-column a:hover {
+        text-decoration: underline;
+        }
+        .footer-note {
+        font-size: 0.7rem;
+        color: #444;
+        text-align: center;
+        margin-top: 20px;
+        padding-bottom: 20px;
+        }
+
+        .footer-bottom {
+        text-align: center;
+        font-size: 0.7rem;
+        margin-top: 30px;
+        }
+    
+        .footer-bottom p:last-child {
+        font-size: 0.7rem;
         }
     </style>
     <script>
@@ -70,6 +117,12 @@
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
+        document.addEventListener("DOMContentLoaded", function () {
+            const yearSpan = document.getElementById("year");
+            if (yearSpan) {
+              yearSpan.textContent = new Date().getFullYear();
+            }
+        });
     </script>
 </head>
 <body>
@@ -146,9 +199,35 @@
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" alt="certificate full">
     </div>
-    <div class="footer-note">
-        This page is for personal portfolio purposes. All content is used with permission and in compliance with privacy and copyright regulations.
-    </div>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-column">
+            <h3>Contact</h3>
+            <p>✉️ yunwcy@gmail.com</p>
+            <p>📍 National Taipei University</p>
+          </div>
+      
+          <div class="footer-column">
+            <h3>Links</h3>
+            <p><a href="https://yunwcy.github.io/">Home</a></p>
+            <p><a href="https://yunwcy.github.io/about">About Me</a></p>
+            <p><a href="https://yunwcy.github.io/research">Experiences</a></p>
+            <p><a href="https://yunwcy.github.io/project">Projects</a></p>
+            <p><a href="https://yunwcy.github.io/contact">Contact</a></p>
+          </div>
+      
+          <div class="footer-column">
+            <h3>Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+          </div>
+        </div>
+      
+        <div class="footer-bottom">
+          <p class="footer-note">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
+          <p>This site is for academic and personal portfolio use only.</p>
+        </div>
+    </footer>
 </body>
 </html>
 
