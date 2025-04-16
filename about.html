@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me | Yun</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Add i18next scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.16/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.4.0/i18next-http-backend.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -25,6 +30,7 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            box-sizing: border-box;
         }
         .menu-icon {
             display: none;
@@ -46,6 +52,26 @@
             background: rgba(46, 139, 87, 0.2);
             border-radius: 5px;
         }
+        /* Language switcher styles */
+        .language-switcher {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .language-btn {
+            background: #2E8B57;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .language-btn:hover {
+            background: #236b43;
+        }
         @media (max-width: 768px) {
             .menu-icon {
                 display: block;
@@ -63,6 +89,11 @@
             }
             .menu-items.active {
                 display: flex;
+            }
+            .language-switcher {
+                position: absolute;
+                top: 15px;
+                right: 60px;
             }
             .two-column {
                 flex-direction: column;
@@ -173,17 +204,17 @@
         .name {
             font-size: 2rem;
             font-weight: 700;
-            color: #5A4A42; /* 咖啡色 */
+            color: #5A4A42;
             margin: 0;
         }
         
         .title {
             font-size: 1.2rem;
-            color: #2E8B57; /* 綠色 */
+            color: #2E8B57;
             margin-top: 5px;
         }
         .contact-info {
-            border: 2px dashed #90C49E;  /* 綠色虛線邊框 */
+            border: 2px dashed #90C49E;
             border-radius: 15px;
             padding: 15px 20px;
             margin: 30px auto;
@@ -269,18 +300,227 @@
             if (yearSpan) {
               yearSpan.textContent = new Date().getFullYear();
             }
+            
+            // Initialize i18next
+            initializeI18n();
         });
+        
+        // Language resources
+        const resources = {
+            en: {
+                translation: {
+                    // Navigation
+                    "home": "Home",
+                    "about": "About me",
+                    "experiences": "Experiences",
+                    "projects": "Projects",
+                    "contact": "Contact",
+                    
+                    // Header
+                    "nameTitle": "Cheng-Yun Wu (Yun)",
+                    "profession": "Master Student | Research Assistant",
+                    
+                    // Contact Info
+                    "phone": "+886-9-55924587",
+                    "email": "yunwcy.im@gmail.com",
+                    "location": "New Taipei City, Taiwan",
+                    
+                    // Sections
+                    "educationTitle": "Education",
+                    "master": "Master: Institute of Information Management, National Taipei University (2024/09 - 2026/06)",
+                    "bachelor": "Bachelor: Department of Information Management, Ming Chuan University (2019/09 - 2023/06)",
+                    "highSchool": "High School: Taipei JingMei Girls High School (2016/09 - 2019/06)",
+                    
+                    "skillsTitle": "Skills",
+                    "python": "Python",
+                    "java": "Java",
+                    "chatbot": "Chatbot",
+                    "llm": "Large language model (LLM)",
+                    "rag": "Retrieval-augmented generation (RAG)",
+                    
+                    "languageTitle": "Language",
+                    "chinese": "Chinese",
+                    "english": "English",
+                    
+                    "aboutMeTitle": "About me",
+                    "aboutMeContent": "Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.",
+                    
+                    "experienceTitle": "Experience",
+                    "moreDetails": "For more details",
+                    "researchProject": "Research Project:",
+                    "projectTitle": "Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices",
+                    "subProject": "Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System",
+                    "projectFunding": "National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
+                    "position": "Position: Research Assistant, 2024/09 - Now",
+                    
+                    "conferences": "Conferences:",
+                    "conference1": "NTCIR-18, 2025, Tokyo, Japan",
+                    
+                    "otherExperiences": "Other Experiences:",
+                    "experience1": "A teaching assistant for programming courses, 2020/09 - 2022/06",
+                    "experience2": "Technology Inclusion Projects Achievement Presentation, 2024/10/30",
+                    "experience3": "FinTech Taipei 2024, 2024/11/01 - 2024/11/02",
+                    "news": "News",
+                    "experience4": "Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08",
+                    
+                    // Footer
+                    "contactHeading": "Contact",
+                    "linksHeading": "Links",
+                    "connectHeading": "Connect",
+                    "university": "National Taipei University",
+                    "copyright": "© {{year}} Cheng-Yun Wu. All rights reserved.",
+                    "disclaimer": "This site is for academic and personal portfolio use only.",
+                    
+                    // Language switcher
+                    "switchLang": "中文"
+                }
+            },
+            zh: {
+                translation: {
+                    // Navigation
+                    "home": "首頁",
+                    "about": "關於我",
+                    "experiences": "經歷",
+                    "projects": "專案",
+                    "contact": "聯絡方式",
+                    
+                    // Header
+                    "nameTitle": "吳承耘 (Yun)",
+                    "profession": "碩士生 | 研究助理",
+                    
+                    // Contact Info
+                    "phone": "+886-9-55924587",
+                    "email": "yunwcy.im@gmail.com",
+                    "location": "新北市，台灣",
+                    
+                    // Sections
+                    "educationTitle": "教育背景",
+                    "master": "碩士：國立臺北大學資訊管理研究所 (2024/09 - 2026/06)",
+                    "bachelor": "學士：銘傳大學資訊管理學系 (2019/09 - 2023/06)",
+                    "highSchool": "高中：台北市立景美女子高級中學 (2016/09 - 2019/06)",
+                    
+                    "skillsTitle": "技能",
+                    "python": "Python",
+                    "java": "Java",
+                    "chatbot": "聊天機器人",
+                    "llm": "大型語言模型 (LLM)",
+                    "rag": "檢索增強生成 (RAG)",
+                    
+                    "languageTitle": "語言",
+                    "chinese": "中文",
+                    "english": "英文",
+                    
+                    "aboutMeTitle": "關於我",
+                    "aboutMeContent": "你好，我是吳承耘 (Yun)，專注於<strong>人工智能和多模態技術</strong>的碩士生。我在 IFIT Lab擔任<strong>研究助理</strong>，研究興趣包括<strong>AI與對話系統</strong>。",
+                    
+                    "experienceTitle": "經歷",
+                    "moreDetails": "更多詳情",
+                    "researchProject": "研究計畫：",
+                    "projectTitle": "數位支持、溝通無礙：AI科技協助語言障礙者溝通輔具之研發、支持與推廣",
+                    "subProject": "子計畫三：包容溝通支持多模態跨語言任務導向對話系統",
+                    "projectFunding": "國家科學及技術委員會 (NSTC 113-2425-H-305-003-)，2023/05/01 - 2026/04/30",
+                    "position": "職位：研究助理，2024/09 - 至今",
+                    
+                    "conferences": "會議：",
+                    "conference1": "NTCIR-18，2025年，東京，日本",
+                    
+                    "otherExperiences": "其他經歷：",
+                    "experience1": "程式設計課程教學助理，2020/09 - 2022/06",
+                    "experience2": "國科會計畫成果發表，2024/10/30",
+                    "experience3": "台北金融科技展，2024/11/01 - 2024/11/02",
+                    "news": "新聞",
+                    "experience4": "參與日本學術交流訪問，2024/11/04 - 2024/11/08",
+                    
+                    // Footer
+                    "contactHeading": "聯絡方式",
+                    "linksHeading": "連結",
+                    "connectHeading": "社群媒體",
+                    "university": "國立臺北大學",
+                    "copyright": "© {{year}} 吳承耘。保留所有權利。",
+                    "disclaimer": "本網站僅供學術和個人作品集使用。",
+                    
+                    // Language switcher
+                    "switchLang": "English"
+                }
+            }
+        };
+        
+        // Initialize i18next
+        function initializeI18n() {
+            i18next
+                .init({
+                    lng: 'en', // Default language
+                    resources: resources,
+                    interpolation: {
+                        escapeValue: false
+                    }
+                })
+                .then(function() {
+                    updateContent();
+                });
+        }
+        
+        // Switch language function
+        function switchLanguage() {
+            const currentLang = i18next.language;
+            const newLang = currentLang === 'en' ? 'zh' : 'en';
+            i18next.changeLanguage(newLang, function() {
+                updateContent();
+                document.documentElement.lang = newLang;
+            });
+        }
+        
+        // Update all content with translations
+        function updateContent() {
+            // Update navigation
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key) {
+                    if (element.tagName === 'INPUT' && element.type === 'button') {
+                        element.value = i18next.t(key);
+                    } else {
+                        element.textContent = i18next.t(key);
+                    }
+                }
+            });
+            
+            // Update HTML content where needed
+            document.querySelectorAll('[data-i18n-html]').forEach(element => {
+                const key = element.getAttribute('data-i18n-html');
+                if (key) {
+                    element.innerHTML = i18next.t(key);
+                }
+            });
+            
+            // Update attributes
+            document.querySelectorAll('[data-i18n-attr]').forEach(element => {
+                const attrData = element.getAttribute('data-i18n-attr');
+                if (attrData) {
+                    const [attr, key] = attrData.split(':');
+                    if (attr && key) {
+                        element.setAttribute(attr, i18next.t(key));
+                    }
+                }
+            });
+            
+            // Update year in copyright
+            const year = new Date().getFullYear();
+            document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
+        }
     </script>
 </head>
 <body>
     <div class="navbar">
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
         <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/">Home</a>
-            <a href="https://yunwcy.github.io/about">About me</a>
-            <a href="https://yunwcy.github.io/research">Experiences</a>
-            <a href="https://yunwcy.github.io/project">Projects</a>
-            <a href="https://yunwcy.github.io/contact">Contact</a>
+            <a href="https://yunwcy.github.io/" data-i18n="home">Home</a>
+            <a href="https://yunwcy.github.io/about" data-i18n="about">About me</a>
+            <a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a>
+            <a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a>
+            <a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a>
+        </div>
+        <div class="language-switcher">
+            <input type="button" class="language-btn" value="中文" data-i18n="switchLang" onclick="switchLanguage()">
         </div>
     </div>
 
@@ -290,76 +530,77 @@
             <img src="images/IMG_8991.JPG" alt="Profile Photo">
           </div>
           <div class="profile-info">
-            <h1 class="name">Cheng-Yun Wu (Yun)</h1>
-            <h2 class="title">Master Student | Research Assistant</h2>
+            <h1 class="name" data-i18n="nameTitle">Cheng-Yun Wu (Yun)</h1>
+            <h2 class="title" data-i18n="profession">Master Student | Research Assistant</h2>
           </div>
         </div>
         <div class="two-column">
             <div class="left-column">
                 <div class="contact-info">
                   <div class="info-item">
-                    📞 <span>+886-9-55924587</span>
+                    📞 <span data-i18n="phone">+886-9-55924587</span>
                   </div>
                   <div class="info-item">
-                    📧 <span>yunwcy.im@gmail.com</span>
+                    📧 <span data-i18n="email">yunwcy.im@gmail.com</span>
                   </div>
                   <div class="info-item">
-                    📍 <span>New Taipei City, Taiwan</span>
+                    📍 <span data-i18n="location">New Taipei City, Taiwan</span>
                   </div>
                 </div>
 
-                <h2>Education</h2>
+                <h2 data-i18n="educationTitle">Education</h2>
                 <ul>
-                    <li><strong>Master:</strong> Institute of Information Management, National Taipei University (2024/09 - 2026/06)</li>
-                    <li><strong>Bachelor:</strong> Department of Information Management, Ming Chuan University (2019/09 - 2023/06)</li>
-                    <li><strong>High School:</strong> Taipei JingMei Girls High School (2016/09 - 2019/06)</li>
+                    <li data-i18n="master"><strong>Master:</strong> Institute of Information Management, National Taipei University (2024/09 - 2026/06)</li>
+                    <li data-i18n="bachelor"><strong>Bachelor:</strong> Department of Information Management, Ming Chuan University (2019/09 - 2023/06)</li>
+                    <li data-i18n="highSchool"><strong>High School:</strong> Taipei JingMei Girls High School (2016/09 - 2019/06)</li>
                 </ul>
-                <h2>Skills</h2>
+                <h2 data-i18n="skillsTitle">Skills</h2>
                 <ul>
-                    <li>Python</li>
-                    <li>Java</li>
-                    <li>Chatbot</li>
-                    <li>Large language model (LLM)</li>
-                    <li>Retrieval-augmented generation (RAG)</li>
+                    <li data-i18n="python">Python</li>
+                    <li data-i18n="java">Java</li>
+                    <li data-i18n="chatbot">Chatbot</li>
+                    <li data-i18n="llm">Large language model (LLM)</li>
+                    <li data-i18n="rag">Retrieval-augmented generation (RAG)</li>
                 </ul>
-                <h2>Language</h2>
+                <h2 data-i18n="languageTitle">Language</h2>
                 <ul>
-                    <li>Chinese</li>
-                    <li>English</li>
+                    <li data-i18n="chinese">Chinese</li>
+                    <li data-i18n="english">English</li>
                 </ul>
             </div>
             <div class="right-column">
-                <h2>About me</h2>
-                <p>Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.</p>
-                <h2>Experience<a href="https://yunwcy.github.io/research" class="detail-link">For more details</a></h2>
+                <h2 data-i18n="aboutMeTitle">About me</h2>
+                <p data-i18n-html="aboutMeContent">Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.</p>
+                <h2 data-i18n="experienceTitle">Experience<a href="https://yunwcy.github.io/research" class="detail-link" data-i18n="moreDetails">For more details</a></h2>
                 <div class="experience-section">
                     <ul>
                         <li>
-                            <strong>Research Project:</strong> 
+                            <strong data-i18n="researchProject">Research Project:</strong> 
                             <ol>
-                                <li>Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices  
+                                <li>
+                                    <span data-i18n="projectTitle">Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices</span>  
                                     <br>
-                                    <em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>  
+                                    <em data-i18n="subProject">Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>  
                                     <br>
-                                    National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30  
+                                    <span data-i18n="projectFunding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</span>  
                                     <br>
-                                    Position: Research Assistant, 2024/09 - Now
+                                    <span data-i18n="position">Position: Research Assistant, 2024/09 - Now</span>
                                 </li>
                             </ol>
                         </li>
                         <li>
-                            <strong>Conferences:</strong> NTCIR-18, 2025, Tokyo, Japan
+                            <strong data-i18n="conferences">Conferences:</strong> <span data-i18n="conference1">NTCIR-18, 2025, Tokyo, Japan</span>
                         </li>
                         <li>
-                            <strong>Other Experiences:</strong>  
+                            <strong data-i18n="otherExperiences">Other Experiences:</strong>  
                             <ul>
-                                <li>A teaching assistant for programming courses, 2020/09 - 2022/06</li>
-                                <li>Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
+                                <li data-i18n="experience1">A teaching assistant for programming courses, 2020/09 - 2022/06</li>
+                                <li data-i18n="experience2">Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
                                 <li>
-                                    FinTech Taipei 2024, 2024/11/01 - 2024/11/02
-                                    <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;">News</a>
+                                    <span data-i18n="experience3">FinTech Taipei 2024, 2024/11/01 - 2024/11/02</span>
+                                    <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;" data-i18n="news">News</a>
                                 </li>
-                                <li>Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
+                                <li data-i18n="experience4">Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
                             </ul>
                         </li>
                     </ul>
@@ -371,30 +612,30 @@
     <footer>
         <div class="footer-container">
           <div class="footer-column">
-            <h3>Contact</h3>
+            <h3 data-i18n="contactHeading">Contact</h3>
             <p>✉️ yunwcy@gmail.com</p>
-            <p>📍 National Taipei University</p>
+            <p>📍 <span data-i18n="university">National Taipei University</span></p>
           </div>
       
           <div class="footer-column">
-            <h3>Links</h3>
-            <p><a href="https://yunwcy.github.io/">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact">Contact</a></p>
+            <h3 data-i18n="linksHeading">Links</h3>
+            <p><a href="https://yunwcy.github.io/" data-i18n="home">Home</a></p>
+            <p><a href="https://yunwcy.github.io/about" data-i18n="about">About Me</a></p>
+            <p><a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a></p>
+            <p><a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a></p>
+            <p><a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a></p>
           </div>
       
           <div class="footer-column">
-            <h3>Connect</h3>
+            <h3 data-i18n="connectHeading">Connect</h3>
             <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
             <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
           </div>
         </div>
       
         <div class="footer-bottom">
-          <p class="footer-note">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p>This site is for academic and personal portfolio use only.</p>
+          <p class="footer-note" id="copyright" data-i18n="copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
+          <p data-i18n="disclaimer">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>      
 </body>
