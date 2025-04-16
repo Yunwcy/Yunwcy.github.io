@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience | Yun</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Add i18next scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.16/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.4.0/i18next-http-backend.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -14,15 +19,42 @@
             background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
             opacity: 0.9;
         }
-        .navbar { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.8); padding: 10px 20px; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.8); padding: 10px 20px; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-sizing: border-box; }
         .menu-icon { display: none; font-size: 2rem; cursor: pointer; }
         .menu-items { display: flex; gap: 20px; }
         .menu-items a { color: #2E8B57; text-decoration: none; font-size: 1rem; padding: 10px 15px; font-weight: bold; }
         .menu-items a:hover { background: rgba(46, 139, 87, 0.2); border-radius: 5px; }
+        
+        /* Language switcher styles */
+        .language-switcher {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .language-btn {
+            background: #2E8B57;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .language-btn:hover {
+            background: #236b43;
+        }
+        
         @media (max-width: 768px) {
             .menu-icon { display: block; }
             .menu-items { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(255, 255, 255, 0.9); padding: 10px 0; text-align: center; }
             .menu-items.active { display: flex; }
+            .language-switcher {
+                position: absolute;
+                top: 15px;
+                right: 60px;
+            }
             footer {
                 padding: 15px 8px;
                 font-size: 0.7rem;
@@ -146,43 +178,201 @@
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
+        
         document.addEventListener("DOMContentLoaded", function () {
             const yearSpan = document.getElementById("year");
             if (yearSpan) {
               yearSpan.textContent = new Date().getFullYear();
             }
+            
+            // Initialize i18next
+            initializeI18n();
         });
+        
+        // Language resources
+        const resources = {
+            en: {
+                translation: {
+                    // Navigation
+                    "home": "Home",
+                    "about": "About me",
+                    "experiences": "Experiences",
+                    "projects": "Projects",
+                    "contact": "Contact",
+                    
+                    // Content headings
+                    "experiencesTitle": "Experiences",
+                    "researchProjects": "Research Projects",
+                    "papers": "Papers",
+                    "masterThesis": "Master Thesis",
+                    "certificates": "Certificates",
+                    "competitions": "Competitions",
+                    "conferences": "Conferences",
+                    "otherExperiences": "Other Experiences",
+                    "viewPhotos": "📸 View Photos",
+                    
+                    // Footer
+                    "contactHeading": "Contact",
+                    "linksHeading": "Links",
+                    "connectHeading": "Connect",
+                    "copyright": "© {{year}} Cheng-Yun Wu. All rights reserved.",
+                    "disclaimer": "This site is for academic and personal portfolio use only.",
+                    
+                    // Research project
+                    "researchProject1": "Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices: Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System",
+                    "projectDuration": "National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
+                    "researchAssistant": "Research Assistant, 2024/09 - Now",
+                    
+                    // Master thesis
+                    "thesisTitle": "Multimodal Dialogue System for Chinese Taipei University Sport Federation, Advisor: Min-Yuh Day, Yen-Chun Lin",
+                    
+                    // Other experiences
+                    "teachingAssistant": "A teaching assistant for programming courses, 2020/09 - 2022/06",
+                    "technologyPresentation": "Technology Inclusion Projects Achievement Presentation, 2024/10/30",
+                    "fintechEvent": "FinTech Taipei 2024, 2024/11/01 - 2024/11/02",
+                    "news": "News",
+                    "japanExchange": "Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08",
+                    
+                    // Language switcher
+                    "switchLang": "中文"
+                }
+            },
+            zh: {
+                translation: {
+                    // Navigation
+                    "home": "首頁",
+                    "about": "關於我",
+                    "experiences": "經歷",
+                    "projects": "專案",
+                    "contact": "聯絡方式",
+                    
+                    // Content headings
+                    "experiencesTitle": "經歷",
+                    "researchProjects": "研究計畫",
+                    "papers": "論文",
+                    "masterThesis": "碩士論文",
+                    "certificates": "證書",
+                    "competitions": "競賽",
+                    "conferences": "研討會",
+                    "otherExperiences": "其他經歷",
+                    "viewPhotos": "📸 查看照片",
+                    
+                    // Footer
+                    "contactHeading": "聯絡方式",
+                    "linksHeading": "連結",
+                    "connectHeading": "社群媒體",
+                    "copyright": "© {{year}} 吳承耘。保留所有權利。",
+                    "disclaimer": "本網站僅供學術和個人作品集使用。",
+                    
+                    // Research project
+                    "researchProject1": "數位支持、溝通無礙：AI科技協助語言障礙者溝通輔具之研發、支持與推廣 - 子計畫三：包容溝通支持多模態跨語言任務導向對話系統",
+                    "projectDuration": "國家科學及技術委員會 (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
+                    "researchAssistant": "研究助理, 2024/09 - 至今",
+                    
+                    // Master thesis
+                    "thesisTitle": "針對中華民國大專院校體育總會之多模態對話系統, 指導教授: 戴敏育, 林彥君",
+                    
+                    // Other experiences
+                    "teachingAssistant": "程式設計課程教學助理, 2020/09 - 2022/06",
+                    "technologyPresentation": "國科會計畫成果發表會, 2024/10/30",
+                    "fintechEvent": "台北金融科技展 2024, 2024/11/01 - 2024/11/02",
+                    "news": "新聞",
+                    "japanExchange": "參與日本學術交流訪問, 2024/11/04 - 2024/11/08",
+                    
+                    // Language switcher
+                    "switchLang": "English"
+                }
+            }
+        };
+        
+        // Initialize i18next
+        function initializeI18n() {
+            i18next
+                .init({
+                    lng: 'en', // Default language
+                    resources: resources,
+                    interpolation: {
+                        escapeValue: false
+                    }
+                })
+                .then(function() {
+                    updateContent();
+                });
+        }
+        
+        // Switch language function
+        function switchLanguage() {
+            const currentLang = i18next.language;
+            const newLang = currentLang === 'en' ? 'zh' : 'en';
+            i18next.changeLanguage(newLang, function() {
+                updateContent();
+                document.documentElement.lang = newLang;
+            });
+        }
+        
+        // Update all content with translations
+        function updateContent() {
+            // Update navigation
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key) {
+                    if (element.tagName === 'INPUT' && element.type === 'button') {
+                        element.value = i18next.t(key);
+                    } else {
+                        element.textContent = i18next.t(key);
+                    }
+                }
+            });
+            
+            // Update attributes
+            document.querySelectorAll('[data-i18n-attr]').forEach(element => {
+                const attrData = element.getAttribute('data-i18n-attr');
+                if (attrData) {
+                    const [attr, key] = attrData.split(':');
+                    if (attr && key) {
+                        element.setAttribute(attr, i18next.t(key));
+                    }
+                }
+            });
+            
+            // Update year in copyright
+            const year = new Date().getFullYear();
+            document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
+        }
     </script>
 </head>
 <body>
     <div class="navbar">
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
         <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/">Home</a>
-            <a href="https://yunwcy.github.io/about">About me</a>
-            <a href="https://yunwcy.github.io/research">Experiences</a>
-            <a href="https://yunwcy.github.io/project">Projects</a>
-            <a href="https://yunwcy.github.io/contact">Contact</a>
+            <a href="https://yunwcy.github.io/" data-i18n="home">Home</a>
+            <a href="https://yunwcy.github.io/about" data-i18n="about">About me</a>
+            <a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a>
+            <a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a>
+            <a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a>
+        </div>
+        <div class="language-switcher">
+            <input type="button" class="language-btn" value="中文" data-i18n="switchLang" onclick="switchLanguage()">
         </div>
     </div>
 
     <div class="content">
-        <h1>Experiences</h1>
+        <h1 data-i18n="experiencesTitle">Experiences</h1>
 
-        <h2>Research Projects</h2>
-        <h3>[1] Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices: Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</h3>
-        <p>National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</p>
+        <h2 data-i18n="researchProjects">Research Projects</h2>
+        <h3 data-i18n="researchProject1">[1] Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices: Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</h3>
+        <p data-i18n="projectDuration">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</p>
         <ul>
-            <li>Research Assistant, 2024/09 - Now</li>
+            <li data-i18n="researchAssistant">Research Assistant, 2024/09 - Now</li>
         </ul>
 
-        <h2>Papers</h2>
-        <h3>Master Thesis</h3>
+        <h2 data-i18n="papers">Papers</h2>
+        <h3 data-i18n="masterThesis">Master Thesis</h3>
         <ul>
-            <li>Multimodal Dialogue System for Chinese Taipei University Sport Federation, Advisor: Min-Yuh Day, Yen-Chun Lin</li>
+            <li data-i18n="thesisTitle">Multimodal Dialogue System for Chinese Taipei University Sport Federation, Advisor: Min-Yuh Day, Yen-Chun Lin</li>
         </ul>
 
-        <h2>Certificates</h2>
+        <h2 data-i18n="certificates">Certificates</h2>
         <div class="certificates">
             <div class="cert-card" onclick="openLightbox('certificates/Introduction to Programming using Python.png')">
                 <img src="certificates/Introduction to Programming using Python.png" alt="Certificate 1">
@@ -206,22 +396,28 @@
             </div>
         </div>
 
-        <h2>Competitions</h2>
+        <h2 data-i18n="competitions">Competitions</h2>
         <ul>
             <li>TBA</li>
         </ul>
 
-        <h2>Conferences</h2>
+        <h2 data-i18n="conferences">Conferences</h2>
         <ul>
             <li>NTCIR-18, 2025, Tokyo, Japan</li>
         </ul>
 
-        <h2>Other Experiences <a href="https://yunwcy.github.io/photos" class="photo-link">📸 View Photos</a></h2>
+        <h2>
+            <span data-i18n="otherExperiences">Other Experiences</span> 
+            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="viewPhotos">📸 View Photos</a>
+        </h2>
         <ul>
-            <li>A teaching assistant for programming courses, 2020/09 - 2022/06</li>
-            <li>Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
-            <li>FinTech Taipei 2024, 2024/11/01 - 2024/11/02 <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;">News</a></li>
-            <li>Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
+            <li data-i18n="teachingAssistant">A teaching assistant for programming courses, 2020/09 - 2022/06</li>
+            <li data-i18n="technologyPresentation">Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
+            <li>
+                <span data-i18n="fintechEvent">FinTech Taipei 2024, 2024/11/01 - 2024/11/02</span> 
+                <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;" data-i18n="news">News</a>
+            </li>
+            <li data-i18n="japanExchange">Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
         </ul>
     </div>
 
@@ -231,32 +427,31 @@
     <footer>
         <div class="footer-container">
           <div class="footer-column">
-            <h3>Contact</h3>
+            <h3 data-i18n="contactHeading">Contact</h3>
             <p>✉️ yunwcy@gmail.com</p>
             <p>📍 National Taipei University</p>
           </div>
       
           <div class="footer-column">
-            <h3>Links</h3>
-            <p><a href="https://yunwcy.github.io/">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact">Contact</a></p>
+            <h3 data-i18n="linksHeading">Links</h3>
+            <p><a href="https://yunwcy.github.io/" data-i18n="home">Home</a></p>
+            <p><a href="https://yunwcy.github.io/about" data-i18n="about">About Me</a></p>
+            <p><a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a></p>
+            <p><a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a></p>
+            <p><a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a></p>
           </div>
       
           <div class="footer-column">
-            <h3>Connect</h3>
+            <h3 data-i18n="connectHeading">Connect</h3>
             <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
             <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
           </div>
         </div>
       
         <div class="footer-bottom">
-          <p class="footer-note">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p>This site is for academic and personal portfolio use only.</p>
+          <p class="footer-note" id="copyright" data-i18n="copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
+          <p data-i18n="disclaimer">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>
 </body>
 </html>
-
