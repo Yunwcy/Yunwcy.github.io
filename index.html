@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yun | Personal Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@23.6.18/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.5/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/jquery-i18next@1.2.1/dist/umd/jquery-i18next.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -146,6 +150,31 @@
             font-family: 'Noto Serif TC', serif;
             font-size: 0.8rem;
         }
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+            padding-left: 20px;
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            font-family: 'Noto Serif TC', serif;
+            background: none;
+            border: 2px solid #5A4A42;
+            color: #5A4A42;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background-color: #2E8B57;
+            color: white;
+            border-color: #2E8B57;
+        }
 
         .footer-container {
             max-width: 1200px;
@@ -205,8 +234,62 @@
         document.addEventListener("DOMContentLoaded", function () {
             const yearSpan = document.getElementById("year");
             if (yearSpan) {
-              yearSpan.textContent = new Date().getFullYear();
+                yearSpan.textContent = new Date().getFullYear();
             }
+
+            i18next.use(i18nextBrowserLanguageDetector).init({
+                debug: true,
+                fallbackLng: 'en',
+                resources: {
+                    en: {
+                        translation: {
+                            nav: { home: "Home", about: "About me", experiences: "Experiences", projects: "Projects", contact: "Contact" },
+                            hero: {
+                                title: "Welcome to My Page!",
+                                intro1: "Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href = 'https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
+                                intro2: "My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.",
+                                explore: "Explore more <a href='https://yunwcy.github.io/about' style='color: #2E8B57; font-weight: bold;'>about me</a>!"
+                            },
+                            footer: { contact: "Contact", links: "Links", connect: "Connect", rights: "All rights reserved.", note: "This site is for academic and personal portfolio use only." }
+                        }
+                    },
+                    zh: {
+                        translation: {
+                            nav: { home: "首頁", about: "關於我", experiences: "經歷", projects: "專案", contact: "聯絡" },
+                            hero: {
+                                title: "歡迎來到我的網站！",
+                                intro1: "嗨，我是 Yun！目前是 <strong>國立臺北大學資訊管理研究所</strong> 碩士生，同時是 <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong> 的研究助理。",
+                                intro2: "我的研究聚焦於 <strong>人工智慧</strong> 與 <strong>多模態應用</strong>，熱衷於開發促進溝通與提升可及性的智慧系統。",
+                                explore: "歡迎進一步 <a href='https://yunwcy.github.io/about' style='color: #2E8B57; font-weight: bold;'>了解我</a>！"
+                            },
+                            footer: { contact: "聯絡方式", links: "快速連結", connect: "社群平台", rights: "版權所有", note: "本網站為學術與個人作品集使用。" }
+                        }
+                    }
+                }
+            }, function(err, t) {
+                jqueryI18next.init(i18next, $, { useOptionsAttr: true });
+                $('body').localize();
+            });
+
+            function updateActiveLang(lang) {
+                $('.lang-btn').removeClass('active');
+                if (lang === 'zh') $('#btn-zh').addClass('active');
+                else $('#btn-en').addClass('active');
+            }
+
+            $('#btn-en').click(function () {
+                i18next.changeLanguage('en', () => {
+                    $('body').localize();
+                    updateActiveLang('en');
+                });
+            });
+
+            $('#btn-zh').click(function () {
+                i18next.changeLanguage('zh', () => {
+                    $('body').localize();
+                    updateActiveLang('zh');
+                });
+            });
         }); 
     </script>
 </head>
@@ -214,50 +297,51 @@
     <div class="navbar">
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
         <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/">Home</a>
-            <a href="https://yunwcy.github.io/about">About me</a>
-            <a href="https://yunwcy.github.io/research">Experiences</a>
-            <a href="https://yunwcy.github.io/project">Projects</a>
-            <a href="https://yunwcy.github.io/contact">Contact</a>
+            <a href="https://yunwcy.github.io/" data-i18n="nav.home">Home</a>
+            <a href="https://yunwcy.github.io/about" data-i18n="nav.about">About me</a>
+            <a href="https://yunwcy.github.io/research" data-i18n="nav.experiences">Experiences</a>
+            <a href="https://yunwcy.github.io/project" data-i18n="nav.projects">Projects</a>
+            <a href="https://yunwcy.github.io/contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="language-switcher">
+            <button class="lang-btn" id="btn-zh">中文</button>
+            <button class="lang-btn" id="btn-en">EN</button>
         </div>
     </div>
     
     <div class="hero">
         <img src="images/forest.png" alt="Hero Image" class="hero-image">
         <div class="hero-content">
-            <h1>Welcome to My Page!</h1>
-            <p>Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href = "https://www.aifitesg.org/" style="color: #2E8B57; font-weight: bold;">IFIT Lab </a></strong>.</p>
-            <p> My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.</p>
-            <p>Explore more <a href="https://yunwcy.github.io/about" style="color: #2E8B57; font-weight: bold;">about me</a>!</p>
+            <h1 data-i18n="hero.title">Welcome to My Page!</h1>
+            <p data-i18n="hero.intro1"></p>
+            <p data-i18n="hero.intro2"></p>
+            <p data-i18n="hero.explore"></p>
         </div>
     </div>
     <footer>
         <div class="footer-container">
-          <div class="footer-column">
-            <h3>Contact</h3>
-            <p>✉️ yunwcy@gmail.com</p>
-            <p>📍 National Taipei University</p>
-          </div>
-      
-          <div class="footer-column">
-            <h3>Links</h3>
-            <p><a href="https://yunwcy.github.io/">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact">Contact</a></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3>Connect</h3>
-            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
-            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
-          </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact</h3>
+                <p>✉️ yunwcy@gmail.com</p>
+                <p>📍 National Taipei University</p>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.links">Links</h3>
+                <p><a href="https://yunwcy.github.io/" data-i18n="nav.home">Home</a></p>
+                <p><a href="https://yunwcy.github.io/about" data-i18n="nav.about">About Me</a></p>
+                <p><a href="https://yunwcy.github.io/research" data-i18n="nav.experiences">Experiences</a></p>
+                <p><a href="https://yunwcy.github.io/project" data-i18n="nav.projects">Projects</a></p>
+                <p><a href="https://yunwcy.github.io/contact" data-i18n="nav.contact">Contact</a></p>
+            </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.connect">Connect</h3>
+                <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+                <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+            </div>
         </div>
-      
         <div class="footer-bottom">
-          <p class="footer-note">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p>This site is for academic and personal portfolio use only.</p>
+            <p class="footer-note">© <span id="year"></span> Cheng-Yun Wu. <span data-i18n="footer.rights">All rights reserved.</span></p>
+            <p data-i18n="footer.note">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>
 </body>
