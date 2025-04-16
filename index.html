@@ -62,20 +62,20 @@
             display: flex;
             gap: 5px;
         }
-        .lang-btn {
-            padding: 6px 12px;
-            background: none;
-            border: 2px solid #5A4A42;
-            color: #5A4A42;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .lang-btn:hover,
-        .lang-btn.active {
-            background-color: #2E8B57;
+        /* Updated language button style to match the second file */
+        .language-btn {
+            padding: 5px 10px;
+            background: #2E8B57;
             color: white;
-            border-color: #2E8B57;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .language-btn:hover {
+            background: #236b43;
         }
         @media (max-width: 768px) {
             .menu-icon {
@@ -238,8 +238,7 @@
         </div>
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
         <div class="language-switcher">
-            <button class="lang-btn" id="btn-zh">中文</button>
-            <button class="lang-btn active" id="btn-en">EN</button>
+            <button class="language-btn" id="lang-toggle" onclick="switchLanguage()">中文</button>
         </div>
     </div>
     
@@ -323,7 +322,8 @@
                                 connect: "Connect",
                                 rights: "All rights reserved.",
                                 note: "This site is for academic and personal portfolio use only."
-                            }
+                            },
+                            langButton: "中文" // Text for the language button when in English
                         }
                     },
                     zh: {
@@ -345,54 +345,53 @@
                                 contact: "聯絡方式",
                                 university: "國立臺北大學",
                                 links: "導覽",
-                                connect: "社群連結",
-                                rights: "版權所有。",
+                                connect: "社群媒體",
+                                rights: "© {{year}} 吳承耘。保留所有權利。",
                                 note: "本網站僅供學術和個人作品集使用。"
-                            }
+                            },
+                            langButton: "English" // Text for the language button when in Chinese
                         }
                     }
                 }
             }, function(err, t) {
                 updateContent();
+                updateLanguageButton();
             });
             
-            // Language switching
-            $('#btn-en').click(function() {
-                i18next.changeLanguage('en', updateContent);
-                updateActiveButton('en');
-            });
-            
-            $('#btn-zh').click(function() {
-                i18next.changeLanguage('zh', updateContent);
-                updateActiveButton('zh');
-            });
-            
-            // Update content when language changes
-            function updateContent() {
-                $('[data-i18n]').each(function() {
-                    const key = $(this).attr('data-i18n');
-                    const translation = i18next.t(key);
-                    if (this.tagName.toLowerCase() === 'a' || this.tagName.toLowerCase() === 'span' || this.tagName.toLowerCase() === 'p' || this.tagName.toLowerCase() === 'h1' || this.tagName.toLowerCase() === 'h3') {
-                        $(this).html(translation);
-                    } else {
-                        $(this).attr('data-i18n-temp', translation);
-                    }
-                });
-            }
-            
-            function updateActiveButton(lang) {
-                $('.lang-btn').removeClass('active');
-                $(`#btn-${lang}`).addClass('active');
-            }
-            
-            // Initialize with detected language or default
-            const currentLang = i18next.language.substring(0, 2);
-            if (currentLang === 'zh') {
-                updateActiveButton('zh');
-            } else {
-                updateActiveButton('en');
-            }
+            // Update language button text based on current language
+            window.updateLanguageButton = function() {
+                const langButton = document.getElementById('lang-toggle');
+                langButton.textContent = i18next.t('langButton');
+            };
         });
+        
+        // Language switching with single button
+        function switchLanguage() {
+            const currentLang = i18next.language;
+            const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
+            
+            i18next.changeLanguage(newLang, function() {
+                updateContent();
+                updateLanguageButton();
+            });
+        }
+        
+        // Update content when language changes
+        function updateContent() {
+            $('[data-i18n]').each(function() {
+                const key = $(this).attr('data-i18n');
+                const translation = i18next.t(key);
+                if (this.tagName.toLowerCase() === 'a' || this.tagName.toLowerCase() === 'span' || this.tagName.toLowerCase() === 'p' || this.tagName.toLowerCase() === 'h1' || this.tagName.toLowerCase() === 'h3') {
+                    $(this).html(translation);
+                } else {
+                    $(this).attr('data-i18n-temp', translation);
+                }
+            });
+        }
+
+        // Update year in copyright
+        const year = new Date().getFullYear();
+        document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
     </script>
 </body>
 </html>
