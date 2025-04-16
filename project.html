@@ -108,9 +108,9 @@
         h1, h2, h3, strong {
             font-weight: 700; /* 真正有載入的粗體 */
         }
-        .project-container {
+        /*.project-container {
             margin-top: 20px;
-            display: none; /* Commented out content */
+            display: none;  Commented out content 
         }
         .project {
             background: rgba(255, 255, 255, 0.8);
@@ -118,7 +118,64 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-        }
+        }*/
+        .project-card {
+            display: inline-block;
+            width: 280px;
+            height: 430px; /* ✅ 固定整張卡片高度 */
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            vertical-align: top;
+            box-sizing: border-box;
+            overflow: hidden; /* 避免內容超出 */
+          }
+          
+          .project-card:hover {
+            transform: scale(1.03);
+          }
+          
+          .project-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+          }
+          
+          .project-card h4 {
+            margin: 10px 0 5px;
+            color: #5A4A42;
+            font-size: 1rem;
+          }
+          
+          .project-card p {
+            font-size: 0.85rem;
+            color: #333;
+            margin: 0 0 10px;
+            height: 100px; /* ✅ 限定說明文字區高度，避免撐開卡片 */
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .project-card a {
+            display: inline-block;
+            font-weight: bold;
+            color: #2E8B57;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: auto;
+          }
+          
+          .project-card a:hover {
+            text-decoration: underline;
+          }
+
+
         footer {
             background: rgba(213, 236, 198, 0.7);
             padding: 40px 20px;
@@ -189,6 +246,15 @@
               yearSpan.textContent = new Date().getFullYear();
             }
         });
+        function openLightbox(src) {
+          document.getElementById('lightbox-img').src = src;
+          document.getElementById('lightbox').style.display = 'flex';
+        }
+      
+        function closeLightbox() {
+          document.getElementById('lightbox').style.display = 'none';
+        }
+
     </script>
 </head>
 <body>
@@ -205,16 +271,89 @@
     
     <div class="content">
         <h1>Projects</h1>
-        <p>TBA.</p>
-        <!-- <div class="project-container">
-            <p>This page will showcase various projects, including descriptions, links, and images (e.g., QR codes for LineBot, execution pages, or project demos).</p>
-            
-            <div class="project">
-                <h3>Example Project</h3>
-                <p>Description of the project will go here. This may include functionalities, technologies used, and impact.</p>
-                <a href="#" style="color: #2E8B57; font-weight: bold;">View Project</a>
+        <div class="project-container">
+          <!-- <p>This page will showcase various projects, including descriptions, links, and images (e.g., QR codes for LineBot, execution pages, or project demos).</p> -->
+          
+            <!-- InquAIry -->
+            <div class="project-card" onclick="openLightbox('projects/logo_InquAIry-1.png')">
+                <img src="projects/logo_InquAIry-1.png" alt="InquAIry">
+                <h4>2025 Software Engineering Course</h4>
+                <p>2025/04/09</p>
+                <p>InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
+                <a href="https://inquairy.github.io/" target="_blank">🔗 More</a>
             </div>
-        </div> -->
+        
+            <!-- TariffMyBiz -->
+            <div class="project-card" onclick="openLightbox('projects/tariff.jpg')">
+                <img src="projects/tariff.jpg" alt="TariffMyBiz">
+                <h4>2025 Best AI Awards</h4>
+                <p>2025/04/07</p>
+                <p>A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
+                <a href="https://www.youtube.com/watch?v=CgjfBryTFVQ" target="_blank">🔗 More</a>
+                <a href="https://github.com/Yunwcy/TariffMyBiz" target="_blank">🔗 Github</a>
+            </div>
+
+            <!-- SE casestudy -->
+            <div class="project-card" onclick="openLightbox('projects/SEcasestudy.jpg')">
+                <img src="projects/SEcasestudy.jpg" alt="SEcasestudy">
+                <h4>2025 Case Study in Software Engineering Course</h4>
+                <p>2025/03/12</p>
+                <p>AI-PoweredEducation: A Case Study of Khanmigo</p>
+                <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank">🔗 More</a>
+            </div>
+
+            <!-- SinoPac Holdings Business Proposal Competition -->
+            <div class="project-card" onclick="openLightbox('projects/SinoPac.png')">
+                <img src="projects/SinoPac.png" alt="TariffMyBiz">
+                <h4>2025 SinoPac Holdings Business Proposal Competition</h4>
+                <p>2025/03/06</p>
+                <p>"Yong" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System</p>
+                <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank">🔗 More</a>
+            </div>
+
+            <!-- Marketing chatbot -->
+            <div class="project-card" onclick="openLightbox('projects/Marketing_chatbot.jpeg')">
+                <img src="projects/Marketing_chatbot.jpeg" alt="MarketingChatbotFile">
+                <h4>2024 Research Methodology Course</h4>
+                <p>2025/01/02</p>
+                <p>Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education</p>
+                <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank">🔗 More</a>
+            </div>
+
+            <!-- AI final -->
+            <div class="project-card" onclick="openLightbox('projects/trafficAIagent.jpeg')"> 
+                <img src="projects/trafficAIagent.jpeg" alt="AIFinal">
+                <h4>2024 Final Project in AI course</h4>
+                <p>2024/12/24</p>
+                <p>Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management</p>
+                <a href="https://drive.google.com/file/d/1iKgSGS5WUQz0RFl6fkfr3iaJ4to2G_CH/view?usp=drive_link" target="_blank">🔗 More</a>
+            </div>
+
+            <!-- USR -->
+            <div class="project-card" onclick="openLightbox('projects/USR.png')">
+                <img src="projects/USR.png" alt="USRdocument">
+                <h4>2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h4>
+                <p>2024/11/24</p>
+                <p>A sustainable marketing project promoting Australian tea tree essential oil</p>
+                <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank">🔗 More</a>
+            </div>
+
+            <!-- AI Case study -->
+            <div class="project-card" onclick="openLightbox('projects/aicasestudy.png')">
+                <img src="projects/aicasestudy.png" alt="AIcasestudy">
+                <h4>2024 Case Study in AI course</h4>
+                <p>2024/11/19</p>
+                <p>AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan</p>
+                <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank">🔗 More</a>
+            </div>
+
+        </div>
+
+        <!-- Lightbox for image pop-up -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+          <span class="close">&times;</span>
+          <img id="lightbox-img">
+        </div>
     </div>
     <script>
         function toggleMenu() {
