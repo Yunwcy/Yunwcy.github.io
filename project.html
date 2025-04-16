@@ -92,88 +92,93 @@
             }
         }
         .content {
-            max-width: 900px;
-            margin: 100px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: left;
-            font-family: 'Noto Serif TC', serif;
+          max-width: 1100px; /* ✅ 增加寬度讓一排放3張 */
+          margin: 100px auto;
+          padding: 20px;
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          text-align: center;
         }
         h1 {
             font-size: 2.5rem;
             color: #5A4A42;
         }
         h1, h2, h3, strong {
-            font-weight: 700; /* 真正有載入的粗體 */
+            font-weight: 700;
         }
-        /*.project-container {
-            margin-top: 20px;
-            display: none;  Commented out content 
+        .project-grid {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center; /* ✅ 水平置中卡片 */
+          gap: 20px;
         }
-        .project {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }*/
         .project-card {
-            display: inline-block;
-            width: 280px;
-            height: 430px; /* ✅ 固定整張卡片高度 */
-            margin: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            vertical-align: top;
-            box-sizing: border-box;
-            overflow: hidden; /* 避免內容超出 */
-          }
+          width: 300px;
+          height: 420px;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          padding: 15px;
+          box-sizing: border-box;
+        }
           
-          .project-card:hover {
+        .project-card:hover {
             transform: scale(1.03);
-          }
-          
-          .project-card img {
+        }
+        
+        .project-card img {
             width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 10px;
-          }
-          
-          .project-card h4 {
+            height: 150px;
+            object-fit: cover; /* ✅ 固定圖片大小裁切超出 */
+            border-radius: 8px;
+        }
+        
+        .project-card h4 {
             margin: 10px 0 5px;
             color: #5A4A42;
             font-size: 1rem;
-          }
-          
-          .project-card p {
-            font-size: 0.85rem;
+        }
+        .project-card h3 {
+            font-size: 1rem;
+            margin: 10px 0 5px;
             color: #333;
-            margin: 0 0 10px;
-            height: 100px; /* ✅ 限定說明文字區高度，避免撐開卡片 */
+            font-weight: bold;
+        }
+        .project-card small {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+        }
+                
+        .project-card p {
+            font-size: 0.85rem;
+            color: #444;
             overflow: hidden;
             text-overflow: ellipsis;
-          }
-          
-          .project-card a {
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* ✅ 最多四行 */
+            -webkit-box-orient: vertical;
+            margin-bottom: auto;
+        }
+                
+        .project-card a {
             display: inline-block;
             font-weight: bold;
             color: #2E8B57;
             text-decoration: none;
             font-size: 0.85rem;
             margin-top: auto;
-          }
-          
-          .project-card a:hover {
+        }
+        
+        .project-card a:hover {
             text-decoration: underline;
-          }
+        }
 
 
         footer {
@@ -238,6 +243,17 @@
         .footer-bottom p:last-child {
             font-size: 0.7rem;
         }
+        @media (max-width: 992px) {
+          .project-card {
+            width: 45%;
+          }
+        }
+        
+        @media (max-width: 600px) {
+          .project-card {
+            width: 90%;
+          }
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -277,8 +293,8 @@
             <!-- InquAIry -->
             <div class="project-card" onclick="openLightbox('projects/logo_InquAIry-1.png')">
                 <img src="projects/logo_InquAIry-1.png" alt="InquAIry">
-                <h4>2025 Software Engineering Course</h4>
-                <p>2025/04/09</p>
+                <h3>2025 Software Engineering Course</h3>
+                <small>2025/04/09</small>
                 <p>InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
                 <a href="https://inquairy.github.io/" target="_blank">🔗 More</a>
             </div>
@@ -286,8 +302,8 @@
             <!-- TariffMyBiz -->
             <div class="project-card" onclick="openLightbox('projects/tariff.jpg')">
                 <img src="projects/tariff.jpg" alt="TariffMyBiz">
-                <h4>2025 Best AI Awards</h4>
-                <p>2025/04/07</p>
+                <h3>2025 Best AI Awards</h3>
+                <small>2025/04/07</small>
                 <p>A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
                 <a href="https://www.youtube.com/watch?v=CgjfBryTFVQ" target="_blank">🔗 More</a>
                 <a href="https://github.com/Yunwcy/TariffMyBiz" target="_blank">🔗 Github</a>
@@ -296,8 +312,8 @@
             <!-- SE casestudy -->
             <div class="project-card" onclick="openLightbox('projects/SEcasestudy.jpg')">
                 <img src="projects/SEcasestudy.jpg" alt="SEcasestudy">
-                <h4>2025 Case Study in Software Engineering Course</h4>
-                <p>2025/03/12</p>
+                <h3>2025 Case Study in Software Engineering Course</h3>
+                <small>2025/03/12</small>
                 <p>AI-PoweredEducation: A Case Study of Khanmigo</p>
                 <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank">🔗 More</a>
             </div>
@@ -305,8 +321,8 @@
             <!-- SinoPac Holdings Business Proposal Competition -->
             <div class="project-card" onclick="openLightbox('projects/SinoPac.png')">
                 <img src="projects/SinoPac.png" alt="TariffMyBiz">
-                <h4>2025 SinoPac Holdings Business Proposal Competition</h4>
-                <p>2025/03/06</p>
+                <h3>2025 SinoPac Holdings Business Proposal Competition</h3>
+                <small>2025/03/06</small>
                 <p>"Yong" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System</p>
                 <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank">🔗 More</a>
             </div>
@@ -314,8 +330,8 @@
             <!-- Marketing chatbot -->
             <div class="project-card" onclick="openLightbox('projects/Marketing_chatbot.jpeg')">
                 <img src="projects/Marketing_chatbot.jpeg" alt="MarketingChatbotFile">
-                <h4>2024 Research Methodology Course</h4>
-                <p>2025/01/02</p>
+                <h3>2024 Research Methodology Course</h3>
+                <small>2025/01/02</small>
                 <p>Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education</p>
                 <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank">🔗 More</a>
             </div>
@@ -332,8 +348,8 @@
             <!-- USR -->
             <div class="project-card" onclick="openLightbox('projects/USR.png')">
                 <img src="projects/USR.png" alt="USRdocument">
-                <h4>2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h4>
-                <p>2024/11/24</p>
+                <h3>2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h3>
+                <small>2024/11/24</small>
                 <p>A sustainable marketing project promoting Australian tea tree essential oil</p>
                 <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank">🔗 More</a>
             </div>
@@ -341,8 +357,8 @@
             <!-- AI Case study -->
             <div class="project-card" onclick="openLightbox('projects/aicasestudy.png')">
                 <img src="projects/aicasestudy.png" alt="AIcasestudy">
-                <h4>2024 Case Study in AI course</h4>
-                <p>2024/11/19</p>
+                <h3>2024 Case Study in AI course</h3>
+                <small>2024/11/19</small>
                 <p>AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan</p>
                 <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank">🔗 More</a>
             </div>
