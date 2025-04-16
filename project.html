@@ -263,14 +263,6 @@
               yearSpan.textContent = new Date().getFullYear();
             }
         });
-        function openLightbox(src) {
-          document.getElementById('lightbox-img').src = src;
-          document.getElementById('lightbox').style.display = 'flex';
-        }
-      
-        function closeLightbox() {
-          document.getElementById('lightbox').style.display = 'none';
-        }
 
     </script>
 </head>
@@ -292,7 +284,7 @@
           <!-- <p>This page will showcase various projects, including descriptions, links, and images (e.g., QR codes for LineBot, execution pages, or project demos).</p> -->
           
             <!-- InquAIry -->
-            <div class="project-card" onclick="openLightbox('projects/logo_InquAIry-1.png')">
+            <div class="project-card">
                 <img src="projects/logo_InquAIry-1.png" alt="InquAIry">
                 <h3>2025 Software Engineering Course</h3>
                 <small>2025/04/09</small>
@@ -301,7 +293,7 @@
             </div>
         
             <!-- TariffMyBiz -->
-            <div class="project-card" onclick="openLightbox('projects/tariff.jpg')">
+            <div class="project-card">
                 <img src="projects/tariff.jpg" alt="TariffMyBiz">
                 <h3>2025 Best AI Awards</h3>
                 <small>2025/04/07</small>
@@ -311,7 +303,7 @@
             </div>
 
             <!-- SE casestudy -->
-            <div class="project-card" onclick="openLightbox('projects/SEcasestudy.jpg')">
+            <div class="project-card">
                 <img src="projects/SEcasestudy.jpg" alt="SEcasestudy">
                 <h3>2025 Case Study in Software Engineering Course</h3>
                 <small>2025/03/12</small>
@@ -320,7 +312,7 @@
             </div>
 
             <!-- SinoPac Holdings Business Proposal Competition -->
-            <div class="project-card" onclick="openLightbox('projects/SinoPac.png')">
+            <div class="project-card">
                 <img src="projects/SinoPac.png" alt="TariffMyBiz">
                 <h3>2025 SinoPac Holdings Business Proposal Competition</h3>
                 <small>2025/03/06</small>
@@ -329,7 +321,7 @@
             </div>
 
             <!-- Marketing chatbot -->
-            <div class="project-card" onclick="openLightbox('projects/Marketing_chatbot.jpeg')">
+            <div class="project-card">
                 <img src="projects/Marketing_chatbot.jpeg" alt="MarketingChatbotFile">
                 <h3>2024 Research Methodology Course</h3>
                 <small>2025/01/02</small>
@@ -338,7 +330,7 @@
             </div>
 
             <!-- AI final -->
-            <div class="project-card" onclick="openLightbox('projects/trafficAIagent.jpeg')"> 
+            <div class="project-card"> 
                 <img src="projects/trafficAIagent.jpeg" alt="AIFinal">
                 <h4>2024 Final Project in AI course</h4>
                 <p>2024/12/24</p>
@@ -347,7 +339,7 @@
             </div>
 
             <!-- USR -->
-            <div class="project-card" onclick="openLightbox('projects/USR.png')">
+            <div class="project-card">
                 <img src="projects/USR.png" alt="USRdocument">
                 <h3>2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h3>
                 <small>2024/11/24</small>
@@ -356,7 +348,7 @@
             </div>
 
             <!-- AI Case study -->
-            <div class="project-card" onclick="openLightbox('projects/aicasestudy.png')">
+            <div class="project-card">
                 <img src="projects/aicasestudy.png" alt="AIcasestudy">
                 <h3>2024 Case Study in AI course</h3>
                 <small>2024/11/19</small>
@@ -366,11 +358,6 @@
 
         </div>
 
-        <!-- Lightbox for image pop-up -->
-        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-          <span class="close">&times;</span>
-          <img id="lightbox-img">
-        </div>
     </div>
     <script>
         function toggleMenu() {
