@@ -253,7 +253,7 @@
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
         
-            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15 };
+            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5 };
         
             if (selectedEvent) {
                 let numImages = imageNum[selectedEvent] || 0;
@@ -308,6 +308,7 @@
                     "nstcEvent": "Technology Inclusion Projects Achievement Presentation",
                     "fintechEvent": "FinTech Taipei 2024",
                     "japanEvent": "Academic exchange visit to Japan",
+                    "bestAIAwards": "2025 Best AI Awards - Final contest",
                     
                     // Footer
                     "contactHeading": "Contact",
@@ -335,6 +336,7 @@
                     "nstcEvent": "國科會計畫成果發表會",
                     "fintechEvent": "台北金融科技展 2024",
                     "japanEvent": "日本學術交流訪問",
+                    "bestAIAwards": "2025 經濟部智慧創新大賞 - 決賽",
                     
                     // Footer
                     "contactHeading": "聯絡方式",
@@ -430,6 +432,7 @@
                 <option value="nstc" data-i18n="nstcEvent">Technology Inclusion Projects Achievement Presentation</option>
                 <option value="fintech2024" data-i18n="fintechEvent">FinTech Taipei 2024</option>
                 <option value="japan2024" data-i18n="japanEvent">Academic exchange visit to Japan</option>
+                <option value="bestAI2025" data-i18n="bestAIAwards">2025 Best AI Awards - Final contest</option>
             </select>
         </div>
         <div class="photo-gallery" id="photo-gallery"></div>
