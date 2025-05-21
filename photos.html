@@ -253,7 +253,7 @@
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
         
-            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5 };
+            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5, 'icim2025': 8 };
         
             if (selectedEvent) {
                 let numImages = imageNum[selectedEvent] || 0;
@@ -309,6 +309,7 @@
                     "fintechEvent": "FinTech Taipei 2024",
                     "japanEvent": "Academic exchange visit to Japan",
                     "bestAIAwards": "2025 Best AI Awards - Final contest",
+                    "icim2025": "2025 International Conference on Information Management",
                     
                     // Footer
                     "contactHeading": "Contact",
@@ -433,6 +434,7 @@
                 <option value="fintech2024" data-i18n="fintechEvent">FinTech Taipei 2024</option>
                 <option value="japan2024" data-i18n="japanEvent">Academic exchange visit to Japan</option>
                 <option value="bestAI2025" data-i18n="bestAIAwards">2025 Best AI Awards - Final contest</option>
+                <option value="icim2025" data-i18n="icim2025">2025 International Conference on Information Management</option>
             </select>
         </div>
         <div class="photo-gallery" id="photo-gallery"></div>
