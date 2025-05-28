@@ -253,7 +253,7 @@
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
         
-            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5, 'icim2025': 10 };
+            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5, 'icim2025': 10, 'ntpuAI': 6, 'tsc2025': 4 };
         
             if (selectedEvent) {
                 let numImages = imageNum[selectedEvent] || 0;
@@ -311,6 +311,7 @@
                     "bestAIAwards": "2025 Best AI Awards - Final contest",
                     "icim2025": "2025 International Conference on Information Management",
                     "ntpuAI": "2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest",
+                    "tsc2025": "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest",
                     
                     // Footer
                     "contactHeading": "Contact",
@@ -340,6 +341,7 @@
                     "japanEvent": "日本學術交流訪問",
                     "bestAIAwards": "2025 經濟部智慧創新大賞 - 決賽",
                     "ntpuAI": "2025 第三屆臺北大學AI智慧應用創新競賽 - 決賽",
+                    "tsc2025": "2025 第十屆崇越行銷大賞：AI應用行銷競賽 - 決賽",
                     
                     // Footer
                     "contactHeading": "聯絡方式",
@@ -438,6 +440,8 @@
                 <option value="bestAI2025" data-i18n="bestAIAwards">2025 Best AI Awards - Final contest</option>
                 <option value="icim2025" data-i18n="icim2025">2025 International Conference on Information Management</option>
                 <option value="ntpuAI" data-i18n="ntpuAI">2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest</option>
+                <option value="tsc2025" data-i18n="tsc2025">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest</option>
+                
             </select>
         </div>
         <div class="photo-gallery" id="photo-gallery"></div>
