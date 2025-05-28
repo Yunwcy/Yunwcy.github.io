@@ -62,7 +62,6 @@
             display: flex;
             gap: 5px;
         }
-        /* Updated language button style to match the second file */
         .language-btn {
             padding: 5px 10px;
             background: #2E8B57;
@@ -276,7 +275,7 @@
         </div>
       
         <div class="footer-bottom">
-            <p class="footer-note" id="copyright" data-i18n="copyright">© 2025 Cheng-Yun Wu. All rights reserved.</p>
+            <p class="footer-note" id="copyright" data-i18n="footer.copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
           <p data-i18n="footer.note">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>
@@ -290,11 +289,6 @@
         }
         
         document.addEventListener("DOMContentLoaded", function () {
-            const yearSpan = document.getElementById("year");
-            if (yearSpan) {
-              yearSpan.textContent = new Date().getFullYear();
-            }
-            
             // Initialize i18next
             i18next.use(i18nextBrowserLanguageDetector).init({
                 fallbackLng: 'en',
@@ -320,10 +314,10 @@
                                 university: "National Taipei University",
                                 links: "Links",
                                 connect: "Connect",
-                                copyright: "© 2025 Cheng-Yun Wu. All rights reserved.",
+                                copyright: "© <span id=\"year-en\"></span> Cheng-Yun Wu. All rights reserved.",
                                 note: "This site is for academic and personal portfolio use only."
                             },
-                            langButton: "中文" // Text for the language button when in English
+                            langButton: "中文"
                         }
                     },
                     zh: {
@@ -346,26 +340,27 @@
                                 university: "國立臺北大學",
                                 links: "導覽",
                                 connect: "社群媒體",
-                                copyright: "© 2025 吳承耘。保留所有權利。",
+                                copyright: "© <span id=\"year-zh\"></span> 吳承耘。保留所有權利。",
                                 note: "本網站僅供學術和個人作品集使用。"
                             },
-                            langButton: "English" // Text for the language button when in Chinese
+                            langButton: "English"
                         }
                     }
                 }
             }, function(err, t) {
+                // 初始化完成後更新內容
                 updateContent();
                 updateLanguageButton();
             });
-            
-            // Update language button text based on current language
-            window.updateLanguageButton = function() {
-                const langButton = document.getElementById('lang-toggle');
-                langButton.textContent = i18next.t('langButton');
-            };
         });
         
-        // Language switching with single button
+        // 更新語言按鈕文字
+        function updateLanguageButton() {
+            const langButton = document.getElementById('lang-toggle');
+            langButton.textContent = i18next.t('langButton');
+        }
+        
+        // 語言切換
         function switchLanguage() {
             const currentLang = i18next.language;
             const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
@@ -376,22 +371,24 @@
             });
         }
         
-        // Update content when language changes
+        // 更新所有翻譯內容
         function updateContent() {
             $('[data-i18n]').each(function() {
                 const key = $(this).attr('data-i18n');
                 const translation = i18next.t(key);
-                if (this.tagName.toLowerCase() === 'a' || this.tagName.toLowerCase() === 'span' || this.tagName.toLowerCase() === 'p' || this.tagName.toLowerCase() === 'h1' || this.tagName.toLowerCase() === 'h3') {
-                    $(this).html(translation);
-                } else {
-                    $(this).attr('data-i18n-temp', translation);
-                }
+                $(this).html(translation);
             });
+            
+            // 更新年份
+            updateYear();
         }
-
-        // Update year in copyright
-        const year = new Date().getFullYear();
-        document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
+        
+        // 更新年份函數
+        function updateYear() {
+            const currentYear = new Date().getFullYear();
+            // 更新所有年份 span
+            $('#year-en, #year-zh, #year').text(currentYear);
+        }
     </script>
 </body>
 </html>
