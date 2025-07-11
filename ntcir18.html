@@ -110,6 +110,127 @@
             margin: 15px 0;
             border-left: 4px solid #2E8B57;
         }
+
+        /* Methodology section */
+        .methodology-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .method-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #2E8B57;
+        }
+        
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .method-icon {
+            font-size: 2rem;
+            background: rgba(46, 139, 87, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .method-header h3 {
+            margin: 0;
+            color: #2E8B57;
+            font-size: 1.4rem;
+        }
+        
+        .method-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(46, 139, 87, 0.05);
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .step-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+        }
+        
+        .step-icon {
+            font-size: 1.5rem;
+            background: #2E8B57;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin: 0 0 5px 0;
+            color: #5A4A42;
+            font-size: 1.1rem;
+        }
+        
+        .step-content p {
+            margin: 0;
+            color: #5A4A42;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .methodology-container {
+                gap: 20px;
+            }
+            
+            .method-section {
+                padding: 20px;
+            }
+            
+            .method-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .method-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .step-icon {
+                align-self: center;
+            }
+        }
         
         /* Awards section */
         .awards-grid {
@@ -340,6 +461,26 @@
                     "medNLPContent": "Medical Natural Language Processing Dialogue System Evaluation - This task focuses on analyzing whether medical chatbot responses to patient questions contain potential medical, legal, or ethical risks. The dataset includes Japanese and German corpora with corresponding English and French translations. Our team achieved exceptional performance, winning first place in 7 out of 8 subtasks in multilingual risk assessment Joint Accuracy metrics.",
                     "finArgTitle": "FinArg-2",
                     "finArgContent": "Financial Argument Temporal Reasoning - This task focuses on temporal reasoning of statements in earnings calls and social media, requiring models to identify temporal reference points in statements and predict the validity period of statement content. Our team combined fine-tuning models and prompt engineering approaches, achieving first place in key subtasks and demonstrating strong potential in financial semantic reasoning applications.",
+
+                    // Methodology content 
+                    "methodologyIntro": "Our research employed innovative methodologies for both tasks, combining state-of-the-art approaches in natural language processing and machine learning.",
+                    "medNLPMethodTitle": "MedNLP-CHAT Methodology",
+                    "finArgMethodTitle": "FinArg-2 Methodology",
+                    "agenticAI": "Agentic AI Framework",
+                    "agenticAIDesc": "Multi-model collaborative approach with majority voting and weighted scoring systems",
+                    "promptEngineering": "Prompt Engineering",
+                    "promptEngineeringDesc": "Three-shot prompting with GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Flash",
+                    "riskAssessment": "Risk Assessment",
+                    "riskAssessmentDesc": "Medical, legal, and ethical risk evaluation across multiple languages",
+                    "modelFineTuning": "Model Fine-tuning",
+                    "modelFineTuningDesc": "BERT, RoBERTa, DistilBERT for encoder-based tasks; GPT-4o Mini for decoder-based",
+                    "dataAugmentation": "Data Augmentation",
+                    "dataAugmentationDesc": "Semantic variation generation to address class imbalance in financial datasets",
+                    "temporalReasoning": "Temporal Reasoning",
+                    "temporalReasoningDesc": "Classification of argument claims based on temporal references in financial contexts",
+                    
+                    // Poster content
+                    "posterContent": "Our research findings were presented through comprehensive poster sessions, attracting significant attention from international participants and receiving recognition for clear communication of complex methodologies.",
                     
                     // Results content
                     "resultsContent": "The IMNTPU team achieved remarkable results in both tasks. In FinArg-2, we secured first place in key subtasks through our innovative combination of fine-tuning models and prompt engineering. For MedNLP-CHAT, our multi-model collaborative approach effectively identified potential risks, achieving first place in 7 out of 8 subtasks in multilingual risk assessment. These achievements demonstrate our team's excellence in financial semantic reasoning and medical risk assessment applications.",
@@ -397,6 +538,26 @@
                     "medNLPContent": "醫療自然語言處理對話系統評估 - 旨在分析醫療聊天機器人回應病患問題時，是否潛藏醫療、法律或倫理風險。資料涵蓋日文與德文語料，並提供相對應的英文與法文翻譯。我們的團隊表現優異，在多語言風險判斷的Joint Accuracy指標上，8個子任務中拿下7項第一。",
                     "finArgTitle": "FinArg-2",
                     "finArgContent": "財務論證的時間推理 - 聚焦於法說會與社群媒體中的語句時效性推理，模型要能辨識語句中的時間參照點，並預測聲明內容的有效期間。團隊結合微調模型及提示工程不同方法，於關鍵子任務獲得第一名，展現在財務語意推理的應用潛力。",
+                    
+                    // Methodology content
+                    "methodologyIntro": "我們的研究在兩個任務中都採用了創新的方法論，結合了自然語言處理和機器學習領域的前沿技術。",
+                    "medNLPMethodTitle": "MedNLP-CHAT 研究方法",
+                    "finArgMethodTitle": "FinArg-2 研究方法",
+                    "agenticAI": "代理AI框架",
+                    "agenticAIDesc": "多模型協作方法，結合多數投票和加權評分系統",
+                    "promptEngineering": "提示工程",
+                    "promptEngineeringDesc": "使用GPT-4o、Claude 3.5 Sonnet、Gemini 1.5 Flash的三次提示技術",
+                    "riskAssessment": "風險評估",
+                    "riskAssessmentDesc": "跨多種語言的醫療、法律和倫理風險評估",
+                    "modelFineTuning": "模型微調",
+                    "modelFineTuningDesc": "編碼器任務使用BERT、RoBERTa、DistilBERT；解碼器任務使用GPT-4o Mini",
+                    "dataAugmentation": "數據增強",
+                    "dataAugmentationDesc": "語義變化生成以解決金融數據集中的類別不平衡問題",
+                    "temporalReasoning": "時間推理",
+                    "temporalReasoningDesc": "基於金融語境中時間參考的論證聲明分類",
+                    
+                    // Poster content  
+                    "posterContent": "我們的研究成果透過全面的海報展示呈現，吸引了國際參與者的廣泛關注，並因清晰傳達複雜方法論而獲得認可。",
                     
                     // Results content
                     "resultsContent": "IMNTPU團隊在兩項任務中都取得了卓越成果。在FinArg-2任務中，透過創新結合微調模型及提示工程的方法，於關鍵子任務獲得第一名。在MedNLP-CHAT任務中，運用多個模型合作有效辨識潛在風險，在多語言風險判斷的Joint Accuracy指標上，8個子任務中拿下7項第一，充分展現其在醫療風險判斷上的準確性與穩定性。",
@@ -519,6 +680,71 @@
         <div class="task-category">
             <h3 data-i18n="finArgTitle">FinArg-2</h3>
             <p data-i18n="finArgContent">A financial argument mining task that challenges participants to identify, extract, and analyze argumentative structures in financial documents. This task focuses on understanding financial reasoning and decision-making processes.</p>
+        </div>
+
+        <h2 data-i18n="methodology">Methodology</h2>
+        <p data-i18n="methodologyIntro">Our research employed innovative methodologies for both tasks, combining state-of-the-art approaches in natural language processing and machine learning.</p>
+        
+        <div class="methodology-container">
+            <div class="method-section">
+                <div class="method-header">
+                    <span class="method-icon">🏥</span>
+                    <h3 data-i18n="medNLPMethodTitle">MedNLP-CHAT Methodology</h3>
+                </div>
+                <div class="method-steps">
+                    <div class="step-item">
+                        <div class="step-icon">🤖</div>
+                        <div class="step-content">
+                            <h4 data-i18n="agenticAI">Agentic AI Framework</h4>
+                            <p data-i18n="agenticAIDesc">Multi-model collaborative approach with majority voting and weighted scoring systems</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">💬</div>
+                        <div class="step-content">
+                            <h4 data-i18n="promptEngineering">Prompt Engineering</h4>
+                            <p data-i18n="promptEngineeringDesc">Three-shot prompting with GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Flash</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">⚖️</div>
+                        <div class="step-content">
+                            <h4 data-i18n="riskAssessment">Risk Assessment</h4>
+                            <p data-i18n="riskAssessmentDesc">Medical, legal, and ethical risk evaluation across multiple languages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method-section">
+                <div class="method-header">
+                    <span class="method-icon">💰</span>
+                    <h3 data-i18n="finArgMethodTitle">FinArg-2 Methodology</h3>
+                </div>
+                <div class="method-steps">
+                    <div class="step-item">
+                        <div class="step-icon">🔧</div>
+                        <div class="step-content">
+                            <h4 data-i18n="modelFineTuning">Model Fine-tuning</h4>
+                            <p data-i18n="modelFineTuningDesc">BERT, RoBERTa, DistilBERT for encoder-based tasks; GPT-4o Mini for decoder-based</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">📊</div>
+                        <div class="step-content">
+                            <h4 data-i18n="dataAugmentation">Data Augmentation</h4>
+                            <p data-i18n="dataAugmentationDesc">Semantic variation generation to address class imbalance in financial datasets</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">⏰</div>
+                        <div class="step-content">
+                            <h4 data-i18n="temporalReasoning">Temporal Reasoning</h4>
+                            <p data-i18n="temporalReasoningDesc">Classification of argument claims based on temporal references in financial contexts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <h2 data-i18n="results">Results</h2>
