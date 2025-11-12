@@ -181,6 +181,47 @@
             padding-bottom: 15px;
         }
 
+        /* === 修正 Swiper 箭頭顯示 === */
+        .certificates-swiper,
+        .projects-swiper {
+            position: relative;
+        }
+
+        .certificates-swiper .swiper-button-next,
+        .certificates-swiper .swiper-button-prev,
+        .projects-swiper .swiper-button-next,
+        .projects-swiper .swiper-button-prev {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            color: var(--primary-green);
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+        }
+
+        .certificates-swiper .swiper-button-next:hover,
+        .certificates-swiper .swiper-button-prev:hover,
+        .projects-swiper .swiper-button-next:hover,
+        .projects-swiper .swiper-button-prev:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .certificates-swiper .swiper-button-next:after,
+        .certificates-swiper .swiper-button-prev:after,
+        .projects-swiper .swiper-button-next:after,
+        .projects-swiper .swiper-button-prev:after {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         /* Certificates and Projects spacing */
         .certificates-swiper .swiper-slide,
         .projects-swiper .swiper-slide {
@@ -193,6 +234,17 @@
         .cert-card,
         .project-card {
             margin: 0 auto;
+        }
+
+        .project-card {
+            height: auto !important;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-desc {
+            flex-grow: 1;
         }
 
         /* Timeline for Research */
