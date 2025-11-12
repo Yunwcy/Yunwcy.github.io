@@ -1720,7 +1720,6 @@
             });
         });
 
-        // Initialize Swiper sliders (modified)
         function initializeSwiper() {
             // Certificates Swiper
             new Swiper('.certificates-swiper', {
@@ -1737,7 +1736,7 @@
                     clickable: true,
                 },
                 breakpoints: {
-                    320: { slidesPerView: 1, spaceBetween: 20, centeredSlides: true },
+                    320: { slidesPerView: 1, spaceBetween: 20 },
                     768: { slidesPerView: 2, spaceBetween: 30 },
                     1024: { slidesPerView: 3, spaceBetween: 40 }
                 }
@@ -1758,12 +1757,13 @@
                     clickable: true,
                 },
                 breakpoints: {
-                    320: { slidesPerView: 1, spaceBetween: 20, centeredSlides: true },
+                    320: { slidesPerView: 1, spaceBetween: 20 },
                     768: { slidesPerView: 2, spaceBetween: 30 },
                     1024: { slidesPerView: 3, spaceBetween: 40 }
                 }
             });
         }
+
 
         // Toggle menu for mobile
         function toggleMenu() {
