@@ -3,29 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yun | Personal Website</title>
+    <title>Yun | Personal Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <!-- Swiper CSS for sliders -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- i18next -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+    
     <style>
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: rgba(213, 236, 198, 0.8);
+            --medium-green: rgba(180, 218, 144, 0.7);
+            --dark-green: #1e5d3a;
+            --text-color: #5A4A42;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
         * {
             box-sizing: border-box;
         }
+
         html, body {
             margin: 0;
             padding: 0;
             max-width: 100vw;
             overflow-x: hidden;
         }
+
         body {
-            margin: 0;
             font-family: 'Noto Serif TC', serif;
-            text-align: center;
-            color: #5A4A42; 
-            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5)); 
-            opacity: 0.8; 
+            color: var(--text-color);
+            background: linear-gradient(135deg, 
+                rgba(213, 236, 198, 0.5), 
+                rgba(220, 233, 190, 0.5), 
+                rgba(180, 218, 144, 0.5), 
+                rgba(212, 228, 175, 0.5), 
+                rgba(202, 226, 167, 0.5)
+            );
+            opacity: 0.8;
         }
+
+        /* Navigation Styles */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -37,34 +62,45 @@
             top: 0;
             left: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
+
         .menu-icon {
             display: none;
             font-size: 2rem;
             cursor: pointer;
+            color: var(--primary-green);
         }
+
         .menu-items {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
+
         .menu-items a {
-            color: #2E8B57;
+            color: var(--primary-green);
             text-decoration: none;
-            font-size: 1rem;
-            padding: 10px 15px;
+            font-size: 0.95rem;
+            padding: 8px 12px;
             font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
+
         .menu-items a:hover {
             background: rgba(46, 139, 87, 0.2);
             border-radius: 5px;
         }
+
         .language-switcher {
             display: flex;
             gap: 5px;
         }
+
         .language-btn {
             padding: 5px 10px;
-            background: #2E8B57;
+            background: var(--primary-green);
             color: white;
             border: none;
             border-radius: 5px;
@@ -73,56 +109,12 @@
             font-weight: bold;
             transition: background 0.3s;
         }
+
         .language-btn:hover {
-            background: #236b43;
+            background: var(--dark-green);
         }
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-            .menu-items {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 10px 0;
-                text-align: center;
-            }
-            .menu-items.active {
-                display: flex;
-            }
-            footer {
-                padding: 15px 8px;
-                font-size: 0.7rem;
-            }
-            
-            .footer-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .footer-column {
-                min-width: unset;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            .footer-column p,
-            .footer-column a {
-                font-size: 0.65rem;
-            }
-            
-            .footer-note,
-            .footer-bottom {
-                font-size: 0.65rem;
-                margin-top: 10px;
-            }
-        }
+
+        /* Hero Section */
         .hero {
             position: relative;
             width: 100%;
@@ -134,6 +126,7 @@
             text-align: center;
             padding: 20px;
         }
+
         .hero-image {
             position: absolute;
             width: 100%;
@@ -141,40 +134,445 @@
             object-fit: cover;
             z-index: -1;
         }
+
         .hero-content {
             position: relative;
             background: rgba(255, 255, 255, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             max-width: 700px;
             width: 90%;
             font-family: 'Noto Serif TC', serif;
         }
-        @media (max-width: 768px) {
-            .hero-content {
-                max-width: 90%;
-            }
-        }
+
         .hero h1 {
             font-size: 2.5rem;
-            margin: 0;
+            margin: 0 0 20px 0;
             font-weight: bold;
-            color: #5A4A42;
+            color: var(--text-color);
         }
+
         .hero p {
             font-size: 1.1rem;
             line-height: 1.6;
+            margin-bottom: 15px;
         }
-        h1, h2, h3, strong {
-            font-weight: 700; 
+
+        /* Main Content */
+        .content-section {
+            padding: 80px 40px;
+            margin: 0;
         }
-        footer {
-            background: rgba(213, 236, 198, 0.7);
-            padding: 20px 10px;
-            color: #5A4A42;
-            font-family: 'Noto Serif TC', serif;
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 50px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
+        }
+
+        /* Timeline for Research */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--primary-green);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -11px;
+            background: white;
+            border: 4px solid var(--primary-green);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -11px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content .date {
+            color: var(--dark-green);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Swiper Container */
+        .swiper-container {
+            width: 100%;
+            padding: 20px 0 60px 0;
+        }
+
+        .swiper-slide {
+            width: auto;
+            height: auto;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-green);
+            background: var(--card-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-top: -25px;
+        }
+
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 20px;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--primary-green);
+        }
+
+        /* Publications Grid */
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .publication-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-green);
+        }
+
+        .publication-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .publication-card h4 {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .publication-card .authors {
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .publication-card .conference {
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pub-link:hover {
+            background: var(--dark-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Certificates Card for Swiper */
+        .cert-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 280px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .cert-card img {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .cert-card h4 {
+            color: var(--primary-green);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cert-card .cert-date {
+            color: var(--dark-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .cert-card p {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        /* Projects Card for Swiper */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            width: 350px;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .project-card h3 {
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .project-card .project-date {
+            color: var(--dark-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card .project-desc {
+            color: var(--text-color);
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            background: var(--light-green);
+            color: var(--primary-green);
+            padding: 3px 6px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
             font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--dark-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Experience Lists */
+        .experience-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-list h3 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        .experience-list ul {
+            list-style-type: square;
+            padding-left: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .experience-list li {
+            margin-bottom: 15px;
+        }
+
+        .photo-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--light-green), var(--medium-green));
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .photo-link:hover {
+            background: var(--medium-green);
+            transform: translateY(-2px);
+            color: var(--dark-green);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            cursor: pointer;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light-green);
+            padding: 40px 20px 20px;
+            color: var(--text-color);
+            margin-top: 60px;
         }
 
         .footer-container {
@@ -184,6 +582,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: flex-start;
+            gap: 30px;
         }
 
         .footer-column {
@@ -193,103 +592,715 @@
         }
 
         .footer-column h3 {
+            color: var(--primary-green);
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .footer-column p, .footer-column a {
-            font-size: 0.7rem;
-            margin: 5px 0;
+        .footer-column p,
+        .footer-column a {
+            font-size: 0.9rem;
+            margin: 8px 0;
+            color: var(--text-color);
             text-decoration: none;
-            color: #2E8B57;
         }
 
         .footer-column a:hover {
+            color: var(--primary-green);
             text-decoration: underline;
-        }
-        .footer-note {
-            font-size: 0.7rem;
-            color: #444;
-            text-align: center;
-            margin-top: 10px;
-            padding-bottom: 10px;
         }
 
         .footer-bottom {
             text-align: center;
-            font-size: 0.7rem;
-            margin-top: 15px;
+            font-size: 0.85rem;
+            margin-top: 30px;
+            border-top: 1px solid var(--medium-green);
+            padding-top: 20px;
         }
 
-        .footer-bottom p:last-child {
-            font-size: 0.7rem;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .menu-items {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 10px 0;
+                text-align: center;
+                gap: 5px;
+            }
+
+            .menu-items.active {
+                display: flex;
+            }
+
+            .content-section {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-list {
+                padding: 20px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .footer-column {
+                min-width: unset;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .footer-column p,
+            .footer-column a {
+                font-size: 0.8rem;
+            }
+
+            .footer-bottom {
+                font-size: 0.7rem;
+                margin-top: 10px;
+            }
+        }
+
+        /* Smooth scrolling and animations */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation active state */
+        .menu-items a.active {
+            background: var(--light-green);
+            border-radius: 5px;
         }
     </style>
 </head>
+
 <body>
+    <!-- Navigation -->
     <div class="navbar">
         <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/" data-i18n="nav.home">Home</a>
-            <a href="https://yunwcy.github.io/about" data-i18n="nav.about">About me</a>
-            <a href="https://yunwcy.github.io/research" data-i18n="nav.experiences">Experiences</a>
-            <a href="https://yunwcy.github.io/project" data-i18n="nav.projects">Projects</a>
-            <a href="https://yunwcy.github.io/contact" data-i18n="nav.contact">Contact</a>
+            <a href="#home" data-i18n="nav.home">Home</a>
+            <a href="about.html" data-i18n="nav.about">About me</a>
+            <a href="#experiences" data-i18n="nav.experiences">Experiences</a>
+            <a href="#publications" data-i18n="nav.publications">Publications</a>
+            <a href="#certifications" data-i18n="nav.certifications">Certifications</a>
+            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
+            <a href="#conferences" data-i18n="nav.conferences">Conferences</a>
+            <a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a>
         </div>
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
         <div class="language-switcher">
-            <button class="language-btn" id="lang-toggle" onclick="switchLanguage()">中文</button>
+            <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
         </div>
     </div>
-    
-    <div class="hero">
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
         <img src="images/forest.png" alt="Hero Image" class="hero-image">
         <div class="hero-content">
             <h1 data-i18n="hero.title">Welcome to My Page!</h1>
-            <p data-i18n="hero.intro">Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href = "https://www.aifitesg.org/" style="color: #2E8B57; font-weight: bold;">IFIT Lab </a></strong>.</p>
-            <p data-i18n="hero.research">My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.</p>
-            <p data-i18n="hero.explore">Explore more <a href="https://yunwcy.github.io/about" style="color: #2E8B57; font-weight: bold;">about me</a>!</p>
+            <p data-i18n-html="hero.intro">Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href="https://www.aifitesg.org/" style="color: #2E8B57; font-weight: bold;">IFIT Lab</a></strong>.</p>
+            <p data-i18n-html="hero.research">My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.</p>
+            <p data-i18n-html="hero.explore">Explore more <a href="about.html" style="color: #2E8B57; font-weight: bold;">about me</a>!</p>
         </div>
+    </section>
+
+    <!-- Research Experience Section -->
+    <section class="content-section" id="experiences">
+        <h2 class="section-title fade-in" data-i18n="researchSection.title">Research Experience</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2024/09 - Present</div>
+                    <h3 data-i18n="timeline.position">Research Assistant</h3>
+                    <p data-i18n-html="timeline.projectTitle"><strong>Digital Support, Unimpeded Communication:</strong> The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment</p>
+                    <p data-i18n="timeline.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</em></p>
+                    <p data-i18n="timeline.funding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</p>
+                    <ul>
+                        <li data-i18n="timeline.task1">Developing multimodal dialogue systems for speech-impaired users</li>
+                        <li data-i18n="timeline.task2">Implementing cross-lingual communication support technologies</li>
+                        <li data-i18n="timeline.task3">Researching inclusive AI technologies for accessibility</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="content-section" id="publications">
+        <h2 class="section-title fade-in" data-i18n="publications.title">Publications</h2>
+        <div class="publications-grid">
+            <div class="publication-card fade-in">
+                <h4>Enhancing Sports Organization Management through a Multimodal Dialogue System</h4>
+                <div class="authors">Cheng-Yun Wu and Min-Yuh Day</div>
+                <div class="conference">The 31st International Conference on IT Applications and Management (ITAM-31), Jinju, Korea, October 26-30, 2025</div>
+                <div class="publication-links">
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-card fade-in">
+                <h4>Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities</h4>
+                <div class="authors">Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Hsin-Ting Lu, Yue-Shan Chang, Chen-Yu Chiang, Chao-Yin Lin, Yu-An Lin and Min-Yuh Day</div>
+                <div class="conference">Proceedings of the 2025 Taiwan Symposium On Cloud And Services Computing (TWSC2 2025), New Taipei City, Taiwan, July 3-4, 2025</div>
+                <div class="publication-links">
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-card fade-in">
+                <h4>IMNTPU at NTCIR-18 MedNLP-CHAT Task: Evaluating Agentic AI for Multilingual Risk Assessment in Medical Chatbots</h4>
+                <div class="authors">Jun-Yu Wu, Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao and Min-Yuh Day</div>
+                <div class="conference">Proceedings of the 18th NTCIR Conference on Evaluation of Information Access Technologies (NTCIR-18), Tokyo, Japan, June 10-13, 2025</div>
+                <div class="publication-links">
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-card fade-in">
+                <h4>IMNTPU at the NTCIR-18 FinArg-2: Fine-Tuning and Prompt-Based Learning for Temporal Argument Detection and Claim Validity Assessment</h4>
+                <div class="authors">Bor-Jen Chen, Wen-Hsin Hsiao, Jun-Yu Wu, Cheng-Yun Wu and Min-Yuh Day</div>
+                <div class="conference">Proceedings of the 18th NTCIR Conference on Evaluation of Information Access Technologies (NTCIR-18), Tokyo, Japan, June 10-13, 2025</div>
+                <div class="publication-links">
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="publication-card fade-in">
+                <h4>Multimodal Dialogue System for Chinese Taipei University Sports Federation</h4>
+                <div class="authors">Cheng-Yun Wu, Yen-Chun Lin, and Min-Yuh Day</div>
+                <div class="conference">The 36th International Conference on Information Management (ICIM 2025), New Taipei City, Taiwan, May 16, 2025</div>
+                <div class="publication-links">
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="#" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section with Swiper -->
+    <section class="content-section" id="certifications">
+        <h2 class="section-title fade-in" data-i18n="certificates.title">Certificates</h2>
+        <div class="swiper-container certificates-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/Introduction to Programming using Python.png')">
+                        <img src="certificates/Introduction to Programming using Python.png" alt="MTA Python Certificate">
+                        <div class="cert-date">2021/06/09</div>
+                        <h4>MTA: Introduction to Programming using Python</h4>
+                        <p>98-381: Microsoft Technology Associate</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/Database Administration Fundamentals.png')">
+                        <img src="certificates/Database Administration Fundamentals.png" alt="MTA Database Certificate">
+                        <div class="cert-date">2021/06/10</div>
+                        <h4>MTA: Database Fundamentals</h4>
+                        <p>98-364: Microsoft Technology Associate</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/ERP.png')">
+                        <img src="certificates/ERP.png" alt="ERP Certificate">
+                        <div class="cert-date">2022/06</div>
+                        <h4>ERP Application Engineer</h4>
+                        <p>Enterprise Resource Planning in Distribution Module for Data Systems Workflow ERP GP, Release 4.X</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/NVIDIA_Building RAG Agents with LLMs_Certificate.png')">
+                        <img src="certificates/NVIDIA_Building RAG Agents with LLMs_Certificate.png" alt="NVIDIA RAG Certificate">
+                        <div class="cert-date">2024/10/12</div>
+                        <h4>NVIDIA: Building RAG Agents with LLMs</h4>
+                        <p>NVIDIA Deep Learning Institute Certificate</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section with Swiper -->
+    <section class="content-section" id="projects">
+        <h2 class="section-title fade-in" data-i18n="projectsSection.title">Projects</h2>
+        <div class="swiper-container projects-swiper">
+            <div class="swiper-wrapper">
+                <!-- TWSC2 2025 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/TWSC2.png" alt="TWSC2 2025">
+                        <div class="project-date">2025/07/04</div>
+                        <h3 data-i18n="projects.twsc.title">2025 Taiwan Symposium On Cloud And Services Computing Conference</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">RAG</span>
+                            <span class="project-tag" data-i18n="tags.multimodal">Multimodal</span>
+                            <span class="project-tag" data-i18n="tags.dialogue">Dialogue System</span>
+                            <span class="project-tag" data-i18n="tags.accessibility">Accessibility</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.twsc.desc">Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1Zslp5PXvFnOvTxhhdvj8WZ71K9vcCB5F/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SE Group Final 2025 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/logo_InquAIry.png" alt="InquAIry">
+                        <div class="project-date">2025/06/04</div>
+                        <h3 data-i18n="projects.se_group.title">2025 Group Final Report in Software Engineering Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.ai_education">AI Education</span>
+                            <span class="project-tag" data-i18n="tags.learning">Learning Platform</span>
+                            <span class="project-tag" data-i18n="tags.software">Software Engineering</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.se_group.desc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1-iDAW9wnQ_-7gZd3F6ABPFK4wbSQ_Azh/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thesis 2025 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/Thesis.png" alt="Thesis">
+                        <div class="project-date">2025/05/28</div>
+                        <h3 data-i18n="projects.thesis.title">2025 Individual Final Report in Software Engineering Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.multimodal">Multimodal</span>
+                            <span class="project-tag" data-i18n="tags.dialogue">Dialogue System</span>
+                            <span class="project-tag" data-i18n="tags.sports">Sports Management</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.thesis.desc">Multimodal Dialogue System for Chinese Taipei University Sports Federation</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/14NKV-BZc9VlG1iTngiMQQSDXbf5r6_oL/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anyo -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/Anyo.png" alt="Anyo">
+                        <div class="project-date">2025/04/27</div>
+                        <h3 data-i18n="projects.anyo.title">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.ai_recommendation">AI Recommendation</span>
+                            <span class="project-tag" data-i18n="tags.health">Healthy Diet</span>
+                            <span class="project-tag" data-i18n="tags.marketing">Marketing Competition</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.anyo.desc">Anyong Fresh AI-Powered Healthy Recipe Recommendation System</p>
+                        <div class="project-links">
+                            <a href="https://youtu.be/KN0zhCcEdcI" target="_blank" class="project-link">
+                                <i class="fab fa-youtube"></i>YouTube
+                            </a>
+                            <a href="https://docs.google.com/presentation/d/1EhryTBCbG52EIYrDSUyS2RaWy4OJ9gmL/edit?usp=sharing&ouid=103078681710745961578&rtpof=true&sd=true" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TradiqAI -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/TRADIQAI.png" alt="TradiqAI">
+                        <div class="project-date">2025/04/18</div>
+                        <h3 data-i18n="projects.tradiq.title">2025 The 3rd NTPU AI Smart Application Innovation Competition</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">RAG</span>
+                            <span class="project-tag" data-i18n="tags.trade">Trade Inquiry</span>
+                            <span class="project-tag" data-i18n="tags.ai_competition">AI Competition</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.tradiq.desc">A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
+                        <div class="project-links">
+                            <a href="https://youtu.be/otihb7V_ji4" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CodeMigo -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/CodeMigo.png" alt="CodeMigo">
+                        <div class="project-date">2025/04/17</div>
+                        <h3 data-i18n="projects.codemigo.title">CodeMigo – A Tiny Growing CodePet</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.gamification">Gamification</span>
+                            <span class="project-tag" data-i18n="tags.coding_learning">Coding Learning</span>
+                            <span class="project-tag" data-i18n="tags.opensource">Open Source</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.codemigo.desc">A simple CodePet that grows with your coding time. Feed XP by logging your coding time</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Yunwcy/CodeMigo" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- InquAIry -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/logo_InquAIry-1.png" alt="InquAIry Early">
+                        <div class="project-date">2025/04/09</div>
+                        <h3 data-i18n="projects.inquairy.title">2025 Group Report in Software Engineering Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.ai_education">AI Education</span>
+                            <span class="project-tag" data-i18n="tags.learning">Learning Platform</span>
+                            <span class="project-tag" data-i18n="tags.team">Team Project</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.inquairy.desc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
+                        <div class="project-links">
+                            <a href="https://inquairy.github.io/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TariffMyBiz -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/tariff.jpg" alt="TariffMyBiz">
+                        <div class="project-date">2025/04/07</div>
+                        <h3 data-i18n="projects.tariffmybiz.title">2025 Best AI Awards</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">RAG</span>
+                            <span class="project-tag" data-i18n="tags.trade">Trade Inquiry</span>
+                            <span class="project-tag" data-i18n="tags.ai_awards">AI Awards</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.tariffmybiz.desc">A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
+                        <div class="project-links">
+                            <a href="https://www.youtube.com/watch?v=CgjfBryTFVQ" target="_blank" class="project-link">
+                                <i class="fab fa-youtube"></i>YouTube
+                            </a>
+                            <a href="https://github.com/Yunwcy/TariffMyBiz" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SE Case Study -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/SEcasestudy.jpg" alt="SE Case Study">
+                        <div class="project-date">2025/03/12</div>
+                        <h3 data-i18n="projects.secase.title">2025 Case Study in Software Engineering Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.case_study">Case Study</span>
+                            <span class="project-tag" data-i18n="tags.ai_education">AI Education</span>
+                            <span class="project-tag" data-i18n="tags.research">Research</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.secase.desc">AI-PoweredEducation: A Case Study of Khanmigo</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SinoPac -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/SinoPac.png" alt="SinoPac">
+                        <div class="project-date">2025/03/06</div>
+                        <h3 data-i18n="projects.sinopac.title">2025 SinoPac Holdings Business Proposal Competition</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.fintech">FinTech</span>
+                            <span class="project-tag" data-i18n="tags.business">Business Proposal</span>
+                            <span class="project-tag" data-i18n="tags.competition">Competition</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.sinopac.desc">"Yong" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marketing Chatbot -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/Marketing_chatbot.jpeg" alt="Marketing Chatbot">
+                        <div class="project-date">2025/01/02</div>
+                        <h3 data-i18n="projects.marketing.title">2024 Research Methodology Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">RAG</span>
+                            <span class="project-tag" data-i18n="tags.chatbot">Chatbot</span>
+                            <span class="project-tag" data-i18n="tags.education">Education</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.marketing.desc">Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Final -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/trafficAIagent.jpeg" alt="AI Final">
+                        <div class="project-date">2024/12/24</div>
+                        <h3 data-i18n="projects.ai_final.title">2024 Final Project in AI course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">LLM</span>
+                            <span class="project-tag" data-i18n="tags.smart_city">Smart City</span>
+                            <span class="project-tag" data-i18n="tags.traffic">Traffic Management</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.ai_final.desc">Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1iKgSGS5WUQz0RFl6fkfr3iaJ4to2G_CH/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USR -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/USR.png" alt="USR">
+                        <div class="project-date">2024/11/24</div>
+                        <h3 data-i18n="projects.usr.title">2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.sustainability">Sustainability</span>
+                            <span class="project-tag" data-i18n="tags.marketing">Marketing</span>
+                            <span class="project-tag" data-i18n="tags.generative_ai">Generative AI</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.usr.desc">A sustainable marketing project promoting Australian tea tree essential oil</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Case Study -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <img src="projects/aicasestudy.png" alt="AI Case Study">
+                        <div class="project-date">2024/11/19</div>
+                        <h3 data-i18n="projects.ai_case.title">2024 Case Study in AI course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.case_study">Case Study</span>
+                            <span class="project-tag" data-i18n="tags.smart_transportation">Smart Transportation</span>
+                            <span class="project-tag" data-i18n="tags.comparative">Comparative Analysis</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.ai_case.desc">AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section class="content-section" id="competitions">
+        <h2 class="section-title fade-in">
+            <span data-i18n="competitions.title">Competitions</span>
+            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="competitions.viewPhotos">📸 View Photos</a>
+        </h2>
+        <div class="experience-list fade-in">
+            <ul>
+                <li data-i18n="competitions.tsc">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention, 2025/05/24</li>
+                <li data-i18n="competitions.ntpuAI2025">2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award, 2025/05/22</li>
+                <li data-i18n="competitions.bestAIAwards">2025 Best AI Awards, Final contest, 2025/05/03</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Conferences Section -->
+    <section class="content-section" id="conferences">
+        <h2 class="section-title fade-in">
+            <span data-i18n="conferences.title">Conferences</span>
+            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="conferences.viewPhotos">📸 View Photos</a>
+        </h2>
+        <div class="experience-list fade-in">
+            <ul>
+                <li data-i18n="conferences.icim2025">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
+                <li>
+                    <span data-i18n="conferences.ntcir18">NTCIR-18 Conference (The 18th NII Testbeds and Community for Information access Research), Tokyo, Japan, 2025/06/10-13</span>
+                    <a href="https://yunwcy.github.io/ntcir18" style="color: #2E8B57; font-weight: bold;">More ></a>
+                </li>
+                <li data-i18n="conferences.twsc22025">TWSC2 2025 Conference (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Other Experiences Section -->
+    <section class="content-section" id="other-experiences">
+        <h2 class="section-title fade-in">
+            <span data-i18n="otherExperiences.title">Other Experiences</span>
+            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="otherExperiences.viewPhotos">📸 View Photos</a>
+        </h2>
+        <div class="experience-list fade-in">
+            <ul>
+                <li data-i18n="otherExperiences.teachingAssistant">A teaching assistant for programming courses, 2020/09 - 2022/06</li>
+                <li data-i18n="otherExperiences.technologyPresentation">Technology Inclusion Projects Achievement Presentation, 2024/10/30</li>
+                <li>
+                    <span data-i18n="otherExperiences.fintechEvent">FinTech Taipei 2024, 2024/11/01 - 2024/11/02</span> 
+                    <a href="https://www.aacsb.ntpu.edu.tw/fintech/view.php?id=MTM1MA==" style="color: #2E8B57; font-weight: bold;" data-i18n="otherExperiences.news">News</a>
+                </li>
+                <li data-i18n="otherExperiences.japanExchange">Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" alt="certificate full">
     </div>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
-          <div class="footer-column">
-            <h3 data-i18n="footer.contact">Contact</h3>
-            <p>✉️ yunwcy@gmail.com</p>
-            <p>📍 <span data-i18n="footer.university">National Taipei University</span></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="footer.links">Links</h3>
-            <p><a href="https://yunwcy.github.io/" data-i18n="nav.home">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about" data-i18n="nav.about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research" data-i18n="nav.experiences">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project" data-i18n="nav.projects">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact" data-i18n="nav.contact">Contact</a></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="footer.connect">Connect</h3>
-            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
-            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
-          </div>
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact</h3>
+                <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+                <p>📍 <span data-i18n="footer.university">National Taipei University</span></p>
+            </div>
+
+            <div class="footer-column">
+                <h3 data-i18n="footer.links">Links</h3>
+                <p><a href="#home" data-i18n="nav.home">Home</a></p>
+                <p><a href="about.html" data-i18n="nav.about">About Me</a></p>
+                <p><a href="#experiences" data-i18n="nav.experiences">Experiences</a></p>
+                <p><a href="#publications" data-i18n="nav.publications">Publications</a></p>
+                <p><a href="#certifications" data-i18n="nav.certifications">Certifications</a></p>
+                <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
+                <p><a href="#competitions" data-i18n="nav.competitions">Competitions</a></p>
+                <p><a href="#conferences" data-i18n="nav.conferences">Conferences</a></p>
+                <p><a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a></p>
+            </div>
+
+            <div class="footer-column">
+                <h3 data-i18n="footer.connect">Connect</h3>
+                <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+                <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+            </div>
         </div>
-      
+
         <div class="footer-bottom">
             <p class="footer-note" id="copyright" data-i18n="footer.copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p data-i18n="footer.note">This site is for academic and personal portfolio use only.</p>
+            <p data-i18n="footer.note">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu-items');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
-        }
-        
+        // Initialize i18next with expanded content
         document.addEventListener("DOMContentLoaded", function () {
-            // Initialize i18next
             i18next.use(i18nextBrowserLanguageDetector).init({
                 fallbackLng: 'en',
                 debug: false,
@@ -300,14 +1311,155 @@
                                 home: "Home",
                                 about: "About me",
                                 experiences: "Experiences",
+                                publications: "Publications",
+                                certifications: "Certifications",
                                 projects: "Projects",
-                                contact: "Contact"
+                                competitions: "Competitions",
+                                conferences: "Conferences",
+                                otherExperiences: "Other Experiences"
                             },
                             hero: {
                                 title: "Welcome to My Page!",
-                                intro: "Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href = 'https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab </a></strong>.",
+                                intro: "Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
                                 research: "My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.",
-                                explore: "Explore more <a href='https://yunwcy.github.io/about' style='color: #2E8B57; font-weight: bold;'>about me</a>!"
+                                explore: "Explore more <a href='about.html' style='color: #2E8B57; font-weight: bold;'>about me</a>!"
+                            },
+                            researchSection: {
+                                title: "Research Experience"
+                            },
+                            timeline: {
+                                position: "Research Assistant",
+                                projectTitle: "<strong>Digital Support, Unimpeded Communication:</strong> The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment",
+                                subProject: "Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support",
+                                funding: "National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
+                                task1: "Developing multimodal dialogue systems for speech-impaired users",
+                                task2: "Implementing cross-lingual communication support technologies",
+                                task3: "Researching inclusive AI technologies for accessibility"
+                            },
+                            publications: {
+                                title: "Publications",
+                                slides: "Slides",
+                                fulltext: "Full Text"
+                            },
+                            certificates: {
+                                title: "Certificates"
+                            },
+                            projectsSection: {
+                                title: "Projects"
+                            },
+                            projects: {
+                                more: "More",
+                                twsc: {
+                                    title: "2025 Taiwan Symposium On Cloud And Services Computing Conference",
+                                    desc: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities"
+                                },
+                                se_group: {
+                                    title: "2025 Group Final Report in Software Engineering Course",
+                                    desc: "InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise"
+                                },
+                                thesis: {
+                                    title: "2025 Individual Final Report in Software Engineering Course",
+                                    desc: "Multimodal Dialogue System for Chinese Taipei University Sports Federation"
+                                },
+                                anyo: {
+                                    title: "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition",
+                                    desc: "Anyong Fresh AI-Powered Healthy Recipe Recommendation System"
+                                },
+                                tradiq: {
+                                    title: "2025 The 3rd NTPU AI Smart Application Innovation Competition",
+                                    desc: "A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions"
+                                },
+                                codemigo: {
+                                    title: "CodeMigo – A Tiny Growing CodePet",
+                                    desc: "A simple CodePet that grows with your coding time. Feed XP by logging your coding time"
+                                },
+                                inquairy: {
+                                    title: "2025 Group Report in Software Engineering Course",
+                                    desc: "InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise"
+                                },
+                                tariffmybiz: {
+                                    title: "2025 Best AI Awards",
+                                    desc: "A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions"
+                                },
+                                secase: {
+                                    title: "2025 Case Study in Software Engineering Course",
+                                    desc: "AI-PoweredEducation: A Case Study of Khanmigo"
+                                },
+                                sinopac: {
+                                    title: "2025 SinoPac Holdings Business Proposal Competition",
+                                    desc: "\"Yong\" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System"
+                                },
+                                marketing: {
+                                    title: "2024 Research Methodology Course",
+                                    desc: "Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education"
+                                },
+                                ai_final: {
+                                    title: "2024 Final Project in AI course",
+                                    desc: "Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management"
+                                },
+                                usr: {
+                                    title: "2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition",
+                                    desc: "A sustainable marketing project promoting Australian tea tree essential oil"
+                                },
+                                ai_case: {
+                                    title: "2024 Case Study in AI course",
+                                    desc: "AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan"
+                                }
+                            },
+                            tags: {
+                                multimodal: "Multimodal",
+                                dialogue: "Dialogue System",
+                                accessibility: "Accessibility",
+                                ai_education: "AI Education",
+                                learning: "Learning Platform",
+                                software: "Software Engineering",
+                                sports: "Sports Management",
+                                ai_recommendation: "AI Recommendation",
+                                health: "Healthy Diet",
+                                marketing: "Marketing Competition",
+                                trade: "Trade Inquiry",
+                                ai_competition: "AI Competition",
+                                gamification: "Gamification",
+                                coding_learning: "Coding Learning",
+                                opensource: "Open Source",
+                                team: "Team Project",
+                                ai_awards: "AI Awards",
+                                case_study: "Case Study",
+                                research: "Research",
+                                fintech: "FinTech",
+                                business: "Business Proposal",
+                                competition: "Competition",
+                                chatbot: "Chatbot",
+                                education: "Education",
+                                smart_city: "Smart City",
+                                traffic: "Traffic Management",
+                                sustainability: "Sustainability",
+                                generative_ai: "Generative AI",
+                                smart_transportation: "Smart Transportation",
+                                comparative: "Comparative Analysis"
+                            },
+                            competitions: {
+                                title: "Competitions",
+                                viewPhotos: "📸 View Photos",
+                                tsc: "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention, 2025/05/24",
+                                ntpuAI2025: "2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award, 2025/05/22",
+                                bestAIAwards: "2025 Best AI Awards, Final contest, 2025/05/03"
+                            },
+                            conferences: {
+                                title: "Conferences",
+                                viewPhotos: "📸 View Photos",
+                                icim2025: "2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16",
+                                ntcir18: "NTCIR-18 Conference (The 18th NII Testbeds and Community for Information access Research), Tokyo, Japan, 2025/06/10-13",
+                                twsc22025: "TWSC2 2025 Conference (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04"
+                            },
+                            otherExperiences: {
+                                title: "Other Experiences",
+                                viewPhotos: "📸 View Photos",
+                                teachingAssistant: "A teaching assistant for programming courses, 2020/09 - 2022/06",
+                                technologyPresentation: "Technology Inclusion Projects Achievement Presentation, 2024/10/30",
+                                fintechEvent: "FinTech Taipei 2024, 2024/11/01 - 2024/11/02",
+                                news: "News",
+                                japanExchange: "Participated in an academic exchange visit to Japan, 2024/11/04 - 2024/11/08"
                             },
                             footer: {
                                 contact: "Contact",
@@ -326,14 +1478,155 @@
                                 home: "首頁",
                                 about: "關於我",
                                 experiences: "經歷",
-                                projects: "專案",
-                                contact: "聯絡方式"
+                                publications: "學術發表",
+                                certifications: "證書認證",
+                                projects: "專案作品",
+                                competitions: "競賽經歷",
+                                conferences: "會議參與",
+                                otherExperiences: "其他經歷"
                             },
                             hero: {
                                 title: "歡迎來到我的個人網站！",
-                                intro: "嗨，我是Yun！目前是<strong>國立臺北大學資訊管理研究所</strong>的碩士生，同時也是<strong><a href = 'https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>的研究助理。",
+                                intro: "嗨，我是Yun！目前是<strong>國立臺北大學資訊管理研究所</strong>的碩士生，同時也是<strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>的研究助理。",
                                 research: "我的研究興趣專注在<strong>人工智慧</strong>和<strong>多模態</strong>應用，開發可以增強溝通和可用性的系統。",
-                                explore: "<a href='https://yunwcy.github.io/about' style='color: #2E8B57; font-weight: bold;'>了解更多</a>關於我的資訊！"
+                                explore: "<a href='about.html' style='color: #2E8B57; font-weight: bold;'>了解更多</a>關於我的資訊！"
+                            },
+                            researchSection: {
+                                title: "研究經歷"
+                            },
+                            timeline: {
+                                position: "研究助理",
+                                projectTitle: "<strong>數位支持，暢通無礙：</strong> AI輔助語言障礙者溝通輔具之開發、支持與推廣",
+                                subProject: "子計畫三：支持無障礙溝通的多模態跨語言任務導向對話系統",
+                                funding: "國家科學及技術委員會 (NSTC 113-2425-H-305-003-)，2023/05/01 - 2026/04/30",
+                                task1: "開發針對語言障礙使用者的多模態對話系統",
+                                task2: "實作跨語言溝通支援技術",
+                                task3: "研究無障礙AI技術"
+                            },
+                            publications: {
+                                title: "學術發表",
+                                slides: "投影片",
+                                fulltext: "全文"
+                            },
+                            certificates: {
+                                title: "證書認證"
+                            },
+                            projectsSection: {
+                                title: "專案作品"
+                            },
+                            projects: {
+                                more: "更多",
+                                twsc: {
+                                    title: "2025台灣雲端服務暨運算研討會",
+                                    desc: "實作具備RAG增強多語言與多模態對話能力的無障礙溝通系統"
+                                },
+                                se_group: {
+                                    title: "2025軟體工程課程團體期末報告",
+                                    desc: "InquAIry：用AI激發你的好奇心！智慧、可擴展的AI學習支援，適用於教育和企業"
+                                },
+                                thesis: {
+                                    title: "2025軟體工程課程個人期末報告",
+                                    desc: "中華台北大學體育總會多模態對話系統"
+                                },
+                                anyo: {
+                                    title: "2025第十屆TSC行銷學術研討會：AI應用行銷競賽",
+                                    desc: "安養鮮 AI驅動健康食譜推薦系統"
+                                },
+                                tradiq: {
+                                    title: "2025第三屆臺北大學AI智慧應用創新競賽",
+                                    desc: "一個互動式關稅查詢系統，運用RAG技術整合檔案，協助企業和機構有效應對國際貿易變化並做出明智決策"
+                                },
+                                codemigo: {
+                                    title: "CodeMigo – 會成長的小小程式寵物",
+                                    desc: "一個隨著你的編程時間而成長的程式寵物。通過記錄編程時間來餵養XP"
+                                },
+                                inquairy: {
+                                    title: "2025軟體工程課程團體報告",
+                                    desc: "InquAIry：用AI激發你的好奇心！智慧、可擴展的AI學習支援，適用於教育和企業"
+                                },
+                                tariffmybiz: {
+                                    title: "2025 Best AI Awards",
+                                    desc: "一個互動式關稅查詢系統，運用RAG技術整合檔案，協助企業和機構有效應對國際貿易變化並做出明智決策"
+                                },
+                                secase: {
+                                    title: "2025軟體工程課程個案研究",
+                                    desc: "AI驅動教育：Khanmigo個案研究"
+                                },
+                                sinopac: {
+                                    title: "2025永豐金控商業企劃競賽",
+                                    desc: "「勇」敢發聲 – 客戶互動回饋優化訓練系統"
+                                },
+                                marketing: {
+                                    title: "2024研究方法課程",
+                                    desc: "應用檢索增強生成(RAG)建構聊天機器人教學助理：行銷教育案例研究"
+                                },
+                                ai_final: {
+                                    title: "2024人工智慧課程期末專案",
+                                    desc: "大型語言模型在AI驅動交通查詢代理的智慧城市交通管理應用"
+                                },
+                                usr: {
+                                    title: "2024臺北大學USR x 生成式AI永續共創行銷競賽",
+                                    desc: "推廣澳洲茶樹精油的永續行銷專案"
+                                },
+                                ai_case: {
+                                    title: "2024人工智慧課程個案研究",
+                                    desc: "AI驅動智慧交通：新加坡與台灣的比較洞察"
+                                }
+                            },
+                            tags: {
+                                multimodal: "多模態",
+                                dialogue: "對話系統",
+                                accessibility: "無障礙",
+                                ai_education: "AI教育",
+                                learning: "學習平台",
+                                software: "軟體工程",
+                                sports: "運動管理",
+                                ai_recommendation: "AI推薦",
+                                health: "健康飲食",
+                                marketing: "行銷競賽",
+                                trade: "貿易查詢",
+                                ai_competition: "AI競賽",
+                                gamification: "遊戲化",
+                                coding_learning: "程式學習",
+                                opensource: "開源專案",
+                                team: "團隊專案",
+                                ai_awards: "AI獎項",
+                                case_study: "個案研究",
+                                research: "研究",
+                                fintech: "金融科技",
+                                business: "商業企劃",
+                                competition: "競賽",
+                                chatbot: "聊天機器人",
+                                education: "教育",
+                                smart_city: "智慧城市",
+                                traffic: "交通管理",
+                                sustainability: "永續發展",
+                                generative_ai: "生成式AI",
+                                smart_transportation: "智慧交通",
+                                comparative: "比較分析"
+                            },
+                            competitions: {
+                                title: "競賽經歷",
+                                viewPhotos: "📸 檢視照片",
+                                tsc: "2025第十屆TSC行銷學術研討會：AI應用行銷競賽，佳作，2025/05/24",
+                                ntpuAI2025: "2025第三屆臺北大學AI智慧應用創新競賽：實作組，優秀獎，2025/05/22",
+                                bestAIAwards: "2025 Best AI Awards，決賽，2025/05/03"
+                            },
+                            conferences: {
+                                title: "會議參與",
+                                viewPhotos: "📸 檢視照片",
+                                icim2025: "2025年資訊管理國際研討會，新北市，台灣，2025/05/16",
+                                ntcir18: "NTCIR-18研討會 (第18屆NII資訊存取技術測試平台與社群研討會)，東京，日本，2025/06/10-13",
+                                twsc22025: "TWSC2 2025研討會 (2025台灣雲端服務暨運算研討會)，新北市，台灣，2025/07/03-04"
+                            },
+                            otherExperiences: {
+                                title: "其他經歷",
+                                viewPhotos: "📸 檢視照片",
+                                teachingAssistant: "程式設計課程教學助理，2020/09 - 2022/06",
+                                technologyPresentation: "科技包容計畫成果發表，2024/10/30",
+                                fintechEvent: "FinTech Taipei 2024，2024/11/01 - 2024/11/02",
+                                news: "新聞",
+                                japanExchange: "參與日本學術交流訪問，2024/11/04 - 2024/11/08"
                             },
                             footer: {
                                 contact: "聯絡方式",
@@ -348,19 +1641,101 @@
                     }
                 }
             }, function(err, t) {
-                // 初始化完成後更新內容
                 updateContent();
                 updateLanguageButton();
+                updateYear();
+                initializeSwiper();
             });
         });
-        
-        // 更新語言按鈕文字
+
+        // Initialize Swiper sliders
+        function initializeSwiper() {
+            // Projects Swiper
+            new Swiper('.projects-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                centeredSlides: false,
+                loop: false,
+                navigation: {
+                    nextEl: '.projects-swiper .swiper-button-next',
+                    prevEl: '.projects-swiper .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.projects-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        centeredSlides: true,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 25,
+                    },
+                    1440: {
+                        slidesPerView: 4,
+                        spaceBetween: 25,
+                    }
+                }
+            });
+
+            // Certificates Swiper
+            new Swiper('.certificates-swiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                centeredSlides: false,
+                loop: false,
+                navigation: {
+                    nextEl: '.certificates-swiper .swiper-button-next',
+                    prevEl: '.certificates-swiper .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.certificates-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        centeredSlides: true,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 25,
+                    },
+                    1440: {
+                        slidesPerView: 4,
+                        spaceBetween: 25,
+                    }
+                }
+            });
+        }
+
+        // Toggle menu for mobile
+        function toggleMenu() {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
+        }
+
+        // Update language button text
         function updateLanguageButton() {
             const langButton = document.getElementById('lang-toggle');
             langButton.textContent = i18next.t('langButton');
         }
-        
-        // 語言切換
+
+        // Switch language
         function switchLanguage() {
             const currentLang = i18next.language;
             const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
@@ -368,27 +1743,122 @@
             i18next.changeLanguage(newLang, function() {
                 updateContent();
                 updateLanguageButton();
+                document.documentElement.lang = newLang;
             });
         }
-        
-        // 更新所有翻譯內容
+
+        // Update all content with translations
         function updateContent() {
-            $('[data-i18n]').each(function() {
-                const key = $(this).attr('data-i18n');
-                const translation = i18next.t(key);
-                $(this).html(translation);
+            // Update simple text content
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (key) {
+                    if (element.tagName === 'INPUT' && element.type === 'button') {
+                        element.value = i18next.t(key);
+                    } else {
+                        element.textContent = i18next.t(key);
+                    }
+                }
             });
             
-            // 更新年份
+            // Update HTML content
+            document.querySelectorAll('[data-i18n-html]').forEach(element => {
+                const key = element.getAttribute('data-i18n-html');
+                if (key) {
+                    element.innerHTML = i18next.t(key);
+                }
+            });
+            
+            // Update attributes
+            document.querySelectorAll('[data-i18n-attr]').forEach(element => {
+                const attrData = element.getAttribute('data-i18n-attr');
+                if (attrData) {
+                    const [attr, key] = attrData.split(':');
+                    if (attr && key) {
+                        element.setAttribute(attr, i18next.t(key));
+                    }
+                }
+            });
+            
             updateYear();
         }
-        
-        // 更新年份函數
+
+        // Update year in copyright
         function updateYear() {
-            const currentYear = new Date().getFullYear();
-            // 更新所有年份 span
-            $('#year-en, #year-zh, #year').text(currentYear);
+            const year = new Date().getFullYear();
+            const copyrightElement = document.getElementById('copyright');
+            if (copyrightElement) {
+                copyrightElement.innerHTML = i18next.t('footer.copyright', { year: year });
+            }
+            document.getElementById('year').textContent = year;
         }
+
+        // Lightbox functions
+        function openLightbox(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.menu-items a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
