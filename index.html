@@ -181,70 +181,80 @@
             padding-bottom: 15px;
         }
 
-        /* === 修正 Swiper 箭頭顯示 === */
-        .certificates-swiper,
-        .projects-swiper {
+        /* Swiper Container Styles */
+        .swiper {
+            width: 100%;
+            padding: 20px 0 60px 0;
             position: relative;
         }
 
+        /* Fix Swiper Navigation Buttons */
+        .swiper-button-next,
+        .swiper-button-prev {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            margin-top: 0;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            background: var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-button-next {
+            right: 10px;
+        }
+
+        .swiper-button-prev {
+            left: 10px;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Ensure navigation buttons are visible and functional */
         .certificates-swiper .swiper-button-next,
         .certificates-swiper .swiper-button-prev,
         .projects-swiper .swiper-button-next,
         .projects-swiper .swiper-button-prev {
             display: flex !important;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            color: var(--primary-green);
-            z-index: 10;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        .certificates-swiper .swiper-button-next:hover,
-        .certificates-swiper .swiper-button-prev:hover,
-        .projects-swiper .swiper-button-next:hover,
-        .projects-swiper .swiper-button-prev:hover {
+        /* Swiper Pagination */
+        .swiper-pagination {
+            bottom: 20px;
+        }
+
+        .swiper-pagination-bullet {
             background: var(--primary-green);
-            color: white;
+            opacity: 0.5;
         }
 
-        .certificates-swiper .swiper-button-next:after,
-        .certificates-swiper .swiper-button-prev:after,
-        .projects-swiper .swiper-button-next:after,
-        .projects-swiper .swiper-button-prev:after {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        /* Certificates and Projects spacing */
-        .certificates-swiper .swiper-slide,
-        .projects-swiper .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
-            margin: 0 10px;
-        }
-
-        .cert-card,
-        .project-card {
-            margin: 0 auto;
-        }
-
-        .project-card {
-            height: auto !important;
-            min-height: 480px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-desc {
-            flex-grow: 1;
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: var(--primary-green);
         }
 
         /* Timeline for Research */
@@ -311,34 +321,6 @@
             font-weight: bold;
             font-size: 0.9rem;
             margin-bottom: 15px;
-        }
-
-        /* Swiper Container */
-        .swiper-container {
-            width: 100%;
-            padding: 20px 0 60px 0;
-        }
-
-        .swiper-slide {
-            width: auto;
-            height: auto;
-        }
-
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--primary-green);
-            background: var(--card-bg);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            margin-top: -25px;
-        }
-
-        .swiper-button-next:after, .swiper-button-prev:after {
-            font-size: 20px;
-        }
-
-        .swiper-pagination-bullet {
-            background: var(--primary-green);
         }
 
         /* Publications Grid */
@@ -936,7 +918,7 @@
     <!-- Certificates Section with Swiper -->
     <section class="content-section" id="certifications">
         <h2 class="section-title fade-in" data-i18n="certificates.title">Certificates</h2>
-        <div class="swiper-container certificates-swiper">
+        <div class="swiper certificates-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="cert-card" onclick="openLightbox('certificates/Introduction to Programming using Python.png')">
@@ -980,7 +962,7 @@
     <!-- Projects Section with Swiper -->
     <section class="content-section" id="projects">
         <h2 class="section-title fade-in" data-i18n="projectsSection.title">Projects</h2>
-        <div class="swiper-container projects-swiper">
+        <div class="swiper projects-swiper">
             <div class="swiper-wrapper">
                 <!-- TWSC2 2025 -->
                 <div class="swiper-slide">
@@ -1716,15 +1698,16 @@
                 updateContent();
                 updateLanguageButton();
                 updateYear();
-                initializeSwiper();
+                // Initialize Swiper after i18n is loaded
+                setTimeout(initializeSwiper, 100);
             });
         });
 
         function initializeSwiper() {
             // Certificates Swiper
-            new Swiper('.certificates-swiper', {
+            const certificatesSwiper = new Swiper('.certificates-swiper', {
                 slidesPerView: 3,
-                spaceBetween: 40,
+                spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
                 navigation: {
@@ -1736,16 +1719,25 @@
                     clickable: true,
                 },
                 breakpoints: {
-                    320: { slidesPerView: 1, spaceBetween: 20 },
-                    768: { slidesPerView: 2, spaceBetween: 30 },
-                    1024: { slidesPerView: 3, spaceBetween: 40 }
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 25
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                    }
                 }
             });
 
             // Projects Swiper
-            new Swiper('.projects-swiper', {
+            const projectsSwiper = new Swiper('.projects-swiper', {
                 slidesPerView: 3,
-                spaceBetween: 40,
+                spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
                 navigation: {
@@ -1757,13 +1749,25 @@
                     clickable: true,
                 },
                 breakpoints: {
-                    320: { slidesPerView: 1, spaceBetween: 20 },
-                    768: { slidesPerView: 2, spaceBetween: 30 },
-                    1024: { slidesPerView: 3, spaceBetween: 40 }
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 25
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                    }
                 }
             });
-        }
 
+            // Debug: Log swiper instances to ensure they're created
+            console.log('Certificates Swiper:', certificatesSwiper);
+            console.log('Projects Swiper:', projectsSwiper);
+        }
 
         // Toggle menu for mobile
         function toggleMenu() {
@@ -1834,7 +1838,10 @@
             if (copyrightElement) {
                 copyrightElement.innerHTML = i18next.t('footer.copyright', { year: year });
             }
-            document.getElementById('year').textContent = year;
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                yearElement.textContent = year;
+            }
         }
 
         // Lightbox functions
