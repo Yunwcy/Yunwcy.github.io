@@ -159,6 +159,12 @@
             margin-bottom: 15px;
         }
 
+        /* Hide arrows in hero */
+        .hero .swiper-button-prev,
+        .hero .swiper-button-next {
+            display: none !important;
+        }
+
         /* Main Content */
         .content-section {
             padding: 80px 40px;
@@ -173,6 +179,20 @@
             margin-bottom: 50px;
             border-bottom: 3px solid var(--primary-green);
             padding-bottom: 15px;
+        }
+
+        /* Certificates and Projects spacing */
+        .certificates-swiper .swiper-slide,
+        .projects-swiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            margin: 0 10px;
+        }
+
+        .cert-card,
+        .project-card {
+            margin: 0 auto;
         }
 
         /* Timeline for Research */
@@ -1648,47 +1668,12 @@
             });
         });
 
-        // Initialize Swiper sliders
+        // Initialize Swiper sliders (modified)
         function initializeSwiper() {
-            // Projects Swiper
-            new Swiper('.projects-swiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 20,
-                centeredSlides: false,
-                loop: false,
-                navigation: {
-                    nextEl: '.projects-swiper .swiper-button-next',
-                    prevEl: '.projects-swiper .swiper-button-prev',
-                },
-                pagination: {
-                    el: '.projects-swiper .swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                        centeredSlides: true,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 25,
-                    },
-                    1440: {
-                        slidesPerView: 4,
-                        spaceBetween: 25,
-                    }
-                }
-            });
-
             // Certificates Swiper
             new Swiper('.certificates-swiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 20,
+                slidesPerView: 3,
+                spaceBetween: 40,
                 centeredSlides: false,
                 loop: false,
                 navigation: {
@@ -1700,23 +1685,30 @@
                     clickable: true,
                 },
                 breakpoints: {
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                        centeredSlides: true,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 25,
-                    },
-                    1440: {
-                        slidesPerView: 4,
-                        spaceBetween: 25,
-                    }
+                    320: { slidesPerView: 1, spaceBetween: 20, centeredSlides: true },
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    1024: { slidesPerView: 3, spaceBetween: 40 }
+                }
+            });
+
+            // Projects Swiper
+            new Swiper('.projects-swiper', {
+                slidesPerView: 3,
+                spaceBetween: 40,
+                centeredSlides: false,
+                loop: false,
+                navigation: {
+                    nextEl: '.projects-swiper .swiper-button-next',
+                    prevEl: '.projects-swiper .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.projects-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1, spaceBetween: 20, centeredSlides: true },
+                    768: { slidesPerView: 2, spaceBetween: 30 },
+                    1024: { slidesPerView: 3, spaceBetween: 40 }
                 }
             });
         }
