@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-assisted Communication Assistive Devices Research Project | Yun</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+
+<style>
+/* CSS 變數定義 - 定義整個網站的主要顏色和樣式變數 */
+:root {
+    --primary-green: #2E8B57;           /* 主要綠色 */
+    --light-green: rgba(213, 236, 198, 0.8);  /* 淺綠色 */
+    --medium-green: rgba(180, 218, 144, 0.7); /* 中綠色 */
+    --dark-green: #1e5d3a;             /* 深綠色 */
+    --text-color: #5A4A42;             /* 文字顏色 */
+    --card-bg: rgba(255, 255, 255, 0.9); /* 卡片背景色 */
+}
+
+/* 全域樣式重置 */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+/* 網頁主體樣式 */
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, 
+        rgba(213, 236, 198, 0.5), 
+        rgba(220, 233, 190, 0.5), 
+        rgba(180, 218, 144, 0.5), 
+        rgba(212, 228, 175, 0.5), 
+        rgba(202, 226, 167, 0.5));
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* 導航列樣式 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* 背景模糊效果 */
+}
+
+.nav-brand {
+    color: var(--primary-green);
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.back-link:hover {
+    background: rgba(46, 139, 87, 0.2);
+    color: var(--dark-green);
+}
+
+/* 語言切換按鈕樣式 */
+.language-switcher {
+    display: flex;
+    gap: 5px;
+}
+
+.language-btn {
+    padding: 5px 10px;
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.language-btn:hover {
+    background: var(--dark-green);
+}
+
+/* 主要內容區域樣式 */
+.main-content {
+    padding: 100px 40px 60px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* 頁面標題樣式 */
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 15px;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 50px;
+    font-style: italic;
+}
+
+/* 內容卡片樣式 */
+.content-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* 區塊標題樣式 */
+.section-header {
+    color: var(--primary-green);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--primary-green);
+    padding-left: 20px;
+}
+
+.subsection-header {
+    color: var(--dark-green);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 30px 0 20px 0;
+}
+
+/* 專案概覽網格樣式 */
+.project-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.overview-card {
+    background: rgba(46, 139, 87, 0.05);
+    border-left: 4px solid var(--primary-green);
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.overview-card h4 {
+    color: var(--primary-green);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* 時間軸樣式 */
+.timeline-container {
+    position: relative;
+    margin: 30px 0;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.timeline-date {
+    background: var(--primary-green);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 120px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.timeline-content {
+    flex: 1;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h5 {
+    color: var(--primary-green);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* 功能網格樣式 */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 2px solid var(--light-green);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 15px;
+}
+
+/* 技術標籤樣式 */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tech-tag {
+    background: var(--light-green);
+    color: var(--primary-green);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 2px solid var(--medium-green);
+}
+
+/* 專案資訊卡片區塊樣式 - 模仿附圖設計 */
+.project-info-section {
+    margin: 50px 0;
+}
+
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    border-left: 5px solid var(--primary-green);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+    color: var(--primary-green);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    color: var(--text-color);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* 統計卡片區塊樣式 - 模仿附圖底部設計 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.stats-card {
+    background: var(--primary-green);
+    color: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(46, 139, 87, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(46, 139, 87, 0.4);
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.stats-label {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+/* 強調框樣式 */
+.highlight-box {
+    background: rgba(46, 139, 87, 0.05);
+    border: 2px solid var(--light-green);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.highlight-box h4 {
+    color: var(--primary-green);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* 動畫效果 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 100px 20px 60px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-date {
+        margin-right: 0;
+        margin-bottom: 15px;
+        align-self: flex-start;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- 導航列 -->
+<div class="navbar">
+  <a href="index.html" class="nav-brand" data-i18n="nav.brand">Yun's Portfolio</a>
+  <a href="index.html" class="back-link" data-i18n="nav.back">← Back to Home</a>
+  <div class="language-switcher">
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+  </div>
+</div>
+
+<!-- 主要內容區域 -->
+<div class="main-content">
+    <!-- 頁面標題 -->
+    <h1 class="page-title fade-in" data-i18n="page.title">Digital Support, Unimpeded Communication: The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment</h1>
+    <p class="page-subtitle fade-in" data-i18n="page.subtitle">A voice with warmth deserves to be heard by the world. A dialogue with wisdom brings services closer to the heart.</p>
+
+    <!-- 專案資訊區塊 - 模仿附圖設計 -->
+    <div class="project-info-section fade-in">
+        <div class="info-cards-grid">
+            <!-- 資助機構卡片 -->
+            <div class="info-card">
+                <h3 data-i18n="info.funding.title">Funding Agency</h3>
+                <p data-i18n="info.funding.content">National Science and Technology Council (NSTC)</p>
+            </div>
+
+            <!-- 計畫期間卡片 -->
+            <div class="info-card">
+                <h3 data-i18n="info.duration.title">Project Duration</h3>
+                <p data-i18n="info.duration.content">May 1, 2023 - April 30, 2026</p>
+            </div>
+
+            <!-- 計畫編號卡片 -->
+            <div class="info-card">
+                <h3 data-i18n="info.grant.title">Grant Number</h3>
+                <p data-i18n="info.grant.content">NSTC 113-2425-H-305-003-</p>
+            </div>
+
+            <!-- 主辦機構卡片 -->
+            <div class="info-card">
+                <h3 data-i18n="info.host.title">Host Institution</h3>
+                <p data-i18n="info.host.content">National Taipei University</p>
+            </div>
+        </div>
+
+        <!-- 統計卡片區塊 - 模仿附圖底部設計 -->
+        <div class="stats-grid">
+            <div class="stats-card">
+                <span class="stats-number">4</span>
+                <span class="stats-label" data-i18n="stats.subprojects">Sub-projects</span>
+            </div>
+            <div class="stats-card">
+                <span class="stats-number">3</span>
+                <span class="stats-label" data-i18n="stats.years">Years Duration</span>
+            </div>
+            <div class="stats-card">
+                <span class="stats-number" data-i18n="stats.multimodal.title">多模態</span>
+                <span class="stats-label" data-i18n="stats.multimodal.subtitle">Multimodal Approach</span>
+            </div>
+            <div class="stats-card">
+                <span class="stats-number">AI</span>
+                <span class="stats-label" data-i18n="stats.ai">Core Technology</span>
+            </div>
+            </div>
+    </div>
+
+    <!-- 計畫概述 -->
+    <div class="content-card fade-in">
+        <h2 class="section-header" data-i18n="overview.title">Project Overview</h2>
+        <div class="highlight-box">
+            <h4 data-i18n="overview.mission.title">Mission Statement</h4>
+            <p data-i18n="overview.mission.content">This NSTC-funded three-year project (2023–2026) aims to establish AI-based inclusive communication assistive systems for speech-impaired individuals, integrating four sub-projects covering hardware, AI model development, multimodal dialogue systems, and field testing.</p>
+        </div>
+
+        <!-- 子計畫概覽 -->
+        <div class="project-overview">
+        <div class="overview-card">
+            <h4 data-i18n="overview.sub1.title">Sub-project 1</h4>
+            <p data-i18n="overview.sub1.content">Development of embedded hardware and speech signal assistive modules.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="overview.sub2.title">Sub-project 2</h4>
+            <p data-i18n="overview.sub2.content">Design of adaptive AI communication models and user interfaces.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="overview.sub3.title">Sub-project 3</h4>
+            <p data-i18n="overview.sub3.content">Construction of multimodal cross-lingual task-oriented dialogue systems for inclusive communication.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="overview.sub4.title">Sub-project 4</h4>
+            <p data-i18n="overview.sub4.content">Field testing, user validation, and technology dissemination.</p>
+        </div>
+        </div>
+
+        <!-- 計畫時程 -->
+        <div class="timeline-container">
+        <div class="timeline-item">
+            <div class="timeline-date" data-i18n="timeline.y1.date">Year 1 (2023–2024)</div>
+            <div class="timeline-content">
+            <h4 data-i18n="timeline.y1.title">Foundation & Design</h4>
+            <p data-i18n="timeline.y1.desc">Needs assessment, prototype design, and integration framework setup.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date" data-i18n="timeline.y2.date">Year 2 (2024–2025)</div>
+            <div class="timeline-content">
+            <h4 data-i18n="timeline.y2.title">System Development</h4>
+            <p data-i18n="timeline.y2.desc">AI model training, dialogue integration, and multimodal enhancement.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date" data-i18n="timeline.y3.date">Year 3 (2025–2026)</div>
+            <div class="timeline-content">
+            <h4 data-i18n="timeline.y3.title">Testing & Application</h4>
+            <p data-i18n="timeline.y3.desc">Field testing, performance optimization, and cross-sector application.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- 我的角色：子計畫三 -->
+    <div class="content-card fade-in">
+        <h2 class="section-header" data-i18n="sub3.title">My Role: Sub-project 3</h2>
+        <h3 class="subsection-header" data-i18n="sub3.name">Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</h3>
+        <div class="highlight-box">
+        <h4 data-i18n="sub3.role.title">Research Assistant Responsibilities</h4>
+        <p data-i18n="sub3.role.desc">Designing and implementing a RAG-based multimodal dialogue system integrating text, speech, and image recognition for accessible, multilingual, and adaptive communication.</p>
+        </div>
+
+        <!-- 研究目標與創新特色 -->
+        <h3 class="subsection-header" data-i18n="sub3.obj.title">Objectives & Key Features</h3>
+        <ul>
+            <li data-i18n="sub3.obj.1">Develop inclusive AI dialogue systems for multimodal and multilingual communication.</li>
+            <li data-i18n="sub3.obj.2">Integrate NLP, speech, and vision-based components to enhance accessibility.</li>
+            <li data-i18n="sub3.obj.3">Apply RAG-enhanced retrieval for precise context-based responses.</li>
+            <li data-i18n="sub3.obj.4">Design adaptive and user-friendly interfaces for assistive contexts.</li>
+            <li data-i18n="sub3.obj.5">Conduct field deployment with NPO partners and assistive centers.</li>
+        </ul>
+
+        <!-- 功能特色網格 -->
+        <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+            <h4 data-i18n="features.ai.title">AI Intelligence</h4>
+            <p data-i18n="features.ai.desc">LLM + RAG-based comprehension and reasoning.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-eye"></i></div>
+            <h4 data-i18n="features.multimodal.title">Multimodal Input</h4>
+            <p data-i18n="features.multimodal.desc">Text, speech, and image integrated communication.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-globe"></i></div>
+            <h4 data-i18n="features.crosslingual.title">Cross-lingual Dialogue</h4>
+            <p data-i18n="features.crosslingual.desc">Supports Chinese, English, Taiwanese, and Vietnamese.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-comments"></i></div>
+            <h4 data-i18n="features.taskoriented.title">Task Orientation</h4>
+            <p data-i18n="features.taskoriented.desc">Subsidy inquiry, assistive equipment info, and more.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-universal-access"></i></div>
+            <h4 data-i18n="features.accessibility.title">Accessibility Design</h4>
+            <p data-i18n="features.accessibility.desc">Interface optimized for speech-impaired users.</p>
+        </div>
+        </div>
+
+        <h3 class="subsection-header" data-i18n="sub3.tech.title">Technical Approach</h3>
+        <div class="tech-stack">
+            <span class="tech-tag">Natural Language Processing</span>
+            <span class="tech-tag">Machine Learning</span>
+            <span class="tech-tag">Deep Learning</span>
+            <span class="tech-tag">Multimodal AI</span>
+            <span class="tech-tag">Cross-lingual NLP</span>
+            <span class="tech-tag">Dialogue Systems</span>
+            <span class="tech-tag">Speech Recognition</span>
+            <span class="tech-tag">Computer Vision</span>
+            <span class="tech-tag">RAG Technology</span>
+            <span class="tech-tag">Large Language Models</span>
+        </div>
+    </div>
+
+    <!-- Expected Impact -->
+    <div class="content-card fade-in">
+        <h2 class="section-header" data-i18n="impact.title">Expected Impact & Outcomes</h2>
+        <div class="project-overview">
+            <div class="overview-card">
+                <h4 data-i18n="impact.research.title">Research Contribution</h4>
+                <p data-i18n="impact.research.content">Advancing the field of inclusive AI and multimodal communication systems</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="impact.social.title">Social Impact</h4>
+                <p data-i18n="impact.social.content">Improving quality of life for individuals with speech impairments</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="impact.technological.title">Technological Innovation</h4>
+                <p data-i18n="impact.technological.content">Pioneering new approaches in AI-assisted communication</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="impact.commercial.title">Commercial Potential</h4>
+                <p data-i18n="impact.commercial.content">Creating market-ready assistive communication technologies</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Publications & Presentations -->
+    <div class="content-card fade-in">
+        <h2 class="section-header" data-i18n="publications.title">Related Publications & Presentations</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-date">2025/07</div>
+                <div class="timeline-content">
+                    <h5>TWSC2 2025 Conference</h5>
+                    <p data-i18n="publications.twsc.content">Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities</p>
+                    <p style="font-style: italic;">Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Hsin-Ting Lu, Yue-Shan Chang, Chen-Yu Chiang, Chao-Yin Lin, Yu-An Lin and Min-Yuh Day</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript 腳本 -->
+<script>
+// 頁面載入完成後初始化多語言系統
+document.addEventListener("DOMContentLoaded", function() {
+    // 初始化 i18next 多語言系統
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            // 英文翻譯資源
+            en: {
+                translation: {
+                    nav: {
+                        brand: "Yun's Portfolio",
+                        back: "← Back to Home"
+                    },
+                    langButton: "中文",
+                    page: {
+                        title: "Digital Support, Unimpeded Communication: The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment",
+                        subtitle: "A voice with warmth deserves to be heard by the world. A dialogue with wisdom brings services closer to the heart."
+                    },
+                    info: {
+                        funding: {
+                            title: "Funding Agency",
+                            content: "National Science and Technology Council (NSTC)"
+                        },
+                        duration: {
+                            title: "Project Duration",
+                            content: "May 1, 2023 - April 30, 2026"
+                        },
+                        grant: {
+                            title: "Grant Number",
+                            content: "NSTC 113-2425-H-305-003-"
+                        },
+                        host: {
+                            title: "Host Institution",
+                            content: "National Taipei University"
+                        }
+                    },
+                    stats: {
+                        subprojects: "Sub-projects",
+                        years: "Years Duration",
+                        multimodal: {
+                            title: "Multimodal",
+                            subtitle: "Multimodal Approach"
+                        },
+                        ai: "Core Technology"
+                    },
+                    overview: {
+                        title: "Project Overview",
+                        mission: {
+                            title: "Mission Statement",
+                            content: "This NSTC-funded three-year project (2023–2026) aims to establish AI-based inclusive communication assistive systems for speech-impaired individuals, integrating four sub-projects covering hardware, AI model development, multimodal dialogue systems, and field testing."
+                        },
+                        sub1: {
+                            title: "Sub-project 1",
+                            content: "Development of embedded hardware and speech signal assistive modules."
+                        },
+                        sub2: {
+                            title: "Sub-project 2",
+                            content: "Design of adaptive AI communication models and user interfaces."
+                        },
+                        sub3: {
+                            title: "Sub-project 3",
+                            content: "Construction of multimodal cross-lingual task-oriented dialogue systems for inclusive communication."
+                        },
+                        sub4: {
+                            title: "Sub-project 4",
+                            content: "Field testing, user validation, and technology dissemination."
+                        }
+                    },
+                    timeline: {
+                        y1: {
+                            date: "Year 1 (2023–2024)",
+                            title: "Foundation & Design",
+                            desc: "Needs assessment, prototype design, and integration framework setup."
+                        },
+                        y2: {
+                            date: "Year 2 (2024–2025)",
+                            title: "System Development",
+                            desc: "AI model training, dialogue integration, and multimodal enhancement."
+                        },
+                        y3: {
+                            date: "Year 3 (2025–2026)",
+                            title: "Testing & Application",
+                            desc: "Field testing, performance optimization, and cross-sector application."
+                        }
+                    },
+                    sub3: {
+                        title: "My Role: Sub-project 3",
+                        name: "Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support",
+                        role: {
+                            title: "Research Assistant Responsibilities",
+                            desc: "Designing and implementing a RAG-based multimodal dialogue system integrating text, speech, and image recognition for accessible, multilingual, and adaptive communication."
+                        },
+                        obj: {
+                            title: "Objectives & Key Features",
+                            1: "Develop inclusive AI dialogue systems for multimodal and multilingual communication.",
+                            2: "Integrate NLP, speech, and vision-based components to enhance accessibility.",
+                            3: "Apply RAG-enhanced retrieval for precise context-based responses.",
+                            4: "Design adaptive and user-friendly interfaces for assistive contexts.",
+                            5: "Conduct field deployment with NPO partners and assistive centers."
+                        },
+                        tech: {
+                            title: "Technical Approach"
+                        },
+                    },
+                    features: {
+                        ai: {
+                            title: "AI Intelligence",
+                            desc: "LLM + RAG-based comprehension and reasoning."
+                        },
+                        multimodal: {
+                            title: "Multimodal Input",
+                            desc: "Text, speech, and image integrated communication."
+                        },
+                        crosslingual: {
+                            title: "Cross-lingual Dialogue",
+                            desc: "Supports Chinese, English, Taiwanese, and Vietnamese."
+                        },
+                        taskoriented: {
+                            title: "Task Orientation",
+                            desc: "Subsidy inquiry, assistive equipment info, and more."
+                        },
+                        accessibility: {
+                            title: "Accessibility Design",
+                            desc: "Interface optimized for speech-impaired users."
+                        }
+                    },
+                    impact: {
+                        title: "Expected Impact & Outcomes",
+                        research: {
+                            title: "Research Contribution",
+                            content: "Advancing the field of inclusive AI and multimodal communication systems"
+                        },
+                        social: {
+                            title: "Social Impact",
+                            content: "Improving quality of life for individuals with speech impairments"
+                        },
+                        technological: {
+                            title: "Technological Innovation",
+                            content: "Pioneering new approaches in AI-assisted communication"
+                        },
+                        commercial: {
+                            title: "Commercial Potential",
+                            content: "Creating market-ready assistive communication technologies"
+                        }
+                    },
+                    publications: {
+                        title: "Related Publications & Presentations",
+                        twsc: {
+                            content: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities"
+                        },
+                    },
+                }
+            },
+            // 繁體中文翻譯資源
+            zh: {
+                translation: {
+                    nav: {
+                        brand: "Yun 的作品集",
+                        back: "← 回到首頁"
+                    },
+                    langButton: "English",
+                    page: {
+                        title: "數位支持、溝通無礙：AI科技協助語言障礙者溝通輔具之研發、支持與推廣",
+                        subtitle: "有溫度的聲音，值得被世界聽見。有智慧的對話，足以讓服務貼近。"
+                    },
+                    info: {
+                        funding: {
+                            title: "資助機構",
+                            content: "國家科學及技術委員會 (NSTC)"
+                        },
+                        duration: {
+                            title: "計畫期間",
+                            content: "2023年5月1日 - 2026年4月30日"
+                        },
+                        grant: {
+                            title: "計畫編號",
+                            content: "NSTC 113-2425-H-305-003-"
+                        },
+                        host: {
+                            title: "主辦機構",
+                            content: "國立臺北大學"
+                        }
+                    },
+                    stats: {
+                        subprojects: "子計畫",
+                        years: "年期",
+                        multimodal: {
+                            title: "多模態",
+                            subtitle: "多模態方法"
+                        },
+                        ai: "核心技術"
+                    },
+                    overview: {
+                        title: "計畫概述",
+                        mission: {
+                            title: "計畫宗旨",
+                            content: "本計畫（2023–2026，國科會補助）致力於建立AI輔助溝通系統，整合四項子計畫，涵蓋硬體模組、AI模型、多模態對話系統與實地推廣。"
+                        },
+                        sub1: {
+                            title: "子計畫一",
+                            content: "開發語音訊號輔助與嵌入式溝通裝置模組。"
+                        },
+                        sub2: {
+                            title: "子計畫二",
+                            content: "設計自適應AI溝通模型與使用者介面。"
+                        },
+                        sub3: {
+                            title: "子計畫三",
+                            content: "建構包容溝通支持之多模態跨語言任務導向對話系統。"
+                        },
+                        sub4: {
+                            title: "子計畫四",
+                            content: "進行實地測試、使用者驗證與推廣應用。"
+                        }
+                    },
+                    timeline: {
+                        y1: {
+                            date: "第一年 (2023–2024)",
+                            title: "基礎建構與設計",
+                            desc: "需求分析、原型設計與跨子計畫整合框架建立。"
+                        },
+                        y2: {
+                            date: "第二年 (2024–2025)",
+                            title: "系統開發",
+                            desc: "AI模型訓練、對話整合與多模態強化。"
+                        },
+                        y3: {
+                            date: "第三年 (2025–2026)",
+                            title: "測試與應用",
+                            desc: "實地測試、效能優化及跨領域應用推廣。"
+                        }
+                    },
+                    sub3: {
+                        title: "我的角色：子計畫三",
+                        name: "包容溝通支持多模態跨語言任務導向對話系統",
+                        role: {
+                            title: "研究助理職責",
+                            desc: "負責設計與實作以RAG為核心的多模態對話系統，整合文字、語音及影像辨識，提供多語言且具自適應性的溝通輔助。"
+                        },
+                        obj: {
+                            title: "研究目標與創新特色",
+                            1: "開發多模態與多語言的包容性AI對話系統。",
+                            2: "整合NLP、語音與視覺元件以提升無障礙性。",
+                            3: "運用RAG強化檢索與回應精準度。",
+                            4: "設計符合無障礙原則的自適應介面。",
+                            5: "與多個輔具及社福機構合作進行實地部署。"
+                        },
+                        tech: {
+                            title: "技術方法"
+                        },
+                    },
+                    features: {
+                        ai: {
+                            title: "AI智能",
+                            desc: "基於LLM + RAG的理解與推理能力。"
+                        },
+                        multimodal: {
+                            title: "多模態輸入",
+                            desc: "整合文字、語音與影像的溝通方式。"
+                        },
+                        crosslingual: {
+                            title: "跨語言對話",
+                            desc: "支援中文、英文、台語及越南語。"
+                        },
+                        taskoriented: {
+                            title: "任務導向",
+                            desc: "補助查詢、輔具資訊等實用功能。"
+                        },
+                        accessibility: {
+                            title: "無障礙設計",
+                            desc: "針對語言障礙者優化的介面設計。"
+                        }
+                    },
+                    impact: {
+                        title: "預期影響與成果",
+                        research: {
+                            title: "研究貢獻",
+                            content: "推進包容性AI和多模態溝通系統領域"
+                        },
+                        social: {
+                            title: "社會影響",
+                            content: "改善語言障礙者的生活品質"
+                        },
+                        technological: {
+                            title: "技術創新",
+                            content: "在AI輔助溝通方面開創新方法"
+                        },
+                        commercial: {
+                            title: "商業潛力",
+                            content: "創造市場化的輔助溝通技術"
+                        }
+                    },
+                    publications: {
+                        title: "相關發表與簡報",
+                        twsc: {
+                            content: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities"
+                        },
+                    },
+                }
+            }
+        }
+    }, function() {
+        updateContent();
+        updateLanguageButton();
+    });
+});
+
+// 語言切換功能
+function switchLanguage() {
+    const currentLang = i18next.language;
+    const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
+    
+    i18next.changeLanguage(newLang, function() {
+        updateContent();
+        updateLanguageButton();
+        document.documentElement.lang = newLang;
+    });
+}
+
+// 更新語言切換按鈕文字
+function updateLanguageButton() {
+    document.getElementById('lang-toggle').textContent = i18next.t('langButton');
+}
+
+// 更新頁面內容
+function updateContent() {
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (key) {
+            element.textContent = i18next.t(key);
+        }
+    });
+}
+
+// 滾動動畫觀察器 - 當元素進入視窗時觸發淡入動畫
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// 為所有需要動畫的元素添加觀察器
+document.querySelectorAll('.fade-in').forEach(element => observer.observe(element));
+</script>
+</body>
+</html>
