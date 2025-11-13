@@ -413,9 +413,46 @@ body {
         font-size: 1.5rem;   /* 縮小標題字體 */
         line-height: 1.3;    /* 調整行高 */
     }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;  /* 小螢幕時固定2列 */
+        gap: 15px;                       /* 縮小間距 */
+    }
+    
+    .stats-card {
+        padding: 20px 15px;              /* 縮小內距 */
+    }
+    
+    .stats-number {
+        font-size: 1.5rem;               /* 縮小數字字體 */
+    }
+    
+    .stats-label {
+        font-size: 0.85rem;              /* 縮小標籤字體 */
+    }
 }
 
 @media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;  /* 維持2列，但卡片會更小 */
+        gap: 12px;                       /* 更小間距 */
+    }
+    
+    .stats-card {
+        padding: 15px 10px;              /* 更小內距 */
+        border-radius: 10px;             /* 稍微縮小圓角 */
+    }
+    
+    .stats-number {
+        font-size: 1.3rem;               /* 更小數字 */
+        margin-bottom: 8px;
+    }
+    
+    .stats-label {
+        font-size: 0.8rem;               /* 更小標籤 */
+        line-height: 1.2;                /* 調整行高 */
+    }
+
     .navbar {
         padding: 6px 10px;   /* 進一步縮小 */
     }
