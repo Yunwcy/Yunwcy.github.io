@@ -262,7 +262,7 @@
             position: relative;
             max-width: 100%;
             margin: 0 auto;
-            padding-left: 40px; /* 為左側線條留出空間 */
+            padding-left: 30px;
         }
 
         .timeline::after {
@@ -272,36 +272,27 @@
             background: var(--primary-green);
             top: 0;
             bottom: 0;
-            left: 20px; /* 移到左側 */
+            left: 15px;
         }
 
         .timeline-item {
-            padding: 20px 0 20px 40px; /* 調整padding */
+            padding: 20px 0 20px 30px;
             position: relative;
             background: inherit;
-            width: 100%; /* 占滿寬度 */
+            width: 100%;
         }
 
+        /* 移除圓點 */
         .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            left: 12px; /* 調整圓點位置 */
-            background: white;
-            border: 4px solid var(--primary-green);
-            top: 30px;
-            border-radius: 50%;
-            z-index: 1;
+            display: none;
         }
 
-        /* 移除原來的左右交替佈局 */
         .timeline-item:nth-child(even) {
             left: 0%;
         }
 
         .timeline-item:nth-child(even)::after {
-            left: 12px; /* 保持一致的位置 */
+            display: none;
         }
 
         .timeline-content {
@@ -309,8 +300,8 @@
             background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%; /* 占滿可用寬度 */
-            margin-left: 20px; /* 與線條保持距離 */
+            width: 100%;
+            margin-left: 15px;
         }
 
         .timeline-content h3 {
@@ -327,29 +318,26 @@
             margin-bottom: 15px;
         }
 
-/* 手機版調整 */
-@media (max-width: 768px) {
-    .timeline {
-        padding-left: 30px;
-    }
-    
-    .timeline::after {
-        left: 15px;
-    }
-    
-    .timeline-item {
-        padding-left: 30px;
-    }
-    
-    .timeline-item::after {
-        left: 7px;
-    }
-    
-    .timeline-content {
-        margin-left: 15px;
-        padding: 20px;
-    }
-}
+        /* 手機版調整 */
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 25px;
+            }
+            
+            .timeline::after {
+                left: 10px;
+            }
+            
+            .timeline-item {
+                padding-left: 25px;
+            }
+            
+            .timeline-content {
+                margin-left: 10px;
+                padding: 20px;
+            }
+        }
+
 
         /* Publications Grid */
         .publications-grid {
