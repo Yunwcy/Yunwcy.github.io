@@ -472,7 +472,24 @@
             line-height: 1.4;
         }
 
-        /* Projects Card for Swiper */
+        /* Projects Card - 響應式固定數量顯示版本 */
+
+        /* 容器設定 - 根據螢幕寬度計算卡片數量和寬度 */
+        .projects-section {
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+
+        .swiper-container, .projects-slider-container {
+            width: 100%;
+            max-width: 1200px;    /* 最大寬度限制 */
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        /* 基礎卡片樣式 */
         .project-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -480,10 +497,11 @@
             padding: 25px;
             transition: all 0.3s ease;
             position: relative;
-            width: 380px;  /* 增加寬度 */
-            height: 520px; /* 增加高度 */
             display: flex;
             flex-direction: column;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            margin: 0 auto;
         }
 
         .project-card:hover {
@@ -492,13 +510,13 @@
         }
 
         .project-card img {
-            width: 200px;         /* 固定寬度 */
-            height: 200px;        /* 固定高度，與寬度相同 */
-            object-fit: cover;    /* 保持比例裁切 */
-            object-position: center; /* 置中顯示 */
+            width: 180px;             /* 稍微縮小以適應不同尺寸 */
+            height: 180px;
+            object-fit: cover;
+            object-position: center;
             border-radius: 8px;
-            margin: 0 auto 15px auto; /* 水平置中 */
-            display: block;       /* 確保margin auto生效 */
+            margin: 0 auto 15px auto;
+            display: block;
         }
 
         .project-card h3 {
@@ -507,7 +525,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.3;
-            min-height: 60px;     /* 確保標題有足夠空間 */
+            min-height: 60px;
         }
 
         .project-card .project-date {
@@ -523,9 +541,9 @@
             margin-bottom: 15px;
             font-size: 0.9rem;
             flex-grow: 1;
-            overflow: hidden;     /* 防止內容溢出 */
+            overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 4; /* 限制顯示4行 */
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
         }
 
@@ -549,7 +567,7 @@
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-top: auto;     /* 推到底部 */
+            margin-top: auto;
         }
 
         .project-link {
@@ -571,6 +589,247 @@
             color: white;
             transform: translateY(-2px);
         }
+
+        /* Swiper 設定 */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* 增加更多細緻的響應式斷點，避免過渡時擠壓 */
+
+        /* 大螢幕 (1200px+) - 顯示3個卡片 */
+        @media (min-width: 1200px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 1300px;
+                padding: 0 50px;
+            }
+            
+            .project-card {
+                width: 360px;
+                height: 580px;
+            }
+            
+            .project-card img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* 中大螢幕 (1000px - 1199px) - 顯示2個卡片，增加寬度 */
+        @media (min-width: 1000px) and (max-width: 1199px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 950px;     /* 給2個卡片更多空間 */
+                padding: 0 40px;
+            }
+            
+            .project-card {
+                width: 360px;         /* 保持較大的卡片尺寸 */
+                height: 570px;
+            }
+            
+            .project-card img {
+                width: 190px;
+                height: 190px;
+            }
+        }
+
+        /* 中等螢幕 (768px - 999px) - 顯示2個卡片 */
+        @media (min-width: 768px) and (max-width: 999px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 850px;     /* 適中的寬度 */
+                padding: 0 35px;
+            }
+            
+            .project-card {
+                width: 350px;
+                height: 560px;
+                padding: 20px;
+            }
+            
+            .project-card img {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .project-card h3 {
+                font-size: 1.05rem;
+                min-height: 55px;
+            }
+        }
+
+        /* 小中螢幕 (700px - 767px) - 顯示1個卡片，避免2個擠壓 */
+        @media (min-width: 700px) and (max-width: 767px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 420px;
+                padding: 0 30px;
+            }
+            
+            .project-card {
+                width: 360px;
+                height: 540px;
+                padding: 20px;
+            }
+            
+            .project-card img {
+                width: 170px;
+                height: 170px;
+            }
+        }
+
+        /* 小螢幕 (600px - 699px) - 顯示1個卡片 */
+        @media (min-width: 600px) and (max-width: 699px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 400px;
+                padding: 0 30px;
+            }
+            
+            .project-card {
+                width: 360px;
+                height: 540px;
+                padding: 20px;
+            }
+            
+            .project-card img {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .project-card h3 {
+                font-size: 1rem;
+                min-height: 50px;
+            }
+            
+            .project-card .project-desc {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* 手機螢幕 (599px以下) - 顯示1個卡片 */
+        @media (max-width: 599px) {
+            .swiper-container, .projects-slider-container {
+                max-width: 350px;     /* 給手機版卡片足夠空間 */
+                padding: 0 30px;      /* 增加左右padding */
+            }
+            
+            .project-card {
+                width: 290px;
+                height: 520px;
+                padding: 18px;
+            }
+            
+            .project-card img {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .project-card h3 {
+                font-size: 0.95rem;
+                min-height: 45px;
+                line-height: 1.2;
+            }
+            
+            .project-card .project-desc {
+                font-size: 0.8rem;
+                -webkit-line-clamp: 3;
+            }
+            
+            .project-card .project-date {
+                font-size: 0.85rem;
+            }
+            
+            .project-tag {
+                font-size: 0.65rem;
+            }
+            
+            .project-link {
+                font-size: 0.75rem;
+                padding: 5px 8px;
+            }
+        }
+
+        /* 額外修正：確保 projects section 有足夠寬度 */
+        .projects-section {
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 767px) {
+            .projects-section {
+                padding: 40px 15px;  /* 增加左右padding */
+            }
+        }
+
+        /* Swiper 導航按鈕位置調整 */
+        .swiper-button-next,
+        .swiper-button-prev {
+            top: 50%;
+            margin-top: -22px;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .swiper-button-next {
+            right: 10px;
+        }
+
+        .swiper-button-prev {
+            left: 10px;
+        }
+
+        /* 小螢幕隱藏導航按鈕，改用觸摸滑動 */
+        @media (max-width: 768px) {
+            .projects-swiper .swiper-button-next,
+            .projects-swiper .swiper-button-prev {
+                display: none;
+            }
+        }
+
+        /* Swiper 分頁點樣式 */
+        .swiper-pagination-bullet {
+            background: var(--primary-green);
+            opacity: 0.3;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+
+        /* 如果使用自定義滑動容器而非Swiper */
+        .projects-grid {
+            display: grid;
+            gap: 40px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        @media (min-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 360px);
+                max-width: 1160px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 350px);
+                max-width: 760px;
+                margin: 0 auto;
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+                gap: 30px;
+            }
+}
 
         /* Experience Lists */
         .experience-list {
@@ -1859,7 +2118,7 @@
                 }
             });
 
-            // Projects Swiper
+            // Projects Swiper - 增加更多響應式斷點
             const projectsSwiper = new Swiper('.projects-swiper', {
                 slidesPerView: 3,
                 spaceBetween: 30,
@@ -1878,13 +2137,25 @@
                         slidesPerView: 1,
                         spaceBetween: 20
                     },
-                    768: {
-                        slidesPerView: 2,
+                    600: {
+                        slidesPerView: 1,
                         spaceBetween: 25
                     },
-                    1024: {
-                        slidesPerView: 3,
+                    700: {
+                        slidesPerView: 1,    /* 避免在這個寬度顯示2個 */
                         spaceBetween: 30
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 35
+                    },
+                    1000: {
+                        slidesPerView: 2,
+                        spaceBetween: 40
+                    },
+                    1200: {
+                        slidesPerView: 3,
+                        spaceBetween: 40
                     }
                 }
             });
