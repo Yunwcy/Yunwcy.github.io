@@ -6,18 +6,29 @@
     <title>Photos</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Add i18next scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.16/i18next.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.4.0/i18next-http-backend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
     <style>
+        /* CSS 變數定義 */
+        :root {
+            --primary-green: #2E8B57;
+            --light-green: rgba(213, 236, 198, 0.8);
+            --text-color: #5A4A42;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 全域樣式 */
         body {
             margin: 0;
             font-family: 'Noto Serif TC', serif;
             text-align: center;
-            color: #5A4A42;
+            color: var(--text-color);
             background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5));
+            min-height: 100vh;
         }
+
+        /* 導航欄樣式 */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -30,136 +41,154 @@
             left: 0;
             z-index: 1000;
             box-sizing: border-box;
+            backdrop-filter: blur(10px);
         }
-        .menu-icon {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-        }
+
         .menu-items {
             display: flex;
             gap: 20px;
+            flex: 1;
         }
-        .menu-items.active {
-            display: block;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            padding: 10px 0;
-        }
+
         .menu-items a {
-            color: #2E8B57;
+            color: var(--primary-green);
             text-decoration: none;
             font-size: 1rem;
             padding: 10px 15px;
             font-weight: bold;
-            display: block;
+            border-radius: 5px;
+            transition: all 0.3s;
         }
+
         .menu-items a:hover {
             background: rgba(46, 139, 87, 0.2);
-            border-radius: 5px;
         }
-        /* Language switcher styles */
+
+        .menu-icon {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
+        /* 語言切換按鈕樣式 */
         .language-switcher {
             display: flex;
             gap: 5px;
         }
+
         .language-btn {
-            background: #2E8B57;
+            background: var(--primary-green);
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: bold;
             transition: background 0.3s;
         }
+
         .language-btn:hover {
-            background: #236b43;
+            background: #1e5d3a;
         }
+
+        /* 響應式導航 */
         @media (max-width: 768px) {
             .menu-icon {
                 display: block;
             }
+
             .menu-items {
                 display: none;
-            }
-            footer {
-                padding: 15px 8px;
-                font-size: 0.7rem;
-              }
-            
-              .footer-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-              }
-            
-              .footer-column {
-                min-width: unset;
+                position: absolute;
+                top: 100%;
+                left: 0;
                 width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-              }
-            
-              .footer-column p,
-              .footer-column a {
-                font-size: 0.65rem;
-              }
-            
-              .footer-note,
-              .footer-bottom {
-                font-size: 0.65rem;
-                margin-top: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 0;
+            }
+
+            .menu-items.active {
+                display: flex;
+            }
+
+            .menu-items a {
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(46, 139, 87, 0.1);
             }
         }
+
+        /* 主要內容樣式 */
         .content {
             max-width: 900px;
-            margin: 100px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 100px auto 50px;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             font-family: 'Noto Serif TC', serif;
         }
+
         h1 {
             font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 15px;
         }
+
         .dropdown-container {
-            margin-top: 20px;
+            margin: 30px 0;
             display: flex;
             justify-content: center;
         }
+
         select {
-            padding: 10px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            border: 1px solid #5A4A42;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 2px solid var(--primary-green);
             background: white;
+            color: var(--text-color);
             max-width: 80%;
-        }
-        .photo-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .photo-gallery img {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
+
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        }
+
+        /* 照片畫廊樣式 */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 3px solid transparent;
+        }
+
         .photo-gallery img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(46, 139, 87, 0.3);
+            border-color: var(--primary-green);
         }
+
+        /* 燈箱樣式 */
         .lightbox {
             display: none;
             position: fixed;
@@ -167,80 +196,222 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             justify-content: center;
             align-items: center;
+            z-index: 2000;
         }
+
         .lightbox img {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 90%;
+            max-height: 90%;
             border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
+
         .close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
+            top: 30px;
+            right: 40px;
+            font-size: 3rem;
             color: white;
             cursor: pointer;
+            transition: opacity 0.3s;
         }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer樣式 */
         footer {
-            background: rgba(213, 236, 198, 0.7);
-            padding: 20px 10px;
-            color: #5A4A42;
+            background: rgba(213, 236, 198, 0.8);
+            padding: 40px 20px 20px;
+            color: var(--text-color);
             font-family: 'Noto Serif TC', serif;
-            font-size: 0.8rem;
+            margin-top: 50px;
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
             align-items: flex-start;
         }
 
-        .footer-column {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 10px;
-        }
-
         .footer-column h3 {
-            font-weight: bold;
-            margin-bottom: 10px;
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
         .footer-column p, .footer-column a {
-            font-size: 0.7rem;
-            margin: 5px 0;
+            font-size: 0.9rem;
+            margin: 8px 0;
             text-decoration: none;
-            color: #2E8B57;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .footer-column a {
+            color: var(--primary-green);
+            transition: color 0.3s;
         }
 
         .footer-column a:hover {
+            color: #1e5d3a;
             text-decoration: underline;
-        }
-        .footer-note {
-            font-size: 0.7rem;
-            color: #444;
-            text-align: center;
-            margin-top: 10px;
-            padding-bottom: 10px;
         }
 
         .footer-bottom {
             text-align: center;
-            font-size: 0.7rem;
-            margin-top: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(46, 139, 87, 0.2);
         }
 
-        .footer-bottom p:last-child {
-            font-size: 0.7rem;
+        .footer-note {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .content {
+                margin: 80px 20px 30px;
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .photo-gallery img {
+                height: 120px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .close {
+                top: 20px;
+                right: 20px;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                margin: 80px 10px 20px;
+                padding: 20px 15px;
+            }
+
+            select {
+                font-size: 1rem;
+                padding: 10px 15px;
+                max-width: 95%;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <div class="navbar">
+        <div class="menu-items" id="menu-items">
+            <a href="#home" data-i18n="nav.home">Home</a>
+            <a href="about.html" data-i18n="nav.about">About me</a>
+            <a href="#experiences" data-i18n="nav.experiences">Experiences</a>
+            <a href="#publications" data-i18n="nav.publications">Publications</a>
+            <a href="#certifications" data-i18n="nav.certifications">Certifications</a>
+            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
+            <a href="#conferences" data-i18n="nav.conferences">Conferences</a>
+            <a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a>
+        </div>
+        <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
+        <div class="language-switcher">
+            <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+        </div>
+    </div>
+    
+    <!-- 主要內容 -->
+    <div class="content">
+        <h1 data-i18n="content.photos">Photos</h1>
+        <div class="dropdown-container">
+            <select onchange="loadImages(event)">
+                <option value="" data-i18n="content.selectEvent">Select an Event</option>
+                <option value="nstc" data-i18n="content.nstcEvent">Technology Inclusion Projects Achievement Presentation</option>
+                <option value="fintech2024" data-i18n="content.fintechEvent">FinTech Taipei 2024</option>
+                <option value="japan2024" data-i18n="content.japanEvent">Academic exchange visit to Japan</option>
+                <option value="bestAI2025" data-i18n="content.bestAIAwards">2025 Best AI Awards - Final contest</option>
+                <option value="icim2025" data-i18n="content.icim2025">2025 International Conference on Information Management</option>
+                <option value="ntpuAI" data-i18n="content.ntpuAI">2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest</option>
+                <option value="tsc2025" data-i18n="content.tsc2025">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest</option>
+                <option value="ntcir18" data-i18n="content.ntcir18">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference</option>
+            </select>
+        </div>
+        <div class="photo-gallery" id="photo-gallery"></div>
+    </div>
+    
+    <!-- 燈箱 -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3 data-i18n="footer.contact">Contact</h3>
+                <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+                <p>📍 <span data-i18n="footer.university">National Taipei University</span></p>
+            </div>
+
+            <div class="footer-column">
+                <h3 data-i18n="footer.links">Links</h3>
+                <p><a href="#home" data-i18n="nav.home">Home</a></p>
+                <p><a href="about.html" data-i18n="nav.about">About Me</a></p>
+                <p><a href="#experiences" data-i18n="nav.experiences">Experiences</a></p>
+                <p><a href="#publications" data-i18n="nav.publications">Publications</a></p>
+                <p><a href="#certifications" data-i18n="nav.certifications">Certifications</a></p>
+                <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
+                <p><a href="#competitions" data-i18n="nav.competitions">Competitions</a></p>
+                <p><a href="#conferences" data-i18n="nav.conferences">Conferences</a></p>
+                <p><a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a></p>
+            </div>
+
+            <div class="footer-column">
+                <h3 data-i18n="footer.connect">Connect</h3>
+                <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+                <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-note" id="copyright" data-i18n="footer.copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
+            <p data-i18n="footer.note">This site is for academic and personal portfolio use only.</p>
+        </div>
+    </footer>
+
     <script>
+        // 切換手機選單顯示/隱藏
         function toggleMenu() {
             const menu = document.getElementById('menu-items');
             const icon = document.getElementById('menu-icon');
@@ -248,17 +419,27 @@
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
         }
         
+        // 載入選定活動的圖片
         function loadImages(event) {
             const selectedEvent = event.target.value;
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
         
-            imageNum = { 'nstc': 4, 'fintech2024': 4, 'japan2024': 15, 'bestAI2025': 5, 'icim2025': 10, 'ntpuAI': 6, 'tsc2025': 4, 'ntcir18': 13 };
+            const imageNum = { 
+                'nstc': 4, 
+                'fintech2024': 4, 
+                'japan2024': 15, 
+                'bestAI2025': 5, 
+                'icim2025': 10, 
+                'ntpuAI': 6, 
+                'tsc2025': 4, 
+                'ntcir18': 13 
+            };
         
             if (selectedEvent) {
                 let numImages = imageNum[selectedEvent] || 0;
                 for (let i = 1; i <= numImages; i++) {
-                    let imgSrc = ""; // Declare imgSrc before the if-else block
+                    let imgSrc = "";
         
                     if (selectedEvent === 'nstc' || selectedEvent === 'fintech2024') {
                         imgSrc = `images/${selectedEvent}/image${i}.JPG`;
@@ -274,216 +455,138 @@
             }
         }        
         
+        // 開啟燈箱顯示大圖
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').style.display = 'flex';
         }
+
+        // 關閉燈箱
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
+
+        // 頁面載入完成後初始化
         document.addEventListener("DOMContentLoaded", function () {
             const yearSpan = document.getElementById("year");
             if (yearSpan) {
-              yearSpan.textContent = new Date().getFullYear();
+                yearSpan.textContent = new Date().getFullYear();
             }
             
-            // Initialize i18next
-            initializeI18n();
+            // 初始化多語言系統
+            i18next.use(i18nextBrowserLanguageDetector).init({
+                fallbackLng: 'en',
+                debug: false,
+                resources: {
+                    en: {
+                        translation: {
+                            nav: {
+                                home: "Home",
+                                about: "About me",
+                                experiences: "Experiences",
+                                publications: "Publications",
+                                certifications: "Certifications",
+                                projects: "Projects",
+                                competitions: "Competitions",
+                                conferences: "Conferences",
+                                otherExperiences: "Other Experiences"
+                            },
+                            langButton: "中文",
+                            content: {
+                                photos: "Photos",
+                                selectEvent: "Select an Event",
+                                nstcEvent: "Technology Inclusion Projects Achievement Presentation",
+                                fintechEvent: "FinTech Taipei 2024",
+                                japanEvent: "Academic exchange visit to Japan",
+                                bestAIAwards: "2025 Best AI Awards - Final contest",
+                                icim2025: "2025 International Conference on Information Management",
+                                ntpuAI: "2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest",
+                                tsc2025: "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest",
+                                ntcir18: "NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference"
+                            },
+                            footer: {
+                                contact: "Contact",
+                                links: "Links",
+                                connect: "Connect",
+                                university: "National Taipei University",
+                                copyright: "© {{year}} Cheng-Yun Wu. All rights reserved.",
+                                note: "This site is for academic and personal portfolio use only."
+                            }
+                        }
+                    },
+                    zh: {
+                        translation: {
+                            nav: {
+                                home: "首頁",
+                                about: "關於我",
+                                experiences: "經歷",
+                                publications: "學術發表",
+                                certifications: "證照",
+                                projects: "專案作品",
+                                competitions: "競賽經歷",
+                                conferences: "研討會",
+                                otherExperiences: "其他經歷"
+                            },
+                            langButton: "English",
+                            content: {
+                                photos: "照片",
+                                selectEvent: "選擇活動",
+                                nstcEvent: "國科會計畫成果發表會",
+                                fintechEvent: "台北金融科技展 2024",
+                                japanEvent: "日本學術交流訪問",
+                                bestAIAwards: "2025 經濟部智慧創新大賞 - 決賽",
+                                icim2025: "2025 第36屆國際資訊管理學術研討會",
+                                ntpuAI: "2025 第三屆臺北大學AI智慧應用創新競賽 - 決賽",
+                                tsc2025: "2025 第十屆崇越行銷大賞：AI應用行銷競賽 - 決賽",
+                                ntcir18: "NTCIR-18 Conference (第18屆NTCIR國際資訊存取技術評估研討會)"
+                            },
+                            footer: {
+                                contact: "聯絡方式",
+                                links: "連結",
+                                connect: "社群媒體",
+                                university: "國立臺北大學",
+                                copyright: "© {{year}} 吳承耘。保留所有權利。",
+                                note: "本網站僅供學術和個人作品集使用。"
+                            }
+                        }
+                    }
+                }
+            }, function() {
+                updateContent();
+                updateLanguageButton();
+            });
         });
         
-        // Language resources
-        const resources = {
-            en: {
-                translation: {
-                    // Navigation
-                    "home": "Home",
-                    "about": "About me",
-                    "experiences": "Experiences",
-                    "projects": "Projects",
-                    "contact": "Contact",
-                    
-                    // Content
-                    "photos": "Photos",
-                    "selectEvent": "Select an Event",
-                    "nstcEvent": "Technology Inclusion Projects Achievement Presentation",
-                    "fintechEvent": "FinTech Taipei 2024",
-                    "japanEvent": "Academic exchange visit to Japan",
-                    "bestAIAwards": "2025 Best AI Awards - Final contest",
-                    "icim2025": "2025 International Conference on Information Management",
-                    "ntpuAI": "2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest",
-                    "tsc2025": "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest",
-                    "ntcir18": "NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference",
-                    
-                    // Footer
-                    "contactHeading": "Contact",
-                    "linksHeading": "Links",
-                    "connectHeading": "Connect",
-                    "copyright": "© {{year}} Cheng-Yun Wu. All rights reserved.",
-                    "disclaimer": "This site is for academic and personal portfolio use only.",
-                    
-                    // Language switcher
-                    "switchLang": "中文"
-                }
-            },
-            zh: {
-                translation: {
-                    // Navigation
-                    "home": "首頁",
-                    "about": "關於我",
-                    "experiences": "經歷",
-                    "projects": "專案",
-                    "contact": "聯絡方式",
-                    
-                    // Content
-                    "photos": "照片",
-                    "selectEvent": "選擇活動",
-                    "nstcEvent": "國科會計畫成果發表會",
-                    "fintechEvent": "台北金融科技展 2024",
-                    "japanEvent": "日本學術交流訪問",
-                    "bestAIAwards": "2025 經濟部智慧創新大賞 - 決賽",
-                    "icim2025": "2025 第36屆國際資訊管理學術研討會",
-                    "ntpuAI": "2025 第三屆臺北大學AI智慧應用創新競賽 - 決賽",
-                    "tsc2025": "2025 第十屆崇越行銷大賞：AI應用行銷競賽 - 決賽",
-                    "ntcir18": "NTCIR-18 Conference (第18屆NTCIR國際資訊存取技術評估研討會)",
-                    
-                    
-                    // Footer
-                    "contactHeading": "聯絡方式",
-                    "linksHeading": "連結",
-                    "connectHeading": "社群媒體",
-                    "copyright": "© {{year}} 吳承耘。保留所有權利。",
-                    "disclaimer": "本網站僅供學術和個人作品集使用。",
-                    
-                    // Language switcher
-                    "switchLang": "English"
-                }
-            }
-        };
-        
-        // Initialize i18next
-        function initializeI18n() {
-            i18next
-                .init({
-                    lng: 'en', // Default language
-                    resources: resources,
-                    interpolation: {
-                        escapeValue: false
-                    }
-                })
-                .then(function() {
-                    updateContent();
-                });
-        }
-        
-        // Switch language function
+        // 語言切換功能
         function switchLanguage() {
             const currentLang = i18next.language;
-            const newLang = currentLang === 'en' ? 'zh' : 'en';
+            const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
+            
             i18next.changeLanguage(newLang, function() {
                 updateContent();
+                updateLanguageButton();
                 document.documentElement.lang = newLang;
             });
         }
         
-        // Update all content with translations
+        // 更新語言切換按鈕文字
+        function updateLanguageButton() {
+            document.getElementById('lang-toggle').textContent = i18next.t('langButton');
+        }
+        
+        // 更新頁面內容
         function updateContent() {
-            // Update navigation
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (key) {
-                    if (element.tagName === 'INPUT' && element.type === 'button') {
-                        element.value = i18next.t(key);
-                    } else if (element.tagName === 'OPTION') {
-                        element.textContent = i18next.t(key);
-                    } else {
-                        element.textContent = i18next.t(key);
-                    }
+                    element.textContent = i18next.t(key);
                 }
             });
             
-            // Update attributes
-            document.querySelectorAll('[data-i18n-attr]').forEach(element => {
-                const attrData = element.getAttribute('data-i18n-attr');
-                if (attrData) {
-                    const [attr, key] = attrData.split(':');
-                    if (attr && key) {
-                        element.setAttribute(attr, i18next.t(key));
-                    }
-                }
-            });
-            
-            // Update year in copyright
+            // 更新年份
             const year = new Date().getFullYear();
-            document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
+            document.getElementById('copyright').innerHTML = i18next.t('footer.copyright', { year: year });
         }
     </script>
-</head>
-<body>
-    <div class="navbar">
-        <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
-        <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/" data-i18n="home">Home</a>
-            <a href="https://yunwcy.github.io/about" data-i18n="about">About me</a>
-            <a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a>
-            <a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a>
-            <a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a>
-        </div>
-        <div class="language-switcher">
-            <input type="button" class="language-btn" value="中文" data-i18n="switchLang" onclick="switchLanguage()">
-        </div>
-    </div>
-    
-    <div class="content">
-        <h1 data-i18n="photos">Photos</h1>
-        <div class="dropdown-container">
-            <select onchange="loadImages(event)">
-                <option value="" data-i18n="selectEvent">Select an Event</option>
-                <option value="nstc" data-i18n="nstcEvent">Technology Inclusion Projects Achievement Presentation</option>
-                <option value="fintech2024" data-i18n="fintechEvent">FinTech Taipei 2024</option>
-                <option value="japan2024" data-i18n="japanEvent">Academic exchange visit to Japan</option>
-                <option value="bestAI2025" data-i18n="bestAIAwards">2025 Best AI Awards - Final contest</option>
-                <option value="icim2025" data-i18n="icim2025">2025 International Conference on Information Management</option>
-                <option value="ntpuAI" data-i18n="ntpuAI">2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest</option>
-                <option value="tsc2025" data-i18n="tsc2025">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest</option>
-                <option value="ntcir18" data-i18n="ntcir18">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference</option>
-                
-            </select>
-        </div>
-        <div class="photo-gallery" id="photo-gallery"></div>
-    </div>
-    
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="close">&times;</span>
-        <img id="lightbox-img">
-    </div>
-    <footer>
-        <div class="footer-container">
-          <div class="footer-column">
-            <h3 data-i18n="contactHeading">Contact</h3>
-            <p>✉️ yunwcy@gmail.com</p>
-            <p>📍 National Taipei University</p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="linksHeading">Links</h3>
-            <p><a href="https://yunwcy.github.io/" data-i18n="home">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about" data-i18n="about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="connectHeading">Connect</h3>
-            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
-            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
-          </div>
-        </div>
-      
-        <div class="footer-bottom">
-          <p class="footer-note" id="copyright" data-i18n="copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p data-i18n="disclaimer">This site is for academic and personal portfolio use only.</p>
-        </div>
-    </footer>
 </body>
 </html>
