@@ -73,6 +73,42 @@
         .language-btn:hover {
             background: #236b43;
         }
+        /* 響應式設計 */
+        @media (max-width: 1100px) {
+            .menu-items {
+                gap: 10px;  /* 縮小間距 */
+            }
+            
+            .menu-items a {
+                font-size: 0.85rem;  /* 縮小字體 */
+                padding: 6px 8px;    /* 縮小padding */
+            }
+        }
+
+        @media (max-width: 950px) {
+            .menu-items {
+                gap: 8px;   /* 進一步縮小間距 */
+            }
+            
+            .menu-items a {
+                font-size: 0.8rem;   /* 再縮小字體 */
+                padding: 5px 6px;    /* 再縮小padding */
+            }
+            
+            .language-btn {
+                font-size: 0.8rem;   /* 縮小語言按鈕字體 */
+                padding: 4px 8px;    /* 縮小語言按鈕padding */
+            }
+        }
+
+        /* 中等螢幕時隱藏部分導航項目，只保留核心項目 */
+        @media (max-width: 850px) {
+            .menu-items a[href="#competitions"],
+            .menu-items a[href="#conferences"],
+            .menu-items a[href="#other-experiences"] {
+                display: none;  /* 隱藏這些次要項目 */
+            }
+        }
         @media (max-width: 768px) {
             .menu-icon {
                 display: block;
@@ -91,6 +127,19 @@
             }
             .menu-items.active {
                 display: flex;
+            }
+
+            .menu-items a {
+                font-size: 0.95rem;
+                padding: 8px 12px;
+                display: block;  /* 恢復完整顯示 */
+            }
+            
+            /* 在手機菜單中恢復所有項目 */
+            .menu-items a[href="#competitions"],
+            .menu-items a[href="#conferences"],
+            .menu-items a[href="#other-experiences"] {
+                display: block;
             }
             
             .content {
