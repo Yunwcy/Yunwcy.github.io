@@ -476,13 +476,13 @@
         }
 
         .project-card img {
-            width: 100%;
-            height: 200px;        /* 設定固定高度 */
-            aspect-ratio: 1 / 1;  /* 確保正方形比例 */
+            width: 200px;         /* 固定寬度 */
+            height: 200px;        /* 固定高度，與寬度相同 */
             object-fit: cover;    /* 保持比例裁切 */
             object-position: center; /* 置中顯示 */
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin: 0 auto 15px auto; /* 水平置中 */
+            display: block;       /* 確保margin auto生效 */
         }
 
         .project-card h3 {
@@ -1437,7 +1437,8 @@
                                 funding: "National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
                                 task1: "Developing multimodal dialogue systems for speech-impaired users",
                                 task2: "Implementing cross-lingual communication support technologies",
-                                task3: "Researching inclusive AI technologies for accessibility"
+                                task3: "Researching inclusive AI technologies for accessibility",
+                                projectLink: "View Project Details"
                             },
                             publications: {
                                 title: "Publications",
@@ -1614,7 +1615,8 @@
                                 funding: "國家科學及技術委員會 (NSTC 113-2425-H-305-003-)，2023/05/01 - 2026/04/30",
                                 task1: "開發針對語言障礙使用者的多模態對話系統",
                                 task2: "實作跨語言溝通支援技術",
-                                task3: "研究無障礙AI技術"
+                                task3: "研究無障礙AI技術",
+                                projectLink: "計畫詳情"
                             },
                             publications: {
                                 title: "學術發表",
