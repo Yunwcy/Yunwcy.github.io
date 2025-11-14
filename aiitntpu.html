@@ -342,6 +342,112 @@ body {
     margin-bottom: 15px;
 }
 
+/* 合作組織網格樣式 */
+.partner-logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.partner-logo {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+    border: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.partner-logo:hover {
+    transform: translateY(-3px);
+}
+
+.partner-logo img {
+    max-width: 100%;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+.partner-logo h4 {
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+/* YouTube 按鈕樣式 */
+.youtube-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #FF0000;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    margin: 20px 0;
+}
+
+.youtube-btn:hover {
+    background: #CC0000;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    text-decoration: none;
+}
+
+.youtube-btn i {
+    font-size: 1.3rem;
+}
+
+/* 成果亮點區塊樣式 */
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.achievement-card {
+    background: var(--card-bg);
+    border: 2px solid var(--light-green);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.2);
+}
+
+.achievement-icon {
+    font-size: 3rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.achievement-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+    display: block;
+}
+
 /* 動畫效果 */
 .fade-in {
     opacity: 0;
@@ -376,6 +482,11 @@ body {
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .partner-logos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 }
 
@@ -484,6 +595,12 @@ body {
         font-size: 1rem;     /* 縮小副標題 */
         margin-bottom: 30px;
     }
+
+    .partner-logos {
+        grid-template-columns: 1fr;  /* 小螢幕時單列 */
+        gap: 10px;
+        padding: 20px;
+    }
 }
 </style>
 </head>
@@ -550,7 +667,7 @@ body {
                 <span class="stats-number">AI</span>
                 <span class="stats-label" data-i18n="stats.ai">Core Technology</span>
             </div>
-            </div>
+        </div>
     </div>
 
     <!-- 計畫概述 -->
@@ -609,11 +726,54 @@ body {
 
     <!-- 我的角色：子計畫三 -->
     <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="sub3.title">My Role: Sub-project 3</h2>
+        <h2 class="section-header" data-i18n="sub3.title">Sub-project 3</h2>
         <h3 class="subsection-header" data-i18n="sub3.name">Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</h3>
         <div class="highlight-box">
         <h4 data-i18n="sub3.role.title">Research Assistant Responsibilities</h4>
         <p data-i18n="sub3.role.desc">Designing and implementing a RAG-based multimodal dialogue system integrating text, speech, and image recognition for accessible, multilingual, and adaptive communication.</p>
+        </div>
+
+        <!-- Research Objectives -->
+        <h3 class="subsection-header" data-i18n="research.objectives.title">Research Objectives</h3>
+        <div class="project-overview">
+            <div class="overview-card">
+                <h4 data-i18n="research.objectives.goal1.title">End-to-End Multimodal System</h4>
+                <p data-i18n="research.objectives.goal1.desc">Develop a comprehensive dialogue system capable of understanding text, speech, and images simultaneously.</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="research.objectives.goal2.title">Cross-lingual Communication</h4>
+                <p data-i18n="research.objectives.goal2.desc">Enable seamless interaction across Chinese, English, Taiwanese, and Vietnamese languages.</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="research.objectives.goal3.title">Social Welfare Integration</h4>
+                <p data-i18n="research.objectives.goal3.desc">Deploy AI systems in partnership with organizations to provide accessible communication support.</p>
+            </div>
+        </div>
+
+        <!-- Research Methodology -->
+        <h3 class="subsection-header" data-i18n="research.methodology.title">Research Methodology</h3>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-date" data-i18n="research.methodology.step1.phase">Phase 1</div>
+                <div class="timeline-content">
+                    <h5 data-i18n="research.methodology.step1.title">Needs Assessment & Data Collection</h5>
+                    <p data-i18n="research.methodology.step1.desc">Conducted in-depth interviews with 6 social welfare organizations to identify real-world requirements and collected diverse data sources including FAQs and conversation logs.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date" data-i18n="research.methodology.step2.phase">Phase 2</div>
+                <div class="timeline-content">
+                    <h5 data-i18n="research.methodology.step2.title">AI-Enhanced Knowledge Base Construction</h5>
+                    <p data-i18n="research.methodology.step2.desc">Utilized GPT-4o to generate comprehensive Q&A datasets and built multilingual knowledge bases optimized for specific organizational needs.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date" data-i18n="research.methodology.step3.phase">Phase 3</div>
+                <div class="timeline-content">
+                    <h5 data-i18n="research.methodology.step3.title">Iterative Development & Deployment</h5>
+                    <p data-i18n="research.methodology.step3.desc">Implemented three-stage development: core validation with LINE Bot, feature expansion with voice integration, and interface consolidation with Gradio web platform.</p>
+                </div>
+            </div>
         </div>
 
         <!-- 研究目標與創新特色 -->
@@ -657,16 +817,220 @@ body {
 
         <h3 class="subsection-header" data-i18n="sub3.tech.title">Technical Approach</h3>
         <div class="tech-stack">
-            <span class="tech-tag">Natural Language Processing</span>
-            <span class="tech-tag">Machine Learning</span>
-            <span class="tech-tag">Deep Learning</span>
             <span class="tech-tag">Multimodal AI</span>
             <span class="tech-tag">Cross-lingual NLP</span>
             <span class="tech-tag">Dialogue Systems</span>
             <span class="tech-tag">Speech Recognition</span>
-            <span class="tech-tag">Computer Vision</span>
             <span class="tech-tag">RAG Technology</span>
             <span class="tech-tag">Large Language Models</span>
+            <span class="tech-tag">Inclusive AI</span>
+        </div>
+
+        <!-- System Architecture -->
+        <h3 class="subsection-header" data-i18n="sub3.architecture.title">System Architecture</h3>
+        <div class="highlight-box">
+            <h4 data-i18n="sub3.architecture.core.title">Core RAG-Enhanced Architecture</h4>
+            <p data-i18n="sub3.architecture.core.desc">The system employs a sophisticated RAG (Retrieval-Augmented Generation) framework combining e5-base embeddings with FAISS vector database for efficient knowledge retrieval, and GPT-4o/Mistral for intelligent response generation with multilingual TTS output capabilities.</p>
+        </div>
+
+        <!-- Architecture Diagram -->
+        <div style="text-align: center; margin: 30px 0;">
+            <img src="images/aiitntpu_system_arch.png" alt="System Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+            <p style="font-style: italic; color: var(--text-color); margin-top: 10px;" data-i18n="sub3.architecture.diagram.caption">Figure: Subproject III System Architecture - Multimodal RAG Framework</p>
+        </div>
+
+        <!-- Technical Stack Details -->
+        <h4 data-i18n="sub3.technical.stack.title">Technical Implementation Stack</h4>
+        <div class="project-overview">
+            <div class="overview-card">
+                <h4 data-i18n="sub3.technical.embedding.title">Embedding & Retrieval</h4>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li data-i18n="sub3.technical.embedding.item1">e5-base for multilingual text embeddings</li>
+                    <li data-i18n="sub3.technical.embedding.item2">FAISS for efficient similarity search</li>
+                    <li data-i18n="sub3.technical.embedding.item3">Custom vector database optimization</li>
+                </ul>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="sub3.technical.generation.title">Generation & Reasoning</h4>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li data-i18n="sub3.technical.generation.item1">GPT-4o-mini & Mistral for response generation</li>
+                    <li data-i18n="sub3.technical.generation.item2">Custom prompt engineering for domain-specific tasks</li>
+                    <li data-i18n="sub3.technical.generation.item3">Context-aware multilingual processing</li>
+                </ul>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="sub3.technical.multimodal.title">Multimodal Processing</h4>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li data-i18n="sub3.technical.multimodal.item1">Whisper for speech recognition</li>
+                    <li data-i18n="sub3.technical.multimodal.item2">Vision models for image understanding</li>
+                    <li data-i18n="sub3.technical.multimodal.item3">TTS with Meta MMS-TTS-ZAN for Taiwanese</li>
+                </ul>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="sub3.technical.deployment.title">Deployment & Integration</h4>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li data-i18n="sub3.technical.deployment.item1">Google Cloud Run for scalable hosting</li>
+                    <li data-i18n="sub3.technical.deployment.item2">LINE Bot API for instant messaging</li>
+                    <li data-i18n="sub3.technical.deployment.item3">Gradio for web-based multimodal interface</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- My Role Section -->
+        <h3 class="subsection-header" data-i18n="sub3.myrole.title">My Role & Responsibilities</h3>
+        <div class="highlight-box">
+        <h4 data-i18n="sub3.myrole.position.title">Lead Research Assistant for Subproject III</h4>
+        <p data-i18n="sub3.myrole.position.desc">As the lead research assistant, I coordinate the research team and serve as the primary technical contact with partner organizations. My responsibilities include designing and developing the multimodal dialogue system, writing code for system implementation, conducting needs assessments with NPO partners, authoring project reports, and overseeing the deployment process from development to field testing.</p>
+        </div>
+
+        <h4 data-i18n="sub3.roles.title">Key Roles</h4>
+        <div class="tech-stack">
+            <span class="tech-tag" style="background: rgba(46, 139, 87, 0.1); color: var(--primary-green); border: 2px solid var(--primary-green);">Lead Research Assistant</span>
+            <span class="tech-tag" style="background: rgba(46, 139, 87, 0.1); color: var(--primary-green); border: 2px solid var(--primary-green);">Software Engineer</span>
+            <span class="tech-tag" style="background: rgba(46, 139, 87, 0.1); color: var(--primary-green); border: 2px solid var(--primary-green);">Project Manager</span>
+        </div>
+    </div>
+
+    <!-- Current Achievements Section -->
+    <div class="content-card fade-in">
+        <h2 class="section-header" data-i18n="achievements.title">Current Achievements & Implementations</h2>
+        
+        <!-- Key Metrics -->
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon"><i class="fab fa-line"></i></div>
+                <span class="achievement-number">7</span>
+                <h4 data-i18n="achievements.linebots.title">LINE Bot Partnerships</h4>
+                <p data-i18n="achievements.linebots.desc">Deployed AI-powered LINE bots across 7 partner organizations</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon"><i class="fas fa-comments"></i></div>
+                <span class="achievement-number">2,056</span>
+                <h4 data-i18n="achievements.responses.title">Total Responses</h4>
+                <p data-i18n="achievements.responses.desc">Cumulative responses served since deployment in June 2024</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon"><i class="fas fa-globe"></i></div>
+                <h4 data-i18n="achievements.multimodal.title">Multimodal System</h4>
+                <p data-i18n="achievements.multimodal.desc">Gradio-based system supporting text, voice, and image inputs with multilingual capabilities</p>
+            </div>
+        </div>
+
+        <!-- Partner Organizations -->
+        <h3 class="subsection-header" data-i18n="achievements.partners.title">Partner Organizations</h3>
+        <p data-i18n="achievements.partners.desc">We are collaborating with leading social welfare organizations to deploy our AI-powered communication systems:</p>
+        
+        <div class="partner-logos">
+            <div class="partner-logo">
+                <h4 data-i18n="partners.cerebralpalsy">中華民國腦性麻痺協會<br>The Cerebral Palsy Association of R.O.C.</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.cplink.org.tw/tw/home/" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/RTJvva5" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.als">漸凍人協會<br>Taiwan Motor Neuron Disease Association</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.mnda.org.tw/" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/wWqU0vE" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.sunshine">陽光社會福利基金會<br>Sunshine Social Welfare Foundation</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.sunshine.org.tw/" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/BaV2oDl" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.goodfriend">台北市基督教勵友中心<br>Good Friend Mission</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.gfm.org.tw/cht/index.php" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/8lyqE7c" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.accessforall">行無礙資源推廣協會<br>Taiwan Access for All Association</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://sunable.net/" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/l2K5oHI" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.taoyuan">桃園市北區輔具資源中心<br>Taoyuan North District Assistive Technology Center</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.tyad.org.tw/" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/JlH94Vf" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+            <div class="partner-logo">
+                <h4 data-i18n="partners.matsu">連江縣早期療育資源中心<br>Matsu Early Intervention Resource Center</h4>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.rocdown-syndrome.org.tw/branch_detail/151" target="_blank" class="tech-tag" style="background: var(--light-green); text-decoration: none; display: inline-block; margin: 2px;">Official Website</a>
+                    <a href="https://lin.ee/xHSSjkde" target="_blank" class="tech-tag" style="background: #06C755; color: white; text-decoration: none; display: inline-block; margin: 2px;">LINE Bot</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gradio Multimodal Interface -->
+        <h3 class="subsection-header" data-i18n="achievements.gradio.title">Gradio Multimodal Interface</h3>
+        <div class="highlight-box">
+            <h4 data-i18n="achievements.gradio.interface.title">Web-based Multimodal Dialogue Platform</h4>
+            <p data-i18n="achievements.gradio.interface.desc">Our Gradio-based web interface provides a comprehensive multimodal communication platform, supporting text input, voice recording, and image uploads with real-time multilingual responses. The interface is designed for accessibility and cross-device compatibility.</p>
+        </div>
+
+        <div class="project-overview">
+            <div class="overview-card">
+                <h4 data-i18n="achievements.gradio.features.multimodal.title">Multimodal Input Support</h4>
+                <p data-i18n="achievements.gradio.features.multimodal.desc">Seamlessly integrates text typing, voice recording, and image upload capabilities in a single unified interface.</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="achievements.gradio.features.crosslingual.title">Cross-lingual Processing</h4>
+                <p data-i18n="achievements.gradio.features.crosslingual.desc">Real-time language detection and response generation in Chinese, English, Taiwanese, and Vietnamese.</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="achievements.gradio.features.accessibility.title">Accessibility Focused</h4>
+                <p data-i18n="achievements.gradio.features.accessibility.desc">Designed specifically for users with speech impairments.</p>
+            </div>
+        </div>
+
+        <!-- Gradio Interface Link -->
+        <div class="text-center" style="margin: 30px 0;">
+            <div style="background: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); display: inline-block;">
+                <h4 style="color: var(--primary-green); margin-bottom: 15px;" data-i18n="achievements.gradio.demo.title">Try the Multimodal Interface</h4>
+                <p data-i18n="achievements.gradio.demo.desc">Experience our advanced multimodal dialogue system through the web interface:</p>
+                <a href="#" class="tech-tag" style="background: linear-gradient(45deg, #FF6B35, #FF8E53); color: white; text-decoration: none; display: inline-block; margin: 10px; padding: 12px 24px; border-radius: 25px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);" 
+                   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 107, 53, 0.4)'"
+                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 107, 53, 0.3)'"
+                   data-i18n="achievements.gradio.demo.button">
+                    <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>
+                    <span>Access Gradio Interface</span>
+                </a>
+                <p style="font-size: 0.9rem; color: var(--text-color); margin-top: 10px; font-style: italic;" data-i18n="achievements.gradio.demo.note">Interface will be available soon</p>
+            </div>
+        </div>
+
+        <!-- System Implementations -->
+        <h3 class="subsection-header" data-i18n="achievements.systems.title">System Implementations</h3>
+        <div class="project-overview">
+            <div class="overview-card">
+                <h4 data-i18n="achievements.systems.linebot.title">LINE Bot Deployment</h4>
+                <p data-i18n="achievements.systems.linebot.desc">Multi-organization chatbot system with RAG-enhanced knowledge base, supporting text and voice interactions for immediate assistance.</p>
+            </div>
+            <div class="overview-card">
+                <h4 data-i18n="achievements.systems.gradio.title">Gradio Multimodal Interface</h4>
+                <p data-i18n="achievements.systems.gradio.desc">Web-based platform integrating text, speech, and image input capabilities with cross-lingual support including Chinese, English, and Vietnamese.</p>
+            </div>
+        </div>
+
+        <!-- Demo Video -->
+        <div class="text-center" style="margin-top: 40px;">
+            <h3 class="subsection-header" data-i18n="achievements.demo.title">Subproject III Overview</h3>
+            <p data-i18n="achievements.demo.desc">Watch our comprehensive introduction video</p>
+            <!-- <a href="https://youtu.be/demo" class="youtube-btn" data-i18n="achievements.demo.button">
+                <i class="fab fa-youtube"></i>
+                <span>Watch Video</span>
+            </a> -->
         </div>
     </div>
 
@@ -798,7 +1162,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     },
                     sub3: {
-                        title: "My Role: Sub-project 3",
+                        title: "Sub-project 3",
                         name: "Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support",
                         role: {
                             title: "Research Assistant Responsibilities",
@@ -815,6 +1179,55 @@ document.addEventListener("DOMContentLoaded", function() {
                         tech: {
                             title: "Technical Approach"
                         },
+                        architecture: {
+                            title: "System Architecture",
+                            core: {
+                                title: "Core RAG-Enhanced Architecture",
+                                desc: "The system employs a sophisticated RAG (Retrieval-Augmented Generation) framework combining e5-base embeddings with FAISS vector database for efficient knowledge retrieval, and GPT-4o/Mistral for intelligent response generation with multilingual TTS output capabilities."
+                            },
+                            diagram: {
+                                caption: "Figure: Subproject III System Architecture - Multimodal RAG Framework"
+                            }
+                        },
+                        technical: {
+                            stack: {
+                                title: "Technical Implementation Stack"
+                            },
+                            embedding: {
+                                title: "Embedding & Retrieval",
+                                item1: "e5-base for multilingual text embeddings",
+                                item2: "FAISS for efficient similarity search",
+                                item3: "Custom vector database optimization"
+                            },
+                            generation: {
+                                title: "Generation & Reasoning",
+                                item1: "GPT-4o-mini & Mistral for response generation",
+                                item2: "Custom prompt engineering for domain-specific tasks",
+                                item3: "Context-aware multilingual processing"
+                            },
+                            multimodal: {
+                                title: "Multimodal Processing",
+                                item1: "Whisper for speech recognition",
+                                item2: "Vision models for image understanding",
+                                item3: "TTS with Meta MMS-TTS-ZAN for Taiwanese"
+                            },
+                            deployment: {
+                                title: "Deployment & Integration",
+                                item1: "Google Cloud Run for scalable hosting",
+                                item2: "LINE Bot API for instant messaging",
+                                item3: "Gradio for web-based multimodal interface"
+                            }
+                        },
+                        myrole: {
+                            title: "My Role & Responsibilities",
+                            position: {
+                                title: "Lead Research Assistant for Subproject III",
+                                desc: "As the primary responsible person among the research assistants, I coordinate team workflow, represent the project in meetings, serve as the main liaison with partner NPOs, discuss organizational needs, write project reports, and lead system development and deployment."
+                            }
+                        },
+                        roles: {
+                            title: "Key Roles"
+                        }
                     },
                     features: {
                         ai: {
@@ -837,6 +1250,77 @@ document.addEventListener("DOMContentLoaded", function() {
                             title: "Accessibility Design",
                             desc: "Interface optimized for speech-impaired users."
                         }
+                    },
+                    achievements: {
+                        title: "Current Achievements & Implementations",
+                        linebots: {
+                            title: "LINE Bot Partnerships",
+                            desc: "Deployed AI-powered LINE bots across 7 partner organizations"
+                        },
+                        responses: {
+                            title: "Total Responses",
+                            desc: "Cumulative responses served since deployment in June 2024"
+                        },
+                        multimodal: {
+                            title: "Multimodal System",
+                            desc: "Gradio-based system supporting text, voice, and image inputs with multilingual capabilities"
+                        },
+                        partners: {
+                            title: "Partner Organizations",
+                            desc: "We are collaborating with leading social welfare organizations to deploy our AI-powered communication systems:"
+                        },
+                        systems: {
+                            title: "System Implementations",
+                            linebot: {
+                                title: "LINE Bot Deployment",
+                                desc: "Multi-organization chatbot system with RAG-enhanced knowledge base, supporting text and voice interactions for immediate assistance."
+                            },
+                            gradio: {
+                                title: "Gradio Multimodal Interface",
+                                desc: "Web-based platform integrating text, speech, and image input capabilities with cross-lingual support including Chinese, English, and Vietnamese."
+                            }
+                        },
+                        demo: {
+                            title: "Subproject III Overview",
+                            desc: "Watch our comprehensive introduction video",
+                            button: "Watch Video"
+                        },
+                        gradio: {
+                            title: "Gradio Multimodal Interface",
+                            interface: {
+                                title: "Web-based Multimodal Dialogue Platform",
+                                desc: "Our Gradio-based web interface provides a comprehensive multimodal communication platform, supporting text input, voice recording, and image uploads with real-time multilingual responses. The interface is designed for accessibility and cross-device compatibility."
+                            },
+                            features: {
+                                multimodal: {
+                                    title: "Multimodal Input Support",
+                                    desc: "Seamlessly integrates text typing, voice recording, and image upload capabilities in a single unified interface."
+                                },
+                                crosslingual: {
+                                    title: "Cross-lingual Processing",
+                                    desc: "Real-time language detection and response generation in Chinese, English, Taiwanese, and Vietnamese."
+                                },
+                                accessibility: {
+                                    title: "Accessibility Focused",
+                                    desc: "Designed specifically for users with speech impairments."
+                                }
+                            },
+                            demo: {
+                                title: "Try the Multimodal Interface",
+                                desc: "Experience our advanced multimodal dialogue system through the web interface:",
+                                button: "Access Gradio Interface",
+                                note: "Interface will be available soon"
+                            }
+                        }
+                    },
+                    partners: {
+                        cerebralpalsy: "The Cerebral Palsy Association of R.O.C.",
+                        als: "Taiwan Motor Neuron Disease Association",
+                        sunshine: "Sunshine Social Welfare Foundation",
+                        goodfriend: "Good Friend Mission",
+                        accessforall: "Taiwan Access for All Association",
+                        taoyuan: "Taoyuan North District Assistive Technology Center",
+                        matsu: "Matsu Early Intervention Resource Center"
                     },
                     impact: {
                         title: "Expected Impact & Outcomes",
@@ -862,6 +1346,41 @@ document.addEventListener("DOMContentLoaded", function() {
                         twsc: {
                             content: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities"
                         },
+                    },
+                    research: {
+                        objectives: {
+                            title: "Research Objectives",
+                            goal1: {
+                                title: "End-to-End Multimodal System",
+                                desc: "Develop a comprehensive dialogue system capable of understanding text, speech, and images simultaneously."
+                            },
+                            goal2: {
+                                title: "Cross-lingual Communication",
+                                desc: "Enable seamless interaction across Chinese, English, Taiwanese, and Vietnamese languages."
+                            },
+                            goal3: {
+                                title: "Social Welfare Integration",
+                                desc: "Deploy AI systems in partnership with organizations to provide accessible communication support."
+                            }
+                        },
+                        methodology: {
+                            title: "Research Methodology",
+                            step1: {
+                                phase: "Phase 1",
+                                title: "Needs Assessment & Data Collection",
+                                desc: "Conducted in-depth interviews with 6 social welfare organizations to identify real-world requirements and collected diverse data sources including FAQs and conversation logs."
+                            },
+                            step2: {
+                                phase: "Phase 2",
+                                title: "AI-Enhanced Knowledge Base Construction",
+                                desc: "Utilized GPT-4o to generate comprehensive Q&A datasets and built multilingual knowledge bases optimized for specific organizational needs."
+                            },
+                            step3: {
+                                phase: "Phase 3",
+                                title: "Iterative Development & Deployment",
+                                desc: "Implemented three-stage development: core validation with LINE Bot, feature expansion with voice integration, and interface consolidation with Gradio web platform."
+                            }
+                        }
                     },
                 }
             },
@@ -945,7 +1464,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     },
                     sub3: {
-                        title: "我的角色：子計畫三",
+                        title: "子計畫三",
                         name: "包容溝通支持多模態跨語言任務導向對話系統",
                         role: {
                             title: "研究助理職責",
@@ -962,6 +1481,55 @@ document.addEventListener("DOMContentLoaded", function() {
                         tech: {
                             title: "技術方法"
                         },
+                        architecture: {
+                            title: "系統架構",
+                            core: {
+                                title: "核心RAG強化架構",
+                                desc: "系統採用先進的RAG（檢索增強生成）框架，結合e5-base嵌入式模型與FAISS向量資料庫進行高效知識檢索，並使用GPT-4o/Mistral進行智能回應生成，具備多語言TTS輸出功能。"
+                            },
+                            diagram: {
+                                caption: "圖：子計畫三系統架構 - 多模態RAG框架"
+                            }
+                        },
+                        technical: {
+                            stack: {
+                                title: "技術實作架構"
+                            },
+                            embedding: {
+                                title: "嵌入與檢索",
+                                item1: "e5-base多語言文本嵌入",
+                                item2: "FAISS高效相似度搜尋",
+                                item3: "客製化向量資料庫優化"
+                            },
+                            generation: {
+                                title: "生成與推理",
+                                item1: "GPT-4o-mini與Mistral回應生成",
+                                item2: "領域專用提示工程設計",
+                                item3: "上下文感知多語言處理"
+                            },
+                            multimodal: {
+                                title: "多模態處理",
+                                item1: "Whisper語音辨識",
+                                item2: "視覺模型圖像理解",
+                                item3: "Meta MMS-TTS-ZAN台語語音合成"
+                            },
+                            deployment: {
+                                title: "部署與整合",
+                                item1: "Google Cloud Run可擴展託管",
+                                item2: "LINE Bot API即時訊息",
+                                item3: "Gradio網頁多模態介面"
+                            }
+                        },
+                        myrole: {
+                            title: "我的角色與職責",
+                            position: {
+                                title: "子計畫三主要研究助理負責人",
+                                desc: "作為主要研究助理，我負責協調研究團隊並擔任與合作組織的主要技術聯絡窗口。我的職責包括設計和開發多模態對話系統、撰寫系統實作程式碼、與非營利組織夥伴進行需求評估、撰寫專案報告書，以及監督從開發到實地測試的整個部署流程。"
+                            }
+                        },
+                        roles: {
+                            title: "主要角色"
+                        }
                     },
                     features: {
                         ai: {
@@ -984,6 +1552,77 @@ document.addEventListener("DOMContentLoaded", function() {
                             title: "無障礙設計",
                             desc: "針對語言障礙者優化的介面設計。"
                         }
+                    },
+                    achievements: {
+                        title: "現階段成果與實作",
+                        linebots: {
+                            title: "LINE Bot 合作夥伴",
+                            desc: "已在7個合作組織部署AI智能LINE機器人"
+                        },
+                        responses: {
+                            title: "累計回應數",
+                            desc: "自2024年6月部署以來累計服務回應數"
+                        },
+                        multimodal: {
+                            title: "多模態系統",
+                            desc: "基於Gradio的系統，支援文字、語音、圖像輸入及多語言功能"
+                        },
+                        partners: {
+                            title: "合作組織",
+                            desc: "我們與領先的社會福利組織合作，共同部署AI智能溝通系統："
+                        },
+                        systems: {
+                            title: "系統實作",
+                            linebot: {
+                                title: "LINE Bot 部署",
+                                desc: "跨組織聊天機器人系統，具備RAG強化的知識庫，支援文字與語音互動，提供即時協助。"
+                            },
+                            gradio: {
+                                title: "Gradio 多模態介面",
+                                desc: "整合文字、語音與圖像輸入功能的網頁平台，支援中文、英文、越南語等跨語言互動。"
+                            }
+                        },
+                        demo: {
+                            title: "子計畫三概覽",
+                            desc: "歡迎觀看我們子計畫三的介紹影片",
+                            button: "觀看影片"
+                        },
+                        gradio: {
+                            title: "Gradio 多模態介面",
+                            interface: {
+                                title: "網頁版多模態對話平台",
+                                desc: "我們基於Gradio的網頁介面提供全面的多模態溝通平台，支援文字輸入、語音錄製和圖像上傳，具備即時多語言回應功能。介面專為無障礙設計，支援跨裝置相容性。"
+                            },
+                            features: {
+                                multimodal: {
+                                    title: "多模態輸入支援",
+                                    desc: "在統一介面中無縫整合文字輸入、語音錄製和圖像上傳功能。"
+                                },
+                                crosslingual: {
+                                    title: "跨語言處理",
+                                    desc: "即時語言偵測與中文、英文、台語、越南語回應生成。"
+                                },
+                                accessibility: {
+                                    title: "無障礙設計",
+                                    desc: "專為語言障礙使用者設計。"
+                                }
+                            },
+                            demo: {
+                                title: "體驗多模態介面",
+                                desc: "透過網頁介面體驗我們先進的多模態對話系統：",
+                                button: "進入 Gradio 介面",
+                                note: "介面即將上線"
+                            }
+                        }
+                    },
+                    partners: {
+                        cerebralpalsy: "中華民國腦性麻痺協會",
+                        als: "漸凍人協會",
+                        sunshine: "陽光社會福利基金會",
+                        goodfriend: "台北市基督教勵友中心",
+                        accessforall: "行無礙資源推廣協會",
+                        taoyuan: "桃園市北區輔具資源中心",
+                        matsu: "連江縣早期療育資源中心"
                     },
                     impact: {
                         title: "預期影響與成果",
@@ -1009,6 +1648,41 @@ document.addEventListener("DOMContentLoaded", function() {
                         twsc: {
                             content: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities"
                         },
+                    },
+                    research: {
+                        objectives: {
+                            title: "研究目標",
+                            goal1: {
+                                title: "端到端多模態系統",
+                                desc: "開發能同時理解文字、語音與圖像的全面性對話系統。"
+                            },
+                            goal2: {
+                                title: "跨語言溝通",
+                                desc: "實現中文、英文、台語及越南語間的無縫互動。"
+                            },
+                            goal3: {
+                                title: "社福領域整合",
+                                desc: "與各組織合作部署AI系統，提供無障礙溝通支持。"
+                            }
+                        },
+                        methodology: {
+                            title: "研究方法",
+                            step1: {
+                                phase: "階段一",
+                                title: "需求評估與資料蒐集",
+                                desc: "深度訪談6家社福組織了解實際需求，並蒐集多元資料來源包括FAQ與對話紀錄。"
+                            },
+                            step2: {
+                                phase: "階段二", 
+                                title: "AI強化知識庫建構",
+                                desc: "運用GPT-4o生成全面的問答資料集，並針對各組織需求建置多語言知識庫。"
+                            },
+                            step3: {
+                                phase: "階段三",
+                                title: "迭代開發與部署",
+                                desc: "三階段開發流程：LINE Bot核心驗證、語音功能擴充、Gradio網頁介面整合。"
+                            }
+                        }
                     },
                 }
             }
