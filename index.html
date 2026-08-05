@@ -181,6 +181,78 @@
             padding-bottom: 15px;
         }
 
+        /* Project count badge next to the section title */
+        .project-count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 10px;
+            margin-left: 12px;
+            border-radius: 20px;
+            background: var(--primary-green);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        /* Systems / Reports filter bar for the Projects section */
+        .project-filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: -30px auto 30px auto;
+        }
+
+        .project-filter-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .project-filter-btn:hover {
+            background: var(--light-green);
+        }
+
+        .project-filter-btn.active {
+            background: var(--primary-green);
+            color: #fff;
+        }
+
+        /* System vs. Report badge shown on each project card */
+        .project-type-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-type-badge.system {
+            background: var(--primary-green);
+            color: #fff;
+        }
+
+        .project-type-badge.report {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         /* Swiper Container Styles */
         .swiper {
             width: 100%;
@@ -1021,6 +1093,7 @@
         @media (max-width: 850px) {
             .menu-items a[href="#competitions"],
             .menu-items a[href="#conferences"],
+            .menu-items a[href="#awards"],
             .menu-items a[href="#other-experiences"] {
                 display: none;  /* 隱藏這些次要項目 */
             }
@@ -1056,6 +1129,7 @@
             /* 在手機菜單中恢復所有項目 */
             .menu-items a[href="#competitions"],
             .menu-items a[href="#conferences"],
+            .menu-items a[href="#awards"],
             .menu-items a[href="#other-experiences"] {
                 display: block;
             }
@@ -1163,6 +1237,7 @@
             <a href="#projects" data-i18n="nav.projects">Projects</a>
             <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
             <a href="#conferences" data-i18n="nav.conferences">Conferences</a>
+            <a href="#awards" data-i18n="nav.awards">Awards</a>
             <a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a>
         </div>
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
@@ -1189,7 +1264,7 @@
         <div class="timeline">
             <div class="timeline-item fade-in">
                 <div class="timeline-content">
-                    <div class="date">2024/09 - Present</div>
+                    <div class="date">2024/09 - 2026/07</div>
                     <h3 data-i18n="timeline.position">Lead Research Assistant</h3>
                     <p data-i18n-html="timeline.projectTitle"><strong>Digital Support, Unimpeded Communication:</strong> The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment</p>
                     <p data-i18n="timeline.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</em></p>
@@ -1207,6 +1282,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2025/12 - 2026/02</div>
+                    <h3 data-i18n="timelineEsg.position">Data Annotator</h3>
+                    <p data-i18n-html="timelineEsg.projectTitle"><strong>ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project:</strong> AI CUP 2026 VeriPromiseESG</p>
+                    <p data-i18n="timelineEsg.subProject"><em>Ministry of Education — AI CUP 2026 National Collegiate Artificial Intelligence Professional Domain Thematic Competition Project</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2024/09 - 2025/12</div>
+                    <h3 data-i18n="timelineLang.position">Research Assistant</h3>
+                    <p data-i18n-html="timelineLang.projectTitle"><strong>Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities</strong></p>
+                    <p data-i18n="timelineLang.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em></p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1214,6 +1307,20 @@
     <section class="content-section" id="publications">
         <h2 class="section-title fade-in" data-i18n="publications.title">Publications</h2>
         <div class="publications-grid">
+            <div class="publication-card fade-in">
+                <h4>Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration</h4>
+                <div class="authors">Cheng-Yun Wu (Advisor: Min-Yuh Day)</div>
+                <div class="conference">Master's Thesis, Institute of Information Management, National Taipei University, 2026</div>
+                <div class="publication-links">
+                    <a href="https://drive.google.com/file/d/1HTFpmjrKsXtMdnjx49ImXFeC1rEc6J5m/view?usp=drive_link" class="pub-link">
+                        <i class="fas fa-file-powerpoint"></i><span data-i18n="publications.slides">Slides</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gMHA7ZqjJ7pt_ep-Xdp1OYJkVtiOytsT/view?usp=drive_link" class="pub-link">
+                        <i class="fas fa-file-pdf"></i><span data-i18n="publications.fulltext">Full Text</span>
+                    </a>
+                </div>
+            </div>
+
             <div class="publication-card fade-in">
                 <h4>Enhancing Sports Organization Management through a Multimodal Dialogue System</h4>
                 <div class="authors">Cheng-Yun Wu and Min-Yuh Day</div>
@@ -1323,6 +1430,46 @@
                         <p>NVIDIA Deep Learning Institute Certificate</p>
                     </div>
                 </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/NVIDIA_20251222_Building RAG Agents with LLMs.png')">
+                        <img src="certificates/NVIDIA_20251222_Building RAG Agents with LLMs.png" alt="NVIDIA RAG Agents Certificate of Competency">
+                        <div class="cert-date">2025/12/22</div>
+                        <h4>NVIDIA: Building RAG Agents with LLMs</h4>
+                        <p>NVIDIA Certificate of Competency</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/AWS_Cloud_Foundations_Training_Badge.png')">
+                        <img src="certificates/AWS_Cloud_Foundations_Training_Badge.png" alt="AWS Academy Cloud Foundations Training Badge">
+                        <div class="cert-date">2025/12/25</div>
+                        <h4>AWS Academy Graduate - Cloud Foundations - Training Badge</h4>
+                        <p>AWS Academy Digital Training Badge, 20 hours</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/NVIDIA_Building Agentic AI Applications with LLMs.png')">
+                        <img src="certificates/NVIDIA_Building Agentic AI Applications with LLMs.png" alt="NVIDIA Agentic AI Applications Certificate of Competency">
+                        <div class="cert-date">2026/03/24</div>
+                        <h4>NVIDIA: Building Agentic AI Applications with Large Language Models</h4>
+                        <p>NVIDIA Certificate of Competency</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/NVIDIA_Generative AI with Diffusion Models_20260331.png')">
+                        <img src="certificates/NVIDIA_Generative AI with Diffusion Models_20260331.png" alt="NVIDIA Generative AI with Diffusion Models Certificate of Competency">
+                        <div class="cert-date">2026/03/31</div>
+                        <h4>NVIDIA: Generative AI with Diffusion Models</h4>
+                        <p>NVIDIA Certificate of Competency</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('certificates/經濟部產業人才能力鑑定證書_AI應用規劃師-初級能力鑑定.png')">
+                        <img src="certificates/經濟部產業人才能力鑑定證書_AI應用規劃師-初級能力鑑定.png" alt="MOEA AI Application Planner Associate Level Certificate">
+                        <div class="cert-date">2026/07/31</div>
+                        <h4>MOEA: AI Application Planner - Associate Level</h4>
+                        <p>Certificate of MOEA Industry Professional Assessment System</p>
+                    </div>
+                </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -1332,12 +1479,269 @@
 
     <!-- Projects Section with Swiper -->
     <section class="content-section" id="projects">
-        <h2 class="section-title fade-in" data-i18n="projectsSection.title">Projects</h2>
+        <h2 class="section-title fade-in">
+            <span data-i18n="projectsSection.title">Projects</span>
+            <span class="project-count-badge" id="projects-count-badge">0</span>
+        </h2>
+        <div class="project-filter-bar fade-in">
+            <button class="project-filter-btn active" data-filter="all" data-i18n="projectsSection.filterAll">All</button>
+            <button class="project-filter-btn" data-filter="system" data-i18n="projectsSection.filterSystem">🖥️ Systems</button>
+            <button class="project-filter-btn" data-filter="report" data-i18n="projectsSection.filterReport">📄 Reports</button>
+        </div>
         <div class="swiper projects-swiper">
             <div class="swiper-wrapper">
-                <!-- ESG Midterm 2025 -->
-                <div class="swiper-slide">
+                <!-- NTPU OPE Assistant -->
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/OPEassistant.jpg" alt="NTPU OPE Assistant">
+                        <div class="project-date">2026/06/12</div>
+                        <h3 data-i18n="projects.opeAssistant.title">NTPU OPE Assistant</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.chatbot">Chatbot</span>
+                            <span class="project-tag" data-i18n="tags.sports">Sports Management</span>
+                            <span class="project-tag" data-i18n="tags.conversational_ai">Conversational AI</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.opeAssistant.desc">NTPU OPE Assistant is an intelligent assistant for the NTPU Office of Physical Education, answering questions related to physical education affairs</p>
+                        <div class="project-links">
+                            <a href="https://ntpuopeagent.aifitesg.org/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>System
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Marketing Final 2026 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/MarketingFinal.png" alt="Social Marketing Final Report">
+                        <div class="project-date">2026/06/11</div>
+                        <h3 data-i18n="projects.marketingFinal.title">2026 Social Media Marketing Final Report</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.marketing">Marketing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://canva.link/9sve5qxyn2d4u47" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IM your Buddy - GenAI Group Final 2026 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/IMyourBuddyFinal.png" alt="IM your Buddy Final Report">
+                        <div class="project-date">2026/06/09</div>
+                        <h3 data-i18n="projects.imYourBuddyFinal.title">2026 Group Final Report in Generative AI Innovative Applications Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.generative_ai">Generative AI</span>
+                            <span class="project-tag" data-i18n="tags.chatbot">Chatbot</span>
+                            <span class="project-tag" data-i18n="tags.education">Education</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.imYourBuddyFinal.desc">IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1kw63_GAWmROCZ959UEtLPRQOBda189-b/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- North Taiwan University Alliance AI Agent Competition -->
+                <div class="swiper-slide" data-type="system">
+                    <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/IMyourBuddyCompetition.png" alt="IM YOUR BUDDY - AI Agent Competition">
+                        <div class="project-date">2026/05/22</div>
+                        <h3 data-i18n="projects.imYourBuddyCompetition.title">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.ai_competition">AI Competition</span>
+                            <span class="project-tag">Agent</span>
+                            <span class="project-tag" data-i18n="tags.team">Team Project</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.imYourBuddyCompetition.desc">IM YOUR BUDDY - Micro-Organization Intelligent Agent</p>
+                        <div class="project-links">
+                            <a href="https://imyourbuddy-official.zeabur.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>Intro
+                            </a>
+                            <a href="https://imyourbuddy.zeabur.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>System
+                            </a>
+                            <a href="https://youtu.be/t6-mKJwVW-I" target="_blank" class="project-link">
+                                <i class="fab fa-youtube"></i>YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Finance App -->
+                <div class="swiper-slide" data-type="system">
+                    <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/FinanceApp.png" alt="Finance App">
+                        <div class="project-date">2026/05/19</div>
+                        <h3 data-i18n="projects.financeApp.title">Personal Finance App</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.fintech">FinTech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grandma's Sewing Box -->
+                <div class="swiper-slide" data-type="system">
+                    <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/GrandmaSewingBox.PNG" alt="Grandma's Sewing Box">
+                        <div class="project-date">2026/05/01</div>
+                        <h3 data-i18n="projects.grandmaSewingBox.title">Grandma's Sewing Box</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Personal Project</span>
+                            <span class="project-tag">Web App</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.grandmaSewingBox.desc">Every stitch, every thread—a mark of love. The warmth woven in yarn lives on here forever.</p>
+                        <div class="project-links">
+                            <a href="https://yuying-art.vercel.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Marketing Midterm 2026 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/MarketingMidterm.png" alt="Social Marketing Midterm Report">
+                        <div class="project-date">2026/04/23</div>
+                        <h3 data-i18n="projects.marketingMidterm.title">2026 Social Media Marketing Midterm Report</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.marketing">Marketing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://canva.link/9hpz338fl2k6ozg" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IM your Buddy - GenAI Group Midterm 2026 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/IMyourBuddyMidterm.png" alt="IM your Buddy Midterm Report">
+                        <div class="project-date">2026/04/14</div>
+                        <h3 data-i18n="projects.imYourBuddyMidterm.title">2026 Group Midterm Report in Generative AI Innovative Applications Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.generative_ai">Generative AI</span>
+                            <span class="project-tag" data-i18n="tags.chatbot">Chatbot</span>
+                            <span class="project-tag" data-i18n="tags.education">Education</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.imYourBuddyMidterm.desc">IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1xCZFapG4t-P1Sekwno3DtgCfP-Ht9Ks6/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IFIT Lab Handover System -->
+                <div class="swiper-slide" data-type="system">
+                    <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/LabHandover.png" alt="IFIT Lab Handover System">
+                        <div class="project-date">2026/04/01</div>
+                        <h3 data-i18n="projects.labHandover.title">IFIT Lab Handover System</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Knowledge Management</span>
+                            <span class="project-tag">Web App</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://lab-handover.vercel.app/dashboard" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>System
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GenAI Case Study 2026 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/GenAICaseStudy.png" alt="Generative AI Case Study">
+                        <div class="project-date">2026/03/17</div>
+                        <h3 data-i18n="projects.genaiCaseStudy.title">2026 Group Case Study in Generative AI Innovative Applications Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.generative_ai">Generative AI</span>
+                            <span class="project-tag" data-i18n="tags.case_study">Case Study</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1lXUw5IqVWROWlub4F6Za6w7VHfN52_R2/view?usp=drive_link" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Virtual-Real Pottery Journey - ESG Group Final 2025 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
+                        <img src="projects/PotteryJourney.png" alt="Virtual-Real Pottery Journey">
+                        <div class="project-date">2025/12/24</div>
+                        <h3 data-i18n="projects.potteryJourney.title">2025 Group Final Report in Sustainability and ESG Data Analytics Course</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">AI</span>
+                            <span class="project-tag">Digital Avatar</span>
+                            <span class="project-tag" data-i18n="tags.esg">ESG</span>
+                            <span class="project-tag" data-i18n="tags.usr">USR</span>
+                        </div>
+                        <p class="project-desc" data-i18n="projects.potteryJourney.desc">The Virtual-Real Pottery Journey: AI Digital Avatar Driven Sustainable Ecosystem</p>
+                        <div class="project-links">
+                            <a href="https://drive.google.com/file/d/1nEjPhkC0tB8Ka9BaGHDrtLrBX4pNmuuJ/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USR Competition Report -->
+                <div class="swiper-slide" data-type="system">
+                    <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
+                        <img src="projects/USRreport.png" alt="USR Competition Report">
+                        <div class="project-date">2025/12/12</div>
+                        <h3 data-i18n="projects.usrReport.title">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)</h3>
+                        <div class="project-tags">
+                            <span class="project-tag" data-i18n="tags.usr">USR</span>
+                            <span class="project-tag" data-i18n="tags.sustainability">Sustainability</span>
+                            <span class="project-tag" data-i18n="tags.competition">Competition</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://lin.ee/xXya3tn" target="_blank" class="project-link">
+                                <i class="fab fa-line"></i>LINE
+                            </a>
+                            <a href="https://drive.google.com/file/d/1thj5eLVTSmFTgFvHM4wcN2UAdLNtLkPR/view?usp=sharing" target="_blank" class="project-link">
+                                <i class="fas fa-file-alt"></i>Proposal
+                            </a>
+                            <a href="https://shus-pottery-soul.zeabur.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>System
+                            </a>
+                            <a href="https://cybj-create-your-better-journey.zeabur.app/" target="_blank" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>Intro
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ESG Midterm 2025 -->
+                <div class="swiper-slide" data-type="report">
+                    <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/ESGmidterm.png" alt="ESG Midterm">
                         <div class="project-date">2025/11/05</div>
                         <h3 data-i18n="projects.esgmidterm.title">2025 Group Midterm Report in Sustainability and ESG Data Analytics Course</h3>
@@ -1357,8 +1761,9 @@
                 </div>
 
                 <!-- ITAM-31 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/itam31.png" alt="ITAM-31">
                         <div class="project-date">2025/10/29</div>
                         <h3 data-i18n="projects.itam31.title">31st International Conference on IT Applications and Management</h3>
@@ -1379,8 +1784,9 @@
                 </div>
 
                 <!-- ESG Case Study 2025 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/ESGcasestudy.png" alt="ESG Case Study">
                         <div class="project-date">2025/10/01</div>
                         <h3 data-i18n="projects.esgcasestudy.title">2025 Case Study in Sustainability and ESG Data Analytics Course</h3>
@@ -1398,8 +1804,9 @@
                 </div>
 
                 <!-- TWSC2 2025 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/TWSC2.png" alt="TWSC2 2025">
                         <div class="project-date">2025/07/04</div>
                         <h3 data-i18n="projects.twsc.title">2025 Taiwan Symposium On Cloud And Services Computing Conference</h3>
@@ -1419,8 +1826,9 @@
                 </div>
 
                 <!-- SE Group Final 2025 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/logo_InquAIry.png" alt="InquAIry">
                         <div class="project-date">2025/06/04</div>
                         <h3 data-i18n="projects.se_group.title">2025 Group Final Report in Software Engineering Course</h3>
@@ -1439,8 +1847,9 @@
                 </div>
 
                 <!-- Thesis 2025 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/Thesis.png" alt="Thesis">
                         <div class="project-date">2025/05/28</div>
                         <h3 data-i18n="projects.thesis.title">2025 Individual Final Report in Software Engineering Course</h3>
@@ -1459,8 +1868,9 @@
                 </div>
 
                 <!-- Anyo -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
                         <img src="projects/Anyo.png" alt="Anyo">
                         <div class="project-date">2025/04/27</div>
                         <h3 data-i18n="projects.anyo.title">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition</h3>
@@ -1482,8 +1892,9 @@
                 </div>
 
                 <!-- TradiqAI -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
                         <img src="projects/TRADIQAI.png" alt="TradiqAI">
                         <div class="project-date">2025/04/18</div>
                         <h3 data-i18n="projects.tradiq.title">2025 The 3rd NTPU AI Smart Application Innovation Competition</h3>
@@ -1502,8 +1913,9 @@
                 </div>
 
                 <!-- CodeMigo -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
                         <img src="projects/CodeMigo.png" alt="CodeMigo">
                         <div class="project-date">2025/04/17</div>
                         <h3 data-i18n="projects.codemigo.title">CodeMigo – A Tiny Growing CodePet</h3>
@@ -1522,8 +1934,9 @@
                 </div>
 
                 <!-- InquAIry -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
                         <img src="projects/logo_InquAIry-1.png" alt="InquAIry Early">
                         <div class="project-date">2025/04/09</div>
                         <h3 data-i18n="projects.inquairy.title">2025 Group Report in Software Engineering Course</h3>
@@ -1542,8 +1955,9 @@
                 </div>
 
                 <!-- TariffMyBiz -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="system">
                     <div class="project-card">
+                        <span class="project-type-badge system" data-i18n="projectsSection.badgeSystem">🖥️ System</span>
                         <img src="projects/tariff.jpg" alt="TariffMyBiz">
                         <div class="project-date">2025/04/07</div>
                         <h3 data-i18n="projects.tariffmybiz.title">2025 Best AI Awards</h3>
@@ -1565,8 +1979,9 @@
                 </div>
 
                 <!-- SE Case Study -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/SEcasestudy.jpg" alt="SE Case Study">
                         <div class="project-date">2025/03/12</div>
                         <h3 data-i18n="projects.secase.title">2025 Case Study in Software Engineering Course</h3>
@@ -1585,8 +2000,9 @@
                 </div>
 
                 <!-- SinoPac -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/SinoPac.png" alt="SinoPac">
                         <div class="project-date">2025/03/06</div>
                         <h3 data-i18n="projects.sinopac.title">2025 SinoPac Holdings Business Proposal Competition</h3>
@@ -1605,8 +2021,9 @@
                 </div>
 
                 <!-- Marketing Chatbot -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/Marketing_chatbot.jpeg" alt="Marketing Chatbot">
                         <div class="project-date">2025/01/02</div>
                         <h3 data-i18n="projects.marketing.title">2024 Research Methodology Course</h3>
@@ -1625,8 +2042,9 @@
                 </div>
 
                 <!-- AI Final -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/trafficAIagent.jpeg" alt="AI Final">
                         <div class="project-date">2024/12/24</div>
                         <h3 data-i18n="projects.ai_final.title">2024 Final Project in AI course</h3>
@@ -1645,8 +2063,9 @@
                 </div>
 
                 <!-- USR -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/USR.png" alt="USR">
                         <div class="project-date">2024/11/24</div>
                         <h3 data-i18n="projects.usr.title">2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h3>
@@ -1665,8 +2084,9 @@
                 </div>
 
                 <!-- AI Case Study -->
-                <div class="swiper-slide">
+                <div class="swiper-slide" data-type="report">
                     <div class="project-card">
+                        <span class="project-type-badge report" data-i18n="projectsSection.badgeReport">📄 Report</span>
                         <img src="projects/aicasestudy.png" alt="AI Case Study">
                         <div class="project-date">2024/11/19</div>
                         <h3 data-i18n="projects.ai_case.title">2024 Case Study in AI course</h3>
@@ -1698,6 +2118,9 @@
         </h2>
         <div class="experience-list fade-in">
             <ul>
+                <li data-i18n="competitions.ntpuAiAgent2026">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition: First Place, 2026/05/22</li>
+                <li data-i18n="competitions.usr2025">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方): First Place, 2025/12/12</li>
+                <li data-i18n="competitions.ntcir18MedNlp">NTCIR-18 MedNLP-CHAT: Medical Natural Language Processing for AI Chat, 2025/06/10-13, Japan</li>
                 <li data-i18n="competitions.tsc">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention, 2025/05/24</li>
                 <li data-i18n="competitions.ntpuAI2025">2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award, 2025/05/22</li>
                 <li data-i18n="competitions.bestAIAwards">2025 Best AI Awards, Final contest, 2025/05/03</li>
@@ -1721,6 +2144,106 @@
                 </li>
                 <li data-i18n="conferences.icim2025">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
             </ul>
+        </div>
+    </section>
+
+    <!-- Awards Section with Swiper -->
+    <section class="content-section" id="awards">
+        <h2 class="section-title fade-in" data-i18n="awards.title">Awards</h2>
+        <div class="swiper awards-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/經濟部2025智慧創新大賞入圍證明.png')">
+                        <img src="awards/經濟部2025智慧創新大賞入圍證明.png" alt="2025 Best AI Awards Finalist Certificate">
+                        <div class="cert-date">2025/05/03</div>
+                        <h4 data-i18n="awards.moeaFinalist.title">Finalist Certificate</h4>
+                        <p data-i18n="awards.moeaFinalist.subtitle">2025 Best AI Awards (Ministry of Economic Affairs)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/ICIM_Certificate.png')">
+                        <img src="awards/ICIM_Certificate.png" alt="ICIM 2025 Certificate of Presentation">
+                        <div class="cert-date">2025/05/16</div>
+                        <h4 data-i18n="awards.icimCert.title">Certificate of Presentation</h4>
+                        <p data-i18n="awards.icimCert.subtitle">2025 International Conference on Information Management (ICIM 2025)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/ICIM_International Track Outstanding Paper Award.png')">
+                        <img src="awards/ICIM_International Track Outstanding Paper Award.png" alt="ICIM 2025 International Track Outstanding Paper Award">
+                        <div class="cert-date">2025/05/16</div>
+                        <h4 data-i18n="awards.icimPaper.title">International Track Outstanding Paper Award</h4>
+                        <p data-i18n="awards.icimPaper.subtitle">2025 International Conference on Information Management (ICIM 2025)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/第十屆崇越行銷大賞佳作.png')">
+                        <img src="awards/第十屆崇越行銷大賞佳作.png" alt="The 10th TOPCO Marketing Award Honorable Mention">
+                        <div class="cert-date">2025/05/24</div>
+                        <h4 data-i18n="awards.topcoAward.title">Honorable Mention</h4>
+                        <p data-i18n="awards.topcoAward.subtitle">The 10th (2025) TOPCO Marketing Award: AI Application Competition</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/medNLP_best_oral.png')">
+                        <img src="awards/medNLP_best_oral.png" alt="NTCIR-18 MedNLP-CHAT Best Oral Presentation Award">
+                        <div class="cert-date">2025/06/13</div>
+                        <h4 data-i18n="awards.medNlpOral.title">Best Oral Presentation Award</h4>
+                        <p data-i18n="awards.medNlpOral.subtitle">NTCIR-18 MedNLP-CHAT Task</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/finArg_best_oral.png')">
+                        <img src="awards/finArg_best_oral.png" alt="NTCIR-18 FinArg-2 Best Oral Presentation Award">
+                        <div class="cert-date">2025/06/13</div>
+                        <h4 data-i18n="awards.finArgOral.title">Best Oral Presentation Award</h4>
+                        <p data-i18n="awards.finArgOral.subtitle">NTCIR-18 FinArg-2 Task</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/finArg_best_poster.png')">
+                        <img src="awards/finArg_best_poster.png" alt="NTCIR-18 FinArg-2 Best Poster Award">
+                        <div class="cert-date">2025/06/13</div>
+                        <h4 data-i18n="awards.finArgPoster.title">Best Poster Award</h4>
+                        <p data-i18n="awards.finArgPoster.subtitle">NTCIR-18 FinArg-2 Task</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/TWSC2_發表證明.png')">
+                        <img src="awards/TWSC2_發表證明.png" alt="TWSC2 2025 Certificate of Presentation">
+                        <div class="cert-date">2025/07/03</div>
+                        <h4 data-i18n="awards.twscCert.title">Certificate of Presentation</h4>
+                        <p data-i18n="awards.twscCert.subtitle">2025 Taiwan Symposium on Cloud and Services Computing (TWSC2 2025)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/ITAM_CERTIFICATE OF PARTICIPATION.png')">
+                        <img src="awards/ITAM_CERTIFICATE OF PARTICIPATION.png" alt="ITAM-31 Certificate of Participation">
+                        <div class="cert-date">2025/10/26</div>
+                        <h4 data-i18n="awards.itamCert.title">Certificate of Participation</h4>
+                        <p data-i18n="awards.itamCert.subtitle">31st International Conference on IT Applications and Management (ITAM-31)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/2025 NTPU USR XREsolution 再想解方永續科技提案競賽_第一名.png')">
+                        <img src="awards/2025 NTPU USR XREsolution 再想解方永續科技提案競賽_第一名.png" alt="2025 NTPU USR Sustainability Technology Proposal Competition First Place">
+                        <div class="cert-date">2025/12/12</div>
+                        <h4 data-i18n="awards.usrAward.title">First Place</h4>
+                        <p data-i18n="awards.usrAward.subtitle">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="cert-card" onclick="openLightbox('awards/北聯大-人工智慧代理創新創業跨域競賽_第一名.png')">
+                        <img src="awards/北聯大-人工智慧代理創新創業跨域競賽_第一名.png" alt="North Taiwan University Alliance AI Agent Competition First Place">
+                        <div class="cert-date">2026/05/22</div>
+                        <h4 data-i18n="awards.ntpuAiAgentAward.title">First Place</h4>
+                        <p data-i18n="awards.ntpuAiAgentAward.subtitle">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
 
@@ -1768,6 +2291,7 @@
                 <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
                 <p><a href="#competitions" data-i18n="nav.competitions">Competitions</a></p>
                 <p><a href="#conferences" data-i18n="nav.conferences">Conferences</a></p>
+                <p><a href="#awards" data-i18n="nav.awards">Awards</a></p>
                 <p><a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a></p>
             </div>
 
@@ -1805,6 +2329,7 @@
                                 projects: "Projects",
                                 competitions: "Competitions",
                                 conferences: "Conferences",
+                                awards: "Awards",
                                 otherExperiences: "Other Experiences"
                             },
                             hero: {
@@ -1826,6 +2351,16 @@
                                 task3: "Researching inclusive AI technologies for accessibility",
                                 projectLink: "View Project Details"
                             },
+                            timelineEsg: {
+                                position: "Data Annotator",
+                                projectTitle: "<strong>ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project:</strong> AI CUP 2026 VeriPromiseESG",
+                                subProject: "Ministry of Education — AI CUP 2026 National Collegiate Artificial Intelligence Professional Domain Thematic Competition Project"
+                            },
+                            timelineLang: {
+                                position: "Research Assistant",
+                                projectTitle: "<strong>Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities</strong>",
+                                subProject: "Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System"
+                            },
                             publications: {
                                 title: "Publications",
                                 slides: "Slides",
@@ -1835,10 +2370,57 @@
                                 title: "Certificates"
                             },
                             projectsSection: {
-                                title: "Projects"
+                                title: "Projects",
+                                filterAll: "All",
+                                filterSystem: "🖥️ Systems",
+                                filterReport: "📄 Reports",
+                                badgeSystem: "🖥️ System",
+                                badgeReport: "📄 Report"
                             },
                             projects: {
                                 more: "More",
+                                opeAssistant: {
+                                    title: "NTPU OPE Assistant",
+                                    desc: "NTPU OPE Assistant is an intelligent assistant for the NTPU Office of Physical Education, answering questions related to physical education affairs"
+                                },
+                                marketingFinal: {
+                                    title: "2026 Social Media Marketing Final Report"
+                                },
+                                imYourBuddyFinal: {
+                                    title: "2026 Group Final Report in Generative AI Innovative Applications Course",
+                                    desc: "IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey"
+                                },
+                                imYourBuddyCompetition: {
+                                    title: "North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition",
+                                    desc: "IM YOUR BUDDY - Micro-Organization Intelligent Agent"
+                                },
+                                financeApp: {
+                                    title: "Personal Finance App"
+                                },
+                                grandmaSewingBox: {
+                                    title: "Grandma's Sewing Box",
+                                    desc: "Every stitch, every thread—a mark of love. The warmth woven in yarn lives on here forever."
+                                },
+                                marketingMidterm: {
+                                    title: "2026 Social Media Marketing Midterm Report"
+                                },
+                                imYourBuddyMidterm: {
+                                    title: "2026 Group Midterm Report in Generative AI Innovative Applications Course",
+                                    desc: "IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey"
+                                },
+                                labHandover: {
+                                    title: "IFIT Lab Handover System"
+                                },
+                                genaiCaseStudy: {
+                                    title: "2026 Group Case Study in Generative AI Innovative Applications Course"
+                                },
+                                potteryJourney: {
+                                    title: "2025 Group Final Report in Sustainability and ESG Data Analytics Course",
+                                    desc: "The Virtual-Real Pottery Journey: AI Digital Avatar Driven Sustainable Ecosystem"
+                                },
+                                usrReport: {
+                                    title: "2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)"
+                                },
                                 esgmidterm: {
                                     title: "2025 Group Midterm Report in Sustainability and ESG Data Analytics Course",
                                     desc: "AI-Driven Digital Transformation for Shu’s Pottery"
@@ -1949,6 +2531,9 @@
                             competitions: {
                                 title: "Competitions",
                                 viewPhotos: "📸 View Photos",
+                                ntpuAiAgent2026: "North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition: First Place, 2026/05/22",
+                                usr2025: "2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方): First Place, 2025/12/12",
+                                ntcir18MedNlp: "NTCIR-18 MedNLP-CHAT: Medical Natural Language Processing for AI Chat, 2025/06/10-13, Japan",
                                 tsc: "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention, 2025/05/24",
                                 ntpuAI2025: "2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award, 2025/05/22",
                                 bestAIAwards: "2025 Best AI Awards, Final contest, 2025/05/03"
@@ -1960,6 +2545,53 @@
                                 ntcir18: "NTCIR-18 Conference (The 18th NII Testbeds and Community for Information access Research), Tokyo, Japan, 2025/06/10-13",
                                 twsc22025: "TWSC2 2025 Conference (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04",
                                 itam31: "31st International Conference on IT Applications and Management, Jinju, Korea, 2025/10/26-30"
+                            },
+                            awards: {
+                                title: "Awards",
+                                moeaFinalist: {
+                                    title: "Finalist Certificate",
+                                    subtitle: "2025 Best AI Awards (Ministry of Economic Affairs)"
+                                },
+                                icimCert: {
+                                    title: "Certificate of Presentation",
+                                    subtitle: "2025 International Conference on Information Management (ICIM 2025)"
+                                },
+                                icimPaper: {
+                                    title: "International Track Outstanding Paper Award",
+                                    subtitle: "2025 International Conference on Information Management (ICIM 2025)"
+                                },
+                                topcoAward: {
+                                    title: "Honorable Mention",
+                                    subtitle: "The 10th (2025) TOPCO Marketing Award: AI Application Competition"
+                                },
+                                medNlpOral: {
+                                    title: "Best Oral Presentation Award",
+                                    subtitle: "NTCIR-18 MedNLP-CHAT Task"
+                                },
+                                finArgOral: {
+                                    title: "Best Oral Presentation Award",
+                                    subtitle: "NTCIR-18 FinArg-2 Task"
+                                },
+                                finArgPoster: {
+                                    title: "Best Poster Award",
+                                    subtitle: "NTCIR-18 FinArg-2 Task"
+                                },
+                                twscCert: {
+                                    title: "Certificate of Presentation",
+                                    subtitle: "2025 Taiwan Symposium on Cloud and Services Computing (TWSC2 2025)"
+                                },
+                                itamCert: {
+                                    title: "Certificate of Participation",
+                                    subtitle: "31st International Conference on IT Applications and Management (ITAM-31)"
+                                },
+                                usrAward: {
+                                    title: "First Place",
+                                    subtitle: "2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)"
+                                },
+                                ntpuAiAgentAward: {
+                                    title: "First Place",
+                                    subtitle: "North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition"
+                                }
                             },
                             otherExperiences: {
                                 title: "Other Experiences",
@@ -1993,6 +2625,7 @@
                                 projects: "專案作品",
                                 competitions: "競賽經歷",
                                 conferences: "研討會",
+                                awards: "獲獎紀錄",
                                 otherExperiences: "其他經歷"
                             },
                             hero: {
@@ -2014,6 +2647,16 @@
                                 task3: "研究無障礙AI技術",
                                 projectLink: "計畫詳情"
                             },
+                            timelineEsg: {
+                                position: "資料標注員",
+                                projectTitle: "<strong>ESG 永續承諾驗證競賽與標註資料蒐集計畫：</strong>AI CUP 2026 VeriPromiseESG",
+                                subProject: "教育部——AI CUP 2026 教育部全國大專校院人工智慧專業領域主題競賽計畫"
+                            },
+                            timelineLang: {
+                                position: "研究助理",
+                                projectTitle: "<strong>語言障礙者之語音處理、合成、辨識、與語句建構之研究</strong>",
+                                subProject: "子計畫三：多模態跨語言任務導向對話系統"
+                            },
                             publications: {
                                 title: "學術發表",
                                 slides: "投影片",
@@ -2023,10 +2666,57 @@
                                 title: "證書認證"
                             },
                             projectsSection: {
-                                title: "專案作品"
+                                title: "專案作品",
+                                filterAll: "全部",
+                                filterSystem: "🖥️ 系統作品",
+                                filterReport: "📄 報告文件",
+                                badgeSystem: "🖥️ 系統",
+                                badgeReport: "📄 報告"
                             },
                             projects: {
                                 more: "更多",
+                                opeAssistant: {
+                                    title: "NTPU OPE Assistant",
+                                    desc: "NTPU OPE Assistant 國立臺北大學體育室智慧助理，可以詢問關於體育室的相關內容"
+                                },
+                                marketingFinal: {
+                                    title: "2026 社群行銷期末報告"
+                                },
+                                imYourBuddyFinal: {
+                                    title: "2026 生成式AI創新應用課程期末報告",
+                                    desc: "IM your Buddy：你的校園生活領航員，伴你順利航向每一段旅程"
+                                },
+                                imYourBuddyCompetition: {
+                                    title: "北聯大-人工智慧代理創新創業跨域競賽",
+                                    desc: "IM YOUR BUDDY - 微型組織智慧代理人"
+                                },
+                                financeApp: {
+                                    title: "理財APP"
+                                },
+                                grandmaSewingBox: {
+                                    title: "阿嬤的針線盒",
+                                    desc: "每一針每一線，都是愛的印記。用毛線勾勒出的溫暖，在這裡永遠留存。"
+                                },
+                                marketingMidterm: {
+                                    title: "2026 社群行銷期中報告"
+                                },
+                                imYourBuddyMidterm: {
+                                    title: "2026 生成式AI創新應用課程期中報告",
+                                    desc: "IM your Buddy：你的校園生活領航員，伴你順利航向每一段旅程"
+                                },
+                                labHandover: {
+                                    title: "IFIT Lab交接系統"
+                                },
+                                genaiCaseStudy: {
+                                    title: "2026 生成式AI創新應用課程個案研究"
+                                },
+                                potteryJourney: {
+                                    title: "2025 永續數據分析課程期末報告",
+                                    desc: "虛實共融的製陶旅程：AI數位分身驅動的永續生態系統"
+                                },
+                                usrReport: {
+                                    title: "2025 NTPU USR 永續科技提案競賽 REsolution 再想解方"
+                                },
                                 esgmidterm: {
                                     title: "2025 永續數據分析課程期中報告",
                                     desc: "AI啟動陶藝革新：新旺集瓷的數位轉型之路"
@@ -2137,6 +2827,9 @@
                             competitions: {
                                 title: "競賽經歷",
                                 viewPhotos: "📸 檢視照片",
+                                ntpuAiAgent2026: "北聯大－人工智慧代理創新創業跨域競賽：第一名，2026/05/22",
+                                usr2025: "2025 NTPU USR 永續科技提案競賽 REsolution 再想解方：第一名，2025/12/12",
+                                ntcir18MedNlp: "NTCIR-18 MedNLP-CHAT：醫療自然語言處理人工智慧對話評測，2025/06/10-13，日本",
                                 tsc: "2025第十屆TSC行銷學術研討會：AI應用行銷競賽，佳作，2025/05/24",
                                 ntpuAI2025: "2025第三屆臺北大學AI智慧應用創新競賽：實作組，優秀獎，2025/05/22",
                                 bestAIAwards: "2025 Best AI Awards，決賽，2025/05/03"
@@ -2148,6 +2841,53 @@
                                 ntcir18: "NTCIR-18研討會 (第18屆NII資訊存取技術測試平台與社群研討會)，東京，日本，2025/06/10-13",
                                 twsc22025: "TWSC2 2025研討會 (2025台灣雲端服務暨運算研討會)，新北市，台灣，2025/07/03-04",
                                 itam31: "第31屆國際資訊應用與管理研討會，晉州，韓國，2025/10/26-30"
+                            },
+                            awards: {
+                                title: "獲獎紀錄",
+                                moeaFinalist: {
+                                    title: "入圍證明",
+                                    subtitle: "2025 智慧創新大賞（經濟部）"
+                                },
+                                icimCert: {
+                                    title: "發表證明",
+                                    subtitle: "2025 第36屆國際資訊管理學術研討會 (ICIM 2025)"
+                                },
+                                icimPaper: {
+                                    title: "國際場次優秀論文獎",
+                                    subtitle: "2025 第36屆國際資訊管理學術研討會 (ICIM 2025)"
+                                },
+                                topcoAward: {
+                                    title: "佳作獎",
+                                    subtitle: "第十屆（2025）崇越行銷大賞：AI應用競賽"
+                                },
+                                medNlpOral: {
+                                    title: "最佳口頭報告獎",
+                                    subtitle: "NTCIR-18 MedNLP-CHAT 任務"
+                                },
+                                finArgOral: {
+                                    title: "最佳口頭報告獎",
+                                    subtitle: "NTCIR-18 FinArg-2 任務"
+                                },
+                                finArgPoster: {
+                                    title: "最佳海報獎",
+                                    subtitle: "NTCIR-18 FinArg-2 任務"
+                                },
+                                twscCert: {
+                                    title: "發表證明",
+                                    subtitle: "2025年臺灣雲端與服務計算研討會 (TWSC2 2025)"
+                                },
+                                itamCert: {
+                                    title: "研討會參與證明",
+                                    subtitle: "第31屆國際資訊應用與管理研討會 (ITAM-31)"
+                                },
+                                usrAward: {
+                                    title: "第一名",
+                                    subtitle: "2025 NTPU USR 永續科技提案競賽 REsolution 再想解方"
+                                },
+                                ntpuAiAgentAward: {
+                                    title: "第一名",
+                                    subtitle: "北聯大-人工智慧代理創新創業跨域競賽"
+                                }
                             },
                             otherExperiences: {
                                 title: "其他經歷",
@@ -2211,6 +2951,36 @@
                 }
             });
 
+            // Awards Swiper
+            const awardsSwiper = new Swiper('.awards-swiper', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                centeredSlides: false,
+                loop: false,
+                navigation: {
+                    nextEl: '.awards-swiper .swiper-button-next',
+                    prevEl: '.awards-swiper .swiper-button-prev',
+                },
+                pagination: {
+                    el: '.awards-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 25
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30
+                    }
+                }
+            });
+
             // Projects Swiper - 增加更多響應式斷點
             const projectsSwiper = new Swiper('.projects-swiper', {
                 slidesPerView: 3,
@@ -2251,6 +3021,30 @@
                         spaceBetween: 40
                     }
                 }
+            });
+
+            // Projects count badge
+            const projectCards = document.querySelectorAll('.projects-swiper .project-card');
+            const projectsCountBadge = document.getElementById('projects-count-badge');
+            if (projectsCountBadge) {
+                projectsCountBadge.textContent = projectCards.length;
+            }
+
+            // Systems / Reports filter for the Projects section
+            const projectFilterButtons = document.querySelectorAll('.project-filter-btn');
+            const projectSlides = document.querySelectorAll('.projects-swiper .swiper-slide');
+            projectFilterButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    projectFilterButtons.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    const filter = btn.getAttribute('data-filter');
+                    projectSlides.forEach(function (slide) {
+                        const matches = filter === 'all' || slide.getAttribute('data-type') === filter;
+                        slide.style.display = matches ? '' : 'none';
+                    });
+                    projectsSwiper.update();
+                    projectsSwiper.slideTo(0);
+                });
             });
 
             // Debug: Log swiper instances to ensure they're created
