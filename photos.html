@@ -466,6 +466,16 @@
             menu.classList.toggle('active');
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
         }
+
+        // 手機選單開啟時，點擊選單以外的空白處也會收起選單
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('active') && !menu.contains(e.target) && e.target !== icon) {
+                menu.classList.remove('active');
+                icon.textContent = '☰';
+            }
+        });
         
         // 載入選定活動的圖片
         function loadImages(event) {

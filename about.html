@@ -518,6 +518,8 @@
                     <li data-i18n="chatbot">Chatbot</li>
                     <li data-i18n="llm">Large language model (LLM)</li>
                     <li data-i18n="rag">Retrieval-augmented generation (RAG)</li>
+                    <li data-i18n="agenticAi">Agentic AI</li>
+                    <li data-i18n="cloud">Cloud Computing (AWS)</li>
                 </ul>
                 <h2 data-i18n="languageTitle">Language</h2>
                 <ul>
@@ -527,38 +529,54 @@
             </div>
             <div class="right-column">
                 <h2 data-i18n="aboutMeTitle">About me</h2>
-                <p data-i18n-html="aboutMeContent">Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.</p>
+                <p data-i18n-html="aboutMeContent">Hi, I'm Cheng-Yun Wu (Yun). I hold a Master's in Information Management from National Taipei University, where I worked as a <strong>research assistant at IFIT Lab</strong> building <strong>multimodal, RAG-enhanced dialogue systems</strong> and <strong>agentic AI applications</strong>. My work spans published research, competition-winning prototypes, and systems I've designed and shipped end-to-end.</p>
                 <h2 data-i18n="experienceTitle">Experience<a href="index.html#experiences" class="detail-link" data-i18n="moreDetails">For more details</a></h2>
                 <div class="experience-section">
                     <ul>
                         <li>
-                            <strong data-i18n="researchProject">Research Project:</strong> 
+                            <strong data-i18n="researchProject">Research Project:</strong>
                             <ol>
                                 <li>
-                                    <span data-i18n="projectTitle">Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices</span>  
+                                    <span data-i18n="projectTitle">Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices</span>
                                     <br>
-                                    <em data-i18n="subProject">Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>  
+                                    <em data-i18n="subProject">Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>
                                     <br>
-                                    <span data-i18n="projectFunding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</span>  
+                                    <span data-i18n="projectFunding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</span>
                                     <br>
-                                    <span data-i18n="position">Position: Research Assistant, 2024/09 - Now</span>
+                                    <span data-i18n="position">Position: Research Assistant, 2024/09 - 2026/07</span>
+                                </li>
+                                <li>
+                                    <span data-i18n="project2Title">ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project (AI CUP 2026 VeriPromiseESG)</span>
+                                    <br>
+                                    <span data-i18n="project2Position">Position: Data Annotator, 2025/12 - 2026/02</span>
+                                </li>
+                                <li>
+                                    <span data-i18n="project3Title">Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities</span>
+                                    <br>
+                                    <em data-i18n="project3SubProject">Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em>
+                                    <br>
+                                    <span data-i18n="project3Position">Position: Research Assistant, 2024/09 - 2025/12</span>
                                 </li>
                             </ol>
                         </li>
                         <li>
-                            <strong data-i18n="conferences">Conferences</strong> 
+                            <strong data-i18n="conferencesLabel">Conferences</strong>
                             <ul>
-                                <li data-i18n="conference1">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
-                                <li data-i18n="conference2">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference, Tokyo, Japan, 2025/06/10-13</li>
+                                <li data-i18n="conference4">31st International Conference on IT Applications and Management, Jinju, Korea, 2025/10/26-30</li>
                                 <li data-i18n="conference3">TWSC2 2025 (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04</li>
+                                <li data-i18n="conference2">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference, Tokyo, Japan, 2025/06/10-13</li>
+                                <li data-i18n="conference1">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
                             </ul>
                         </li>
                         <li>
-                            <strong data-i18n="competitionTitle">Competitions:</strong> 
+                            <strong data-i18n="competitionTitle">Competitions:</strong>
                             <ul>
-                                <li data-i18n="competition1">2025 Best AI Awards, Final contest</li>
-                                <li data-i18n="competition2">2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award</li>
+                                <li data-i18n="competition6">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition: First Place, 2026/05/22</li>
+                                <li data-i18n="competition5">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方): First Place, 2025/12/12</li>
+                                <li data-i18n="competition4">NTCIR-18 MedNLP-CHAT: Medical Natural Language Processing for AI Chat, 2025/06/10-13, Japan</li>
                                 <li data-i18n="competition3">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention</li>
+                                <li data-i18n="competition2">2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award</li>
+                                <li data-i18n="competition1">2025 Best AI Awards, Final contest</li>
                             </ul>
                         </li>
                     </ul>
@@ -608,6 +626,16 @@
             menu.classList.toggle('active');
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
         }
+
+        // 手機選單開啟時，點擊選單以外的空白處也會收起選單
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('active') && !menu.contains(e.target) && e.target !== icon) {
+                menu.classList.remove('active');
+                icon.textContent = '☰';
+            }
+        });
         
         document.addEventListener("DOMContentLoaded", function () {
             // Initialize i18next
@@ -627,7 +655,7 @@
                             conferences: "Conferences",
                             otherExperiences: "Other Experiences",
                             nameTitle: "Cheng-Yun Wu (Yun)",
-                            profession: "Master Student | Research Assistant",
+                            profession: "AI Engineer | Multimodal & Agentic AI Systems",
                             phone: "+886-9-55924587",
                             email: "yunwcy.im@gmail.com",
                             location: "New Taipei City, Taiwan",
@@ -641,26 +669,37 @@
                             chatbot: "Chatbot",
                             llm: "Large language model (LLM)",
                             rag: "Retrieval-augmented generation (RAG)",
+                            agenticAi: "Agentic AI",
+                            cloud: "Cloud Computing (AWS)",
                             languageTitle: "Language",
                             chinese: "Chinese",
                             english: "English",
                             aboutMeTitle: "About me",
-                            aboutMeContent: "Hi, I'm Cheng-Yun Wu (Yun), a master's student focusing on <strong>AI and multimodal technologies</strong>. I work as a <strong>research assistant at IFIT Lab</strong>, with research interests in <strong>AI-driven dialogue systems</strong>.",
+                            aboutMeContent: "Hi, I'm Cheng-Yun Wu (Yun). I hold a Master's in Information Management from National Taipei University, where I worked as a <strong>research assistant at IFIT Lab</strong> building <strong>multimodal, RAG-enhanced dialogue systems</strong> and <strong>agentic AI applications</strong>. My work spans published research, competition-winning prototypes, and systems I've designed and shipped end-to-end.",
                             experienceTitle: "Experience",
                             moreDetails: "For more details",
                             researchProject: "Research Project:",
                             projectTitle: "Digital Support, Unimpeded Communication: AI-assisted Communication Assistive Devices",
                             subProject: "Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System",
                             projectFunding: "National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30",
-                            position: "Position: Research Assistant, 2024/09 - Now",
-                            conferences: "Conferences",
+                            position: "Position: Research Assistant, 2024/09 - 2026/07",
+                            project2Title: "ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project (AI CUP 2026 VeriPromiseESG)",
+                            project2Position: "Position: Data Annotator, 2025/12 - 2026/02",
+                            project3Title: "Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities",
+                            project3SubProject: "Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System",
+                            project3Position: "Position: Research Assistant, 2024/09 - 2025/12",
+                            conferencesLabel: "Conferences",
                             conference1: "2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16",
                             conference2: "NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference, Tokyo, Japan, 2025/06/10-13",
                             conference3: "TWSC2 2025 (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04",
+                            conference4: "31st International Conference on IT Applications and Management, Jinju, Korea, 2025/10/26-30",
                             competitionTitle: "Competitions:",
                             competition1: "2025 Best AI Awards, Final contest",
                             competition2: "2025 The 3rd NTPU AI Smart Application Innovation Competition: Practical Division, Excellence Award",
                             competition3: "2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition, Honorable Mention",
+                            competition4: "NTCIR-18 MedNLP-CHAT: Medical Natural Language Processing for AI Chat, 2025/06/10-13, Japan",
+                            competition5: "2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方): First Place, 2025/12/12",
+                            competition6: "North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition: First Place, 2026/05/22",
                             contactHeading: "Contact",
                             university: "National Taipei University",
                             linksHeading: "Links",
@@ -682,7 +721,7 @@
                             conferences: "研討會",
                             otherExperiences: "其他經歷",
                             nameTitle: "吳承耘 (Yun)",
-                            profession: "碩士生 | 研究助理",
+                            profession: "AI工程師 | 多模態與代理式AI系統",
                             phone: "+886-9-55924587",
                             email: "yunwcy.im@gmail.com",
                             location: "新北市，台灣",
@@ -696,26 +735,37 @@
                             chatbot: "聊天機器人",
                             llm: "大型語言模型 (LLM)",
                             rag: "檢索增強生成 (RAG)",
+                            agenticAi: "代理式AI（Agentic AI）",
+                            cloud: "雲端運算 (AWS)",
                             languageTitle: "語言",
                             chinese: "中文",
                             english: "英文",
                             aboutMeTitle: "關於我",
-                            aboutMeContent: "嗨，我是吳承耘 (Yun)，專注於<strong>AI和多模態技術</strong>的碩士生。我在<strong>IFIT Lab擔任研究助理</strong>，研究興趣為<strong>AI驅動的對話系統</strong>。",
+                            aboutMeContent: "嗨，我是吳承耘 (Yun)，國立臺北大學資訊管理研究所畢業。研究所期間於<strong>IFIT Lab擔任研究助理</strong>，打造<strong>多模態、RAG增強的對話系統</strong>與<strong>代理式AI（Agentic AI）應用</strong>。我的作品涵蓋學術發表、競賽獲獎專案，以及從設計到上線一手完成的實際系統。",
                             experienceTitle: "經歷",
                             moreDetails: "更多詳情",
                             researchProject: "研究計畫：",
                             projectTitle: "數位支持，暢通無礙：AI輔助語言障礙者溝通輔具之開發、支持與推廣",
                             subProject: "子計畫三：支持無障礙溝通的多模態跨語言任務導向對話系統",
                             projectFunding: "國家科學及技術委員會 (NSTC 113-2425-H-305-003-)，2023/05/01 - 2026/04/30",
-                            position: "職位：研究助理，2024/09 - 至今",
-                            conferences: "會議：",
+                            position: "職位：研究助理，2024/09 - 2026/07",
+                            project2Title: "ESG 永續承諾驗證競賽與標註資料蒐集計畫 (AI CUP 2026 VeriPromiseESG)",
+                            project2Position: "職位：資料標注員，2025/12 - 2026/02",
+                            project3Title: "語言障礙者之語音處理、合成、辨識、與語句建構之研究",
+                            project3SubProject: "子計畫三：多模態跨語言任務導向對話系統",
+                            project3Position: "職位：研究助理，2024/09 - 2025/12",
+                            conferencesLabel: "會議：",
                             conference1: "2025年資訊管理國際研討會，新北市，台灣，2025/05/16",
                             conference2: "NTCIR-18 (第18屆NII資訊存取技術測試平台與社群研討會)，東京，日本，2025/06/10-13",
                             conference3: "TWSC2 2025 (2025台灣雲端服務暨運算研討會)，新北市，台灣，2025/07/03-04",
+                            conference4: "第31屆國際資訊應用與管理研討會，晉州，韓國，2025/10/26-30",
                             competitionTitle: "競賽：",
                             competition1: "2025 Best AI Awards，決賽",
                             competition2: "2025第三屆臺北大學AI智慧應用創新競賽：實作組，優秀獎",
                             competition3: "2025第十屆TSC行銷學術研討會：AI應用行銷競賽，佳作",
+                            competition4: "NTCIR-18 MedNLP-CHAT：醫療自然語言處理人工智慧對話評測，2025/06/10-13，日本",
+                            competition5: "2025 NTPU USR 永續科技提案競賽 REsolution 再想解方：第一名，2025/12/12",
+                            competition6: "北聯大－人工智慧代理創新創業跨域競賽：第一名，2026/05/22",
                             contactHeading: "聯絡方式",
                             university: "國立臺北大學",
                             linksHeading: "導覽",

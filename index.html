@@ -2346,8 +2346,8 @@
                             },
                             hero: {
                                 title: "Welcome to My Page!",
-                                intro: "Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
-                                research: "My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.",
+                                intro: "Hi, I'm Yun! I hold a Master's in Information Management from <strong>National Taipei University</strong>, where I worked as a research assistant at <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
+                                research: "I build <strong>multimodal, RAG-enhanced dialogue systems</strong> and <strong>agentic AI applications</strong> — work that's led to publications at international conferences, several AI competition wins, and hands-on systems I've designed and shipped, from a university sports assistant to a lab knowledge-handover platform.",
                                 explore: "Explore more <a href='about.html' style='color: #2E8B57; font-weight: bold;'>about me</a>!"
                             },
                             researchSection: {
@@ -2648,8 +2648,8 @@
                             },
                             hero: {
                                 title: "歡迎來到我的個人網站！",
-                                intro: "嗨，我是Yun！目前是<strong>國立臺北大學資訊管理研究所</strong>的碩士生，同時也是<strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>的研究助理。",
-                                research: "我的研究興趣專注在<strong>人工智慧</strong>和<strong>多模態</strong>應用，開發可以增強溝通和可用性的系統。",
+                                intro: "嗨，我是Yun！國立臺北大學資訊管理研究所畢業，研究所期間擔任<strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>研究助理。",
+                                research: "我專注於打造<strong>多模態、RAG增強的對話系統</strong>與<strong>代理式AI（Agentic AI）應用</strong>，成果包括多篇國際研討會論文發表、多項AI競賽獲獎，以及親手設計並上線的系統，從大學體育室智慧助理到實驗室知識交接平台都有涉獵。",
                                 explore: "<a href='about.html' style='color: #2E8B57; font-weight: bold;'>了解更多</a>關於我的資訊！"
                             },
                             researchSection: {
@@ -3100,6 +3100,16 @@
             menu.classList.toggle('active');
             icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
         }
+
+        // 手機選單開啟時，點擊選單以外的空白處也會收起選單
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('active') && !menu.contains(e.target) && e.target !== icon) {
+                menu.classList.remove('active');
+                icon.textContent = '☰';
+            }
+        });
 
         // Update language button text
         function updateLanguageButton() {
