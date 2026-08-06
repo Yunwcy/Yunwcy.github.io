@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFIT Lab Handover System | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 12px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card code {
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+
+/* Role header */
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Feature cards */
+.feature-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.feature-header h4 { margin: 0; font-size: 1.02rem; color: var(--text-color); }
+.feature-card ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+.feature-card ul li { margin-bottom: 8px; }
+.feature-card ul li:last-child { margin-bottom: 0; }
+.feature-card ul li strong { color: var(--dark-green); }
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.15rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card, .feature-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">🌟 <span data-i18n="badge">Featured Case Study · Solo Project</span></span>
+    <h1 data-i18n="title">IFIT Lab Handover System</h1>
+    <div class="subtitle" data-i18n="subtitle">Centralizing knowledge transfer for lab members</div>
+    <div class="meta" data-i18n="meta">Personal project · Built and maintained solo since 2026/04</div>
+    <div class="case-links">
+        <a class="case-link" href="https://lab-handover.vercel.app/dashboard" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="linkSystem">Live System</span></a>
+    </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#features" data-i18n="tocFeatures">Features</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/labhandover/lab-handover-tech-stack.svg" alt="Tech stack and deployment architecture" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="techCaption">4-layer architecture: frontend, application (Next.js API), data (PostgreSQL + Vercel Blob), and infrastructure (Vercel, GitHub, Google OAuth)</div>
+    </div>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Frontend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Next.js (App Router)</span>
+                <span class="tech-chip">React 19</span>
+                <span class="tech-chip">Tailwind CSS</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Auth &amp; Backend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">NextAuth (Auth.js v5)</span>
+                <span class="tech-chip">Google OAuth</span>
+                <span class="tech-chip">Middleware Guards</span>
+                <span class="tech-chip">Prisma ORM</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">Data &amp; Storage</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">PostgreSQL</span>
+                <span class="tech-chip">Vercel Postgres</span>
+                <span class="tech-chip">Vercel Blob</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Infra &amp; Deployment</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Vercel</span>
+                <span class="tech-chip">Serverless Functions</span>
+                <span class="tech-chip">GitHub CI/CD</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="features">
+    <h2><i class="fas fa-star"></i> <span data-i18n="featuresTitle">Features</span></h2>
+    <div class="feature-groups">
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-shield-halved"></i></div><h4 data-i18n="f1Title">Authentication &amp; Access Control</h4></div>
+            <ul data-i18n-html="f1List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-table-columns"></i></div><h4 data-i18n="f2Title">Dashboard</h4></div>
+            <ul data-i18n-html="f2List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-folder-open"></i></div><h4 data-i18n="f3Title">Document Management</h4></div>
+            <ul data-i18n-html="f3List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-cloud-arrow-up"></i></div><h4 data-i18n="f4Title">Upload &amp; Download</h4></div>
+            <ul data-i18n-html="f4List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-magnifying-glass"></i></div><h4 data-i18n="f5Title">Site-wide Search</h4></div>
+            <ul data-i18n-html="f5List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-users-gear"></i></div><h4 data-i18n="f6Title">Member &amp; Permission Management</h4></div>
+            <ul data-i18n-html="f6List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-bell"></i></div><h4 data-i18n="f7Title">Notifications &amp; Announcements</h4></div>
+            <ul data-i18n-html="f7List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-clipboard-list"></i></div><h4 data-i18n="f8Title">Audit Log</h4></div>
+            <ul data-i18n-html="f8List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-mobile-screen-button"></i></div><h4 data-i18n="f9Title">Responsive UI</h4></div>
+            <ul data-i18n-html="f9List"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Solo Full-Stack Developer</div>
+        </div>
+        <p data-i18n="roleContent">I built this system entirely on my own — architecture design, database schema, authentication, file-upload integration, frontend UI, deployment, and ongoing operations — using a Next.js (App Router) + Prisma + PostgreSQL + Vercel full-stack setup.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">Two-layer permission design</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c1Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">Cross-OS file-type misdetection</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c2Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">Keeping multi-file upload state in sync</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c3Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c3Solution"></p>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html" data-i18n="footerHome">Home</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Featured Case Study · Solo Project",
+                title: "IFIT Lab Handover System",
+                subtitle: "Centralizing knowledge transfer for lab members",
+                meta: "Personal project · Built and maintained solo since 2026/04",
+                linkSystem: "Live System",
+                tocProblem: "Problem",
+                tocTech: "Tech Stack",
+                tocFeatures: "Features",
+                tocRole: "My Role",
+                tocChallenges: "Challenges",
+                problemTitle: "Problem Background",
+                problemContent: "<p>Our lab's project documents, administrative records, and handover knowledge have long suffered from three core problems:</p><ol><li><strong>Handover materials scattered everywhere, with no version control:</strong> Project documents, forms, and administrative records were never centrally managed — handovers relied on verbal tradition or files scattered across cloud drives and chat apps, leaving new members unable to find the correct, latest version.</li><li><strong>No permission or access control:</strong> Documents weren't classified by sensitivity — anyone with a link could access them, with no way to know who had viewed or downloaded what. Sensitive content (HR, finances) had no real protection.</li><li><strong>No categorization or audit trail:</strong> Handover materials weren't organized by project or type, and there was no audit log — when staff turned over, information gaps appeared with no one left to ask.</li></ol>",
+                techTitle: "Tech Stack",
+                techCaption: "4-layer architecture: frontend, application (Next.js API), data (PostgreSQL + Vercel Blob), and infrastructure (Vercel, GitHub, Google OAuth)",
+                techGroup1: "Frontend",
+                techGroup2: "Auth & Backend",
+                techGroup3: "Data & Storage",
+                techGroup4: "Infra & Deployment",
+                featuresTitle: "Features",
+                f1Title: "Authentication & Access Control",
+                f1List: "<li>Google OAuth login — no separate account/password needed; lab members sign in with their existing Google account.</li><li>Email whitelist — only admin-approved emails can log in; the whitelist starts empty (open to everyone) to simplify initial setup.</li><li>Role-based access (USER/ADMIN) — regular members can view, upload, and download within their permissions; admins can also create projects, manage member roles and the whitelist, delete any document/project, and broadcast announcements.</li><li>First-time onboarding — users without a name on file are redirected to an onboarding page before accessing anything else.</li>",
+                f2Title: "Dashboard",
+                f2List: "<li><strong>Daily admin handover</strong> — seven fixed categories (reimbursement &amp; funding, lab servers, Financial Center 403, TA duties, Prof. Day's section, submissions &amp; competitions, thesis-related), each opening into its own document library.</li><li><strong>Research projects</strong> — a dynamically loaded list of projects, each card showing its name and document count; admins can add new project categories anytime.</li>",
+                f3Title: "Document Management",
+                f3List: "<li>Document lists — file name, type (PDF/Word/Excel/PPT/image/ZIP, etc.), size, uploader, and upload date for every file.</li><li>Smart preview — PDFs and images preview natively in-browser; Word/Excel/PPT open automatically in Microsoft Office's online viewer, no download required.</li><li>Permission-aware actions — regular members can only delete their own uploads; admins can delete anyone's files or entire projects.</li>",
+                f4Title: "Upload & Download",
+                f4List: "<li>Direct client-side upload — files go straight to Vercel Blob rather than through the backend API, supporting files up to 50MB each.</li><li>Parallel multi-file upload — select multiple files at once, each with its own independent progress and success/failure status.</li><li>Batch download — every document under a project can be zipped and downloaded in one click.</li>",
+                f5Title: "Site-wide Search",
+                f5List: "<li>The top search bar fuzzy-matches project names/descriptions and document titles at once, showing matching projects and documents separately — each with its parent project, uploader, and a direct download link.</li>",
+                f6Title: "Member & Permission Management",
+                f6List: "<li>Lists everyone who has ever logged in, with one-click role switching between member and admin.</li><li>A dedicated whitelist manager for adding or removing approved login emails.</li><li><em>(Admin only)</em></li>",
+                f7Title: "Notifications & Announcements",
+                f7List: "<li>Admins can broadcast system-wide announcements (new projects, maintenance, etc.), instantly delivered to every member's personal notification list.</li><li>Each user has their own read/unread notification history.</li>",
+                f8Title: "Audit Log",
+                f8List: "<li>Every preview or download action is logged — who accessed what, and when — so admins can track access to sensitive documents.</li>",
+                f9Title: "Responsive UI",
+                f9List: "<li>Fully responsive design — the sidebar and top bar automatically adapt for mobile and tablet widths, so the system works smoothly on any device.</li>",
+                roleTitle: "My Role",
+                roleSubtitle: "Solo Full-Stack Developer",
+                roleContent: "I built this system entirely on my own — architecture design, database schema, authentication, file-upload integration, frontend UI, deployment, and ongoing operations — using a Next.js (App Router) + Prisma + PostgreSQL + Vercel full-stack setup.",
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "Two-layer permission design",
+                c1Problem: "I wanted the convenience of Google account login for lab members, but the system also had to be restricted to actual lab members only — not just anyone with a Google account.",
+                c1Solution: "In NextAuth's <code>signIn</code> callback, I run Google OAuth first, then check the result against a Prisma-managed <code>AllowedEmail</code> whitelist table before granting access. On top of that, a <code>Role</code> field (USER/ADMIN) combined with middleware enforces page-level access control, so only admins can manage the whitelist and other users.",
+                c2Title: "Cross-OS file-type misdetection",
+                c2Problem: "I initially locked uploads down with a strict <code>allowedContentTypes</code> whitelist — but Windows and Mac report different MIME types for the same file extension, so legitimate files kept getting rejected.",
+                c2Solution: "I removed the overly strict content-type check and switched to trusting file extensions and upload context instead.",
+                c3Title: "Keeping multi-file upload state in sync",
+                c3Problem: "During batch uploads, each file's progress/success/failure state kept interfering with the others.",
+                c3Solution: "I refactored the upload component's state management so each file tracks its own progress independently — it took several iterations (eventually landing on a global upload modal) before it was fully stable.",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerProjects: "Projects",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "精選案例．個人專案",
+                title: "IFIT Lab交接系統",
+                subtitle: "集中管理實驗室成員的知識交接",
+                meta: "個人專案．自 2026/04 起獨立開發與維運",
+                linkSystem: "系統",
+                tocProblem: "問題背景",
+                tocTech: "技術堆疊",
+                tocFeatures: "功能特色",
+                tocRole: "我的角色",
+                tocChallenges: "挑戰與解法",
+                problemTitle: "問題背景",
+                problemContent: "<p>實驗室的計畫文件、行政資料與交接知識，長期面臨三個核心問題：</p><ol><li><strong>交接資料散落各處、版本混亂：</strong>計畫文件、表單、行政資料過去缺乏集中管理，交接時常靠口頭傳承或散落在雲端硬碟／通訊軟體，新進成員難以找到正確、最新的版本。</li><li><strong>缺乏權限與存取控管：</strong>文件沒有分級，任何取得連結的人都能存取，也無法得知誰看過、下載過哪些資料，敏感內容（如人事、財務）無法妥善保護。</li><li><strong>缺乏分類與追蹤機制：</strong>交接內容沒有依計畫／類型分類，也沒有稽核紀錄，人員異動後容易出現資訊斷層、找不到人可以問。</li></ol>",
+                techTitle: "技術堆疊",
+                techCaption: "四層架構：展示層、應用層（Next.js API）、資料層（PostgreSQL + Vercel Blob），以及基礎架構層（Vercel、GitHub、Google OAuth）",
+                techGroup1: "前端",
+                techGroup2: "驗證與後端",
+                techGroup3: "資料與儲存",
+                techGroup4: "基礎架構與部署",
+                featuresTitle: "功能特色",
+                f1Title: "身份驗證與存取控制",
+                f1List: "<li>Google OAuth 登入：不需另外註冊帳號密碼，用實驗室成員既有的 Google 帳號即可登入。</li><li>Email 白名單機制：只有管理員預先核准的 Email 才能成功登入；白名單為空時開放所有人登入，方便系統剛部署時的初始設定。</li><li>角色分級（USER／ADMIN）：一般成員僅能瀏覽、上傳、下載自己有權限的內容；管理員多了新增計畫、管理成員權限、管理白名單、刪除任何文件／計畫、發布全域公告等權限。</li><li>新生報到流程：第一次登入若沒有填寫本名，會被導向報到頁面完成基本資料，才能進入系統其他頁面。</li>",
+                f2Title: "儀表板首頁",
+                f2List: "<li><strong>日常行政交接：</strong>固定七大分類（報帳與經費、實驗室主機、金融中心 403、TA 助教業務、戴老師專區、投稿與比賽、論文相關），每個分類點進去就是該類別的文件庫。</li><li><strong>研究計畫專區：</strong>從資料庫動態讀取的計畫清單，每張卡片顯示計畫名稱與文件數量；管理員可以隨時新增新的研究計畫分類。</li>",
+                f3Title: "文件管理",
+                f3List: "<li>文件列表：顯示檔名、檔案類型（PDF／Word／Excel／PPT／圖片／ZIP 等）、大小、上傳者、上傳日期。</li><li>智慧預覽：PDF、圖片直接用瀏覽器原生預覽；Word／Excel／PPT 則自動導向 Microsoft Office 線上檢視器，不需下載也能看內容。</li><li>權限化操作：一般成員只能刪除自己上傳的文件，管理員可以刪除任何人的文件與整個計畫。</li>",
+                f4Title: "上傳與下載",
+                f4List: "<li>前端直傳大檔案：上傳走 Vercel Blob 的 client-side 直傳機制，檔案不經過後端 API，單檔可達 50MB。</li><li>多檔並行上傳：一次選取多個檔案同時上傳，各自獨立顯示上傳進度與成功／失敗狀態。</li><li>批次下載：計畫底下的所有文件可以一鍵打包成 ZIP 下載，不用一份一份點。</li>",
+                f5Title: "全站搜尋",
+                f5List: "<li>頂部搜尋列可同時模糊比對「計畫名稱／描述」與「文件標題」，結果分區顯示相關計畫與相關文件，並附上文件所屬計畫、上傳者與直接下載連結。</li>",
+                f6Title: "成員與權限管理",
+                f6List: "<li>列出系統內所有已登入過的成員，一鍵切換一般成員／管理員身分。</li><li>獨立的 Email 白名單管理介面，新增或移除允許登入的 Email。</li><li><em>（管理員專屬）</em></li>",
+                f7Title: "系統通知與公告",
+                f7List: "<li>管理員可以「全域廣播」發布系統公告（例如新計畫上線、系統維護），訊息會即時寫入每一位成員的個人通知列表。</li><li>每位使用者有自己的已讀／未讀通知紀錄。</li>",
+                f8Title: "稽核紀錄",
+                f8List: "<li>每次「預覽」或「下載」文件的動作都會被記錄下來（誰、看了什麼、什麼時候），方便管理員追蹤重要文件的存取狀況。</li>",
+                f9Title: "介面體驗",
+                f9List: "<li>RWD 響應式設計，Sidebar／Topbar 在手機、平板寬度下會自動調整，行動裝置也能正常操作。</li>",
+                roleTitle: "我負責的部分",
+                roleSubtitle: "全端工程師（獨立開發）",
+                roleContent: "從架構設計、資料庫 schema、身份驗證機制、檔案上傳串接、前端 UI，到部署與維運，皆一人包辦，使用 Next.js（App Router）+ Prisma + PostgreSQL + Vercel 全端開發。",
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "權限設計（雙層驗證）",
+                c1Problem: "既要用 Google 帳號登入方便師生使用，又要限制只有實驗室成員能進系統。",
+                c1Solution: "在 NextAuth 的 <code>signIn</code> callback 中，先完成 Google OAuth 身份驗證，再查詢 Prisma 的 <code>AllowedEmail</code> 白名單資料表決定是否放行；另外用 <code>Role</code>（USER／ADMIN）搭配 Middleware 做頁面層級的存取控制，管理員才能管理白名單與使用者。",
+                c2Title: "跨作業系統的檔案格式誤判",
+                c2Problem: "上傳時嚴格限制 <code>allowedContentTypes</code>，結果不同 OS（Windows／Mac）對同一副檔名回報的 MIME type 不一致，導致合法檔案被擋下。",
+                c2Solution: "移除過度嚴格的內容類型白名單檢查，改為信任副檔名與使用情境。",
+                c3Title: "多檔案上傳狀態同步",
+                c3Problem: "批次上傳時每個檔案的進度／成功／失敗狀態容易互相干擾。",
+                c3Solution: "重構上傳元件的狀態管理，讓每個檔案獨立追蹤進度，多次疊代（global upload modal）才穩定下來。",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerProjects: "專案作品",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>
