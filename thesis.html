@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Multimodal RAG-Enhanced Dialogue System | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 50px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul { padding-left: 22px; margin: 0; }
+.case-card ul li { margin-bottom: 10px; }
+.case-card ul li:last-child { margin-bottom: 0; }
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+}
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.15rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+
+/* Demo video */
+.video-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.video-wrap iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">🌟 <span data-i18n="badge">Featured Case Study</span></span>
+    <h1 data-i18n="title">Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration</h1>
+    <div class="subtitle" data-i18n="subtitle">Master's Thesis · Institute of Information Management, National Taipei University</div>
+    <div class="meta" data-i18n="meta">Cheng-Yun Wu · Advisors: Min-Yuh Day, Yen-Chun Lin · 2026</div>
+    <div class="case-links">
+        <a class="case-link" href="https://drive.google.com/file/d/1gMHA7ZqjJ7pt_ep-Xdp1OYJkVtiOytsT/view?usp=drive_link" target="_blank"><i class="fas fa-file-pdf"></i> <span data-i18n="linkFull">Full Text</span></a>
+        <a class="case-link" href="https://drive.google.com/file/d/1HTFpmjrKsXtMdnjx49ImXFeC1rEc6J5m/view?usp=drive_link" target="_blank"><i class="fas fa-file-powerpoint"></i> <span data-i18n="linkSlides">Slides</span></a>
+        <a class="case-link" href="https://youtu.be/GiczKl2Bim8" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkDemo">Demo Video</span></a>
+    </div>
+</div>
+
+<section class="case-section">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="archTitle">System Architecture</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/thesis/architecture.png" alt="Agentic Multimodal RAG system architecture" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="archCaption">Agentic Multimodal RAG core: multimodal input, agentic reflection loop, domain tool routing, hybrid retrieval &amp; reranking, and the indexed knowledge base</div>
+    </div>
+</section>
+
+<section class="case-section">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/thesis/system_architecture.svg" alt="Tech stack and deployment architecture" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="techCaption">Actual deployed system: 4-layer architecture from frontend to infrastructure</div>
+    </div>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">LLM &amp; Agent</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">OpenAI Responses API</span>
+                <span class="tech-chip">GPT-5.4-mini</span>
+                <span class="tech-chip">GPT-4o-mini</span>
+                <span class="tech-chip">Tool Calling</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Retrieval</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">FAISS</span>
+                <span class="tech-chip">BM25</span>
+                <span class="tech-chip">HyDE</span>
+                <span class="tech-chip">RRF</span>
+                <span class="tech-chip">LLM Reranking</span>
+                <span class="tech-chip">text-embedding-3-small</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">Multimodal</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Whisper-1 (STT)</span>
+                <span class="tech-chip">tts-1 (TTS)</span>
+                <span class="tech-chip">GPT-4o Vision</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Frontend &amp; Infra</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Gradio</span>
+                <span class="tech-chip">Cloudflare Tunnel</span>
+                <span class="tech-chip">Zero Trust</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <p data-i18n="roleIntro">This project was completed independently by me, covering research planning, system development, and empirical evaluation. Key contributions include:</p>
+        <ul data-i18n-html="roleList"></ul>
+    </div>
+</section>
+
+<section class="case-section">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">Administrative data is scattered and inconsistently formatted</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c1Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">A single RAG pipeline struggles with complex administrative questions</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c2Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">A single automated score doesn't fully reflect system quality</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c3Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c3Solution"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section">
+    <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
+    <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/GiczKl2Bim8" title="Demo video" allowfullscreen></iframe>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html" data-i18n="footerHome">Home</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Featured Case Study",
+                title: "Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration",
+                subtitle: "Master's Thesis · Institute of Information Management, National Taipei University",
+                meta: "Cheng-Yun Wu · Advisors: Min-Yuh Day, Yen-Chun Lin · 2026",
+                linkFull: "Full Text",
+                linkSlides: "Slides",
+                linkDemo: "Demo Video",
+                problemTitle: "Problem Background",
+                problemContent: "<p>University sports administration covers a wide range of information — venue reservations, PE course schedules, competition activities, regulations, announcements, forms, and FAQs. However, this information is scattered across different web pages, documents, and images, forcing users to search through multiple pages on their own, while administrative staff repeatedly answer similar questions.</p><p>Traditional keyword search or rule-based chatbots work well for single, well-defined questions, but struggle with complex queries that require integrating multiple conditions, cross-referencing data sources, or interpreting images and speech. This project therefore builds an <strong>Agentic Multimodal Retrieval-Augmented Generation (Agentic Multimodal RAG)</strong> dialogue system for university sports administration — integrating text, image, and speech input, and using knowledge retrieval, tool routing, and conversational memory to provide well-grounded, more complete administrative answers.</p>",
+                archTitle: "System Architecture",
+                archCaption: "Agentic Multimodal RAG core: multimodal input, agentic reflection loop, domain tool routing, hybrid retrieval & reranking, and the indexed knowledge base",
+                techTitle: "Tech Stack",
+                techCaption: "Actual deployed system: 4-layer architecture from frontend to infrastructure",
+                techGroup1: "LLM & Agent",
+                techGroup2: "Retrieval",
+                techGroup3: "Multimodal",
+                techGroup4: "Frontend & Infra",
+                roleTitle: "My Role",
+                roleIntro: "This project was completed independently by me, covering research planning, system development, and empirical evaluation. Key contributions include:",
+                roleList: "<li>Analyzed usage scenarios and information needs in university sports administration to define the research problem and system requirements.</li><li>Collected and organized public data from NTPU's Office of Physical Education, including announcements, regulations, forms, FAQs, course schedules, and competition records.</li><li>Built the knowledge base pipeline covering data cleaning, document parsing, chunking, metadata design, and vectorization.</li><li>Designed a hybrid retrieval mechanism combining semantic search, keyword search, query rewriting, HyDE, Reciprocal Rank Fusion (RRF), and LLM-based reranking.</li><li>Designed the Agentic RAG architecture, implementing the agent controller, tool selection, reflection loop, short-term conversational memory, and a persistent correction mechanism.</li><li>Built domain-specific tools for regulations, announcements, courses, competitions, forms, and content correction.</li><li>Integrated text, image, and speech input, and developed the Gradio conversational interface.</li><li>Designed comparative experiments between Advanced RAG and Agentic RAG, building simple and complex query datasets.</li><li>Conducted RAGAS automated evaluation, statistical testing, semi-structured interviews, and user survey analysis.</li><li>Completed the research thesis, system demonstration, results analysis, and dissemination of findings.</li>",
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "Administrative data is scattered and inconsistently formatted",
+                c1Problem: "Sports administration information is scattered across website announcements, PDFs, tables, images, and different types of web pages. Simply dumping everything into a single vector database causes incomplete or incorrect retrieval results, because formats, heading structures, and document semantics vary so widely.",
+                c1Solution: "I built a complete knowledge-base pipeline that crawls, normalizes, parses, chunks, and tags metadata by data type, dividing content into categories such as regulations, announcements, forms, FAQs, and competitions. On the retrieval side, I combined semantic vector search, keyword search, query rewriting, Hypothetical Document Embeddings (HyDE), Reciprocal Rank Fusion (RRF), and LLM-based reranking. This multi-stage retrieval-and-rerank pipeline preserves both semantic understanding and precise matching of proper nouns/terminology, improving retrieval coverage across heterogeneous administrative data.",
+                c2Title: "A single RAG pipeline struggles with complex administrative questions",
+                c2Problem: "Some administrative questions aren't a single lookup — a user might ask about venue application eligibility, opening hours, required documents, and related regulations all at once. A single \"retrieve-then-generate\" pipeline tends to surface only part of the needed information, leading to incomplete answers.",
+                c2Solution: "I extended the system from plain RAG into a tool-oriented Agentic RAG architecture. The agent controller first interprets user intent, then selects the appropriate domain tools and data sources — issuing multiple retrieval rounds when needed, integrating evidence from different sources, and using a reflection loop to check whether the gathered information is sufficient to answer the question. Experiments showed that Agentic RAG performs on par with Advanced RAG on simple factual queries, but outperforms it on complex queries requiring tool selection and multi-source integration — across answer relevancy, context recall, and especially answer completeness, where the gap was most pronounced.",
+                c3Title: "A single automated score doesn't fully reflect system quality",
+                c3Problem: "Early in the research, I found that automated RAG evaluation results can be skewed by the choice of judge model, answer length, and phrasing. For instance, when the system integrates multiple sources into a more complete answer, that doesn't automatically score higher on every metric — relying on a single model or a single metric risks a one-sided read of system performance.",
+                c3Solution: "I redesigned the evaluation pipeline: using multiple judge models of different sizes and providers; running per-question paired comparisons with statistical significance testing; building separate datasets for simple factual queries and complex tool-routing queries; evaluating Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together; and pairing this with semi-structured interviews and post-use surveys to capture real-world usability that automated scores can't see. This mixed-methods approach — automated evaluation, statistical analysis, and user research — avoids relying on any single score and gives a fuller picture of the system's practical value in real administrative settings.",
+                demoTitle: "Demo",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerProjects: "Projects",
+                footerPublications: "Publications",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "精選案例",
+                title: "Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration",
+                subtitle: "碩士論文．國立臺北大學資訊管理研究所",
+                meta: "吳承耘．指導教授：Min-Yuh Day, Yen-Chun Lin．2026",
+                linkFull: "論文全文",
+                linkSlides: "簡報",
+                linkDemo: "Demo 影片",
+                problemTitle: "問題背景",
+                problemContent: "<p>大學體育行政涵蓋場地借用、體育課程、競賽活動、法規、公告、表單及常見問答等資訊。然而，這些資料分散於不同網頁、文件及圖片中，使用者往往需要自行搜尋多個頁面，行政人員也必須重複回覆相似問題。</p><p>傳統關鍵字搜尋或規則式聊天機器人，較適合處理單一且明確的問題，難以理解需要整合多項條件、跨資料來源或包含圖片與語音的複雜查詢。因此，本專案建置一套應用於大學體育行政的<strong>代理式多模態檢索增強生成對話系統（Agentic Multimodal Retrieval-Augmented Generation, Agentic Multimodal RAG）</strong>，整合文字、圖片與語音輸入，並透過知識檢索、工具路由及對話記憶，提供具資料依據且較完整的行政資訊回覆。</p>",
+                archTitle: "系統架構",
+                archCaption: "Agentic Multimodal RAG 核心：多模態輸入、代理式反思迴圈、領域工具路由、混合檢索與重新排序，以及索引知識庫",
+                techTitle: "技術堆疊",
+                techCaption: "實際部署系統：從展示層到基礎架構的四層架構",
+                techGroup1: "LLM 與代理",
+                techGroup2: "檢索",
+                techGroup3: "多模態",
+                techGroup4: "前端與基礎架構",
+                roleTitle: "我負責的部分",
+                roleIntro: "本專案由我獨立完成，涵蓋研究規劃、系統開發與實證評估。主要工作包括：",
+                roleList: "<li>分析大學體育行政的使用情境與資訊需求，定義研究問題及系統功能。</li><li>蒐集與整理國立臺北大學體育室公開資料，包括公告、法規、表單、常見問答、課程與競賽紀錄。</li><li>建立資料清理、文件解析、切塊、Metadata 設計及向量化的知識庫處理流程。</li><li>設計混合式檢索機制，整合語意搜尋、關鍵字搜尋、Query Rewrite、HyDE、RRF 與 LLM Reranking。</li><li>設計 Agentic RAG 架構，實作代理控制器、工具選擇、反思流程、短期對話記憶及持久修正機制。</li><li>建立法規、公告、課程、競賽、表單及內容修正等領域工具。</li><li>整合文字、圖片及語音輸入，並開發 Gradio 對話介面。</li><li>規劃 Advanced RAG 與 Agentic RAG 的比較實驗，建立簡單與複雜查詢資料集。</li><li>執行 RAGAS 自動評估、統計檢定、半結構式訪談及使用者問卷分析。</li><li>完成研究論文、系統展示、結果分析與研究成果發表。</li>",
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "行政資料分散且格式不一致",
+                c1Problem: "體育行政資訊分散於網站公告、PDF、表格、圖片及不同類型的網頁中。若直接將所有內容放入單一向量資料庫，容易因資料格式、標題結構及文件語意不同，導致檢索結果不完整或找錯資料。",
+                c1Solution: "我建立完整的知識庫處理流程，依資料類型進行網頁爬取、文字正規化、文件解析、切塊及 Metadata 標記，並將資料區分為法規、公告、表單、常見問答與競賽等類別。檢索端則結合語意向量搜尋、關鍵字搜尋、Query Rewrite、Hypothetical Document Embeddings（HyDE）、Reciprocal Rank Fusion（RRF）與 LLM-based Reranking。透過多階段檢索與重新排序，同時保留語意理解及專有名詞精確比對能力，提升不同類型行政資料的檢索覆蓋率。",
+                c2Title: "單一 RAG 流程難以回答複雜行政問題",
+                c2Problem: "部分行政問題不只是查詢單一資訊，例如使用者可能同時詢問場地申請資格、開放時間、所需文件及相關規定。單一的「檢索後生成」流程，容易只找到其中一部分資料，造成回答不完整。",
+                c2Solution: "我將系統由一般 RAG 擴充為工具導向的 Agentic RAG 架構。代理控制器會先判斷使用者意圖，再選擇適合的領域工具與資料來源，必要時執行多次檢索、整合不同證據，並透過反思流程檢查資訊是否足以回答問題。實驗結果顯示，在簡單事實查詢中，Agentic RAG 與 Advanced RAG 表現接近；但在需要工具選擇與多來源整合的複雜查詢中，Agentic RAG 在答案相關性、上下文召回率與答案完整性方面表現較佳，其中答案完整性的差異最明顯。",
+                c3Title: "單一自動評估分數無法完整反映系統品質",
+                c3Problem: "研究初期發現，RAG 自動評估結果可能受到 Judge Model、回答長度及措辭方式影響。例如，系統將多項資料整合為較完整的答案時，不一定會在所有指標上獲得較高分數；若只使用單一模型或單一指標，容易對系統表現產生片面解讀。",
+                c3Solution: "我重新設計評估流程：使用多個不同規模與來源的語言模型作為 Judge Model；以每個問題為單位進行配對比較及統計檢定；分別建立簡單事實查詢與複雜工具路由查詢資料集；同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall 與 Answer Completeness；搭配半結構式訪談及使用後問卷，補充自動評估無法觀察的實際使用感受。透過自動評估、統計分析與使用者研究的混合方法，避免僅依賴單一分數，並更完整地說明系統在真實行政情境中的實用性。",
+                demoTitle: "Demo",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerProjects: "專案作品",
+                footerPublications: "學術發表",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>
