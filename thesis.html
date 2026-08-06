@@ -19,6 +19,7 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 body {
     font-family: 'Noto Serif TC', serif;
     color: var(--text-color);
@@ -119,6 +120,26 @@ body {
     font-size: 0.9rem;
 }
 .case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
 
 /* Content sections */
 .case-section {
@@ -237,6 +258,10 @@ body {
 .lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
 .lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
 
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
 footer {
     background: rgba(213, 236, 198, 0.8);
     padding: 40px 20px 20px;
@@ -278,14 +303,22 @@ footer {
         <a class="case-link" href="https://drive.google.com/file/d/1HTFpmjrKsXtMdnjx49ImXFeC1rEc6J5m/view?usp=drive_link" target="_blank"><i class="fas fa-file-powerpoint"></i> <span data-i18n="linkSlides">Slides</span></a>
         <a class="case-link" href="https://youtu.be/GiczKl2Bim8" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkDemo">Demo Video</span></a>
     </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#architecture" data-i18n="tocArch">Architecture</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
 </div>
 
-<section class="case-section">
+<section class="case-section fade-in" id="problem">
     <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
     <div class="case-card" data-i18n-html="problemContent"></div>
 </section>
 
-<section class="case-section">
+<section class="case-section fade-in" id="architecture">
     <h2><i class="fas fa-diagram-project"></i> <span data-i18n="archTitle">System Architecture</span></h2>
     <div class="diagram-box">
         <img src="case-studies/thesis/architecture.png" alt="Agentic Multimodal RAG system architecture" onclick="openLightbox(this.src)">
@@ -293,7 +326,7 @@ footer {
     </div>
 </section>
 
-<section class="case-section">
+<section class="case-section fade-in" id="techstack">
     <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
     <div class="diagram-box">
         <img src="case-studies/thesis/system_architecture.svg" alt="Tech stack and deployment architecture" onclick="openLightbox(this.src)">
@@ -339,7 +372,7 @@ footer {
     </div>
 </section>
 
-<section class="case-section">
+<section class="case-section fade-in" id="role">
     <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
     <div class="case-card">
         <p data-i18n="roleIntro">This project was completed independently by me, covering research planning, system development, and empirical evaluation. Key contributions include:</p>
@@ -347,7 +380,7 @@ footer {
     </div>
 </section>
 
-<section class="case-section">
+<section class="case-section fade-in" id="challenges">
     <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
 
     <div class="challenge-card">
@@ -387,7 +420,7 @@ footer {
     </div>
 </section>
 
-<section class="case-section">
+<section class="case-section fade-in" id="demo">
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
     <div class="video-wrap">
         <iframe src="https://www.youtube.com/embed/GiczKl2Bim8" title="Demo video" allowfullscreen></iframe>
@@ -432,6 +465,13 @@ function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
 }
 
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
 document.addEventListener('DOMContentLoaded', function () {
     i18next.use(i18nextBrowserLanguageDetector).init({
         fallbackLng: 'en',
@@ -447,6 +487,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 linkFull: "Full Text",
                 linkSlides: "Slides",
                 linkDemo: "Demo Video",
+                tocProblem: "Problem",
+                tocArch: "Architecture",
+                tocTech: "Tech Stack",
+                tocRole: "My Role",
+                tocChallenges: "Challenges",
+                tocDemo: "Demo",
                 problemTitle: "Problem Background",
                 problemContent: "<p>University sports administration covers a wide range of information — venue reservations, PE course schedules, competition activities, regulations, announcements, forms, and FAQs. However, this information is scattered across different web pages, documents, and images, forcing users to search through multiple pages on their own, while administrative staff repeatedly answer similar questions.</p><p>Traditional keyword search or rule-based chatbots work well for single, well-defined questions, but struggle with complex queries that require integrating multiple conditions, cross-referencing data sources, or interpreting images and speech. This project therefore builds an <strong>Agentic Multimodal Retrieval-Augmented Generation (Agentic Multimodal RAG)</strong> dialogue system for university sports administration — integrating text, image, and speech input, and using knowledge retrieval, tool routing, and conversational memory to provide well-grounded, more complete administrative answers.</p>",
                 archTitle: "System Architecture",
@@ -492,6 +538,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 linkFull: "論文全文",
                 linkSlides: "簡報",
                 linkDemo: "Demo 影片",
+                tocProblem: "問題背景",
+                tocArch: "系統架構",
+                tocTech: "技術堆疊",
+                tocRole: "我的角色",
+                tocChallenges: "挑戰與解法",
+                tocDemo: "Demo",
                 problemTitle: "問題背景",
                 problemContent: "<p>大學體育行政涵蓋場地借用、體育課程、競賽活動、法規、公告、表單及常見問答等資訊。然而，這些資料分散於不同網頁、文件及圖片中，使用者往往需要自行搜尋多個頁面，行政人員也必須重複回覆相似問題。</p><p>傳統關鍵字搜尋或規則式聊天機器人，較適合處理單一且明確的問題，難以理解需要整合多項條件、跨資料來源或包含圖片與語音的複雜查詢。因此，本專案建置一套應用於大學體育行政的<strong>代理式多模態檢索增強生成對話系統（Agentic Multimodal Retrieval-Augmented Generation, Agentic Multimodal RAG）</strong>，整合文字、圖片與語音輸入，並透過知識檢索、工具路由及對話記憶，提供具資料依據且較完整的行政資訊回覆。</p>",
                 archTitle: "系統架構",

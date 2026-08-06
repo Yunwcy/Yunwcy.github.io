@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IM Your Buddy | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-badge.gold { background: linear-gradient(135deg, #e0a72e, #c98a1a); }
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul { padding-left: 22px; margin: 0; }
+.case-card ul li { margin-bottom: 12px; }
+.case-card ul li:last-child { margin-bottom: 0; }
+
+/* Role header */
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
+.team-line {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(46, 139, 87, 0.3);
+}
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.15rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-label.outcome { color: #c9832e; }
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+
+/* Demo video */
+.video-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+.video-wrap iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge gold">🏆 <span data-i18n="badge">Featured Case Study · Competition Winner</span></span>
+    <h1 data-i18n="title">IM Your Buddy</h1>
+    <div class="subtitle" data-i18n="subtitle">A Micro-Organization Intelligent Agent for Department Administration</div>
+    <div class="meta" data-i18n="meta">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition · First Place · 2026/05/22</div>
+    <div class="case-links">
+        <a class="case-link" href="https://imyourbuddy-official.zeabur.app/" target="_blank"><i class="fas fa-house"></i> <span data-i18n="linkIntro">Intro Site</span></a>
+        <a class="case-link" href="https://imyourbuddy.zeabur.app/" target="_blank"><i class="fas fa-robot"></i> <span data-i18n="linkSystem">Live System</span></a>
+        <a class="case-link" href="https://youtu.be/t6-mKJwVW-I" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkDemo">Demo Video</span></a>
+    </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#architecture" data-i18n="tocArch">Architecture</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="architecture">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="archTitle">System Architecture</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/imyourbuddy/architecture.png" alt="IM Your Buddy system architecture" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="archCaption">Student chat interface and admin console, both backed by a GPT-4o decision agent that calls domain tools against the knowledge base and student database</div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/imyourbuddy/stack.png" alt="Tech stack and deployment layers" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="techCaption">4-layer stack: frontend, application (FastAPI), AI intelligence (GPT-4o agent + tools), and infrastructure (Zeabur, SQLite, OpenAI API)</div>
+    </div>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Frontend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">HTML / CSS / JS</span>
+                <span class="tech-chip">Student App</span>
+                <span class="tech-chip">Admin Console</span>
+                <span class="tech-chip">Bilingual ZH/EN</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Backend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Python FastAPI</span>
+                <span class="tech-chip">SSE Streaming</span>
+                <span class="tech-chip">Session Auth</span>
+                <span class="tech-chip">SHA-256</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">AI Agent</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">GPT-4o</span>
+                <span class="tech-chip">Function Calling</span>
+                <span class="tech-chip">7 Domain Tools</span>
+                <span class="tech-chip">text-embedding</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Data &amp; Infra</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">SQLite</span>
+                <span class="tech-chip">Knowledge Base</span>
+                <span class="tech-chip">Zeabur Cloud</span>
+                <span class="tech-chip">Persistent Volume</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-crown"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Product Owner &amp; Full-Stack Systems Engineer</div>
+        </div>
+        <p data-i18n="roleIntro">In our four-person team, I served as Product Owner and lead systems engineer, turning the team's product concept into a fully working, demo-able, deployed system. My work covered the whole lifecycle — from requirements planning through technical integration to launch:</p>
+        <ul data-i18n-html="roleList"></ul>
+        <div class="team-line" data-i18n="teamLine">Team: Bor-Jen Chen, Wen-Hsin Hsiao, <strong>Cheng-Yun Wu</strong>, Nien-Hsin Chen</div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">Generic Q&amp;A can't reflect each student's actual graduation progress</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c1Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c1Solution"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
+            <p data-i18n="c1Outcome"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">From a classroom prototype to a maintainable production system</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c2Problem"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c2Solution"></p>
+        </div>
+        <div class="challenge-block">
+            <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
+            <p data-i18n="c2Outcome"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="demo">
+    <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
+    <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/t6-mKJwVW-I" title="Demo video" allowfullscreen></iframe>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html" data-i18n="footerHome">Home</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Featured Case Study · Competition Winner",
+                title: "IM Your Buddy",
+                subtitle: "A Micro-Organization Intelligent Agent for Department Administration",
+                meta: "North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition · First Place · 2026/05/22",
+                linkIntro: "Intro Site",
+                linkSystem: "Live System",
+                linkDemo: "Demo Video",
+                tocProblem: "Problem",
+                tocArch: "Architecture",
+                tocTech: "Tech Stack",
+                tocRole: "My Role",
+                tocChallenges: "Challenges",
+                tocDemo: "Demo",
+                problemTitle: "Problem Background",
+                problemContent: "<p>Most campus systems focus on university-wide registration, course selection, and credit lookups — they rarely go deep enough for department-specific graduation requirements, thesis defense procedures, academic rules, and administrative conventions. Students end up digging through department websites, group announcements, and years of scattered documents, and can still miss things when rules are inconsistent or outdated.</p><p>Much of that department knowledge also lives only in teaching assistants' heads. TAs repeatedly answer the same questions and have to proactively remind students of deadlines — and when staff turn over, that knowledge disappears with them.</p><p>So we built <strong>IM your Buddy</strong>, a \"micro-organization intelligent agent\" that brings department regulations, event calendars, defense procedures, resource links, and each student's personal progress into one platform. An AI agent interprets user intent and calls the right tools to provide real-time Q&amp;A, administrative SOP guidance, personalized graduation-progress analysis, and proactive reminders — shifting department services from passive lookup to active, personalized decision support.</p>",
+                archTitle: "System Architecture",
+                archCaption: "Student chat interface and admin console, both backed by a GPT-4o decision agent that calls domain tools against the knowledge base and student database",
+                techTitle: "Tech Stack",
+                techCaption: "4-layer stack: frontend, application (FastAPI), AI intelligence (GPT-4o agent + tools), and infrastructure (Zeabur, SQLite, OpenAI API)",
+                techGroup1: "Frontend",
+                techGroup2: "Backend",
+                techGroup3: "AI Agent",
+                techGroup4: "Data &amp; Infra",
+                roleTitle: "My Role",
+                roleSubtitle: "Product Owner &amp; Full-Stack Systems Engineer",
+                roleIntro: "In our four-person team, I served as Product Owner and lead systems engineer, turning the team's product concept into a fully working, demo-able, deployed system. My work covered the whole lifecycle — from requirements planning through technical integration to launch:",
+                roleList: "<li><strong>Product &amp; system planning:</strong> Translated departmental admin pain points into system requirements, and designed the student app, admin console, AI agent, knowledge base, and personalized progress-analysis modules.</li><li><strong>Core system development:</strong> Owned frontend/backend integration, API design, data pipelines, and the main system logic.</li><li><strong>AI agent implementation:</strong> Integrated LLM function calling with multi-tool orchestration, so the agent automatically selects the right tool — calendar, graduation requirements, practicum credits, global-exposure credits, defense SOPs, resource links, or personal graduation progress — for each question.</li><li><strong>Admin console:</strong> Built calendar management, resource-link management, student/alumni records, document import, a dashboard, and email notifications — lowering the bar for ongoing maintenance.</li><li><strong>Iteration &amp; maintenance:</strong> Continuously adjusted features, fixed bugs, and improved the UI/UX based on competition requirements, course feedback, and real usage.</li><li><strong>Deployment &amp; launch:</strong> Handled deployment, data persistence, environment configuration, and ongoing operations — taking the project from concept/prototype to a publicly usable MVP.</li><li><strong>Official project site:</strong> Independently built the project's public website, bringing together the product vision, features, team info, walkthroughs, and competition results into one consistent brand.</li>",
+                teamLine: "Team: Bor-Jen Chen, Wen-Hsin Hsiao, <strong>Cheng-Yun Wu</strong>, Nien-Hsin Chen",
+                challengesTitle: "Challenges &amp; Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                outcomeLabel: "Outcome",
+                c1Title: "Generic Q&amp;A can't reflect each student's actual graduation progress",
+                c1Problem: "The same graduation rule doesn't mean the same thing for every student. What students actually want to know isn't \"what are the requirements\" — it's \"what have I already completed, what's left, and what should I do next.\"",
+                c1Solution: "I designed student login and a personalized progress-analysis pipeline: course records, credits, global-exposure and practicum credits, English requirements, and thesis progress are stored in SQLite, and a dedicated tool compares them against department graduation rules in real time. The system generates completed items, remaining items, specific gaps, and next-step recommendations per student — with an admin-side view for editing student records and spotting at-risk students.",
+                c1Outcome: "This shifted the service from a shared-information lookup to personalized decision support, and let staff spot high-risk or delayed-graduation students much faster.",
+                c2Title: "From a classroom prototype to a maintainable production system",
+                c2Problem: "A competition system can't just survive one demo — it has to handle frontend/backend integration, streaming responses, data persistence, cloud environment quirks, error handling, and ongoing content updates. If everything were hard-coded, every change would require redevelopment, which admin staff simply couldn't maintain themselves.",
+                c2Solution: "I split the system into modules — student frontend, AI agent, admin API, knowledge base, student database, and email service — with FastAPI serving REST endpoints and streaming responses. Data lives in a structured knowledge base and SQLite, backed by persistent cloud storage so nothing is lost on redeploy. I also built a full admin console so non-engineers can add events, edit resource links, update student records, import documents, and send notifications themselves — cutting future maintenance loose from needing a developer.",
+                c2Outcome: "The project went from a proof of concept to a deployable MVP with a student frontend, admin console, AI agent, data management, email notifications, and a public website — built modularly so it could be adapted to other departments in the future.",
+                demoTitle: "Demo",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerProjects: "Projects",
+                footerCompetitions: "Competitions",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "精選案例．競賽冠軍",
+                title: "IM Your Buddy",
+                subtitle: "微型組織智慧代理人：系所行政智慧助理",
+                meta: "北聯大－人工智慧代理創新創業跨域競賽．第一名．2026/05/22",
+                linkIntro: "介紹網站",
+                linkSystem: "系統",
+                linkDemo: "Demo 影片",
+                tocProblem: "問題背景",
+                tocArch: "系統架構",
+                tocTech: "技術堆疊",
+                tocRole: "我的角色",
+                tocChallenges: "挑戰與解法",
+                tocDemo: "Demo",
+                problemTitle: "問題背景",
+                problemContent: "<p>現有智慧校園系統多以全校共通的註冊、選課與學分查詢為核心，較難深入處理各系所特有的畢業門檻、論文口試流程、學術規範與行政慣例。學生往往需要在系網、群組公告、歷年文件與表單之間反覆查找資訊，仍可能因規定分散或版本不一致而遺漏重要事項。</p><p>另一方面，許多系所行政知識長期仰賴助教的個人經驗與口頭傳承。助教除了需要重複回覆相似問題，也必須主動提醒學生截止日期與行政流程；一旦人員異動，便可能產生知識斷層與資訊落差。</p><p>因此，我們開發 <strong>IM your Buddy</strong>，以「微型組織智慧代理人」為核心概念，將系所規章、活動行事曆、口試流程、資源連結及學生個人進度整合於單一平台。系統透過 AI Agent 判斷使用者意圖、呼叫不同功能工具，提供即時問答、行政 SOP 引導、個人化畢業進度分析與主動提醒，讓系所服務由被動查詢進一步轉向主動且個人化的決策支援。</p>",
+                archTitle: "系統架構",
+                archCaption: "學生聊天介面與管理後台，皆由 GPT-4o 決策代理驅動，依問題自動呼叫對應工具查詢知識庫與學生資料庫",
+                techTitle: "技術堆疊",
+                techCaption: "四層架構：展示層、應用層（FastAPI）、AI 智能層（GPT-4o 代理與工具），以及基礎架構（Zeabur、SQLite、OpenAI API）",
+                techGroup1: "前端",
+                techGroup2: "後端",
+                techGroup3: "AI Agent",
+                techGroup4: "資料與基礎架構",
+                roleTitle: "我負責的部分",
+                roleSubtitle: "產品負責人（Product Owner）暨全端系統工程師",
+                roleIntro: "在陳柏臻、蕭文欣、吳承耘、陳念歆組成的四人團隊中，我主要擔任產品負責人（Product Owner, PO）與核心系統工程師，負責將團隊提出的產品構想轉化為可實際操作、展示與部署的完整系統。我的工作不僅是開發單一功能，而是主導系統從需求規劃、技術整合到正式上線的完整生命週期，包括：",
+                roleList: "<li><strong>產品與系統規劃：</strong>將系所行政痛點轉化為系統需求，規劃學生端、管理端、AI Agent、知識庫與個人化進度分析等功能模組。</li><li><strong>核心系統開發：</strong>負責前後端功能整合、API 設計、資料處理流程及主要系統邏輯建置。</li><li><strong>AI Agent 功能實作：</strong>整合大型語言模型的工具呼叫（Function Calling）與多工具協作機制，使系統能依問題內容自動選擇行事曆、畢業規定、實作能力、全球視野、口試 SOP、資源連結及個人畢業進度等工具。</li><li><strong>管理後台建置：</strong>開發行事曆、資源連結、學生與校友資料、文件匯入、儀表板及郵件通知等管理功能，降低系統後續維護門檻。</li><li><strong>系統修改與持續維護：</strong>依據競賽需求、課程回饋與實際操作結果持續調整功能、修正錯誤、改善介面與優化使用流程。</li><li><strong>部署與正式上線：</strong>處理系統部署、資料持久化、環境設定及線上服務維運，使專案不只停留在概念或原型，而能成為可公開操作的 MVP。</li><li><strong>專案官方網站架設：</strong>獨立建置專案官網，統整產品理念、系統特色、團隊資訊、操作展示與競賽成果，建立完整且一致的產品形象。</li>",
+                teamLine: "團隊成員：陳柏臻、蕭文欣、<strong>吳承耘</strong>、陳念歆",
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                outcomeLabel: "成果",
+                c1Title: "一般問答無法反映每位學生的實際畢業進度",
+                c1Problem: "相同的畢業規定套用在不同學生身上，答案並不完全相同。學生真正關心的通常不是「畢業規定有哪些」，而是「我已經完成什麼、還差什麼，以及下一步該做什麼」。",
+                c1Solution: "我設計學生登入與個人化進度分析機制，將學生修課、學分、全球視野、實作能力、英文門檻及論文進度等資料存放於 SQLite 資料庫，再由專屬工具即時比對系所畢業條件。系統可依個別學生狀態產生已完成項目、待完成項目、具體差距與後續行動建議，並在管理後台提供學生資料編輯與畢業風險總覽功能。",
+                c1Outcome: "將服務由「提供共同資訊」提升為「個人化決策支援」，也讓行政人員能更快速掌握高風險或可能延畢的學生。",
+                c2Title: "從課堂原型走向可長期維護的線上系統",
+                c2Problem: "競賽系統不能只完成單次 Demo，還需要面對前後端整合、串流回覆、資料持久化、雲端環境差異、錯誤處理及後續內容更新等實際部署問題。若所有資料與規則都寫死在程式碼中，每次修改都必須重新開發，難以交由行政人員使用。",
+                c2Solution: "我將系統拆分為學生前台、AI Agent、管理 API、知識庫、學生資料庫與郵件服務等模組，並以 FastAPI 提供 REST API 與串流回覆機制。資料則分別透過結構化知識庫與 SQLite 管理，並搭配雲端持久化空間，避免重新部署後資料遺失。此外，我建立完整管理後台，讓非工程背景的管理者也能自行新增活動、修改資源連結、更新學生資料、匯入文件與發送通知，降低後續維護對開發者的依賴。",
+                c2Outcome: "成功將專案從概念驗證轉化為具備前台、後台、AI Agent、資料管理、郵件通知與公開網站的可部署 MVP，並保留未來複製至其他系所的模組化擴充能力。",
+                demoTitle: "Demo",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerProjects: "專案作品",
+                footerCompetitions: "競賽經歷",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>

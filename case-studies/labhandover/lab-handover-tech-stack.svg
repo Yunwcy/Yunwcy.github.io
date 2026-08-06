@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1302" viewBox="0 0 1200 1302" role="img">
+<title>實驗室交接系統技術堆疊圖</title>
+<desc>四層 AI Agent 技術架構圖：展示層（Gradio UI、Cloudflare Tunnel）、應用層（Agentic Loop、Hybrid Retrieval、多模態處理、安全機制）、資料層（網站知識庫、法規表單庫、向量索引、修正紀錄）、基礎架構層（學校電腦、Cloudflare Zero Trust、OpenAI API）。</desc>
+<rect x="0" y="0" width="1200" height="1302" fill="#f6f4ef"/>
+<text x="600.0" y="62" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="#686f7a">SYSTEM ARCHITECTURE</text>
+<text x="600.0" y="92" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="28" font-weight="800" fill="#20242c">實驗室交接系統｜技術堆疊圖</text>
+<text x="600.0" y="120" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" fill="#686f7a">Next.js 全端架構：展示層・應用層・資料層・基礎架構</text>
+<rect x="40" y="140.0" width="1120" height="236.0" rx="18" fill="#eef0fd" stroke="#4a55e0" stroke-width="1.8"/>
+<rect x="64.0" y="160.0" width="71.0" height="26" rx="13" fill="#ffffff" stroke="#4a55e0" stroke-width="1.3"/>
+<text x="99.5" y="173.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#4a55e0">第 4 層</text>
+<text x="147.0" y="173.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#4a55e0">展示層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Frontend</tspan></text>
+<rect x="64.0" y="194.0" width="344.0" height="146.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="236.0" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="236.0" dy="0">使用者</tspan>
+</text>
+<text x="236.0" y="252.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="236.0" dy="0">瀏覽器・校內師生</tspan>
+</text>
+<rect x="428.0" y="194.0" width="344.0" height="146.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="600.0" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="600.0" dy="0">Next.js App Router</tspan>
+</text>
+<text x="600.0" y="252.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="600.0" dy="0">React 19・Tailwind CSS</tspan>
+</text>
+<text x="600.0" y="280.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="600.0" dy="0">Dashboard・Projects・Users・Search</tspan>
+</text>
+<rect x="526.8" y="298.0" width="146.4" height="26" rx="13" fill="#e7ebfd"/>
+<text x="600.0" y="311.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#3a46c9">React Compiler 啟用</text>
+<rect x="792.0" y="194.0" width="344.0" height="146.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="964.0" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="964.0" dy="0">核心元件</tspan>
+</text>
+<text x="964.0" y="252.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="964.0" dy="0">Sidebar・Topbar</tspan>
+</text>
+<text x="964.0" y="280.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="964.0" dy="0">UploadModal・GlobalUploadModal</tspan>
+<tspan x="964.0" dy="20">BroadcastModal</tspan>
+</text>
+<line x1="600.0" y1="382" x2="600.0" y2="410" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,410 607.0,410 600.0,422" fill="#686f7a"/>
+<rect x="40" y="430.0" width="1120" height="262.0" rx="18" fill="#eaf9f1" stroke="#0f9d64" stroke-width="1.8"/>
+<rect x="64.0" y="450.0" width="71.0" height="26" rx="13" fill="#ffffff" stroke="#0f9d64" stroke-width="1.3"/>
+<text x="99.5" y="463.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#0f9d64">第 3 層</text>
+<text x="147.0" y="463.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#0f9d64">應用層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Backend・Next.js API</tspan></text>
+<rect x="64.0" y="484.0" width="253.0" height="172.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="190.5" y="512.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="190.5" dy="0">NextAuth（Auth.js v5）</tspan>
+</text>
+<text x="190.5" y="542.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="190.5" dy="0">Google OAuth 登入</tspan>
+<tspan x="190.5" dy="20">JWT session</tspan>
+</text>
+<text x="190.5" y="590.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="190.5" dy="0">signIn callback 檢查白名單</tspan>
+</text>
+<rect x="131.7" y="608.0" width="117.6" height="26" rx="13" fill="#e7ebfd"/>
+<text x="190.5" y="621.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#3a46c9">PrismaAdapter</text>
+<rect x="337.0" y="484.0" width="253.0" height="172.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="463.5" y="512.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="463.5" dy="0">Middleware 路由守衛</tspan>
+</text>
+<text x="463.5" y="542.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="463.5" dy="0">未登入 → /auth/signin</tspan>
+</text>
+<text x="463.5" y="570.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="463.5" dy="0">未填本名 → /auth/onboarding</tspan>
+</text>
+<text x="463.5" y="598.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="463.5" dy="0">每個 Request 進頁面前攔截</tspan>
+</text>
+<rect x="610.0" y="484.0" width="253.0" height="172.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="736.5" y="512.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="736.5" dy="0">API Route Handlers</tspan>
+</text>
+<text x="736.5" y="542.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="736.5" dy="0">/api/projects</tspan>
+<tspan x="736.5" dy="20">/api/documents</tspan>
+<tspan x="736.5" dy="20">/api/users</tspan>
+<tspan x="736.5" dy="20">/api/notifications</tspan>
+</text>
+<text x="736.5" y="630.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="736.5" dy="0">/api/allowed-emails</tspan>
+</text>
+<rect x="883.0" y="484.0" width="253.0" height="172.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="1009.5" y="512.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="1009.5" dy="0">Vercel Blob 直傳</tspan>
+</text>
+<text x="1009.5" y="542.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="1009.5" dy="0">upload-token 簽發一次性權杖</tspan>
+</text>
+<text x="1009.5" y="570.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="1009.5" dy="0">瀏覽器直傳・繞過 4.5MB 限制</tspan>
+</text>
+<rect x="965.1" y="588.0" width="88.8" height="26" rx="13" fill="#dff6ea"/>
+<text x="1009.5" y="601.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#0c8452">最大 50MB／檔</text>
+<line x1="600.0" y1="698" x2="600.0" y2="726" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,726 607.0,726 600.0,738" fill="#686f7a"/>
+<rect x="40" y="746.0" width="1120" height="230.0" rx="18" fill="#fdf1e4" stroke="#d9711a" stroke-width="1.8"/>
+<rect x="64.0" y="766.0" width="71.0" height="26" rx="13" fill="#ffffff" stroke="#d9711a" stroke-width="1.3"/>
+<text x="99.5" y="779.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#d9711a">第 2 層</text>
+<text x="147.0" y="779.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#d9711a">資料層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Database &amp; Storage</tspan></text>
+<rect x="64.0" y="800.0" width="253.0" height="140.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="190.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="190.5" dy="0">PostgreSQL</tspan>
+</text>
+<text x="190.5" y="858.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="190.5" dy="0">Vercel Postgres</tspan>
+</text>
+<text x="190.5" y="886.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="190.5" dy="0">POSTGRES_PRISMA_URL</tspan>
+<tspan x="190.5" dy="20">＋ NON_POOLING</tspan>
+</text>
+<rect x="337.0" y="800.0" width="253.0" height="140.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="463.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="463.5" dy="0">業務資料表</tspan>
+</text>
+<text x="463.5" y="858.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="463.5" dy="0">User・Project・Document</tspan>
+</text>
+<text x="463.5" y="886.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="463.5" dy="0">Notification・AuditLog</tspan>
+<tspan x="463.5" dy="20">AllowedEmail</tspan>
+</text>
+<rect x="610.0" y="800.0" width="253.0" height="140.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="736.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="736.5" dy="0">NextAuth 資料表</tspan>
+</text>
+<text x="736.5" y="858.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="736.5" dy="0">Account・Session</tspan>
+</text>
+<text x="736.5" y="886.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="736.5" dy="0">VerificationToken</tspan>
+</text>
+<text x="736.5" y="914.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="736.5" dy="0">Prisma ORM 存取</tspan>
+</text>
+<rect x="883.0" y="800.0" width="253.0" height="140.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="1009.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="1009.5" dy="0">Vercel Blob 儲存</tspan>
+</text>
+<text x="1009.5" y="858.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="1009.5" dy="0">交接文件檔案本體</tspan>
+</text>
+<text x="1009.5" y="886.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="1009.5" dy="0">PDF・圖片・簡報等</tspan>
+</text>
+<line x1="600.0" y1="982" x2="600.0" y2="1010" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,1010 607.0,1010 600.0,1022" fill="#686f7a"/>
+<rect x="40" y="1030.0" width="1120" height="202.0" rx="18" fill="#f6eefc" stroke="#8a3fd1" stroke-width="1.8"/>
+<rect x="64.0" y="1050.0" width="71.0" height="26" rx="13" fill="#ffffff" stroke="#8a3fd1" stroke-width="1.3"/>
+<text x="99.5" y="1063.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#8a3fd1">第 1 層</text>
+<text x="147.0" y="1063.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#8a3fd1">基礎架構<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Infrastructure</tspan></text>
+<rect x="64.0" y="1084.0" width="344.0" height="112.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="236.0" y="1112.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="236.0" dy="0">Vercel</tspan>
+</text>
+<text x="236.0" y="1142.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="236.0" dy="0">Hosting・Serverless Functions</tspan>
+</text>
+<text x="236.0" y="1170.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="236.0" dy="0">Edge Middleware</tspan>
+</text>
+<rect x="428.0" y="1084.0" width="344.0" height="112.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="600.0" y="1112.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="600.0" dy="0">GitHub</tspan>
+</text>
+<text x="600.0" y="1142.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#686f7a">
+<tspan x="600.0" dy="0">Yunwcy/lab-handover</tspan>
+</text>
+<text x="600.0" y="1170.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="600.0" dy="0">push main → 自動部署</tspan>
+</text>
+<rect x="792.0" y="1084.0" width="344.0" height="112.0" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="964.0" y="1112.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">
+<tspan x="964.0" dy="0">Google OAuth</tspan>
+</text>
+<text x="964.0" y="1142.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="964.0" dy="0">Google Identity Platform</tspan>
+</text>
+<text x="964.0" y="1170.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" fill="#686f7a">
+<tspan x="964.0" dy="0">身分驗證提供者</tspan>
+</text>
+<text x="600.0" y="1280" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" fill="#686f7a">實驗室交接系統・技術堆疊圖</text>
+</svg>
