@@ -75,8 +75,12 @@
 
         .menu-items {
             display: flex;
+            align-items: center;
             gap: 15px;
-            flex-wrap: wrap;
+            flex: 1 1 auto;
+            min-width: 0;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
 
         .menu-items a {
@@ -92,6 +96,35 @@
         .menu-items a:hover {
             background: rgba(46, 139, 87, 0.2);
             border-radius: 5px;
+        }
+
+        /* Nav collapses into a dropdown menu (JS-driven) whenever it no longer fits on one line */
+        .navbar.nav-compact .menu-icon {
+            display: block;
+        }
+
+        .navbar.nav-compact .menu-items {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 0;
+            text-align: center;
+            gap: 5px;
+            overflow: visible;
+        }
+
+        .navbar.nav-compact .menu-items.active {
+            display: flex;
+        }
+
+        .navbar.nav-compact .menu-items a {
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            display: block;
         }
 
         .language-switcher {
@@ -1062,78 +1095,7 @@
         }
 
         /* Responsive Design */
-        /* 優化導航欄響應式設計 */
-        @media (max-width: 1100px) {
-            .menu-items {
-                gap: 10px;  /* 縮小間距 */
-            }
-            
-            .menu-items a {
-                font-size: 0.85rem;  /* 縮小字體 */
-                padding: 6px 8px;    /* 縮小padding */
-            }
-        }
-
-        @media (max-width: 950px) {
-            .menu-items {
-                gap: 8px;   /* 進一步縮小間距 */
-            }
-            
-            .menu-items a {
-                font-size: 0.8rem;   /* 再縮小字體 */
-                padding: 5px 6px;    /* 再縮小padding */
-            }
-            
-            .language-btn {
-                font-size: 0.8rem;   /* 縮小語言按鈕字體 */
-                padding: 4px 8px;    /* 縮小語言按鈕padding */
-            }
-        }
-
-        /* 中等螢幕時隱藏部分導航項目，只保留核心項目 */
-        @media (max-width: 850px) {
-            .menu-items a[href="#competitions"],
-            .menu-items a[href="#conferences"],
-            .menu-items a[href="#awards"],
-            .menu-items a[href="#other-experiences"] {
-                display: none;  /* 隱藏這些次要項目 */
-            }
-        }
         @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-
-            .menu-items {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                padding: 10px 0;
-                text-align: center;
-                gap: 5px;
-            }
-
-            .menu-items.active {
-                display: flex;
-            }
-
-            .menu-items a {
-                font-size: 0.95rem;
-                padding: 8px 12px;
-                display: block;  /* 恢復完整顯示 */
-            }
-            
-            /* 在手機菜單中恢復所有項目 */
-            .menu-items a[href="#competitions"],
-            .menu-items a[href="#conferences"],
-            .menu-items a[href="#awards"],
-            .menu-items a[href="#other-experiences"] {
-                display: block;
-            }
 
             .content-section {
                 padding: 60px 20px;
@@ -3112,6 +3074,29 @@
             }
         });
 
+        // 導覽列：當項目容不下一行時自動收合成下拉選單，避免換行成兩行
+        function updateNavMode() {
+            const navbar = document.querySelector('.navbar');
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            if (!navbar || !menu || !icon) return;
+            navbar.classList.remove('nav-compact');
+            menu.classList.remove('active');
+            icon.textContent = '☰';
+            if (menu.scrollWidth > menu.clientWidth + 1) {
+                navbar.classList.add('nav-compact');
+            }
+        }
+        let navResizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(navResizeTimer);
+            navResizeTimer = setTimeout(updateNavMode, 150);
+        });
+        // 字體載入時機可能影響量測寬度的準確度，字體就緒後重新檢查一次
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(updateNavMode);
+        }
+
         // Update language button text
         function updateLanguageButton() {
             const langButton = document.getElementById('lang-toggle');
@@ -3164,6 +3149,7 @@
             });
             
             updateYear();
+            updateNavMode();
         }
 
         // Update year in copyright

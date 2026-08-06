@@ -47,8 +47,12 @@
 
         .menu-items {
             display: flex;
+            align-items: center;
             gap: 20px;
-            flex: 1;
+            flex: 1 1 auto;
+            min-width: 0;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
 
         .menu-items a {
@@ -59,6 +63,7 @@
             font-weight: bold;
             border-radius: 5px;
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
         .menu-items a:hover {
@@ -70,6 +75,35 @@
             font-size: 2rem;
             cursor: pointer;
             color: var(--primary-green);
+        }
+
+        /* Nav collapses into a dropdown menu (JS-driven) whenever it no longer fits on one line */
+        .navbar.nav-compact .menu-icon {
+            display: block;
+        }
+
+        .navbar.nav-compact .menu-items {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            flex-direction: column;
+            padding: 20px 0;
+            gap: 0;
+            overflow: visible;
+        }
+
+        .navbar.nav-compact .menu-items.active {
+            display: flex;
+        }
+
+        .navbar.nav-compact .menu-items a {
+            font-size: 0.95rem;
+            padding: 15px 20px;
+            display: block;
+            border-bottom: 1px solid rgba(46, 139, 87, 0.1);
         }
 
         /* 語言切換按鈕樣式 */
@@ -92,84 +126,6 @@
 
         .language-btn:hover {
             background: #1e5d3a;
-        }
-
-        /* 響應式導航 */
-        @media (max-width: 1100px) {
-            .menu-items {
-                gap: 10px;  /* 縮小間距 */
-            }
-            
-            .menu-items a {
-                font-size: 0.85rem;  /* 縮小字體 */
-                padding: 6px 8px;    /* 縮小padding */
-            }
-        }
-
-        @media (max-width: 950px) {
-            .menu-items {
-                gap: 8px;   /* 進一步縮小間距 */
-            }
-            
-            .menu-items a {
-                font-size: 0.8rem;   /* 再縮小字體 */
-                padding: 5px 6px;    /* 再縮小padding */
-            }
-            
-            .language-btn {
-                font-size: 0.8rem;   /* 縮小語言按鈕字體 */
-                padding: 4px 8px;    /* 縮小語言按鈕padding */
-            }
-        }
-
-        /* 中等螢幕時隱藏部分導航項目，只保留核心項目 */
-        @media (max-width: 850px) {
-            .menu-items a[href="index.html#competitions"],
-            .menu-items a[href="index.html#conferences"],
-            .menu-items a[href="index.html#awards"],
-            .menu-items a[href="index.html#other-experiences"] {
-                display: none;  /* 隱藏這些次要項目 */
-            }
-        }
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-
-            .menu-items {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                flex-direction: column;
-                padding: 20px 0;
-                gap: 0;
-            }
-
-            .menu-items.active {
-                display: flex;
-            }
-
-            .menu-items a {
-                padding: 15px 20px;
-                border-bottom: 1px solid rgba(46, 139, 87, 0.1);
-            }
-
-            .menu-items a {
-                font-size: 0.95rem;
-                padding: 8px 12px;
-                display: block;  /* 恢復完整顯示 */
-            }
-            
-            /* 在手機菜單中恢復所有項目 */
-            .menu-items a[href="index.html#competitions"],
-            .menu-items a[href="index.html#conferences"],
-            .menu-items a[href="index.html#awards"],
-            .menu-items a[href="index.html#other-experiences"] {
-                display: block;
-            }
         }
 
         /* 主要內容樣式 */
@@ -484,7 +440,30 @@
                 icon.textContent = '☰';
             }
         });
-        
+
+        // 導覽列：當項目容不下一行時自動收合成下拉選單，避免換行成兩行
+        function updateNavMode() {
+            const navbar = document.querySelector('.navbar');
+            const menu = document.getElementById('menu-items');
+            const icon = document.getElementById('menu-icon');
+            if (!navbar || !menu || !icon) return;
+            navbar.classList.remove('nav-compact');
+            menu.classList.remove('active');
+            icon.textContent = '☰';
+            if (menu.scrollWidth > menu.clientWidth + 1) {
+                navbar.classList.add('nav-compact');
+            }
+        }
+        let navResizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(navResizeTimer);
+            navResizeTimer = setTimeout(updateNavMode, 150);
+        });
+        // 字體載入時機可能影響量測寬度的準確度，字體就緒後重新檢查一次
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(updateNavMode);
+        }
+
         // 載入選定活動的圖片
         function loadImages(event) {
             const selectedEvent = event.target.value;
@@ -663,6 +642,8 @@
             // 更新年份
             const year = new Date().getFullYear();
             document.getElementById('copyright').innerHTML = i18next.t('footer.copyright', { year: year });
+
+            updateNavMode();
         }
     </script>
 </body>
