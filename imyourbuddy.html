@@ -265,6 +265,20 @@ body {
 .challenge-block { margin-bottom: 16px; }
 .challenge-block:last-child { margin-bottom: 0; }
 .challenge-block p { margin: 0; }
+.challenge-block.solution {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.outcome {
+    background: rgba(224, 167, 46, 0.12);
+    border-left: 4px solid #c9832e;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.outcome p { color: #a86a1a; }
 
 /* Demo video */
 .video-wrap {
@@ -413,7 +427,7 @@ footer {
         </div>
         <p data-i18n="roleIntro">In our four-person team, I served as Product Owner and lead systems engineer, turning the team's product concept into a fully working, demo-able, deployed system. My work covered the whole lifecycle — from requirements planning through technical integration to launch:</p>
         <ul data-i18n-html="roleList"></ul>
-        <div class="team-line" data-i18n="teamLine">Team: Bor-Jen Chen, Wen-Hsin Hsiao, <strong>Cheng-Yun Wu</strong>, Nien-Hsin Chen</div>
+        <div class="team-line" data-i18n-html="teamLine">Team: Bor-Jen Chen, Wen-Hsin Hsiao, <strong>Cheng-Yun Wu</strong>, Nien-Hsin Chen</div>
     </div>
 </section>
 
@@ -426,11 +440,11 @@ footer {
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
             <p data-i18n="c1Problem"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
             <p data-i18n="c1Solution"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block outcome">
             <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
             <p data-i18n="c1Outcome"></p>
         </div>
@@ -442,11 +456,11 @@ footer {
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
             <p data-i18n="c2Problem"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
             <p data-i18n="c2Solution"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block outcome">
             <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
             <p data-i18n="c2Outcome"></p>
         </div>

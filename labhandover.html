@@ -299,6 +299,14 @@ body {
 .challenge-block { margin-bottom: 16px; }
 .challenge-block:last-child { margin-bottom: 0; }
 .challenge-block p { margin: 0; }
+.challenge-block.solution {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.solution code { background: var(--card-bg); }
 
 /* Lightbox */
 .lightbox {
@@ -475,7 +483,7 @@ footer {
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
             <p data-i18n="c1Problem"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
             <p data-i18n-html="c1Solution"></p>
         </div>
@@ -487,7 +495,7 @@ footer {
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
             <p data-i18n-html="c2Problem"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
             <p data-i18n="c2Solution"></p>
         </div>
@@ -499,7 +507,7 @@ footer {
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
             <p data-i18n="c3Problem"></p>
         </div>
-        <div class="challenge-block">
+        <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
             <p data-i18n="c3Solution"></p>
         </div>
