@@ -354,14 +354,20 @@
         }
 
         .swiper-pagination-bullet {
+            width: 9px;
+            height: 9px;
             background: var(--primary-green);
-            opacity: 0.5;
+            opacity: 0.35;
+            transition: width 0.25s ease, opacity 0.25s ease;
         }
 
         .swiper-pagination-bullet-active {
             opacity: 1;
+            width: 24px;
+            border-radius: 5px;
             background: var(--primary-green);
         }
+
 
         /* Timeline for Research */
         .timeline {
@@ -1019,23 +1025,19 @@
             left: 10px;
         }
 
-        /* 小螢幕隱藏導航按鈕，改用觸摸滑動 */
+        /* 小螢幕隱藏導航按鈕，改用觸摸滑動；同時讓下一張卡片露出一點邊緣，
+           暗示還有更多內容可以往旁邊滑（避免箭頭蓋住這個提示區） */
         @media (max-width: 768px) {
             .projects-swiper .swiper-button-next,
-            .projects-swiper .swiper-button-prev {
-                display: none;
+            .projects-swiper .swiper-button-prev,
+            .certificates-swiper .swiper-button-next,
+            .certificates-swiper .swiper-button-prev,
+            .awards-swiper .swiper-button-next,
+            .awards-swiper .swiper-button-prev {
+                display: none !important;
             }
         }
 
-        /* Swiper 分頁點樣式 */
-        .swiper-pagination-bullet {
-            background: var(--primary-green);
-            opacity: 0.3;
-        }
-
-        .swiper-pagination-bullet-active {
-            opacity: 1;
-        }
 
         /* 如果使用自定義滑動容器而非Swiper */
         .projects-grid {
@@ -3103,6 +3105,7 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
+                grabCursor: true,
                 navigation: {
                     nextEl: '.certificates-swiper .swiper-button-next',
                     prevEl: '.certificates-swiper .swiper-button-prev',
@@ -3114,8 +3117,10 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20
+                        // 1.08 = peek a sliver of the next card so it's obvious
+                        // there's more to swipe, without needing page numbers
+                        slidesPerView: 1.08,
+                        spaceBetween: 14
                     },
                     768: {
                         slidesPerView: 2,
@@ -3134,6 +3139,7 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
+                grabCursor: true,
                 navigation: {
                     nextEl: '.awards-swiper .swiper-button-next',
                     prevEl: '.awards-swiper .swiper-button-prev',
@@ -3145,8 +3151,8 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20
+                        slidesPerView: 1.08,
+                        spaceBetween: 14
                     },
                     768: {
                         slidesPerView: 2,
