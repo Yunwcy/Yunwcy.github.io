@@ -371,10 +371,33 @@ footer {
 .footer-column a:hover { text-decoration: underline; }
 .footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
 
+/* Engineering considerations (cost / speed / accuracy / stability) */
+.consider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+.consider-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.consider-card .consider-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+.consider-card p { margin: 0; font-size: 0.88rem; }
+
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
-    .case-card, .challenge-card, .feature-card { padding: 20px; }
+    .case-card, .challenge-card, .feature-card, .consider-card { padding: 20px; }
 }
 </style>
 </head>
@@ -395,6 +418,7 @@ footer {
     <div class="case-toc">
         <a href="#problem" data-i18n="tocProblem">Problem</a>
         <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
         <a href="#features" data-i18n="tocFeatures">Features</a>
         <a href="#role" data-i18n="tocRole">My Role</a>
         <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
@@ -446,6 +470,28 @@ footer {
                 <span class="tech-chip">Serverless Functions</span>
                 <span class="tech-chip">GitHub CI/CD</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <p data-i18n="considerCost"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <p data-i18n="considerSpeed"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <p data-i18n="considerAccuracy"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
+            <p data-i18n="considerStability"></p>
         </div>
     </div>
 </section>
@@ -655,6 +701,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 linkSystem: "Live System",
                 tocProblem: "Problem",
                 tocTech: "Tech Stack",
+                tocConsiderations: "Trade-offs",
                 tocFeatures: "Features",
                 tocRole: "My Role",
                 tocChallenges: "Challenges",
@@ -667,6 +714,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup2: "Auth & Backend",
                 techGroup3: "Data & Storage",
                 techGroup4: "Infra & Deployment",
+                considerTitle: "Engineering Trade-offs",
+                considerCostLabel: "Cost",
+                considerCost: "Vercel Postgres and Blob run on usage-based free/hobby tiers, with no dedicated server to pay for around the clock — appropriate for a lab tool that gets intermittent use, not around-the-clock traffic.",
+                considerSpeedLabel: "Speed",
+                considerSpeed: "Client-side direct-to-Blob uploads bypass the backend entirely, sidestepping Vercel's serverless function payload limit and avoiding a slow proxy-through-server upload path — the fix that made 50MB file uploads possible.",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "Middleware-enforced route guards plus a whitelist check during sign-in ensure only actual lab members with the right role ever see admin-only actions — access-control correctness, not just convenience.",
+                considerStabilityLabel: "Stability",
+                considerStability: "Prisma's typed schema catches data-shape mistakes at build time rather than at runtime, and GitHub-triggered CI/CD means every deploy goes through the same repeatable path — reducing the chance of a bad manual deploy.",
                 featuresTitle: "Features",
                 f1Title: "Authentication & Access Control",
                 f1List: "<li>Google OAuth login — no separate account/password needed; lab members sign in with their existing Google account.</li><li>Email whitelist — only admin-approved emails can log in; the whitelist starts empty (open to everyone) to simplify initial setup.</li><li>Role-based access (USER/ADMIN) — regular members can view, upload, and download within their permissions; admins can also create projects, manage member roles and the whitelist, delete any document/project, and broadcast announcements.</li><li>First-time onboarding — users without a name on file are redirected to an onboarding page before accessing anything else.</li>",
@@ -736,6 +792,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 linkSystem: "系統",
                 tocProblem: "問題背景",
                 tocTech: "技術堆疊",
+                tocConsiderations: "工程權衡",
                 tocFeatures: "功能特色",
                 tocRole: "我的角色",
                 tocChallenges: "挑戰與解法",
@@ -748,6 +805,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup2: "驗證與後端",
                 techGroup3: "資料與儲存",
                 techGroup4: "基礎架構與部署",
+                considerTitle: "工程權衡",
+                considerCostLabel: "成本",
+                considerCost: "Vercel Postgres 與 Blob 都採用量計費的免費／Hobby 方案，不需要 24 小時常駐的伺服器——適合實驗室工具這種間歇性使用場景，而非全天候高流量。",
+                considerSpeedLabel: "速度",
+                considerSpeed: "前端直傳 Vercel Blob，完全繞過後端，避開 Vercel Serverless Function 的檔案大小限制，也不用經過伺服器中繼的慢速上傳路徑——這正是支援 50MB 大檔案上傳的解法。",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "Middleware 路由守衛搭配登入時的白名單檢查，確保只有真正的實驗室成員、且具備正確角色，才看得到管理員專屬功能——這是存取控制的正確性，不只是方便性。",
+                considerStabilityLabel: "穩定性",
+                considerStability: "Prisma 的型別化 Schema 能在建置期就抓出資料結構錯誤，不用等到執行期才發現；搭配 GitHub 觸發的 CI/CD，每次部署都走同一套可重複的流程，降低手動部署出錯的機率。",
                 featuresTitle: "功能特色",
                 f1Title: "身份驗證與存取控制",
                 f1List: "<li>Google OAuth 登入：不需另外註冊帳號密碼，用實驗室成員既有的 Google 帳號即可登入。</li><li>Email 白名單機制：只有管理員預先核准的 Email 才能成功登入；白名單為空時開放所有人登入，方便系統剛部署時的初始設定。</li><li>角色分級（USER／ADMIN）：一般成員僅能瀏覽、上傳、下載自己有權限的內容；管理員多了新增計畫、管理成員權限、管理白名單、刪除任何文件／計畫、發布全域公告等權限。</li><li>新生報到流程：第一次登入若沒有填寫本名，會被導向報到頁面完成基本資料，才能進入系統其他頁面。</li>",

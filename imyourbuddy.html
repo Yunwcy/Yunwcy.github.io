@@ -326,6 +326,29 @@ footer {
 .footer-column a:hover { text-decoration: underline; }
 .footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
 
+/* Engineering considerations (cost / speed / accuracy / stability) */
+.consider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+.consider-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.consider-card .consider-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+.consider-card p { margin: 0; font-size: 0.88rem; }
+
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
@@ -353,6 +376,7 @@ footer {
         <a href="#problem" data-i18n="tocProblem">Problem</a>
         <a href="#architecture" data-i18n="tocArch">Architecture</a>
         <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
         <a href="#role" data-i18n="tocRole">My Role</a>
         <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
         <a href="#demo" data-i18n="tocDemo">Demo</a>
@@ -414,6 +438,28 @@ footer {
                 <span class="tech-chip">Zeabur Cloud</span>
                 <span class="tech-chip">Persistent Volume</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <p data-i18n="considerCost"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <p data-i18n="considerSpeed"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <p data-i18n="considerAccuracy"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
+            <p data-i18n="considerStability"></p>
         </div>
     </div>
 </section>
@@ -551,6 +597,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocProblem: "Problem",
                 tocArch: "Architecture",
                 tocTech: "Tech Stack",
+                tocConsiderations: "Trade-offs",
                 tocRole: "My Role",
                 tocChallenges: "Challenges",
                 tocDemo: "Demo",
@@ -565,6 +612,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup3: "AI Agent",
                 techGroup4: "Data & Infra",
                 roleTitle: "My Role",
+                considerTitle: "Engineering Trade-offs",
+                considerCostLabel: "Cost",
+                considerCost: "SQLite plus Zeabur (not a managed enterprise database) keeps hosting costs near zero for a competition MVP. GPT-4o was chosen specifically for its function-calling reliability rather than a cheaper model — correctly routing to the right tool mattered more than shaving a few cents per call.",
+                considerSpeedLabel: "Speed",
+                considerSpeed: "FastAPI with SSE streaming means the first token appears immediately instead of waiting for the full response — important for a chat-style product where perceived responsiveness drives adoption.",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "The personalized progress-analysis tool compares a student's actual course and credit records against department rules in real time, instead of giving a generic answer — the core fix behind Challenge #1 (personalized graduation-progress answers).",
+                considerStabilityLabel: "Stability",
+                considerStability: "Splitting the system into independent modules (student frontend / AI agent / admin API / database / email service) plus persistent cloud storage means a redeploy or a single module failing doesn't take down the whole system or lose data — directly addressed in Challenge #2.",
                 roleSubtitle: "Product Owner & Full-Stack Systems Engineer",
                 roleIntro: "In our four-person team, I served as Product Owner and lead systems engineer, turning the team's product concept into a fully working, demo-able, deployed system. My work covered the whole lifecycle — from requirements planning through technical integration to launch:",
                 roleList: "<li><strong>Product &amp; system planning:</strong> Translated departmental admin pain points into system requirements, and designed the student app, admin console, AI agent, knowledge base, and personalized progress-analysis modules.</li><li><strong>Core system development:</strong> Owned frontend/backend integration, API design, data pipelines, and the main system logic.</li><li><strong>AI agent implementation:</strong> Integrated LLM function calling with multi-tool orchestration, so the agent automatically selects the right tool — calendar, graduation requirements, practicum credits, global-exposure credits, defense SOPs, resource links, or personal graduation progress — for each question.</li><li><strong>Admin console:</strong> Built calendar management, resource-link management, student/alumni records, document import, a dashboard, and email notifications — lowering the bar for ongoing maintenance.</li><li><strong>Iteration &amp; maintenance:</strong> Continuously adjusted features, fixed bugs, and improved the UI/UX based on competition requirements, course feedback, and real usage.</li><li><strong>Deployment &amp; launch:</strong> Handled deployment, data persistence, environment configuration, and ongoing operations — taking the project from concept/prototype to a publicly usable MVP.</li><li><strong>Official project site:</strong> Independently built the project's public website, bringing together the product vision, features, team info, walkthroughs, and competition results into one consistent brand.</li>",
@@ -611,6 +667,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocProblem: "問題背景",
                 tocArch: "系統架構",
                 tocTech: "技術堆疊",
+                tocConsiderations: "工程權衡",
                 tocRole: "我的角色",
                 tocChallenges: "挑戰與解法",
                 tocDemo: "Demo",
@@ -625,6 +682,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup3: "AI Agent",
                 techGroup4: "資料與基礎架構",
                 roleTitle: "我負責的部分",
+                considerTitle: "工程權衡",
+                considerCostLabel: "成本",
+                considerCost: "使用 SQLite 搭配 Zeabur（非企業級代管資料庫），讓競賽 MVP 的主機成本趨近於零；GPT-4o 則是因為 Function Calling 的穩定度而選用，正確呼叫工具比省下幾分錢更重要。",
+                considerSpeedLabel: "速度",
+                considerSpeed: "FastAPI 搭配 SSE 串流回覆，讓使用者第一個字馬上出現、不用等完整回答產生完畢——對聊天類產品來說，「感覺起來夠快」直接影響採用意願。",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "個人化進度分析工具即時比對學生實際修課／學分紀錄與系所規定，而非給制式化答案，這正是挑戰一（個人化畢業進度回答）的核心解法。",
+                considerStabilityLabel: "穩定性",
+                considerStability: "把系統拆成獨立模組（學生前台／AI Agent／管理 API／資料庫／郵件服務）並搭配雲端持久化儲存，單一模組出狀況或重新部署都不會拖垮整個系統或遺失資料，對應挑戰二的解法。",
                 roleSubtitle: "產品負責人（Product Owner）暨全端系統工程師",
                 roleIntro: "在陳柏臻、蕭文欣、吳承耘、陳念歆組成的四人團隊中，我主要擔任產品負責人（Product Owner, PO）與核心系統工程師，負責將團隊提出的產品構想轉化為可實際操作、展示與部署的完整系統。我的工作不僅是開發單一功能，而是主導系統從需求規劃、技術整合到正式上線的完整生命週期，包括：",
                 roleList: "<li><strong>產品與系統規劃：</strong>將系所行政痛點轉化為系統需求，規劃學生端、管理端、AI Agent、知識庫與個人化進度分析等功能模組。</li><li><strong>核心系統開發：</strong>負責前後端功能整合、API 設計、資料處理流程及主要系統邏輯建置。</li><li><strong>AI Agent 功能實作：</strong>整合大型語言模型的工具呼叫（Function Calling）與多工具協作機制，使系統能依問題內容自動選擇行事曆、畢業規定、實作能力、全球視野、口試 SOP、資源連結及個人畢業進度等工具。</li><li><strong>管理後台建置：</strong>開發行事曆、資源連結、學生與校友資料、文件匯入、儀表板及郵件通知等管理功能，降低系統後續維護門檻。</li><li><strong>系統修改與持續維護：</strong>依據競賽需求、課程回饋與實際操作結果持續調整功能、修正錯誤、改善介面與優化使用流程。</li><li><strong>部署與正式上線：</strong>處理系統部署、資料持久化、環境設定及線上服務維運，使專案不只停留在概念或原型，而能成為可公開操作的 MVP。</li><li><strong>專案官方網站架設：</strong>獨立建置專案官網，統整產品理念、系統特色、團隊資訊、操作展示與競賽成果，建立完整且一致的產品形象。</li>",

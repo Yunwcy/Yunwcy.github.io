@@ -249,6 +249,116 @@ body {
     gap: 14px;
 }
 .impact-note i { font-size: 1.4rem; color: #c9832e; flex-shrink: 0; }
+
+/* Evaluation section */
+.eval-subheading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin: 32px 0 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.eval-subheading:first-of-type { margin-top: 0; }
+.eval-subheading i { color: var(--primary-green); }
+.eval-intro { margin: 0 0 20px 0; }
+.eval-summary {
+    margin-top: 22px;
+    padding: 16px 20px;
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    border-radius: 0 10px 10px 0;
+    color: var(--dark-green);
+    font-size: 0.95rem;
+}
+
+.finding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+.finding-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.finding-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+}
+.finding-card h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--text-color); }
+.finding-card p { margin: 0; font-size: 0.9rem; }
+
+.survey-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+.survey-score { font-size: 2.6rem; font-weight: 800; color: var(--primary-green); line-height: 1; }
+.survey-score span { font-size: 1.1rem; font-weight: 600; opacity: 0.7; }
+.survey-meta { font-size: 0.9rem; opacity: 0.75; }
+
+.score-bars { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+.score-bar-row { display: grid; grid-template-columns: 160px 1fr 50px; align-items: center; gap: 12px; }
+.score-label { font-size: 0.88rem; font-weight: 600; color: var(--text-color); }
+.score-track { background: rgba(46,139,87,0.12); border-radius: 8px; height: 12px; overflow: hidden; }
+.score-fill { background: linear-gradient(90deg, var(--primary-green), var(--dark-green)); height: 100%; border-radius: 8px; }
+.score-value { font-size: 0.88rem; font-weight: 700; color: var(--dark-green); text-align: right; }
+
+.chip-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 6px; }
+.chip-group h5 { margin: 0 0 10px 0; font-size: 0.85rem; color: var(--primary-green); text-transform: uppercase; letter-spacing: 0.5px; }
+.score-chip {
+    display: inline-block;
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 5px 12px;
+    border-radius: 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0 6px 8px 0;
+}
+.score-chip.high { background: rgba(224,167,46,0.18); color: #a86a1a; }
+
+@media (max-width: 600px) {
+    .score-bar-row { grid-template-columns: 110px 1fr 42px; gap: 8px; }
+    .score-label { font-size: 0.8rem; }
+}
+
+/* Engineering considerations (cost / speed / accuracy / stability) */
+.consider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+.consider-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.consider-card .consider-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+.consider-card p { margin: 0; font-size: 0.88rem; }
+
 .challenge-block.solution {
     background: var(--light-green);
     border-left: 4px solid var(--primary-green);
@@ -330,9 +440,11 @@ footer {
         <a href="#problem" data-i18n="tocProblem">Problem</a>
         <a href="#architecture" data-i18n="tocArch">Architecture</a>
         <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
         <a href="#role" data-i18n="tocRole">My Role</a>
         <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
         <a href="#contributions" data-i18n="tocContributions">Contributions</a>
+        <a href="#evaluation" data-i18n="tocEvaluation">Evaluation</a>
         <a href="#demo" data-i18n="tocDemo">Demo</a>
     </div>
 </div>
@@ -392,6 +504,28 @@ footer {
                 <span class="tech-chip">Cloudflare Tunnel</span>
                 <span class="tech-chip">Zero Trust</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <p data-i18n="considerCost"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <p data-i18n="considerSpeed"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <p data-i18n="considerAccuracy"></p>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
+            <p data-i18n="considerStability"></p>
         </div>
     </div>
 </section>
@@ -462,6 +596,80 @@ footer {
         <h3><span class="num">03</span> <span data-i18n="contrib3Title">A more natural, multimodal front door to administrative services</span></h3>
         <p data-i18n="contrib3Content"></p>
     </div>
+</section>
+
+<section class="case-section fade-in" id="evaluation">
+    <h2><i class="fas fa-comments"></i> <span data-i18n="evalTitle">User Feedback &amp; Evaluation</span></h2>
+
+    <div class="eval-subheading"><i class="fas fa-user-group"></i> <span data-i18n="evalInterviewTitle">User Interviews</span></div>
+    <p class="eval-intro" data-i18n="evalInterviewIntro"></p>
+    <div class="finding-grid">
+        <div class="finding-card">
+            <div class="finding-icon"><i class="fas fa-list-check"></i></div>
+            <h4 data-i18n="finding1Title">Well-suited for standardized queries</h4>
+            <p data-i18n="finding1Content"></p>
+        </div>
+        <div class="finding-card">
+            <div class="finding-icon"><i class="fas fa-handshake"></i></div>
+            <h4 data-i18n="finding2Title">Positive acceptance, trust built on evidence</h4>
+            <p data-i18n="finding2Content"></p>
+        </div>
+        <div class="finding-card">
+            <div class="finding-icon"><i class="fas fa-database"></i></div>
+            <h4 data-i18n="finding3Title">Effectiveness tracks knowledge base completeness</h4>
+            <p data-i18n="finding3Content"></p>
+        </div>
+    </div>
+    <p class="eval-summary" data-i18n="evalInterviewSummary"></p>
+
+    <div class="eval-subheading"><i class="fas fa-chart-column"></i> <span data-i18n="evalSurveyTitle">Post-Use Survey</span></div>
+    <div class="survey-headline">
+        <div class="survey-score">4.17<span>/5.00</span></div>
+        <div class="survey-meta" data-i18n="surveyMeta">N = 39 respondents · overall positive rating</div>
+    </div>
+    <div class="score-bars">
+        <div class="score-bar-row">
+            <span class="score-label" data-i18n="dim1Label">Information Quality</span>
+            <div class="score-track"><div class="score-fill" style="width:87.6%"></div></div>
+            <span class="score-value">4.38</span>
+        </div>
+        <div class="score-bar-row">
+            <span class="score-label" data-i18n="dim2Label">Communication Intelligence</span>
+            <div class="score-track"><div class="score-fill" style="width:84.6%"></div></div>
+            <span class="score-value">4.23</span>
+        </div>
+        <div class="score-bar-row">
+            <span class="score-label" data-i18n="dim3Label">Trust &amp; Acceptance</span>
+            <div class="score-track"><div class="score-fill" style="width:84.4%"></div></div>
+            <span class="score-value">4.22</span>
+        </div>
+        <div class="score-bar-row">
+            <span class="score-label" data-i18n="dim4Label">Task Effectiveness</span>
+            <div class="score-track"><div class="score-fill" style="width:84.2%"></div></div>
+            <span class="score-value">4.21</span>
+        </div>
+        <div class="score-bar-row">
+            <span class="score-label" data-i18n="dim5Label">System Usability</span>
+            <div class="score-track"><div class="score-fill" style="width:76.2%"></div></div>
+            <span class="score-value">3.81</span>
+        </div>
+    </div>
+    <p class="eval-intro" data-i18n="dimNote"></p>
+    <div class="chip-groups">
+        <div class="chip-group">
+            <h5 data-i18n="topScoresLabel">Top-Rated Items</h5>
+            <span class="score-chip high" data-i18n="chipSafety">Response Appropriateness — 4.56</span>
+            <span class="score-chip high" data-i18n="chipNatural">Naturalness — 4.54</span>
+            <span class="score-chip high" data-i18n="chipFaithful">Faithfulness — 4.46</span>
+        </div>
+        <div class="chip-group">
+            <h5 data-i18n="growthAreasLabel">Focus for Improvement</h5>
+            <span class="score-chip" data-i18n="chipSpeed">Response Speed — 3.38</span>
+            <span class="score-chip" data-i18n="chipIntent">Intent Understanding — 3.77</span>
+            <span class="score-chip" data-i18n="chipInteraction">Interaction Ease — 3.95</span>
+        </div>
+    </div>
+    <p class="eval-summary" data-i18n="evalSynthesis"></p>
 </section>
 
 <section class="case-section fade-in" id="demo">
@@ -548,9 +756,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocProblem: "Problem",
                 tocArch: "Architecture",
                 tocTech: "Tech Stack",
+                tocConsiderations: "Trade-offs",
                 tocRole: "My Role",
                 tocChallenges: "Challenges",
                 tocContributions: "Contributions",
+                tocEvaluation: "Evaluation",
                 tocDemo: "Demo",
                 problemTitle: "Problem Background",
                 problemContent: "<p>University sports administration covers a wide range of information — venue reservations, PE course schedules, competition activities, regulations, announcements, forms, and FAQs. However, this information is scattered across different web pages, documents, and images, forcing users to search through multiple pages on their own, while administrative staff repeatedly answer similar questions.</p><p>Traditional keyword search or rule-based chatbots work well for single, well-defined questions, but struggle with complex queries that require integrating multiple conditions, cross-referencing data sources, or interpreting images and speech. This project therefore builds an <strong>Agentic Multimodal Retrieval-Augmented Generation (Agentic Multimodal RAG)</strong> dialogue system for university sports administration — integrating text, image, and speech input, and using knowledge retrieval, tool routing, and conversational memory to provide well-grounded, more complete administrative answers.</p>",
@@ -562,6 +772,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup2: "Retrieval",
                 techGroup3: "Multimodal",
                 techGroup4: "Frontend & Infra",
+                considerTitle: "Engineering Trade-offs",
+                considerCostLabel: "Cost",
+                considerCost: "GPT-5.4-mini / GPT-4o-mini were chosen over larger flagship models to keep per-query inference cost low enough for a lab-scale deployment serving an entire student body — the survey's strong quality scores show that trade-off paid off.",
+                considerSpeedLabel: "Speed",
+                considerSpeed: "Hybrid retrieval (dense + sparse + reranking) and the agentic reflection loop (capped at 3 iterations) trade some latency for completeness. That shows up directly in the survey as Response Speed being the lowest-rated dimension (3.38/5) — a deliberate trade-off, and the top priority for future optimization.",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "Multi-stage retrieval (semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking) was built specifically to catch both semantic meaning and exact-term matches like regulation numbers — reflected in the survey's highest-rated dimension, Information Quality (4.38/5).",
+                considerStabilityLabel: "Stability",
+                considerStability: "The reflection loop lets the agent verify whether the retrieved evidence actually answers the question before responding, and a persistent correction mechanism means a confirmed mistake only has to be fixed once — both aimed at consistent, dependable answers across a wide range of query types.",
                 roleTitle: "My Role",
                 roleIntro: "This project was completed independently by me, covering research planning, system development, and empirical evaluation. Key contributions include:",
                 roleList: "<li>Analyzed usage scenarios and information needs in university sports administration to define the research problem and system requirements.</li><li>Collected and organized public data from NTPU's Office of Physical Education, including announcements, regulations, forms, FAQs, course schedules, and competition records.</li><li>Built the knowledge base pipeline covering data cleaning, document parsing, chunking, metadata design, and vectorization.</li><li>Designed a hybrid retrieval mechanism combining semantic search, keyword search, query rewriting, HyDE, Reciprocal Rank Fusion (RRF), and LLM-based reranking.</li><li>Designed the Agentic RAG architecture, implementing the agent controller, tool selection, reflection loop, short-term conversational memory, and a persistent correction mechanism.</li><li>Built domain-specific tools for regulations, announcements, courses, competitions, forms, and content correction.</li><li>Integrated text, image, and speech input, and developed the Gradio conversational interface.</li><li>Designed comparative experiments between Advanced RAG and Agentic RAG, building simple and complex query datasets.</li><li>Conducted RAGAS automated evaluation, statistical testing, semi-structured interviews, and user survey analysis.</li><li>Completed the research thesis, system demonstration, results analysis, and dissemination of findings.</li>",
@@ -578,13 +797,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Problem: "Early in the research, I found that automated RAG evaluation results can be skewed by the choice of judge model, answer length, and phrasing. For instance, when the system integrates multiple sources into a more complete answer, that doesn't automatically score higher on every metric — relying on a single model or a single metric risks a one-sided read of system performance.",
                 c3Solution: "I redesigned the evaluation pipeline: using multiple judge models of different sizes and providers; running per-question paired comparisons with statistical significance testing; building separate datasets for simple factual queries and complex tool-routing queries; evaluating Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together; and pairing this with semi-structured interviews and post-use surveys to capture real-world usability that automated scores can't see. This mixed-methods approach — automated evaluation, statistical analysis, and user research — avoids relying on any single score and gives a fuller picture of the system's practical value in real administrative settings.",
                 contribTitle: "System Contributions",
-                licenseNote: "Following the thesis defense, the university licensed the system for continued use, with plans to expand it into a full campus-wide AI Agent platform — concrete evidence that this research translates into real, ongoing value.",
+                licenseNote: "After the thesis defense, the university proactively asked to keep using the system, with plans to expand it into a full campus-wide AI Agent platform — a sign the research holds real, practical value beyond the academic deliverable.",
                 contrib1Title: "Lowering the cost of finding information and repeated back-and-forth",
                 contrib1Content: "Consolidates information that used to be scattered across announcements, regulations, forms, course pages, and competition pages into a single conversational entry point, so users can just ask in natural language instead of digging through multiple web pages and documents. It also handles routine, public, document-based FAQs on its own, cutting down how often staff have to answer the same questions.",
                 contrib2Title: "Making complex administrative questions faster to answer",
                 contrib2Content: "Through Agentic RAG and tool routing, the system picks the right information source for each question and integrates evidence across documents. Compared to plain keyword search, users can ask multi-condition questions in one go — venue eligibility, application steps, required documents, related regulations — and get a single, more complete answer instead of piecing it together themselves.",
                 contrib3Title: "A more natural, multimodal front door to administrative services",
                 contrib3Content: "Beyond text, the system accepts image and voice input, so users can ask directly about a screenshot of an announcement, a form, or other visual material, and keep following up in context. It shifts department websites from a \"users go find the information\" model to a more intuitive \"users state what they need, the system pulls it together\" interaction.",
+                evalTitle: "User Feedback & Evaluation",
+                evalInterviewTitle: "User Interviews",
+                evalInterviewIntro: "Interviews were conducted across different user roles — including Office of Physical Education staff and students — analyzing real-world usage experience through the lenses of Appropriateness, Acceptability, and Feasibility.",
+                finding1Title: "Well-suited for standardized queries",
+                finding1Content: "Staff noted that regulations are often scattered across many documents, and the system helps them locate the relevant content quickly. High-frequency questions — venue fees, air-conditioning charges, deposits, usage rules — are also good candidates for the system to handle first, with real potential to reduce repeated phone calls and manual replies.",
+                finding2Title: "Positive acceptance, trust built on evidence",
+                finding2Content: "Most interviewees were willing to use the system as their first stop for information, while questions involving important rights, exceptions, or administrative judgment were still preferred to go to a person. Respondents also widely agreed that clearly citing the regulation source, linked documents, or evidence for an answer noticeably increased their trust in it.",
+                finding3Title: "Effectiveness tracks knowledge base completeness",
+                finding3Content: "When the underlying data was fully built out, the system meaningfully cut down search time — but where the source website itself was missing information (competitions, representative teams, real-time venue status), the system couldn't provide a complete answer. Interviewees also pointed to fine-grained image understanding, synonym matching, response speed, and the data-update workflow as directions worth optimizing next.",
+                evalInterviewSummary: "Overall, the interviews suggest the system works best as a first-line, self-service entry point for public, routine, document-based administrative questions — not as a full replacement for administrative staff.",
+                evalSurveyTitle: "Post-Use Survey",
+                surveyMeta: "N = 39 respondents · overall positive rating",
+                dim1Label: "Information Quality",
+                dim2Label: "Communication Intelligence",
+                dim3Label: "Trust & Acceptance",
+                dim4Label: "Task Effectiveness",
+                dim5Label: "System Usability",
+                dimNote: "Users rated information quality highest — the correctness, relevance, and grounding of the system's answers — followed closely by how natural, trustworthy, and useful the overall experience felt.",
+                topScoresLabel: "Top-Rated Items",
+                growthAreasLabel: "Focus for Improvement",
+                chipSafety: "Response Appropriateness — 4.56",
+                chipNatural: "Naturalness — 4.54",
+                chipFaithful: "Faithfulness — 4.46",
+                chipSpeed: "Response Speed — 3.38",
+                chipIntent: "Intent Understanding — 3.77",
+                chipInteraction: "Interaction Ease — 3.95",
+                evalSynthesis: "Taken together, both the interviews and the survey point to strong ratings for information quality, response naturalness, and task effectiveness, with the system seen as a solid first-line entry point for public, routine, document-based administrative questions. Future work can focus on response speed, knowledge base completeness, source transparency, and understanding vaguer or multimodal input — pushing real-world usability and adoption even further.",
                 demoTitle: "Demo",
                 footerContact: "Contact",
                 footerUniversity: "National Taipei University",
@@ -615,9 +861,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocProblem: "問題背景",
                 tocArch: "系統架構",
                 tocTech: "技術堆疊",
+                tocConsiderations: "工程權衡",
                 tocRole: "我的角色",
                 tocChallenges: "挑戰與解法",
                 tocContributions: "系統貢獻",
+                tocEvaluation: "使用者評估",
                 tocDemo: "Demo",
                 problemTitle: "問題背景",
                 problemContent: "<p>大學體育行政涵蓋場地借用、體育課程、競賽活動、法規、公告、表單及常見問答等資訊。然而，這些資料分散於不同網頁、文件及圖片中，使用者往往需要自行搜尋多個頁面，行政人員也必須重複回覆相似問題。</p><p>傳統關鍵字搜尋或規則式聊天機器人，較適合處理單一且明確的問題，難以理解需要整合多項條件、跨資料來源或包含圖片與語音的複雜查詢。因此，本專案建置一套應用於大學體育行政的<strong>代理式多模態檢索增強生成對話系統（Agentic Multimodal Retrieval-Augmented Generation, Agentic Multimodal RAG）</strong>，整合文字、圖片與語音輸入，並透過知識檢索、工具路由及對話記憶，提供具資料依據且較完整的行政資訊回覆。</p>",
@@ -629,6 +877,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup2: "檢索",
                 techGroup3: "多模態",
                 techGroup4: "前端與基礎架構",
+                considerTitle: "工程權衡",
+                considerCostLabel: "成本",
+                considerCost: "選用 GPT-5.4-mini／GPT-4o-mini 而非更大的旗艦模型，讓單次查詢的推論成本足夠低，才撐得起全校師生規模的實際部署——問卷中即使使用較小模型，資訊品質評分依然名列前茅。",
+                considerSpeedLabel: "速度",
+                considerSpeed: "混合檢索（語意＋關鍵字＋重新排序）與代理式反思迴圈（上限 3 次）用一定的延遲換取回答完整性，這也直接反映在問卷最低分項目「回應速度」（3.38／5）上，是刻意的取捨，也是後續優化的第一順位。",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "多階段檢索（語意搜尋＋關鍵字搜尋＋Query Rewrite＋HyDE＋RRF＋LLM Reranking）同時捕捉語意理解與精確比對（例如法規編號），對應問卷中評分最高的「資訊品質」（4.38／5）。",
+                considerStabilityLabel: "穩定性",
+                considerStability: "反思迴圈讓代理在回答前先確認證據是否足以回答問題，加上持久修正機制讓確認過的錯誤只需修正一次、不會重複發生，兩者都是為了在多樣化查詢下維持回答的一致性與可靠度。",
                 roleTitle: "我負責的部分",
                 roleIntro: "本專案由我獨立完成，涵蓋研究規劃、系統開發與實證評估。主要工作包括：",
                 roleList: "<li>分析大學體育行政的使用情境與資訊需求，定義研究問題及系統功能。</li><li>蒐集與整理國立臺北大學體育室公開資料，包括公告、法規、表單、常見問答、課程與競賽紀錄。</li><li>建立資料清理、文件解析、切塊、Metadata 設計及向量化的知識庫處理流程。</li><li>設計混合式檢索機制，整合語意搜尋、關鍵字搜尋、Query Rewrite、HyDE、RRF 與 LLM Reranking。</li><li>設計 Agentic RAG 架構，實作代理控制器、工具選擇、反思流程、短期對話記憶及持久修正機制。</li><li>建立法規、公告、課程、競賽、表單及內容修正等領域工具。</li><li>整合文字、圖片及語音輸入，並開發 Gradio 對話介面。</li><li>規劃 Advanced RAG 與 Agentic RAG 的比較實驗，建立簡單與複雜查詢資料集。</li><li>執行 RAGAS 自動評估、統計檢定、半結構式訪談及使用者問卷分析。</li><li>完成研究論文、系統展示、結果分析與研究成果發表。</li>",
@@ -645,13 +902,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Problem: "研究初期發現，RAG 自動評估結果可能受到 Judge Model、回答長度及措辭方式影響。例如，系統將多項資料整合為較完整的答案時，不一定會在所有指標上獲得較高分數；若只使用單一模型或單一指標，容易對系統表現產生片面解讀。",
                 c3Solution: "我重新設計評估流程：使用多個不同規模與來源的語言模型作為 Judge Model；以每個問題為單位進行配對比較及統計檢定；分別建立簡單事實查詢與複雜工具路由查詢資料集；同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall 與 Answer Completeness；搭配半結構式訪談及使用後問卷，補充自動評估無法觀察的實際使用感受。透過自動評估、統計分析與使用者研究的混合方法，避免僅依賴單一分數，並更完整地說明系統在真實行政情境中的實用性。",
                 contribTitle: "系統貢獻",
-                licenseNote: "系統於論文口試後獲學校授權採用，將持續擴充為完整的校園 AI Agent 系統，是本研究成果實際落地應用的具體證明。",
+                licenseNote: "論文口試後，校方主動提出希望持續採用本系統，並規劃將其擴充為完整的校園 AI Agent 系統——顯示這項研究成果具備實際應用價值，而不只是學術產出。",
                 contrib1Title: "降低行政資訊查找與重複溝通成本",
                 contrib1Content: "將原本分散於公告、法規、表單、課程與競賽頁面的資訊整合至單一對話入口，使用者可直接以自然語言詢問，減少自行瀏覽多個網頁與文件的時間；同時可協助處理例行、公開且文件導向的常見問題，降低行政人員重複回覆的負擔。",
                 contrib2Title: "提升複雜行政問題的資訊取得效率",
                 contrib2Content: "透過 Agentic RAG 與工具路由機制，系統能依照問題內容選擇適合的行政資訊來源，並整合不同文件中的資訊。相較於單純的關鍵字搜尋，使用者可以直接詢問包含多項條件的問題，例如場地資格、申請流程、所需文件與相關規定，取得較完整的一站式回答。",
                 contrib3Title: "提供更自然且多元的行政服務入口",
                 contrib3Content: "除了文字查詢，系統亦支援圖片與語音輸入，讓使用者可直接針對公告截圖、表格或其他視覺資料進行詢問，並延續前後文進行追問。將原本以「使用者尋找資料」為主的行政網站，轉化為更直覺的「使用者提出需求、系統主動整理資訊」互動模式。",
+                evalTitle: "使用者回饋與評估",
+                evalInterviewTitle: "使用者訪談",
+                evalInterviewIntro: "共訪談不同使用角色，包含體育室行政人員與學生，以 Appropriateness、Acceptability、Feasibility 等面向分析實際使用經驗。",
+                finding1Title: "特別適合處理標準化查詢",
+                finding1Content: "行政人員指出，許多法規分散於不同文件中，透過系統可快速定位相關內容；場地費用、冷氣費、保證金及使用規定等高頻問題，也適合先由系統處理，具有降低重複電話詢問與人工回覆負擔的潛力。",
+                finding2Title: "整體接受度偏正面，信任仰賴答案依據",
+                finding2Content: "多數受訪者願意將系統作為第一層資訊查詢工具，而涉及重要權益、例外狀況或需要行政判斷的問題，仍傾向由真人處理。受訪者也普遍認為，若回答能提供清楚的法規來源、文件連結或依據，可明顯提升信任感。",
+                finding3Title: "實際效果高度取決於知識庫完整度",
+                finding3Content: "當資料已完整建置時，系統能有效縮短查找時間；但若網站本身缺少競賽、代表隊、即時場地狀態等資料，系統便無法提供完整答案。訪談亦指出，圖片細部理解、同義詞查詢、回應速度與資料更新流程仍是後續可優化的方向。",
+                evalInterviewSummary: "整體而言，訪談結果顯示，系統較適合作為公開、例行、文件導向行政問題的第一線自助查詢入口，而非全面取代行政人員。",
+                evalSurveyTitle: "使用後問卷",
+                surveyMeta: "N = 39 位受試者．整體正面評價",
+                dim1Label: "資訊品質",
+                dim2Label: "溝通智能",
+                dim3Label: "信任與接受度",
+                dim4Label: "任務效益",
+                dim5Label: "系統可用性",
+                dimNote: "使用者最肯定系統回答的正確性、切題性與資訊依據，緊接著是回答自然度、信任感與整體實用性的表現。",
+                topScoresLabel: "評分最高項目",
+                growthAreasLabel: "後續優化方向",
+                chipSafety: "回應適切性 — 4.56",
+                chipNatural: "回應自然度 — 4.54",
+                chipFaithful: "忠實度 — 4.46",
+                chipSpeed: "回應速度 — 3.38",
+                chipIntent: "意圖理解 — 3.77",
+                chipInteraction: "互動便利性 — 3.95",
+                evalSynthesis: "整體而言，訪談與問卷結果皆顯示，使用者對系統的資訊品質、回答自然度與實際任務效益給予正面評價，並認為其適合作為公開、例行與文件導向行政問題的第一線查詢入口。後續優化則可聚焦於回應速度、知識庫完整度、來源透明度，以及較模糊或多模態輸入的理解能力，進一步提升實際使用體驗與導入成效。",
                 demoTitle: "Demo",
                 footerContact: "聯絡方式",
                 footerUniversity: "國立臺北大學",
