@@ -349,6 +349,23 @@ footer {
 }
 .consider-card p { margin: 0; font-size: 0.88rem; }
 
+/* Compact bullet lists used inside cards to replace dense paragraphs */
+.consider-card ul, .challenge-block ul, .challenge-card > ul {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 0.88rem;
+}
+.challenge-card > ul { font-size: 0.9rem; }
+.consider-card ul li, .challenge-block ul li, .challenge-card > ul li {
+    margin-bottom: 6px;
+}
+.consider-card ul li:last-child, .challenge-block ul li:last-child,
+.challenge-card > ul li:last-child { margin-bottom: 0; }
+.consider-card strong, .challenge-block p strong, .challenge-block ul strong,
+.challenge-card > ul strong { color: var(--dark-green); }
+.challenge-block.solution ul { color: var(--dark-green); }
+.challenge-block.solution strong { color: var(--primary-green); }
+
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
@@ -447,19 +464,19 @@ footer {
     <div class="consider-grid">
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
-            <p data-i18n="considerCost"></p>
+            <ul data-i18n-html="considerCost"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
-            <p data-i18n="considerSpeed"></p>
+            <ul data-i18n-html="considerSpeed"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
-            <p data-i18n="considerAccuracy"></p>
+            <ul data-i18n-html="considerAccuracy"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
-            <p data-i18n="considerStability"></p>
+            <ul data-i18n-html="considerStability"></ul>
         </div>
     </div>
 </section>
@@ -488,7 +505,7 @@ footer {
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c1Solution"></p>
+            <ul data-i18n-html="c1Solution"></ul>
         </div>
         <div class="challenge-block outcome">
             <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
@@ -504,7 +521,7 @@ footer {
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c2Solution"></p>
+            <ul data-i18n-html="c2Solution"></ul>
         </div>
         <div class="challenge-block outcome">
             <span class="challenge-label outcome" data-i18n="outcomeLabel">Outcome</span>
@@ -614,13 +631,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 roleTitle: "My Role",
                 considerTitle: "Engineering Trade-offs",
                 considerCostLabel: "Cost",
-                considerCost: "SQLite plus Zeabur (not a managed enterprise database) keeps hosting costs near zero for a competition MVP. GPT-4o was chosen specifically for its function-calling reliability rather than a cheaper model — correctly routing to the right tool mattered more than shaving a few cents per call.",
+                considerCost: "<li><strong>SQLite + Zeabur</strong> (not a managed enterprise database) keeps hosting costs near zero for a competition MVP.</li><li><strong>Model choice:</strong> GPT-4o, chosen for function-calling reliability, not because it's cheap.</li><li><strong>Why:</strong> routing to the right tool correctly mattered more than shaving a few cents per call.</li>",
                 considerSpeedLabel: "Speed",
-                considerSpeed: "FastAPI with SSE streaming means the first token appears immediately instead of waiting for the full response — important for a chat-style product where perceived responsiveness drives adoption.",
+                considerSpeed: "<li><strong>FastAPI + SSE streaming:</strong> first token appears immediately instead of waiting for the full response.</li><li><strong>Why it matters:</strong> perceived responsiveness drives adoption for a chat-style product.</li>",
                 considerAccuracyLabel: "Accuracy",
-                considerAccuracy: "The personalized progress-analysis tool compares a student's actual course and credit records against department rules in real time, instead of giving a generic answer — the core fix behind Challenge #1 (personalized graduation-progress answers).",
+                considerAccuracy: "<li><strong>Personalized progress-analysis tool:</strong> compares a student's actual records against department rules in real time.</li><li><strong>Not</strong> a generic answer \u2014 the core fix behind Challenge #1.</li>",
                 considerStabilityLabel: "Stability",
-                considerStability: "Splitting the system into independent modules (student frontend / AI agent / admin API / database / email service) plus persistent cloud storage means a redeploy or a single module failing doesn't take down the whole system or lose data — directly addressed in Challenge #2.",
+                considerStability: "<li><strong>Independent modules:</strong> student frontend / AI agent / admin API / database / email service.</li><li><strong>Persistent cloud storage</strong> means a redeploy or a single module failing doesn't take down the whole system or lose data.</li>",
                 roleSubtitle: "Product Owner & Full-Stack Systems Engineer",
                 roleIntro: "In our four-person team, I served as Product Owner and lead systems engineer, turning the team's product concept into a fully working, demo-able, deployed system. My work covered the whole lifecycle — from requirements planning through technical integration to launch:",
                 roleList: "<li><strong>Product &amp; system planning:</strong> Translated departmental admin pain points into system requirements, and designed the student app, admin console, AI agent, knowledge base, and personalized progress-analysis modules.</li><li><strong>Core system development:</strong> Owned frontend/backend integration, API design, data pipelines, and the main system logic.</li><li><strong>AI agent implementation:</strong> Integrated LLM function calling with multi-tool orchestration, so the agent automatically selects the right tool — calendar, graduation requirements, practicum credits, global-exposure credits, defense SOPs, resource links, or personal graduation progress — for each question.</li><li><strong>Admin console:</strong> Built calendar management, resource-link management, student/alumni records, document import, a dashboard, and email notifications — lowering the bar for ongoing maintenance.</li><li><strong>Iteration &amp; maintenance:</strong> Continuously adjusted features, fixed bugs, and improved the UI/UX based on competition requirements, course feedback, and real usage.</li><li><strong>Deployment &amp; launch:</strong> Handled deployment, data persistence, environment configuration, and ongoing operations — taking the project from concept/prototype to a publicly usable MVP.</li><li><strong>Official project site:</strong> Independently built the project's public website, bringing together the product vision, features, team info, walkthroughs, and competition results into one consistent brand.</li>",
@@ -631,11 +648,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 outcomeLabel: "Outcome",
                 c1Title: "Generic Q&A can't reflect each student's actual graduation progress",
                 c1Problem: "The same graduation rule doesn't mean the same thing for every student. What students actually want to know isn't \"what are the requirements\" — it's \"what have I already completed, what's left, and what should I do next.\"",
-                c1Solution: "I designed student login and a personalized progress-analysis pipeline: course records, credits, global-exposure and practicum credits, English requirements, and thesis progress are stored in SQLite, and a dedicated tool compares them against department graduation rules in real time. The system generates completed items, remaining items, specific gaps, and next-step recommendations per student — with an admin-side view for editing student records and spotting at-risk students.",
+                                c1Solution: "<li>Designed <strong>student login + a personalized progress-analysis pipeline</strong> \u2014 courses, credits, global-exposure/practicum credits, English requirements, and thesis progress, stored in SQLite.</li><li>A dedicated tool <strong>compares records against department rules in real time</strong>, generating completed items, remaining items, specific gaps, and next-step recommendations per student.</li><li>Admin-side view for <strong>editing records and spotting at-risk students</strong>.</li>",
                 c1Outcome: "This shifted the service from a shared-information lookup to personalized decision support, and let staff spot high-risk or delayed-graduation students much faster.",
                 c2Title: "From a classroom prototype to a maintainable production system",
                 c2Problem: "A competition system can't just survive one demo — it has to handle frontend/backend integration, streaming responses, data persistence, cloud environment quirks, error handling, and ongoing content updates. If everything were hard-coded, every change would require redevelopment, which admin staff simply couldn't maintain themselves.",
-                c2Solution: "I split the system into modules — student frontend, AI agent, admin API, knowledge base, student database, and email service — with FastAPI serving REST endpoints and streaming responses. Data lives in a structured knowledge base and SQLite, backed by persistent cloud storage so nothing is lost on redeploy. I also built a full admin console so non-engineers can add events, edit resource links, update student records, import documents, and send notifications themselves — cutting future maintenance loose from needing a developer.",
+                                c2Solution: "<li>Split the system into <strong>modules</strong> \u2014 student frontend, AI agent, admin API, knowledge base, student database, email service \u2014 with FastAPI REST + streaming endpoints.</li><li>Data in a structured knowledge base + SQLite, backed by <strong>persistent cloud storage</strong> so nothing is lost on redeploy.</li><li>Built a full <strong>admin console</strong> so non-engineers can add events, edit links, update records, import documents, and send notifications themselves.</li>",
                 c2Outcome: "The project went from a proof of concept to a deployable MVP with a student frontend, admin console, AI agent, data management, email notifications, and a public website — built modularly so it could be adapted to other departments in the future.",
                 demoTitle: "Demo",
                 footerContact: "Contact",
@@ -684,13 +701,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 roleTitle: "我負責的部分",
                 considerTitle: "工程權衡",
                 considerCostLabel: "成本",
-                considerCost: "使用 SQLite 搭配 Zeabur（非企業級代管資料庫），讓競賽 MVP 的主機成本趨近於零；GPT-4o 則是因為 Function Calling 的穩定度而選用，正確呼叫工具比省下幾分錢更重要。",
+                considerCost: "<li><strong>SQLite＋Zeabur</strong>（非企業級代管資料庫），讓競賽 MVP 的主機成本趨近於零。</li><li><strong>模型選擇：</strong>GPT-4o，看中的是 Function Calling 的穩定度，而非便宜。</li><li><strong>原因：</strong>正確呼叫工具比省下幾分錢更重要。</li>",
                 considerSpeedLabel: "速度",
-                considerSpeed: "FastAPI 搭配 SSE 串流回覆，讓使用者第一個字馬上出現、不用等完整回答產生完畢——對聊天類產品來說，「感覺起來夠快」直接影響採用意願。",
+                considerSpeed: "<li><strong>FastAPI＋SSE 串流：</strong>第一個字馬上出現，不用等完整回答產生完畢。</li><li><strong>為何重要：</strong>對聊天類產品來說，「感覺起來夠快」直接影響採用意願。</li>",
                 considerAccuracyLabel: "準確性",
-                considerAccuracy: "個人化進度分析工具即時比對學生實際修課／學分紀錄與系所規定，而非給制式化答案，這正是挑戰一（個人化畢業進度回答）的核心解法。",
+                considerAccuracy: "<li><strong>個人化進度分析工具：</strong>即時比對學生實際修課／學分紀錄與系所規定。</li><li><strong>而非</strong>制式化答案——這正是挑戰一（個人化畢業進度回答）的核心解法。</li>",
                 considerStabilityLabel: "穩定性",
-                considerStability: "把系統拆成獨立模組（學生前台／AI Agent／管理 API／資料庫／郵件服務）並搭配雲端持久化儲存，單一模組出狀況或重新部署都不會拖垮整個系統或遺失資料，對應挑戰二的解法。",
+                considerStability: "<li><strong>獨立模組拆分：</strong>學生前台／AI Agent／管理 API／資料庫／郵件服務。</li><li><strong>雲端持久化儲存：</strong>單一模組出狀況或重新部署，不會拖垮整個系統或遺失資料。</li>",
                 roleSubtitle: "產品負責人（Product Owner）暨全端系統工程師",
                 roleIntro: "在陳柏臻、蕭文欣、吳承耘、陳念歆組成的四人團隊中，我主要擔任產品負責人（Product Owner, PO）與核心系統工程師，負責將團隊提出的產品構想轉化為可實際操作、展示與部署的完整系統。我的工作不僅是開發單一功能，而是主導系統從需求規劃、技術整合到正式上線的完整生命週期，包括：",
                 roleList: "<li><strong>產品與系統規劃：</strong>將系所行政痛點轉化為系統需求，規劃學生端、管理端、AI Agent、知識庫與個人化進度分析等功能模組。</li><li><strong>核心系統開發：</strong>負責前後端功能整合、API 設計、資料處理流程及主要系統邏輯建置。</li><li><strong>AI Agent 功能實作：</strong>整合大型語言模型的工具呼叫（Function Calling）與多工具協作機制，使系統能依問題內容自動選擇行事曆、畢業規定、實作能力、全球視野、口試 SOP、資源連結及個人畢業進度等工具。</li><li><strong>管理後台建置：</strong>開發行事曆、資源連結、學生與校友資料、文件匯入、儀表板及郵件通知等管理功能，降低系統後續維護門檻。</li><li><strong>系統修改與持續維護：</strong>依據競賽需求、課程回饋與實際操作結果持續調整功能、修正錯誤、改善介面與優化使用流程。</li><li><strong>部署與正式上線：</strong>處理系統部署、資料持久化、環境設定及線上服務維運，使專案不只停留在概念或原型，而能成為可公開操作的 MVP。</li><li><strong>專案官方網站架設：</strong>獨立建置專案官網，統整產品理念、系統特色、團隊資訊、操作展示與競賽成果，建立完整且一致的產品形象。</li>",
@@ -701,11 +718,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 outcomeLabel: "成果",
                 c1Title: "一般問答無法反映每位學生的實際畢業進度",
                 c1Problem: "相同的畢業規定套用在不同學生身上，答案並不完全相同。學生真正關心的通常不是「畢業規定有哪些」，而是「我已經完成什麼、還差什麼，以及下一步該做什麼」。",
-                c1Solution: "我設計學生登入與個人化進度分析機制，將學生修課、學分、全球視野、實作能力、英文門檻及論文進度等資料存放於 SQLite 資料庫，再由專屬工具即時比對系所畢業條件。系統可依個別學生狀態產生已完成項目、待完成項目、具體差距與後續行動建議，並在管理後台提供學生資料編輯與畢業風險總覽功能。",
+                                c1Solution: "<li>設計<strong>學生登入＋個人化進度分析機制</strong>——修課、學分、全球視野、實作能力、英文門檻、論文進度存放於 SQLite。</li><li>專屬工具<strong>即時比對系所畢業條件</strong>，產生已完成項目、待完成項目、具體差距與後續行動建議。</li><li>管理後台提供<strong>學生資料編輯與畢業風險總覽</strong>。</li>",
                 c1Outcome: "將服務由「提供共同資訊」提升為「個人化決策支援」，也讓行政人員能更快速掌握高風險或可能延畢的學生。",
                 c2Title: "從課堂原型走向可長期維護的線上系統",
                 c2Problem: "競賽系統不能只完成單次 Demo，還需要面對前後端整合、串流回覆、資料持久化、雲端環境差異、錯誤處理及後續內容更新等實際部署問題。若所有資料與規則都寫死在程式碼中，每次修改都必須重新開發，難以交由行政人員使用。",
-                c2Solution: "我將系統拆分為學生前台、AI Agent、管理 API、知識庫、學生資料庫與郵件服務等模組，並以 FastAPI 提供 REST API 與串流回覆機制。資料則分別透過結構化知識庫與 SQLite 管理，並搭配雲端持久化空間，避免重新部署後資料遺失。此外，我建立完整管理後台，讓非工程背景的管理者也能自行新增活動、修改資源連結、更新學生資料、匯入文件與發送通知，降低後續維護對開發者的依賴。",
+                                c2Solution: "<li>將系統拆分為<strong>模組</strong>——學生前台、AI Agent、管理 API、知識庫、學生資料庫、郵件服務，以 FastAPI 提供 REST 與串流回覆。</li><li>資料存放於結構化知識庫＋SQLite，搭配<strong>雲端持久化空間</strong>，避免重新部署後資料遺失。</li><li>建立完整<strong>管理後台</strong>，讓非工程背景的管理者可自行新增活動、修改連結、更新資料、匯入文件與發送通知。</li>",
                 c2Outcome: "成功將專案從概念驗證轉化為具備前台、後台、AI Agent、資料管理、郵件通知與公開網站的可部署 MVP，並保留未來複製至其他系所的模組化擴充能力。",
                 demoTitle: "Demo",
                 footerContact: "聯絡方式",

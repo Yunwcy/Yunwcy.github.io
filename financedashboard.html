@@ -438,6 +438,23 @@ footer {
 }
 .consider-card p { margin: 0; font-size: 0.88rem; }
 
+/* Compact bullet lists used inside cards to replace dense paragraphs */
+.consider-card ul, .challenge-block ul, .challenge-card > ul {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 0.88rem;
+}
+.challenge-card > ul { font-size: 0.9rem; }
+.consider-card ul li, .challenge-block ul li, .challenge-card > ul li {
+    margin-bottom: 6px;
+}
+.consider-card ul li:last-child, .challenge-block ul li:last-child,
+.challenge-card > ul li:last-child { margin-bottom: 0; }
+.consider-card strong, .challenge-block p strong, .challenge-block ul strong,
+.challenge-card > ul strong { color: var(--dark-green); }
+.challenge-block.solution ul { color: var(--dark-green); }
+.challenge-block.solution strong { color: var(--primary-green); }
+
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
@@ -522,19 +539,19 @@ footer {
     <div class="consider-grid">
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
-            <p data-i18n="considerCost"></p>
+            <ul data-i18n-html="considerCost"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
-            <p data-i18n="considerSpeed"></p>
+            <ul data-i18n-html="considerSpeed"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
-            <p data-i18n="considerAccuracy"></p>
+            <ul data-i18n-html="considerAccuracy"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
-            <p data-i18n="considerStability"></p>
+            <ul data-i18n-html="considerStability"></ul>
         </div>
     </div>
 </section>
@@ -614,7 +631,7 @@ footer {
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n-html="c1Solution"></p>
+            <ul data-i18n-html="c1Solution"></ul>
         </div>
     </div>
 
@@ -626,7 +643,7 @@ footer {
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c2Solution"></p>
+            <ul data-i18n-html="c2Solution"></ul>
         </div>
     </div>
 
@@ -638,7 +655,7 @@ footer {
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n-html="c3Solution"></p>
+            <ul data-i18n-html="c3Solution"></ul>
         </div>
     </div>
 
@@ -911,13 +928,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "Security",
                 considerTitle: "Engineering Trade-offs",
                 considerCostLabel: "Cost",
-                considerCost: "Yahoo Finance and Stooq are free data sources instead of a paid market-data API — the right fit for a personal-use app tracking a handful of holdings, not a trading platform.",
+                considerCost: "<li><strong>Free data sources:</strong> Yahoo Finance + Stooq instead of a paid market-data API.</li><li><strong>Why:</strong> the right fit for a personal-use app tracking a handful of holdings, not a trading platform.</li>",
                 considerSpeedLabel: "Speed",
-                considerSpeed: "A local-first storage model means every screen — net worth, holdings, budgets — renders instantly from on-device data, with no network round-trip needed just to view your own numbers.",
+                considerSpeed: "<li><strong>Local-first storage:</strong> every screen \u2014 net worth, holdings, budgets \u2014 renders instantly from on-device data.</li><li><strong>Result:</strong> no network round-trip needed just to view your own numbers.</li>",
                 considerAccuracyLabel: "Accuracy",
-                considerAccuracy: "Two independent price sources (Yahoo Finance, with Stooq as a fallback) reduce the chance that a single provider outage or a missing ticker leaves stock values stale or wrong.",
+                considerAccuracy: "<li><strong>Two independent price sources:</strong> Yahoo Finance primary, Stooq as fallback.</li><li><strong>Why:</strong> reduces the risk of stale or wrong stock values from a single provider outage or missing ticker.</li>",
                 considerStabilityLabel: "Stability",
-                considerStability: "Because everything lives in an encrypted local database rather than a remote server the developer has to maintain, the app keeps working — and the user's data stays available — with no backend to go down.",
+                considerStability: "<li><strong>Encrypted local database</strong> instead of a remote server to maintain.</li><li><strong>Result:</strong> the app keeps working and data stays available \u2014 there's no backend to go down.</li>",
                 featuresTitle: "Features",
                 f1Title: "Financial Overview",
                 f1List: "<li>Shows total assets, total liabilities, and current net worth</li><li>Shows this month's income, expenses, and cash flow</li><li>Custom analysis period (this month / last month / this year / last 90 days) with a live or manual exchange rate</li><li>Asset composition donut chart</li><li>Liability composition chart</li><li>Income / expense trend chart, switchable between line and bar</li><li>Expense category breakdown chart</li><li>One-tap daily asset snapshot, plus quick-add shortcuts for a transaction, account, stock, or policy</li>",
@@ -946,13 +963,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 solutionLabel: "Solution",
                 c1Title: "Financial data scattered across platforms",
                 c1Problem: "Users' financial information is usually scattered across different platforms — banking apps, brokerage apps, insurer records, mortgage details, manual spreadsheets, and so on. Even when every piece of data exists somewhere, it's hard to quickly answer ‘What are my total assets right now? What's my net worth? Is my debt load too high?’",
-                c1Solution: "I designed <code>FinanceVault</code> as the core data model, unifying expense records, stocks, bank accounts, loans, policies, real estate, financial goals, and snapshots into one structure. The overview page then pulls it all together — cash, stocks, policy cash value, real estate valuation, liabilities, income, expenses, and net worth trend — in a single view.",
+                                c1Solution: "<li>Designed <code>FinanceVault</code> as the <strong>core data model</strong> \u2014 unifying expenses, stocks, bank accounts, loans, policies, real estate, goals, and snapshots into one structure.</li><li>The overview page pulls it together: cash, stocks, policy cash value, real estate valuation, liabilities, income, expenses, net worth trend \u2014 <strong>in a single view</strong>.</li>",
                 c2Title: "Users need long-term tracking, not just a snapshot",
                 c2Problem: "Net worth and investment P&L change over time — with only a snapshot of the current numbers, users have no way to see how their finances are actually trending.",
-                c2Solution: "I added a daily asset snapshot and a stock P&L snapshot mechanism. Users can manually create a snapshot for today, and snapshots recalculate after updating stock prices or editing asset data. Charts then plot net worth, asset composition, and stock P&L over time, so users can actually see how their finances are moving.",
+                                c2Solution: "<li>Added a <strong>daily asset snapshot</strong> and stock P&amp;L snapshot mechanism.</li><li>Users create a snapshot manually, or it recalculates after updating prices/editing data.</li><li>Charts plot net worth, asset composition, and stock P&amp;L <strong>over time</strong>.</li>",
                 c3Title: "Web JSON format didn't match the app's data model",
                 c3Problem: "The original web version stored data as JSON in localStorage, with field names that didn't fully match the app's native data model. A direct import could misalign fields, silently zero out data, or fail to parse at all.",
-                c3Solution: "I built <code>WebDashboardImporter</code> to convert the original web JSON format — mapping fields like <code>transactions</code>, <code>stocks</code>, <code>accounts</code>, <code>loans</code>, <code>policies</code>, <code>realEstate</code>, <code>goals</code>, and <code>snapshots</code> into the app's internal models — plus added clear error messages so users don't accidentally try to import an encrypted backup as plain-text JSON.",
+                                c3Solution: "<li>Built <code>WebDashboardImporter</code> to <strong>convert the original web JSON format</strong>.</li><li>Maps fields like <code>transactions</code>, <code>stocks</code>, <code>accounts</code>, <code>loans</code>, <code>policies</code>, <code>realEstate</code>, <code>goals</code>, <code>snapshots</code> into the app's internal models.</li><li>Added <strong>clear error messages</strong> so users don't accidentally import an encrypted backup as plain-text JSON.</li>",
                 c4Title: "Sensitive data can't just live in a plain file",
                 c4Problem: "A finance app records highly sensitive data — assets, liabilities, stocks, policies, real estate — and storing it in plain text on the phone would be a real risk.",
                 c4Solution: "I encrypted the local database using CryptoKit's AES-GCM and stored the master key in the Keychain. The app unlocks with Face ID, Touch ID, or the device passcode, masks its content when backgrounded, and blurs the screen if a screenshot is detected. Backups can be exported encrypted, and plain-text JSON export is designed as a manual, explicit action so an unencrypted file is never generated automatically.",
@@ -1030,13 +1047,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "安全機制",
                 considerTitle: "工程權衡",
                 considerCostLabel: "成本",
-                considerCost: "使用 Yahoo Finance／Stooq 免費資料源，而非付費金融數據 API——適合追蹤少量持股的個人使用情境，而非交易平台等級的需求。",
+                considerCost: "<li><strong>免費資料源：</strong>Yahoo Finance＋Stooq，而非付費金融數據 API。</li><li><strong>原因：</strong>適合追蹤少量持股的個人使用情境，而非交易平台等級的需求。</li>",
                 considerSpeedLabel: "速度",
-                considerSpeed: "本機優先儲存讓每個畫面（淨值、持倉、預算）都能直接從裝置端資料即時渲染，光是查看自己的數字就不需要網路來回。",
+                considerSpeed: "<li><strong>本機優先儲存：</strong>淨值、持倉、預算等畫面都能直接從裝置端資料即時渲染。</li><li><strong>結果：</strong>光是查看自己的數字，就不需要網路來回。</li>",
                 considerAccuracyLabel: "準確性",
-                considerAccuracy: "使用兩個獨立股價來源（Yahoo Finance 為主、Stooq 為備援），降低單一資料源中斷或缺代號時，股票市值顯示過期或錯誤的風險。",
+                considerAccuracy: "<li><strong>雙股價來源：</strong>Yahoo Finance 為主、Stooq 為備援。</li><li><strong>目的：</strong>降低單一資料源中斷或缺代號時，股票市值顯示過期或錯誤的風險。</li>",
                 considerStabilityLabel: "穩定性",
-                considerStability: "所有資料都存在加密的本機資料庫，而非需要維運的遠端伺服器，代表 App 不會因為後端掛掉而無法使用，使用者資料也隨時可以存取。",
+                considerStability: "<li><strong>加密本機資料庫，</strong>而非需要維運的遠端伺服器。</li><li><strong>結果：</strong>App 不會因後端掛掉而無法使用，使用者資料也隨時可以存取。</li>",
                 featuresTitle: "功能特色",
                 f1Title: "財務總覽",
                 f1List: "<li>顯示總資產、總負債與目前淨值</li><li>顯示本月收入、本月支出與現金流</li><li>可自訂分析區間（本月／上月／今年／近90天）並設定即時或手動匯率</li><li>支援資產組成甜甜圈圖</li><li>支援負債組成圖</li><li>支援收入／支出趨勢圖，可切換折線圖／直條圖</li><li>支援支出類別分布圖</li><li>可一鍵建立今日資產快照，並提供記帳／帳戶／股票／保單的快速新增捷徑</li>",
@@ -1065,13 +1082,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 solutionLabel: "解法",
                 c1Title: "財務資料分散，難以看出完整資產狀況",
                 c1Problem: "使用者的財務資訊通常散落在不同平台，例如銀行 App、券商 App、保險公司資料、房貸資訊、手動記帳表格等。即使每一項資料都存在，也很難快速回答「我現在總資產多少？淨值多少？負債壓力是否過高？」",
-                c1Solution: "設計 <code>FinanceVault</code> 作為核心資料模型，將記帳、股票、銀行帳戶、貸款、保單、房地產、理財目標與快照紀錄整合成同一個資料結構。App 透過總覽頁集中顯示現金、股票、保單現金價值、房地產估值、負債、收入、支出與淨值趨勢。",
+                                c1Solution: "<li>設計 <code>FinanceVault</code> 作為<strong>核心資料模型</strong>，將記帳、股票、銀行帳戶、貸款、保單、房地產、理財目標與快照紀錄整合成同一個資料結構。</li><li>總覽頁集中顯示現金、股票、保單現金價值、房地產估值、負債、收入、支出與淨值趨勢，<strong>一次看完</strong>。</li>",
                 c2Title: "使用者需要長期追蹤，而不是只看當下數字",
                 c2Problem: "資產淨值與投資損益會隨時間變動，如果只有目前資料，使用者無法觀察長期趨勢。",
-                c2Solution: "加入每日資產快照與股票損益快照機制。使用者可以手動建立今日快照，也能在更新股價、修改資產資料後重新計算。圖表會顯示淨值、資產組成、股票損益趨勢，讓使用者看見財務變化。",
+                                c2Solution: "<li>加入<strong>每日資產快照</strong>與股票損益快照機制。</li><li>使用者可手動建立快照，或在更新股價／修改資產資料後自動重新計算。</li><li>圖表顯示淨值、資產組成、股票損益<strong>隨時間的變化</strong>。</li>",
                 c3Title: "原網頁版 JSON 與 App 資料模型格式不同",
                 c3Problem: "最初的網頁版資料使用 localStorage JSON 儲存，欄位命名與 App 原生模型不完全一致。直接匯入可能造成欄位對不上、資料變成 0 或無法解析。",
-                c3Solution: "建立 <code>WebDashboardImporter</code>，支援原網頁 JSON 格式轉換。它會將 <code>transactions</code>、<code>stocks</code>、<code>accounts</code>、<code>loans</code>、<code>policies</code>、<code>realEstate</code>、<code>goals</code>、<code>snapshots</code> 等欄位轉換成 App 內部模型。同時加入錯誤提示，避免使用者誤把加密備份當作明文 JSON 匯入。",
+                                c3Solution: "<li>建立 <code>WebDashboardImporter</code>，<strong>支援原網頁 JSON 格式轉換</strong>。</li><li>將 <code>transactions</code>、<code>stocks</code>、<code>accounts</code>、<code>loans</code>、<code>policies</code>、<code>realEstate</code>、<code>goals</code>、<code>snapshots</code> 等欄位轉換成 App 內部模型。</li><li>加入<strong>錯誤提示</strong>，避免使用者誤把加密備份當作明文 JSON 匯入。</li>",
                 c4Title: "財務資料敏感，不能只靠普通檔案儲存",
                 c4Problem: "理財 App 會記錄資產、負債、股票、保單與房產等敏感資料，如果直接以明文存在手機中，風險較高。",
                 c4Solution: "使用 CryptoKit 的 AES-GCM 將本機資料庫加密，並將主金鑰存放於 Keychain。App 開啟時透過 Face ID、Touch ID 或裝置密碼解鎖，切到背景時自動遮蔽內容，偵測到截圖也會自動模糊畫面。資料備份也支援加密匯出，明文 JSON 則設計成手動觸發，避免自動產生未加密檔案。",

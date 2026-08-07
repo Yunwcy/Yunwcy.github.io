@@ -394,6 +394,23 @@ footer {
 }
 .consider-card p { margin: 0; font-size: 0.88rem; }
 
+/* Compact bullet lists used inside cards to replace dense paragraphs */
+.consider-card ul, .challenge-block ul, .challenge-card > ul {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 0.88rem;
+}
+.challenge-card > ul { font-size: 0.9rem; }
+.consider-card ul li, .challenge-block ul li, .challenge-card > ul li {
+    margin-bottom: 6px;
+}
+.consider-card ul li:last-child, .challenge-block ul li:last-child,
+.challenge-card > ul li:last-child { margin-bottom: 0; }
+.consider-card strong, .challenge-block p strong, .challenge-block ul strong,
+.challenge-card > ul strong { color: var(--dark-green); }
+.challenge-block.solution ul { color: var(--dark-green); }
+.challenge-block.solution strong { color: var(--primary-green); }
+
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
@@ -479,19 +496,19 @@ footer {
     <div class="consider-grid">
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
-            <p data-i18n="considerCost"></p>
+            <ul data-i18n-html="considerCost"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
-            <p data-i18n="considerSpeed"></p>
+            <ul data-i18n-html="considerSpeed"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
-            <p data-i18n="considerAccuracy"></p>
+            <ul data-i18n-html="considerAccuracy"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
-            <p data-i18n="considerStability"></p>
+            <ul data-i18n-html="considerStability"></ul>
         </div>
     </div>
 </section>
@@ -716,13 +733,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "Infra & Deployment",
                 considerTitle: "Engineering Trade-offs",
                 considerCostLabel: "Cost",
-                considerCost: "Vercel Postgres and Blob run on usage-based free/hobby tiers, with no dedicated server to pay for around the clock — appropriate for a lab tool that gets intermittent use, not around-the-clock traffic.",
+                considerCost: "<li><strong>Vercel Postgres + Blob:</strong> usage-based free/hobby tiers, no dedicated server to pay for around the clock.</li><li><strong>Fit:</strong> appropriate for a lab tool with intermittent use, not around-the-clock traffic.</li>",
                 considerSpeedLabel: "Speed",
-                considerSpeed: "Client-side direct-to-Blob uploads bypass the backend entirely, sidestepping Vercel's serverless function payload limit and avoiding a slow proxy-through-server upload path — the fix that made 50MB file uploads possible.",
+                considerSpeed: "<li><strong>Client-side direct-to-Blob uploads</strong> bypass the backend entirely.</li><li><strong>Why:</strong> sidesteps Vercel's serverless function payload limit and a slow proxy-through-server path.</li><li><strong>Result:</strong> the fix that made 50MB file uploads possible.</li>",
                 considerAccuracyLabel: "Accuracy",
-                considerAccuracy: "Middleware-enforced route guards plus a whitelist check during sign-in ensure only actual lab members with the right role ever see admin-only actions — access-control correctness, not just convenience.",
+                considerAccuracy: "<li><strong>Middleware route guards</strong> + a whitelist check during sign-in.</li><li><strong>Result:</strong> only actual lab members with the right role ever see admin-only actions \u2014 correctness, not just convenience.</li>",
                 considerStabilityLabel: "Stability",
-                considerStability: "Prisma's typed schema catches data-shape mistakes at build time rather than at runtime, and GitHub-triggered CI/CD means every deploy goes through the same repeatable path — reducing the chance of a bad manual deploy.",
+                considerStability: "<li><strong>Prisma's typed schema</strong> catches data-shape mistakes at build time, not runtime.</li><li><strong>GitHub-triggered CI/CD:</strong> every deploy goes through the same repeatable path, reducing the chance of a bad manual deploy.</li>",
                 featuresTitle: "Features",
                 f1Title: "Authentication & Access Control",
                 f1List: "<li>Google OAuth login — no separate account/password needed; lab members sign in with their existing Google account.</li><li>Email whitelist — only admin-approved emails can log in; the whitelist starts empty (open to everyone) to simplify initial setup.</li><li>Role-based access (USER/ADMIN) — regular members can view, upload, and download within their permissions; admins can also create projects, manage member roles and the whitelist, delete any document/project, and broadcast announcements.</li><li>First-time onboarding — users without a name on file are redirected to an onboarding page before accessing anything else.</li>",
@@ -807,13 +824,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "基礎架構與部署",
                 considerTitle: "工程權衡",
                 considerCostLabel: "成本",
-                considerCost: "Vercel Postgres 與 Blob 都採用量計費的免費／Hobby 方案，不需要 24 小時常駐的伺服器——適合實驗室工具這種間歇性使用場景，而非全天候高流量。",
+                considerCost: "<li><strong>Vercel Postgres＋Blob：</strong>量計費的免費／Hobby 方案，不需要 24 小時常駐伺服器。</li><li><strong>適合場景：</strong>實驗室工具這種間歇性使用，而非全天候高流量。</li>",
                 considerSpeedLabel: "速度",
-                considerSpeed: "前端直傳 Vercel Blob，完全繞過後端，避開 Vercel Serverless Function 的檔案大小限制，也不用經過伺服器中繼的慢速上傳路徑——這正是支援 50MB 大檔案上傳的解法。",
+                considerSpeed: "<li><strong>前端直傳 Vercel Blob，</strong>完全繞過後端。</li><li><strong>原因：</strong>避開 Serverless Function 的檔案大小限制，也不用經過伺服器中繼的慢速上傳路徑。</li><li><strong>結果：</strong>這正是支援 50MB 大檔案上傳的解法。</li>",
                 considerAccuracyLabel: "準確性",
-                considerAccuracy: "Middleware 路由守衛搭配登入時的白名單檢查，確保只有真正的實驗室成員、且具備正確角色，才看得到管理員專屬功能——這是存取控制的正確性，不只是方便性。",
+                considerAccuracy: "<li><strong>Middleware 路由守衛</strong>搭配登入時的白名單檢查。</li><li><strong>結果：</strong>只有真正的實驗室成員、且具備正確角色，才看得到管理員專屬功能。</li>",
                 considerStabilityLabel: "穩定性",
-                considerStability: "Prisma 的型別化 Schema 能在建置期就抓出資料結構錯誤，不用等到執行期才發現；搭配 GitHub 觸發的 CI/CD，每次部署都走同一套可重複的流程，降低手動部署出錯的機率。",
+                considerStability: "<li><strong>Prisma 型別化 Schema：</strong>建置期就能抓出資料結構錯誤，不用等到執行期。</li><li><strong>GitHub 觸發 CI/CD：</strong>每次部署都走同一套可重複的流程，降低手動部署出錯的機率。</li>",
                 featuresTitle: "功能特色",
                 f1Title: "身份驗證與存取控制",
                 f1List: "<li>Google OAuth 登入：不需另外註冊帳號密碼，用實驗室成員既有的 Google 帳號即可登入。</li><li>Email 白名單機制：只有管理員預先核准的 Email 才能成功登入；白名單為空時開放所有人登入，方便系統剛部署時的初始設定。</li><li>角色分級（USER／ADMIN）：一般成員僅能瀏覽、上傳、下載自己有權限的內容；管理員多了新增計畫、管理成員權限、管理白名單、刪除任何文件／計畫、發布全域公告等權限。</li><li>新生報到流程：第一次登入若沒有填寫本名，會被導向報到頁面完成基本資料，才能進入系統其他頁面。</li>",

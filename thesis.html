@@ -367,6 +367,23 @@ body {
 }
 .challenge-block.solution p { color: var(--dark-green); }
 
+/* Compact bullet lists used inside cards to replace dense paragraphs */
+.consider-card ul, .finding-card ul, .challenge-block ul, .challenge-card > ul {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 0.88rem;
+}
+.finding-card ul, .challenge-card > ul { font-size: 0.9rem; }
+.consider-card ul li, .finding-card ul li, .challenge-block ul li, .challenge-card > ul li {
+    margin-bottom: 6px;
+}
+.consider-card ul li:last-child, .finding-card ul li:last-child,
+.challenge-block ul li:last-child, .challenge-card > ul li:last-child { margin-bottom: 0; }
+.consider-card strong, .finding-card strong, .challenge-block p strong, .challenge-block ul strong,
+.challenge-card > ul strong { color: var(--dark-green); }
+.challenge-block.solution ul { color: var(--dark-green); }
+.challenge-block.solution strong { color: var(--primary-green); }
+
 /* Demo video */
 .video-wrap {
     position: relative;
@@ -513,19 +530,19 @@ footer {
     <div class="consider-grid">
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
-            <p data-i18n="considerCost"></p>
+            <ul data-i18n-html="considerCost"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
-            <p data-i18n="considerSpeed"></p>
+            <ul data-i18n-html="considerSpeed"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
-            <p data-i18n="considerAccuracy"></p>
+            <ul data-i18n-html="considerAccuracy"></ul>
         </div>
         <div class="consider-card">
             <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
-            <p data-i18n="considerStability"></p>
+            <ul data-i18n-html="considerStability"></ul>
         </div>
     </div>
 </section>
@@ -545,11 +562,11 @@ footer {
         <h3><span class="num">1</span> <span data-i18n="c1Title">Administrative data is scattered and inconsistently formatted</span></h3>
         <div class="challenge-block">
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
-            <p data-i18n="c1Problem"></p>
+            <p data-i18n-html="c1Problem"></p>
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c1Solution"></p>
+            <ul data-i18n-html="c1Solution"></ul>
         </div>
     </div>
 
@@ -557,11 +574,11 @@ footer {
         <h3><span class="num">2</span> <span data-i18n="c2Title">A single RAG pipeline struggles with complex administrative questions</span></h3>
         <div class="challenge-block">
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
-            <p data-i18n="c2Problem"></p>
+            <p data-i18n-html="c2Problem"></p>
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c2Solution"></p>
+            <ul data-i18n-html="c2Solution"></ul>
         </div>
     </div>
 
@@ -569,11 +586,11 @@ footer {
         <h3><span class="num">3</span> <span data-i18n="c3Title">A single automated score doesn't fully reflect system quality</span></h3>
         <div class="challenge-block">
             <span class="challenge-label" data-i18n="problemLabel">Problem</span>
-            <p data-i18n="c3Problem"></p>
+            <p data-i18n-html="c3Problem"></p>
         </div>
         <div class="challenge-block solution">
             <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
-            <p data-i18n="c3Solution"></p>
+            <ul data-i18n-html="c3Solution"></ul>
         </div>
     </div>
 </section>
@@ -584,17 +601,17 @@ footer {
 
     <div class="challenge-card">
         <h3><span class="num">01</span> <span data-i18n="contrib1Title">Lowering the cost of finding information and repeated back-and-forth</span></h3>
-        <p data-i18n="contrib1Content"></p>
+        <ul data-i18n-html="contrib1Content"></ul>
     </div>
 
     <div class="challenge-card">
         <h3><span class="num">02</span> <span data-i18n="contrib2Title">Making complex administrative questions faster to answer</span></h3>
-        <p data-i18n="contrib2Content"></p>
+        <ul data-i18n-html="contrib2Content"></ul>
     </div>
 
     <div class="challenge-card">
         <h3><span class="num">03</span> <span data-i18n="contrib3Title">A more natural, multimodal front door to administrative services</span></h3>
-        <p data-i18n="contrib3Content"></p>
+        <ul data-i18n-html="contrib3Content"></ul>
     </div>
 </section>
 
@@ -607,17 +624,17 @@ footer {
         <div class="finding-card">
             <div class="finding-icon"><i class="fas fa-list-check"></i></div>
             <h4 data-i18n="finding1Title">Well-suited for standardized queries</h4>
-            <p data-i18n="finding1Content"></p>
+            <ul data-i18n-html="finding1Content"></ul>
         </div>
         <div class="finding-card">
             <div class="finding-icon"><i class="fas fa-handshake"></i></div>
             <h4 data-i18n="finding2Title">Positive acceptance, trust built on evidence</h4>
-            <p data-i18n="finding2Content"></p>
+            <ul data-i18n-html="finding2Content"></ul>
         </div>
         <div class="finding-card">
             <div class="finding-icon"><i class="fas fa-database"></i></div>
             <h4 data-i18n="finding3Title">Effectiveness tracks knowledge base completeness</h4>
-            <p data-i18n="finding3Content"></p>
+            <ul data-i18n-html="finding3Content"></ul>
         </div>
     </div>
     <p class="eval-summary" data-i18n="evalInterviewSummary"></p>
@@ -774,13 +791,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "Frontend & Infra",
                 considerTitle: "Engineering Trade-offs",
                 considerCostLabel: "Cost",
-                considerCost: "GPT-5.4-mini / GPT-4o-mini were chosen over larger flagship models to keep per-query inference cost low enough for a lab-scale deployment serving an entire student body — the survey's strong quality scores show that trade-off paid off.",
+                considerCost: "<li><strong>Model choice:</strong> GPT-5.4-mini / GPT-4o-mini instead of larger flagship models.</li><li><strong>Why:</strong> keeps per-query inference cost low enough for a lab-scale, campus-wide deployment.</li><li><strong>Trade-off paid off:</strong> the survey's Information Quality score stayed high despite the smaller model.</li>",
                 considerSpeedLabel: "Speed",
-                considerSpeed: "Hybrid retrieval (dense + sparse + reranking) and the agentic reflection loop (capped at 3 iterations) trade some latency for completeness. That shows up directly in the survey as Response Speed being the lowest-rated dimension (3.38/5) — a deliberate trade-off, and the top priority for future optimization.",
+                considerSpeed: "<li><strong>Trade-off:</strong> hybrid retrieval + agentic reflection (up to 3 iterations) trades latency for completeness.</li><li><strong>Cost:</strong> Response Speed is the survey's lowest-rated dimension (3.38/5).</li><li><strong>Next step:</strong> top priority for future optimization.</li>",
                 considerAccuracyLabel: "Accuracy",
-                considerAccuracy: "Multi-stage retrieval (semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking) was built specifically to catch both semantic meaning and exact-term matches like regulation numbers — reflected in the survey's highest-rated dimension, Information Quality (4.38/5).",
+                considerAccuracy: "<li><strong>Multi-stage retrieval:</strong> semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking.</li><li><strong>Why it matters:</strong> catches both semantic meaning and exact-term matches like regulation numbers.</li><li><strong>Result:</strong> Information Quality is the survey's highest-rated dimension (4.38/5).</li>",
                 considerStabilityLabel: "Stability",
-                considerStability: "The reflection loop lets the agent verify whether the retrieved evidence actually answers the question before responding, and a persistent correction mechanism means a confirmed mistake only has to be fixed once — both aimed at consistent, dependable answers across a wide range of query types.",
+                considerStability: "<li><strong>Reflection loop:</strong> checks evidence is sufficient before answering.</li><li><strong>Persistent correction:</strong> a confirmed mistake only needs fixing once — it won't repeat.</li><li><strong>Goal:</strong> consistent, dependable answers across a wide range of query types.</li>",
                 roleTitle: "My Role",
                 roleIntro: "This project was completed independently by me, covering research planning, system development, and empirical evaluation. Key contributions include:",
                 roleList: "<li>Analyzed usage scenarios and information needs in university sports administration to define the research problem and system requirements.</li><li>Collected and organized public data from NTPU's Office of Physical Education, including announcements, regulations, forms, FAQs, course schedules, and competition records.</li><li>Built the knowledge base pipeline covering data cleaning, document parsing, chunking, metadata design, and vectorization.</li><li>Designed a hybrid retrieval mechanism combining semantic search, keyword search, query rewriting, HyDE, Reciprocal Rank Fusion (RRF), and LLM-based reranking.</li><li>Designed the Agentic RAG architecture, implementing the agent controller, tool selection, reflection loop, short-term conversational memory, and a persistent correction mechanism.</li><li>Built domain-specific tools for regulations, announcements, courses, competitions, forms, and content correction.</li><li>Integrated text, image, and speech input, and developed the Gradio conversational interface.</li><li>Designed comparative experiments between Advanced RAG and Agentic RAG, building simple and complex query datasets.</li><li>Conducted RAGAS automated evaluation, statistical testing, semi-structured interviews, and user survey analysis.</li><li>Completed the research thesis, system demonstration, results analysis, and dissemination of findings.</li>",
@@ -788,31 +805,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 problemLabel: "Problem",
                 solutionLabel: "Solution",
                 c1Title: "Administrative data is scattered and inconsistently formatted",
-                c1Problem: "Sports administration information is scattered across website announcements, PDFs, tables, images, and different types of web pages. Simply dumping everything into a single vector database causes incomplete or incorrect retrieval results, because formats, heading structures, and document semantics vary so widely.",
-                c1Solution: "I built a complete knowledge-base pipeline that crawls, normalizes, parses, chunks, and tags metadata by data type, dividing content into categories such as regulations, announcements, forms, FAQs, and competitions. On the retrieval side, I combined semantic vector search, keyword search, query rewriting, Hypothetical Document Embeddings (HyDE), Reciprocal Rank Fusion (RRF), and LLM-based reranking. This multi-stage retrieval-and-rerank pipeline preserves both semantic understanding and precise matching of proper nouns/terminology, improving retrieval coverage across heterogeneous administrative data.",
+                c1Problem: "Sports administration information is scattered across announcements, PDFs, tables, and images in inconsistent formats. Dumping everything into <strong>a single vector database causes incomplete or incorrect retrieval</strong>.",
+                c1Solution: "<li>Built a <strong>full knowledge-base pipeline</strong>: crawl \u2192 normalize \u2192 parse \u2192 chunk \u2192 tag metadata by type (regulations, announcements, forms, FAQs, competitions).</li><li>Combined <strong>semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking</strong>.</li><li>Result: preserves both semantic understanding and precise term matching, improving coverage across heterogeneous data.</li>",
                 c2Title: "A single RAG pipeline struggles with complex administrative questions",
-                c2Problem: "Some administrative questions aren't a single lookup — a user might ask about venue application eligibility, opening hours, required documents, and related regulations all at once. A single \"retrieve-then-generate\" pipeline tends to surface only part of the needed information, leading to incomplete answers.",
-                c2Solution: "I extended the system from plain RAG into a tool-oriented Agentic RAG architecture. The agent controller first interprets user intent, then selects the appropriate domain tools and data sources — issuing multiple retrieval rounds when needed, integrating evidence from different sources, and using a reflection loop to check whether the gathered information is sufficient to answer the question. Experiments showed that Agentic RAG performs on par with Advanced RAG on simple factual queries, but outperforms it on complex queries requiring tool selection and multi-source integration — across answer relevancy, context recall, and especially answer completeness, where the gap was most pronounced.",
+                c2Problem: "A single question can bundle several sub-questions at once \u2014 e.g. venue eligibility, hours, required documents, regulations. A plain <strong>\"retrieve-then-generate\" pipeline tends to surface only part of what's needed</strong>.",
+                c2Solution: "<li>Extended plain RAG into a <strong>tool-oriented Agentic RAG</strong> architecture.</li><li>Agent controller interprets intent \u2192 selects domain tools/sources \u2192 runs multiple retrieval rounds \u2192 reflects on whether evidence is sufficient.</li><li>Result: on par with Advanced RAG on simple queries, <strong>outperforms it on complex, multi-source queries</strong> \u2014 especially answer completeness.</li>",
                 c3Title: "A single automated score doesn't fully reflect system quality",
-                c3Problem: "Early in the research, I found that automated RAG evaluation results can be skewed by the choice of judge model, answer length, and phrasing. For instance, when the system integrates multiple sources into a more complete answer, that doesn't automatically score higher on every metric — relying on a single model or a single metric risks a one-sided read of system performance.",
-                c3Solution: "I redesigned the evaluation pipeline: using multiple judge models of different sizes and providers; running per-question paired comparisons with statistical significance testing; building separate datasets for simple factual queries and complex tool-routing queries; evaluating Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together; and pairing this with semi-structured interviews and post-use surveys to capture real-world usability that automated scores can't see. This mixed-methods approach — automated evaluation, statistical analysis, and user research — avoids relying on any single score and gives a fuller picture of the system's practical value in real administrative settings.",
+                c3Problem: "Automated RAG evaluation can be skewed by <strong>judge-model choice, answer length, and phrasing</strong> \u2014 a more complete answer doesn't always score higher on every metric, so relying on a single model or metric risks a one-sided read.",
+                c3Solution: "<li><strong>Multiple judge models</strong> of different sizes/providers, with per-question paired comparisons and statistical significance testing.</li><li>Separate datasets for simple factual vs. complex tool-routing queries; evaluated Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together.</li><li>Paired with <strong>semi-structured interviews and post-use surveys</strong> to capture real-world usability automated scores can't see.</li>",
                 contribTitle: "System Contributions",
                 licenseNote: "After the thesis defense, the university proactively asked to keep using the system, with plans to expand it into a full campus-wide AI Agent platform — a sign the research holds real, practical value beyond the academic deliverable.",
                 contrib1Title: "Lowering the cost of finding information and repeated back-and-forth",
-                contrib1Content: "Consolidates information that used to be scattered across announcements, regulations, forms, course pages, and competition pages into a single conversational entry point, so users can just ask in natural language instead of digging through multiple web pages and documents. It also handles routine, public, document-based FAQs on its own, cutting down how often staff have to answer the same questions.",
+                contrib1Content: "<li>Consolidates info scattered across announcements, regulations, forms, courses, and competitions into <strong>one conversational entry point</strong>.</li><li>Users ask in natural language instead of digging through multiple pages/documents.</li><li>Handles routine, public, document-based FAQs on its own \u2014 <strong>cutting repeated questions</strong> to staff.</li>",
                 contrib2Title: "Making complex administrative questions faster to answer",
-                contrib2Content: "Through Agentic RAG and tool routing, the system picks the right information source for each question and integrates evidence across documents. Compared to plain keyword search, users can ask multi-condition questions in one go — venue eligibility, application steps, required documents, related regulations — and get a single, more complete answer instead of piecing it together themselves.",
+                contrib2Content: "<li>Agentic RAG + tool routing <strong>picks the right source</strong> for each question and integrates evidence across documents.</li><li>Users can ask multi-condition questions in one go \u2014 eligibility, steps, documents, regulations.</li><li>Get a <strong>single, complete answer</strong> instead of piecing it together themselves.</li>",
                 contrib3Title: "A more natural, multimodal front door to administrative services",
-                contrib3Content: "Beyond text, the system accepts image and voice input, so users can ask directly about a screenshot of an announcement, a form, or other visual material, and keep following up in context. It shifts department websites from a \"users go find the information\" model to a more intuitive \"users state what they need, the system pulls it together\" interaction.",
+                contrib3Content: "<li>Accepts <strong>image and voice input</strong>, not just text \u2014 ask directly about a screenshot, form, or visual material.</li><li>Keep following up in context, multi-turn.</li><li>Shifts from \"users go find the information\" to <strong>\"users state what they need, the system pulls it together\"</strong>.</li>",
                 evalTitle: "User Feedback & Evaluation",
                 evalInterviewTitle: "User Interviews",
                 evalInterviewIntro: "Interviews were conducted across different user roles — including Office of Physical Education staff and students — analyzing real-world usage experience through the lenses of Appropriateness, Acceptability, and Feasibility.",
                 finding1Title: "Well-suited for standardized queries",
-                finding1Content: "Staff noted that regulations are often scattered across many documents, and the system helps them locate the relevant content quickly. High-frequency questions — venue fees, air-conditioning charges, deposits, usage rules — are also good candidates for the system to handle first, with real potential to reduce repeated phone calls and manual replies.",
+                finding1Content: "<li>Regulations are often scattered across many documents \u2014 the system helps <strong>locate relevant content quickly</strong>.</li><li>High-frequency questions (venue fees, A/C charges, deposits, usage rules) are strong candidates for the system to handle first.</li><li>Real potential to <strong>reduce repeated phone calls</strong> and manual replies.</li>",
                 finding2Title: "Positive acceptance, trust built on evidence",
-                finding2Content: "Most interviewees were willing to use the system as their first stop for information, while questions involving important rights, exceptions, or administrative judgment were still preferred to go to a person. Respondents also widely agreed that clearly citing the regulation source, linked documents, or evidence for an answer noticeably increased their trust in it.",
+                finding2Content: "<li>Most interviewees were willing to use the system as their <strong>first stop for information</strong>.</li><li>Questions involving rights, exceptions, or administrative judgment were still preferred to go to a person.</li><li><strong>Citing sources clearly</strong> \u2014 regulation, document link, evidence \u2014 noticeably increased trust.</li>",
                 finding3Title: "Effectiveness tracks knowledge base completeness",
-                finding3Content: "When the underlying data was fully built out, the system meaningfully cut down search time — but where the source website itself was missing information (competitions, representative teams, real-time venue status), the system couldn't provide a complete answer. Interviewees also pointed to fine-grained image understanding, synonym matching, response speed, and the data-update workflow as directions worth optimizing next.",
+                finding3Content: "<li>When the knowledge base was fully built out, the system <strong>meaningfully cut search time</strong>.</li><li>Where the source website itself was missing data (competitions, teams, live venue status), answers stayed incomplete.</li><li>Next to optimize: image understanding, synonym matching, response speed, data-update workflow.</li>",
                 evalInterviewSummary: "Overall, the interviews suggest the system works best as a first-line, self-service entry point for public, routine, document-based administrative questions — not as a full replacement for administrative staff.",
                 evalSurveyTitle: "Post-Use Survey",
                 surveyMeta: "N = 39 respondents · overall positive rating",
@@ -879,13 +896,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "前端與基礎架構",
                 considerTitle: "工程權衡",
                 considerCostLabel: "成本",
-                considerCost: "選用 GPT-5.4-mini／GPT-4o-mini 而非更大的旗艦模型，讓單次查詢的推論成本足夠低，才撐得起全校師生規模的實際部署——問卷中即使使用較小模型，資訊品質評分依然名列前茅。",
+                considerCost: "<li><strong>模型選擇：</strong>採用 GPT-5.4-mini／GPT-4o-mini，而非更大的旗艦模型。</li><li><strong>原因：</strong>讓單次查詢的推論成本足夠低，才撐得起全校規模的實際部署。</li><li><strong>結果：</strong>問卷中「資訊品質」評分依然名列前茅。</li>",
                 considerSpeedLabel: "速度",
-                considerSpeed: "混合檢索（語意＋關鍵字＋重新排序）與代理式反思迴圈（上限 3 次）用一定的延遲換取回答完整性，這也直接反映在問卷最低分項目「回應速度」（3.38／5）上，是刻意的取捨，也是後續優化的第一順位。",
+                considerSpeed: "<li><strong>取捨：</strong>混合檢索＋反思迴圈（上限 3 次）以延遲換取回答完整性。</li><li><strong>代價：</strong>「回應速度」是問卷中評分最低的項目（3.38／5）。</li><li><strong>下一步：</strong>後續優化的第一順位。</li>",
                 considerAccuracyLabel: "準確性",
-                considerAccuracy: "多階段檢索（語意搜尋＋關鍵字搜尋＋Query Rewrite＋HyDE＋RRF＋LLM Reranking）同時捕捉語意理解與精確比對（例如法規編號），對應問卷中評分最高的「資訊品質」（4.38／5）。",
+                considerAccuracy: "<li><strong>多階段檢索：</strong>語意搜尋＋關鍵字搜尋＋Query Rewrite＋HyDE＋RRF＋LLM Reranking。</li><li><strong>目的：</strong>同時捕捉語意理解與精確比對，例如法規編號。</li><li><strong>結果：</strong>「資訊品質」是問卷中評分最高的項目（4.38／5）。</li>",
                 considerStabilityLabel: "穩定性",
-                considerStability: "反思迴圈讓代理在回答前先確認證據是否足以回答問題，加上持久修正機制讓確認過的錯誤只需修正一次、不會重複發生，兩者都是為了在多樣化查詢下維持回答的一致性與可靠度。",
+                considerStability: "<li><strong>反思迴圈：</strong>回答前先確認證據是否足以回答問題。</li><li><strong>持久修正機制：</strong>確認過的錯誤只需修正一次，不會重複發生。</li><li><strong>目標：</strong>在多樣化查詢下維持回答的一致性與可靠度。</li>",
                 roleTitle: "我負責的部分",
                 roleIntro: "本專案由我獨立完成，涵蓋研究規劃、系統開發與實證評估。主要工作包括：",
                 roleList: "<li>分析大學體育行政的使用情境與資訊需求，定義研究問題及系統功能。</li><li>蒐集與整理國立臺北大學體育室公開資料，包括公告、法規、表單、常見問答、課程與競賽紀錄。</li><li>建立資料清理、文件解析、切塊、Metadata 設計及向量化的知識庫處理流程。</li><li>設計混合式檢索機制，整合語意搜尋、關鍵字搜尋、Query Rewrite、HyDE、RRF 與 LLM Reranking。</li><li>設計 Agentic RAG 架構，實作代理控制器、工具選擇、反思流程、短期對話記憶及持久修正機制。</li><li>建立法規、公告、課程、競賽、表單及內容修正等領域工具。</li><li>整合文字、圖片及語音輸入，並開發 Gradio 對話介面。</li><li>規劃 Advanced RAG 與 Agentic RAG 的比較實驗，建立簡單與複雜查詢資料集。</li><li>執行 RAGAS 自動評估、統計檢定、半結構式訪談及使用者問卷分析。</li><li>完成研究論文、系統展示、結果分析與研究成果發表。</li>",
@@ -893,31 +910,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 problemLabel: "問題",
                 solutionLabel: "解法",
                 c1Title: "行政資料分散且格式不一致",
-                c1Problem: "體育行政資訊分散於網站公告、PDF、表格、圖片及不同類型的網頁中。若直接將所有內容放入單一向量資料庫，容易因資料格式、標題結構及文件語意不同，導致檢索結果不完整或找錯資料。",
-                c1Solution: "我建立完整的知識庫處理流程，依資料類型進行網頁爬取、文字正規化、文件解析、切塊及 Metadata 標記，並將資料區分為法規、公告、表單、常見問答與競賽等類別。檢索端則結合語意向量搜尋、關鍵字搜尋、Query Rewrite、Hypothetical Document Embeddings（HyDE）、Reciprocal Rank Fusion（RRF）與 LLM-based Reranking。透過多階段檢索與重新排序，同時保留語意理解及專有名詞精確比對能力，提升不同類型行政資料的檢索覆蓋率。",
+                c1Problem: "體育行政資訊分散於公告、PDF、表格與圖片，格式並不一致。若直接放入<strong>單一向量資料庫，容易導致檢索結果不完整或錯誤</strong>。",
+                c1Solution: "<li>建立<strong>完整知識庫處理流程</strong>：爬取→正規化→解析→切塊→依類型標記 Metadata（法規、公告、表單、常見問答、競賽）。</li><li>結合<strong>語意搜尋＋關鍵字搜尋＋Query Rewrite＋HyDE＋RRF＋LLM Reranking</strong>。</li><li>成果：同時保留語意理解與精確比對能力，提升跨類型資料的檢索覆蓋率。</li>",
                 c2Title: "單一 RAG 流程難以回答複雜行政問題",
-                c2Problem: "部分行政問題不只是查詢單一資訊，例如使用者可能同時詢問場地申請資格、開放時間、所需文件及相關規定。單一的「檢索後生成」流程，容易只找到其中一部分資料，造成回答不完整。",
-                c2Solution: "我將系統由一般 RAG 擴充為工具導向的 Agentic RAG 架構。代理控制器會先判斷使用者意圖，再選擇適合的領域工具與資料來源，必要時執行多次檢索、整合不同證據，並透過反思流程檢查資訊是否足以回答問題。實驗結果顯示，在簡單事實查詢中，Agentic RAG 與 Advanced RAG 表現接近；但在需要工具選擇與多來源整合的複雜查詢中，Agentic RAG 在答案相關性、上下文召回率與答案完整性方面表現較佳，其中答案完整性的差異最明顯。",
+                c2Problem: "使用者常在一個問題中同時詢問多項子問題，例如場地資格、開放時間、所需文件與相關規定。單純的<strong>「檢索後生成」流程容易只找到部分資料</strong>，導致回答不完整。",
+                c2Solution: "<li>將一般 RAG 擴充為<strong>工具導向的 Agentic RAG</strong> 架構。</li><li>代理控制器判斷意圖 → 選擇領域工具與資料來源 → 必要時多次檢索 → 反思資訊是否足夠。</li><li>成果：簡單查詢與 Advanced RAG 表現接近，<strong>複雜、多來源查詢表現更佳</strong>，答案完整性差異最明顯。</li>",
                 c3Title: "單一自動評估分數無法完整反映系統品質",
-                c3Problem: "研究初期發現，RAG 自動評估結果可能受到 Judge Model、回答長度及措辭方式影響。例如，系統將多項資料整合為較完整的答案時，不一定會在所有指標上獲得較高分數；若只使用單一模型或單一指標，容易對系統表現產生片面解讀。",
-                c3Solution: "我重新設計評估流程：使用多個不同規模與來源的語言模型作為 Judge Model；以每個問題為單位進行配對比較及統計檢定；分別建立簡單事實查詢與複雜工具路由查詢資料集；同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall 與 Answer Completeness；搭配半結構式訪談及使用後問卷，補充自動評估無法觀察的實際使用感受。透過自動評估、統計分析與使用者研究的混合方法，避免僅依賴單一分數，並更完整地說明系統在真實行政情境中的實用性。",
+                c3Problem: "RAG 自動評估容易受<strong>Judge Model 選擇、回答長度與措辭</strong>影響——答案更完整不代表每項指標都較高分，僅用單一模型或指標容易產生片面解讀。",
+                c3Solution: "<li>使用<strong>多個不同規模與來源的 Judge Model</strong>，以每題為單位進行配對比較與統計檢定。</li><li>分別建立簡單事實查詢與複雜工具路由查詢資料集，同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall、Answer Completeness。</li><li>搭配<strong>半結構式訪談與使用後問卷</strong>，補足自動評估無法觀察的實際使用感受。</li>",
                 contribTitle: "系統貢獻",
                 licenseNote: "論文口試後，校方主動提出希望持續採用本系統，並規劃將其擴充為完整的校園 AI Agent 系統——顯示這項研究成果具備實際應用價值，而不只是學術產出。",
                 contrib1Title: "降低行政資訊查找與重複溝通成本",
-                contrib1Content: "將原本分散於公告、法規、表單、課程與競賽頁面的資訊整合至單一對話入口，使用者可直接以自然語言詢問，減少自行瀏覽多個網頁與文件的時間；同時可協助處理例行、公開且文件導向的常見問題，降低行政人員重複回覆的負擔。",
+                contrib1Content: "<li>將分散於公告、法規、表單、課程與競賽頁面的資訊整合為<strong>單一對話入口</strong>。</li><li>使用者可直接以自然語言詢問，不必自行翻找多個網頁與文件。</li><li>自動處理例行、公開的文件導向問題，<strong>降低行政人員重複回覆</strong>的負擔。</li>",
                 contrib2Title: "提升複雜行政問題的資訊取得效率",
-                contrib2Content: "透過 Agentic RAG 與工具路由機制，系統能依照問題內容選擇適合的行政資訊來源，並整合不同文件中的資訊。相較於單純的關鍵字搜尋，使用者可以直接詢問包含多項條件的問題，例如場地資格、申請流程、所需文件與相關規定，取得較完整的一站式回答。",
+                contrib2Content: "<li>Agentic RAG＋工具路由，依問題<strong>選擇適合的資訊來源</strong>並整合跨文件證據。</li><li>使用者可一次詢問包含多項條件的問題：資格、流程、文件、規定。</li><li>取得<strong>單一、完整的回答</strong>，不必自行拼湊。</li>",
                 contrib3Title: "提供更自然且多元的行政服務入口",
-                contrib3Content: "除了文字查詢，系統亦支援圖片與語音輸入，讓使用者可直接針對公告截圖、表格或其他視覺資料進行詢問，並延續前後文進行追問。將原本以「使用者尋找資料」為主的行政網站，轉化為更直覺的「使用者提出需求、系統主動整理資訊」互動模式。",
+                contrib3Content: "<li>支援<strong>圖片與語音輸入</strong>，不限文字，可直接針對截圖、表單或視覺資料提問。</li><li>可延續前後文進行多輪追問。</li><li>從「使用者尋找資料」轉化為<strong>「使用者提出需求、系統主動整理」</strong>的互動模式。</li>",
                 evalTitle: "使用者回饋與評估",
                 evalInterviewTitle: "使用者訪談",
                 evalInterviewIntro: "共訪談不同使用角色，包含體育室行政人員與學生，以 Appropriateness、Acceptability、Feasibility 等面向分析實際使用經驗。",
                 finding1Title: "特別適合處理標準化查詢",
-                finding1Content: "行政人員指出，許多法規分散於不同文件中，透過系統可快速定位相關內容；場地費用、冷氣費、保證金及使用規定等高頻問題，也適合先由系統處理，具有降低重複電話詢問與人工回覆負擔的潛力。",
+                finding1Content: "<li>法規常分散於不同文件中，系統可協助<strong>快速定位相關內容</strong>。</li><li>場地費用、冷氣費、保證金、使用規定等高頻問題，適合優先由系統處理。</li><li>具有<strong>降低重複電話詢問</strong>與人工回覆負擔的潛力。</li>",
                 finding2Title: "整體接受度偏正面，信任仰賴答案依據",
-                finding2Content: "多數受訪者願意將系統作為第一層資訊查詢工具，而涉及重要權益、例外狀況或需要行政判斷的問題，仍傾向由真人處理。受訪者也普遍認為，若回答能提供清楚的法規來源、文件連結或依據，可明顯提升信任感。",
+                finding2Content: "<li>多數受訪者願意將系統作為<strong>第一層資訊查詢工具</strong>。</li><li>涉及重要權益、例外狀況或行政判斷的問題，仍傾向由真人處理。</li><li><strong>清楚引用法規來源</strong>、文件連結或依據，可明顯提升信任感。</li>",
                 finding3Title: "實際效果高度取決於知識庫完整度",
-                finding3Content: "當資料已完整建置時，系統能有效縮短查找時間；但若網站本身缺少競賽、代表隊、即時場地狀態等資料，系統便無法提供完整答案。訪談亦指出，圖片細部理解、同義詞查詢、回應速度與資料更新流程仍是後續可優化的方向。",
+                finding3Content: "<li>資料完整建置時，系統能<strong>有效縮短查找時間</strong>。</li><li>若網站本身缺少競賽、代表隊、即時場地狀態等資料，系統便無法提供完整答案。</li><li>後續可優化方向：圖片細部理解、同義詞查詢、回應速度、資料更新流程。</li>",
                 evalInterviewSummary: "整體而言，訪談結果顯示，系統較適合作為公開、例行、文件導向行政問題的第一線自助查詢入口，而非全面取代行政人員。",
                 evalSurveyTitle: "使用後問卷",
                 surveyMeta: "N = 39 位受試者．整體正面評價",
