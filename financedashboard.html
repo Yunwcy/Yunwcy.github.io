@@ -229,7 +229,17 @@ body {
 .diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
 
 /* Demo screenshots */
-.demo-intro { font-size: 0.9rem; opacity: 0.75; margin: -8px 0 20px 0; text-align: center; }
+.demo-subheading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin: 36px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.demo-subheading:first-of-type { margin-top: 0; }
+.demo-subheading i { color: var(--primary-green); }
 .screenshot-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -257,21 +267,6 @@ body {
     text-align: center;
 }
 .screenshot-caption strong { color: var(--dark-green); }
-.screenshot-placeholder-box {
-    width: 100%;
-    height: 175px;
-    border: 2px dashed rgba(46,139,87,0.35);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--primary-green);
-    background: rgba(213,236,198,0.25);
-}
-.screenshot-placeholder-box i { font-size: 1.7rem; opacity: 0.55; }
-.screenshot-placeholder-box span { font-size: 0.75rem; opacity: 0.7; }
 
 /* Tech stack chips */
 .tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
@@ -440,6 +435,9 @@ footer {
 
 <section class="case-section fade-in" id="techstack">
     <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/financedashboard/architecture.svg" alt="System architecture diagram" onclick="openLightbox(this.src)">
+    </div>
     <div class="diagram-box">
         <img src="case-studies/financedashboard/tech-stack.svg" alt="5-layer architecture diagram" onclick="openLightbox(this.src)">
         <div class="diagram-caption" data-i18n="techCaption">5-layer architecture: presentation (SwiftUI), interactive components (Charts / Forms / Export), application logic (Store / Snapshot / Quote / Import-Export / Advice), financial domain modules (expenses, investing, banking, insurance, real estate, planning), and data &amp; security (FinanceVault, AES-GCM, Keychain, Face ID)</div>
@@ -622,48 +620,144 @@ footer {
 
 <section class="case-section fade-in" id="demo">
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
-    <p class="demo-intro" data-i18n="demoIntro">Screenshots are on their way — here's what each screen will show:</p>
+
+    <div class="demo-subheading"><i class="fas fa-lock"></i> <span data-i18n="demoGroupUnlock">Unlock</span></div>
     <div class="screenshot-grid">
-        <!-- TODO: replace box with <img src="case-studies/financedashboard/screenshot1.png" onclick="openLightbox(this.src)"> once provided -->
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot1Caption"><strong>Unlock Screen</strong> — Face ID / passcode unlock, highlighting data security</div>
+            <img src="case-studies/financedashboard/APP上鎖.jpg" alt="Unlock screen" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot1Caption"><strong>Unlock Screen</strong> — Face ID / passcode unlock; the on-screen copy explains that data only decrypts on this device and backups never store plaintext</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-chart-pie"></i> <span data-i18n="f1Title">Financial Overview</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/財務總覽頁_1.jpg" alt="Date range and snapshot" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot2Caption"><strong>Date Range &amp; Snapshot</strong> — pick an analysis period (this month / last month / this year / last 90 days) with a live exchange rate, a net worth KPI, and a one-tap button to save today's asset snapshot</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot2Caption"><strong>Financial Overview</strong> — total assets, liabilities, net worth, this month's income/expenses, plus asset composition and net worth trend charts</div>
+            <img src="case-studies/financedashboard/財務總覽頁_2.jpg" alt="Overview KPI cards" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot3Caption"><strong>Overview KPI Cards</strong> — cash, stock value, policy cash value, real estate value, total liabilities, this month's income and expenses</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot3Caption"><strong>Daily Expense Tracking</strong> — add income/expense form, category / account / currency / amount fields, and filtering</div>
+            <img src="case-studies/financedashboard/財務總覽頁_3.jpg" alt="Asset and liability composition" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot4Caption"><strong>Asset &amp; Liability Composition</strong> — donut charts breaking down total assets and total liabilities; tap a slice to see its amount and share</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot4Caption"><strong>Stock Investment</strong> — TW/US P&amp;L panels, holdings detail, tap-to-reveal donut chart, CSV export</div>
+            <img src="case-studies/financedashboard/財務總覽頁_4.jpg" alt="Income and expense trend" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot5Caption"><strong>Income/Expense Trend &amp; Spending Breakdown</strong> — switch between line and bar charts for income vs. expenses, plus a spending-by-category donut chart</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-receipt"></i> <span data-i18n="f2Title">Daily Expense Tracking</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/日常記帳頁_1.jpg" alt="Transaction list" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot6Caption"><strong>Transaction List</strong> — this month's income, expenses and cash flow, with filters by type / category / account / date and a searchable transaction list</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot5Caption"><strong>Stock P&amp;L Trend</strong> — total, TW, and US P&amp;L, or a 3-line comparison over time</div>
+            <img src="case-studies/financedashboard/日常記帳頁_新增.jpg" alt="Add a transaction" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot7Caption"><strong>Add a Transaction</strong> — type, category (or a custom one you type in), account, currency, date, amount and notes</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-chart-line"></i> <span data-i18n="f3Title">Stock Investment</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/股票投資頁_台股收益面板.jpg" alt="Taiwan stock P&L panel" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot8Caption"><strong>Taiwan Stock P&amp;L Panel</strong> — total value, total cost, unrealized P&amp;L and monthly DCA amount, plus a Taiwan-market panel showing the best/worst performer</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot6Caption"><strong>Banking &amp; Loans</strong> — bank/account asset distribution, brokerage account breakdown, loan repayment progress</div>
+            <img src="case-studies/financedashboard/股票投資頁_美股收益面板.jpg" alt="US stock P&L panel" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot9Caption"><strong>US Stock P&amp;L Panel</strong> — the same breakdown for US holdings, converted and shown in TWD</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot7Caption"><strong>Insurance Policies</strong> — overview, annualized premium structure, investment/savings vs. medical/protection split, next payment reminder</div>
+            <img src="case-studies/financedashboard/股票投資頁_持倉明細.jpg" alt="Holdings detail" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot10Caption"><strong>Holdings Detail</strong> — per-ticker shares, cost, current price and return rate, with one-tap price refresh and CSV export</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot8Caption"><strong>Real Estate</strong> — overview, valuation distribution, rental income and fixed costs</div>
+            <img src="case-studies/financedashboard/股票投資頁_股票分布.jpg" alt="Market allocation" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot11Caption"><strong>Market Allocation</strong> — separate donut charts for Taiwan-market and US-market weight</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot9Caption"><strong>Data Security</strong> — Face ID / Keychain / AES-GCM / JSON backup explainer, encrypted backup and plain-text JSON export</div>
+            <img src="case-studies/financedashboard/股票投資頁_損益趨勢.jpg" alt="P&L trend" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot12Caption"><strong>P&amp;L Trend</strong> — a 3-line comparison (total / Taiwan / US) over a selectable date range, with snapshot and historical price backfill actions</div>
         </div>
         <div class="screenshot-card">
-            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
-            <div class="screenshot-caption" data-i18n-html="shot10Caption"><strong>In-App User Guide</strong> — a walkthrough page to help first-time users get started</div>
+            <img src="case-studies/financedashboard/股票投資頁_代號配置.jpg" alt="Ticker allocation" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot13Caption"><strong>Ticker Allocation</strong> — a combined donut chart across every ticker; tap a slice for that ticker's value, weight and P&amp;L</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-building-columns"></i> <span data-i18n="f4Title">Banking &amp; Loans</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/銀行與貸款頁_資產分布.jpg" alt="Account distribution" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot14Caption"><strong>Account Distribution</strong> — a donut chart split across checking, emergency fund and brokerage accounts</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/銀行與貸款頁_帳戶細分.jpg" alt="Brokerage breakdown and loan distribution" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot15Caption"><strong>Brokerage Breakdown &amp; Loan Distribution</strong> — per-brokerage account split, plus a mortgage/auto-loan distribution chart</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/銀行與貸款頁_貸款還款進度.jpg" alt="Accounts and repayment progress" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot16Caption"><strong>Accounts &amp; Repayment Progress</strong> — every bank/brokerage account balance, plus each loan's remaining principal, interest rate, monthly payment and progress bar</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-file-shield"></i> <span data-i18n="f5Title">Insurance Policies</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/保險保單頁_保險圖表.jpg" alt="Insurance overview" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot17Caption"><strong>Insurance Overview</strong> — cash value, annual premium due and policy loans, plus a policy-type allocation chart (savings / life / disability / medical)</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/保險保單頁_年度保費用途.jpg" alt="Premium purpose and policy list" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot18Caption"><strong>Premium Purpose &amp; Policy List</strong> — splits annual premiums into investment/savings-type vs. medical/protection-type, with a policy list showing loans and payment reminders</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-house"></i> <span data-i18n="f6Title">Real Estate</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/房地產頁_總攬.jpg" alt="Real estate overview" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot19Caption"><strong>Real Estate Overview</strong> — total valuation, purchase cost, unrealized appreciation, monthly rent, fixed costs, and net value after the mortgage</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/房地產頁_房產配置.jpg" alt="Property allocation and rent vs costs" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot20Caption"><strong>Property Allocation &amp; Rent vs. Costs</strong> — per-property valuation share, plus a rent-vs-fixed-cost comparison chart</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-bullseye"></i> <span data-i18n="f7Title">Financial Planning</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/理財規劃頁.jpg" alt="Goals and budgets" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot21Caption"><strong>Goals &amp; Budgets</strong> — savings goals with progress bars (emergency fund, travel fund, retirement investing) and a category-based monthly budget list</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-lock"></i> <span data-i18n="f8Title">Data Security &amp; Backup</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/資料安全頁.jpg" alt="Security status and data management" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot22Caption"><strong>Security Status &amp; Data Management</strong> — a plain-language explainer of every protection in place, plus data actions like loading sample data, snapshotting, and importing/exporting</div>
+        </div>
+    </div>
+
+    <div class="demo-subheading"><i class="fas fa-book"></i> <span data-i18n="demoGroupGuide">In-App User Guide</span></div>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/使用說明書_1.jpg" alt="First-time setup" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot23Caption"><strong>First-Time Setup</strong> — three steps to get started (add bank accounts, import or enter assets, save today's snapshot) plus daily-use tips</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/使用說明書_2.jpg" alt="Stock, insurance, real estate and loan tips" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot24Caption"><strong>Stock, Insurance, Real Estate &amp; Loan Tips</strong> — how to add holdings, refresh prices, read the P&amp;L trend, and record policies, property and loans correctly</div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/financedashboard/使用說明書_3.jpg" alt="Charts, backups and security tips" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="shot25Caption"><strong>Charts, Backups &amp; Security Tips</strong> — why snapshots matter for trend charts, how to read chart values, and guidance on encrypted backups vs. plain-text JSON</div>
         </div>
     </div>
 </section>
@@ -748,13 +842,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "Security",
                 featuresTitle: "Features",
                 f1Title: "Financial Overview",
-                f1List: "<li>Shows total assets, total liabilities, and current net worth</li><li>Shows this month's income, expenses, and cash flow</li><li>Asset composition donut chart</li><li>Liability composition chart</li><li>Income / expense trend chart</li><li>Expense category breakdown chart</li><li>Net worth trend over time</li><li>One-tap daily asset snapshot</li>",
+                f1List: "<li>Shows total assets, total liabilities, and current net worth</li><li>Shows this month's income, expenses, and cash flow</li><li>Custom analysis period (this month / last month / this year / last 90 days) with a live or manual exchange rate</li><li>Asset composition donut chart</li><li>Liability composition chart</li><li>Income / expense trend chart, switchable between line and bar</li><li>Expense category breakdown chart</li><li>One-tap daily asset snapshot, plus quick-add shortcuts for a transaction, account, stock, or policy</li>",
                 f2Title: "Daily Expense Tracking",
                 f2List: "<li>Add income and expense entries</li><li>Supports account, category, currency, amount, and notes</li><li>Custom income/expense categories</li><li>If a category doesn't exist yet, create it on the fly — it syncs to your saved categories</li><li>Filter by type, category, account, and date</li><li>Budget limits and spending alerts</li>",
                 f3Title: "Stock Investment",
                 f3List: "<li>Supports both Taiwan and US stock holdings</li><li>Tracks ticker, name, broker, shares, average cost, current price, and monthly DCA amount</li><li>Separate P&amp;L panels for Taiwan and US holdings</li><li>Shows total market value, total cost, unrealized P&amp;L, and return rate</li><li>One-tap price refresh</li><li>Yahoo Finance / Stooq as price data sources</li><li>Historical price backfill</li><li>Stock P&amp;L snapshots</li><li>Export investment records to CSV</li><li>Tap into the donut chart to see each ticker's value, weight, and P&amp;L</li>",
                 f4Title: "Banking & Loans",
-                f4List: "<li>Tracks bank accounts, brokerage accounts, emergency funds, credit cards, and e-wallets</li><li>Shows account asset distribution</li><li>A dedicated panel that breaks out brokerage/securities accounts separately</li><li>Manages mortgages, auto loans, personal loans, student loans, and other debt</li><li>Shows remaining principal, interest rate, monthly payment, and repayment progress</li><li>Loans are automatically factored into total liabilities</li>",
+                f4List: "<li>Tracks bank accounts, brokerage accounts, emergency funds, credit cards, and e-wallets, each shown with its own balance</li><li>Shows account asset distribution</li><li>A dedicated panel that breaks out brokerage/securities accounts separately</li><li>Manages mortgages, auto loans, personal loans, student loans, and other debt</li><li>Shows remaining principal, interest rate, monthly payment, and a repayment progress bar for every loan</li><li>Loans are automatically factored into total liabilities</li>",
                 f5Title: "Insurance Policies",
                 f5List: "<li>Tracks policy name, insurer, type, currency, premium, payment frequency, and coverage amount</li><li>Tracks cash value / surrender value</li><li>Supports policy loans and loan interest rate</li><li>Shows the total premium due each year</li><li>Set a next-payment-due date</li><li>Distinguishes investment/savings-type from medical/protection-type policies</li><li>Shows policy type allocation, annualized premium structure, and premium purpose breakdown</li>",
                 f6Title: "Real Estate",
@@ -762,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 f7Title: "Financial Planning",
                 f7List: "<li>Set goals like an emergency fund, travel fund, retirement investing, or a home down payment</li><li>Tracks target amount, current savings, and deadline</li><li>Shows a recommended financial-planning order</li><li>Helps users check whether they already have an emergency fund, insurance, investments, and long-term goals in place</li>",
                 f8Title: "Data Security & Backup",
-                f8List: "<li>Unlock with Face ID / Touch ID / device passcode</li><li>Local data encrypted with AES-GCM</li><li>Encryption key stored in the Keychain</li><li>Data is automatically masked when the app goes to the background</li><li>Encrypted backup support</li><li>Manual plain-text JSON export</li><li>Import from the original web version's JSON</li><li>Export investment records to CSV</li><li>Built-in data health check and an in-app user guide</li>",
+                f8List: "<li>Unlock with Face ID / Touch ID / device passcode</li><li>Local data encrypted with AES-GCM</li><li>Encryption key stored in the Keychain</li><li>Data is automatically masked when the app goes to the background, and the screen blurs if a screenshot is detected</li><li>Encrypted backup support</li><li>Manual plain-text JSON export — never generated automatically</li><li>Import from the original web version's JSON</li><li>Export investment records to CSV</li><li>Built-in data health check and an in-app user guide</li>",
                 roleTitle: "My Role",
                 janiceTitle: "Product Designer / Concept Owner",
                 janiceContent: "Janice came up with the project's core concept, planned the overall feature architecture of the finance dashboard, and designed and built the web version — laying the foundation for the iOS app that followed.",
@@ -783,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Solution: "I built <code>WebDashboardImporter</code> to convert the original web JSON format — mapping fields like <code>transactions</code>, <code>stocks</code>, <code>accounts</code>, <code>loans</code>, <code>policies</code>, <code>realEstate</code>, <code>goals</code>, and <code>snapshots</code> into the app's internal models — plus added clear error messages so users don't accidentally try to import an encrypted backup as plain-text JSON.",
                 c4Title: "Sensitive data can't just live in a plain file",
                 c4Problem: "A finance app records highly sensitive data — assets, liabilities, stocks, policies, real estate — and storing it in plain text on the phone would be a real risk.",
-                c4Solution: "I encrypted the local database using CryptoKit's AES-GCM and stored the master key in the Keychain. The app unlocks with Face ID, Touch ID, or the device passcode. Backups can be exported encrypted, and plain-text JSON export is designed as a manual, explicit action so an unencrypted file is never generated automatically.",
+                c4Solution: "I encrypted the local database using CryptoKit's AES-GCM and stored the master key in the Keychain. The app unlocks with Face ID, Touch ID, or the device passcode, masks its content when backgrounded, and blurs the screen if a screenshot is detected. Backups can be exported encrypted, and plain-text JSON export is designed as a manual, explicit action so an unencrypted file is never generated automatically.",
                 c5Title: "Stock prices and P&L need to stay current",
                 c5Problem: "Stock values and P&L change with the market — if prices are entered entirely by hand, they go stale fast.",
                 c5Solution: "I built <code>StockQuoteService</code>, pulling prices from Yahoo Finance and Stooq. The investment page has a one-tap price refresh, plus historical price backfill, so the stock P&amp;L trend chart reflects actual past price movement instead of just a flat line.",
@@ -791,18 +885,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 c6Problem: "Some insurance is purely protective — medical or life insurance — while other policies are really investment or savings vehicles, like savings-type or investment-linked policies. Looking only at the total policy value makes it easy to misread someone's actual financial position.",
                 c6Solution: "The insurance module tracks policy type, payment frequency, annualized premium, cash value, policy loans, premium purpose, and next payment date. The UI splits investment/savings-type premiums from medical/protection-type premiums, and tracks how much total premium is due each year.",
                 demoTitle: "Demo",
-                demoIntro: "Screenshots are on their way — here's what each screen will show:",
-                comingSoon: "Coming soon",
-                shot1Caption: "<strong>Unlock Screen</strong> — Face ID / passcode unlock, highlighting data security",
-                shot2Caption: "<strong>Financial Overview</strong> — total assets, liabilities, net worth, this month's income/expenses, plus asset composition and net worth trend charts",
-                shot3Caption: "<strong>Daily Expense Tracking</strong> — add income/expense form, category / account / currency / amount fields, and filtering",
-                shot4Caption: "<strong>Stock Investment</strong> — TW/US P&amp;L panels, holdings detail, tap-to-reveal donut chart, CSV export",
-                shot5Caption: "<strong>Stock P&amp;L Trend</strong> — total, TW, and US P&amp;L, or a 3-line comparison over time",
-                shot6Caption: "<strong>Banking &amp; Loans</strong> — bank/account asset distribution, brokerage account breakdown, loan repayment progress",
-                shot7Caption: "<strong>Insurance Policies</strong> — overview, annualized premium structure, investment/savings vs. medical/protection split, next payment reminder",
-                shot8Caption: "<strong>Real Estate</strong> — overview, valuation distribution, rental income and fixed costs",
-                shot9Caption: "<strong>Data Security</strong> — Face ID / Keychain / AES-GCM / JSON backup explainer, encrypted backup and plain-text JSON export",
-                shot10Caption: "<strong>In-App User Guide</strong> — a walkthrough page to help first-time users get started",
+                demoGroupUnlock: "Unlock",
+                demoGroupGuide: "In-App User Guide",
+                shot1Caption: "<strong>Unlock Screen</strong> — Face ID / passcode unlock; the on-screen copy explains that data only decrypts on this device and backups never store plaintext",
+                shot2Caption: "<strong>Date Range &amp; Snapshot</strong> — pick an analysis period (this month / last month / this year / last 90 days) with a live exchange rate, a net worth KPI, and a one-tap button to save today's asset snapshot",
+                shot3Caption: "<strong>Overview KPI Cards</strong> — cash, stock value, policy cash value, real estate value, total liabilities, this month's income and expenses",
+                shot4Caption: "<strong>Asset &amp; Liability Composition</strong> — donut charts breaking down total assets and total liabilities; tap a slice to see its amount and share",
+                shot5Caption: "<strong>Income/Expense Trend &amp; Spending Breakdown</strong> — switch between line and bar charts for income vs. expenses, plus a spending-by-category donut chart",
+                shot6Caption: "<strong>Transaction List</strong> — this month's income, expenses and cash flow, with filters by type / category / account / date and a searchable transaction list",
+                shot7Caption: "<strong>Add a Transaction</strong> — type, category (or a custom one you type in), account, currency, date, amount and notes",
+                shot8Caption: "<strong>Taiwan Stock P&amp;L Panel</strong> — total value, total cost, unrealized P&amp;L and monthly DCA amount, plus a Taiwan-market panel showing the best/worst performer",
+                shot9Caption: "<strong>US Stock P&amp;L Panel</strong> — the same breakdown for US holdings, converted and shown in TWD",
+                shot10Caption: "<strong>Holdings Detail</strong> — per-ticker shares, cost, current price and return rate, with one-tap price refresh and CSV export",
+                shot11Caption: "<strong>Market Allocation</strong> — separate donut charts for Taiwan-market and US-market weight",
+                shot12Caption: "<strong>P&amp;L Trend</strong> — a 3-line comparison (total / Taiwan / US) over a selectable date range, with snapshot and historical price backfill actions",
+                shot13Caption: "<strong>Ticker Allocation</strong> — a combined donut chart across every ticker; tap a slice for that ticker's value, weight and P&amp;L",
+                shot14Caption: "<strong>Account Distribution</strong> — a donut chart split across checking, emergency fund and brokerage accounts",
+                shot15Caption: "<strong>Brokerage Breakdown &amp; Loan Distribution</strong> — per-brokerage account split, plus a mortgage/auto-loan distribution chart",
+                shot16Caption: "<strong>Accounts &amp; Repayment Progress</strong> — every bank/brokerage account balance, plus each loan's remaining principal, interest rate, monthly payment and progress bar",
+                shot17Caption: "<strong>Insurance Overview</strong> — cash value, annual premium due and policy loans, plus a policy-type allocation chart (savings / life / disability / medical)",
+                shot18Caption: "<strong>Premium Purpose &amp; Policy List</strong> — splits annual premiums into investment/savings-type vs. medical/protection-type, with a policy list showing loans and payment reminders",
+                shot19Caption: "<strong>Real Estate Overview</strong> — total valuation, purchase cost, unrealized appreciation, monthly rent, fixed costs, and net value after the mortgage",
+                shot20Caption: "<strong>Property Allocation &amp; Rent vs. Costs</strong> — per-property valuation share, plus a rent-vs-fixed-cost comparison chart",
+                shot21Caption: "<strong>Goals &amp; Budgets</strong> — savings goals with progress bars (emergency fund, travel fund, retirement investing) and a category-based monthly budget list",
+                shot22Caption: "<strong>Security Status &amp; Data Management</strong> — a plain-language explainer of every protection in place, plus data actions like loading sample data, snapshotting, and importing/exporting",
+                shot23Caption: "<strong>First-Time Setup</strong> — three steps to get started (add bank accounts, import or enter assets, save today's snapshot) plus daily-use tips",
+                shot24Caption: "<strong>Stock, Insurance, Real Estate &amp; Loan Tips</strong> — how to add holdings, refresh prices, read the P&amp;L trend, and record policies, property and loans correctly",
+                shot25Caption: "<strong>Charts, Backups &amp; Security Tips</strong> — why snapshots matter for trend charts, how to read chart values, and guidance on encrypted backups vs. plain-text JSON",
                 footerContact: "Contact",
                 footerUniversity: "National Taipei University",
                 footerLinks: "Links",
@@ -842,13 +951,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup4: "安全機制",
                 featuresTitle: "功能特色",
                 f1Title: "財務總覽",
-                f1List: "<li>顯示總資產、總負債與目前淨值</li><li>顯示本月收入、本月支出與現金流</li><li>支援資產組成甜甜圈圖</li><li>支援負債組成圖</li><li>支援收入／支出趨勢圖</li><li>支援支出類別分布圖</li><li>支援總資產淨值趨勢</li><li>可建立今日資產快照</li>",
+                f1List: "<li>顯示總資產、總負債與目前淨值</li><li>顯示本月收入、本月支出與現金流</li><li>可自訂分析區間（本月／上月／今年／近90天）並設定即時或手動匯率</li><li>支援資產組成甜甜圈圖</li><li>支援負債組成圖</li><li>支援收入／支出趨勢圖，可切換折線圖／直條圖</li><li>支援支出類別分布圖</li><li>可一鍵建立今日資產快照，並提供記帳／帳戶／股票／保單的快速新增捷徑</li>",
                 f2Title: "日常記帳",
                 f2List: "<li>新增收入與支出</li><li>支援帳戶、類別、幣別、金額與備註</li><li>可自訂收支類別</li><li>新增記帳時若類別不存在，可直接新增並同步到常用類別</li><li>可依類型、類別、帳戶與日期篩選</li><li>支援預算設定與支出提醒</li>",
                 f3Title: "股票投資",
                 f3List: "<li>支援台股與美股持倉</li><li>記錄股票代號、名稱、券商、股數、平均成本、目前股價與月定期定額</li><li>支援台股收益面板與美股收益面板</li><li>顯示總市值、總成本、未實現損益與報酬率</li><li>支援一鍵更新股價</li><li>支援 Yahoo Finance／Stooq 股價來源</li><li>支援歷史股價回填</li><li>支援股票損益快照</li><li>支援投資紀錄匯出 CSV</li><li>甜甜圈圖可點選查看個別代號市值、占比與損益</li>",
                 f4Title: "銀行與貸款",
-                f4List: "<li>記錄銀行帳戶、證券帳戶、緊急預備金、信用卡與電子支付帳戶</li><li>顯示帳戶資產分布</li><li>額外拆分券商／證券帳戶面板</li><li>管理房貸、車貸、信貸、學貸與其他貸款</li><li>顯示剩餘本金、年利率、月付金額與還款進度</li><li>貸款會自動納入總負債</li>",
+                f4List: "<li>記錄銀行帳戶、證券帳戶、緊急預備金、信用卡與電子支付帳戶，各帳戶皆顯示個別餘額</li><li>顯示帳戶資產分布</li><li>額外拆分券商／證券帳戶面板</li><li>管理房貸、車貸、信貸、學貸與其他貸款</li><li>每筆貸款顯示剩餘本金、年利率、月付金額與還款進度條</li><li>貸款會自動納入總負債</li>",
                 f5Title: "保險保單",
                 f5List: "<li>記錄保單名稱、公司、類型、幣別、保費、繳費頻率與保額</li><li>支援現金價值／解約金追蹤</li><li>支援保單借款與借款利率</li><li>顯示每年要繳的保費</li><li>可填寫下次繳費日</li><li>可區分投資／儲蓄型與醫療／保障型</li><li>顯示保單類型配置、年化保費結構與保費用途拆分</li>",
                 f6Title: "房地產",
@@ -856,7 +965,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 f7Title: "理財規劃",
                 f7List: "<li>設定緊急預備金、旅遊基金、退休投資、購屋頭款等目標</li><li>追蹤目標金額、目前已存與期限</li><li>顯示理財順序建議</li><li>協助使用者檢查是否已有緊急預備金、保險、投資與長期目標</li>",
                 f8Title: "資料安全與備份",
-                f8List: "<li>使用 Face ID／Touch ID／裝置密碼解鎖</li><li>使用 AES-GCM 加密本機資料</li><li>使用 Keychain 保存加密金鑰</li><li>App 切到背景時自動遮蔽資料</li><li>支援加密備份</li><li>支援明文 JSON 手動匯出</li><li>支援原網頁 JSON 匯入</li><li>支援投資紀錄 CSV 匯出</li><li>提供資料健康檢查與 App 使用說明</li>",
+                f8List: "<li>使用 Face ID／Touch ID／裝置密碼解鎖</li><li>使用 AES-GCM 加密本機資料</li><li>使用 Keychain 保存加密金鑰</li><li>App 切到背景時自動遮蔽資料，偵測到截圖時畫面也會自動模糊</li><li>支援加密備份</li><li>支援明文 JSON 手動匯出，不會自動產生未加密檔案</li><li>支援原網頁 JSON 匯入</li><li>支援投資紀錄 CSV 匯出</li><li>提供資料健康檢查與 App 使用說明</li>",
                 roleTitle: "我負責的部分",
                 janiceTitle: "Product Designer / 專案發想人",
                 janiceContent: "Janice 負責提出專案的核心想法，規劃整體理財儀表板的功能架構，並完成網頁版的設計與實作，作為後續 iOS App 開發的基礎。",
@@ -877,7 +986,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Solution: "建立 <code>WebDashboardImporter</code>，支援原網頁 JSON 格式轉換。它會將 <code>transactions</code>、<code>stocks</code>、<code>accounts</code>、<code>loans</code>、<code>policies</code>、<code>realEstate</code>、<code>goals</code>、<code>snapshots</code> 等欄位轉換成 App 內部模型。同時加入錯誤提示，避免使用者誤把加密備份當作明文 JSON 匯入。",
                 c4Title: "財務資料敏感，不能只靠普通檔案儲存",
                 c4Problem: "理財 App 會記錄資產、負債、股票、保單與房產等敏感資料，如果直接以明文存在手機中，風險較高。",
-                c4Solution: "使用 CryptoKit 的 AES-GCM 將本機資料庫加密，並將主金鑰存放於 Keychain。App 開啟時透過 Face ID、Touch ID 或裝置密碼解鎖。資料備份也支援加密匯出，明文 JSON 則設計成手動觸發，避免自動產生未加密檔案。",
+                c4Solution: "使用 CryptoKit 的 AES-GCM 將本機資料庫加密，並將主金鑰存放於 Keychain。App 開啟時透過 Face ID、Touch ID 或裝置密碼解鎖，切到背景時自動遮蔽內容，偵測到截圖也會自動模糊畫面。資料備份也支援加密匯出，明文 JSON 則設計成手動觸發，避免自動產生未加密檔案。",
                 c5Title: "股票價格與投資損益需要更新",
                 c5Problem: "股票市值與損益會隨市場變動，如果完全手動輸入，容易過時。",
                 c5Solution: "建立 <code>StockQuoteService</code>，透過 Yahoo Finance 與 Stooq 取得股價資料。投資頁提供一鍵更新股價，並支援歷史股價回填，讓股票收益趨勢圖不只是水平線，而能反映過去股價變化。",
@@ -885,18 +994,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 c6Problem: "保險有些屬於保障型，例如醫療險、壽險；有些則偏投資或儲蓄，例如儲蓄險、投資型保單。若只看保單總額，容易誤判資產狀況。",
                 c6Solution: "保險模組加入保單類型、保費頻率、年化保費、現金價值、保單借款、保費用途與下次繳費日。介面上可以拆分投資／儲蓄型與醫療／保障型保費，並追蹤每年需要繳多少保費。",
                 demoTitle: "系統展示",
-                demoIntro: "Demo 截圖準備中，以下是預計呈現的畫面：",
-                comingSoon: "準備中",
-                shot1Caption: "<strong>App 解鎖畫面</strong> — 顯示 Face ID／裝置密碼解鎖，用來凸顯資料安全",
-                shot2Caption: "<strong>財務總覽頁</strong> — 顯示總資產、總負債、淨值、本月收入與支出，並含資產組成圖與淨值趨勢圖",
-                shot3Caption: "<strong>日常記帳頁</strong> — 新增收入／支出表單、類別／帳戶／幣別／金額欄位、篩選功能畫面",
-                shot4Caption: "<strong>股票投資頁</strong> — 台股／美股收益面板、持倉明細、股票分布甜甜圈圖點選後顯示數值、投資 CSV 匯出按鈕",
-                shot5Caption: "<strong>股票損益趨勢圖</strong> — 顯示總損益、台股損益、美股損益或三線比較",
-                shot6Caption: "<strong>銀行與貸款頁</strong> — 銀行／帳戶資產分布、券商／證券帳戶細分、貸款還款進度",
-                shot7Caption: "<strong>保險保單頁</strong> — 保險總覽、年化保費結構、投資／儲蓄型與醫療／保障型拆分、下次繳費日提醒",
-                shot8Caption: "<strong>房地產頁</strong> — 房地產總覽、估值分布、租金收入與固定支出",
-                shot9Caption: "<strong>資料安全頁</strong> — Face ID／Keychain／AES-GCM／JSON 備份說明、加密備份與明文 JSON 匯出功能",
-                shot10Caption: "<strong>App 使用說明書頁</strong> — 讓初學者知道如何開始使用",
+                demoGroupUnlock: "解鎖畫面",
+                demoGroupGuide: "App 使用說明書",
+                shot1Caption: "<strong>解鎖畫面</strong> — Face ID／裝置密碼解鎖，畫面文字說明資料只在裝置本機解密，備份也不會保存明文資產資料",
+                shot2Caption: "<strong>分析區間與快照</strong> — 可選擇本月／上月／今年／近90天等區間並設定即時匯率，顯示總資產淨值，並可一鍵建立「今日資產快照」",
+                shot3Caption: "<strong>總覽 KPI 卡片</strong> — 現金資產、股票市值、保單現金價值、房地產估值、總負債、本月收入與本月支出",
+                shot4Caption: "<strong>資產與負債組成</strong> — 總資產組成與負債組成甜甜圈圖，點選區塊可查看金額與占比",
+                shot5Caption: "<strong>收支趨勢與支出分布</strong> — 收入／支出趨勢圖可切換折線圖／直條圖，並附支出類別分布甜甜圈圖",
+                shot6Caption: "<strong>記帳明細列表</strong> — 顯示本月收入、支出、現金流，支援依類型／類別／帳戶／日期篩選與搜尋",
+                shot7Caption: "<strong>新增記帳記錄</strong> — 類型、類別（可自訂新類別）、帳戶、幣別、日期、金額與備註",
+                shot8Caption: "<strong>台股收益面板</strong> — 總市值、總成本、未實現損益、月定期定額，並顯示台股最佳／最弱報酬標的",
+                shot9Caption: "<strong>美股收益面板</strong> — 美股市值與損益換算為台幣顯示，同樣附最佳／最弱報酬標的",
+                shot10Caption: "<strong>持倉明細</strong> — 各代號股數、成本、現價與報酬率，支援一鍵更新所有股價與匯出投資紀錄 CSV",
+                shot11Caption: "<strong>市場分布</strong> — 台股與美股各自的持股占比甜甜圈圖",
+                shot12Caption: "<strong>損益趨勢圖</strong> — 可切換近30天／90天／1年／全部，三線比較總損益／台股／美股，並支援快照與歷史股價回填",
+                shot13Caption: "<strong>代號配置</strong> — 全部持股的甜甜圈圖，點選可查看該代號市值、占比與損益",
+                shot14Caption: "<strong>帳戶資產分布</strong> — 活存、緊急預備金、證券戶等帳戶類型占比圖",
+                shot15Caption: "<strong>券商細分與貸款分布</strong> — 各券商帳戶占比，以及房貸／車貸的貸款分布圖",
+                shot16Caption: "<strong>帳戶列表與還款進度</strong> — 每個銀行／證券帳戶餘額，以及每筆貸款的剩餘本金、年利率、月付金額與還款進度條",
+                shot17Caption: "<strong>保險總覽</strong> — 現金價值、每年要繳保費、保單借款，並附保單類型配置圖（儲蓄／壽險／失能／醫療）",
+                shot18Caption: "<strong>年度保費用途拆分</strong> — 拆分投資／儲蓄型與醫療／保障型保費，並列出保單借款與繳費提醒",
+                shot19Caption: "<strong>房地產總覽</strong> — 總估值、購入成本、未實現增值、月租金收入、月固定支出與房貸後淨值",
+                shot20Caption: "<strong>房產配置與租金支出</strong> — 各房產估值占比，以及月租金與固定支出比較圖",
+                shot21Caption: "<strong>理財目標與預算</strong> — 緊急預備金、旅遊基金、退休投資等目標進度條，以及依類別劃分的每月預算",
+                shot22Caption: "<strong>安全狀態與資料管理</strong> — 以白話文說明每項保護機制，並提供載入示範資料、建立快照、匯入匯出等資料操作",
+                shot23Caption: "<strong>第一次使用</strong> — 三步驟上手（先建立銀行帳戶、再輸入資產、建立今日快照）與日常記帳小提醒",
+                shot24Caption: "<strong>股票／保險／房產／貸款操作提示</strong> — 新增持倉、更新股價、看損益趨勢，以及保單、房產、貸款的填寫建議",
+                shot25Caption: "<strong>圖表與備份說明</strong> — 為什麼趨勢需要快照、如何看圖表數值，以及加密備份與明文 JSON 的使用建議",
                 footerContact: "聯絡方式",
                 footerUniversity: "國立臺北大學",
                 footerLinks: "導覽",

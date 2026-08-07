@@ -1,0 +1,189 @@
+<svg width="1800" height="1200" viewBox="0 0 1800 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: #f6f8fc; }
+      .title { font: 800 34px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2a44; }
+      .subtitle { font: 600 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #647084; }
+      .section-title { font: 800 24px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .card-title { font: 800 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #182033; }
+      .text { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5568; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #687386; }
+      .tech { font: 800 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .box { fill: #ffffff; stroke-width: 3; }
+      .soft { fill: #ffffff; stroke-width: 2.5; }
+      .arrow { stroke: #9aa4b2; stroke-width: 3.5; fill: none; marker-end: url(#arrow); }
+      .return { stroke: #b7beca; stroke-width: 3; fill: none; stroke-dasharray: 8 6; marker-end: url(#arrowSoft); }
+      .blue { stroke: #5b73f2; }
+      .green { stroke: #36b887; }
+      .teal { stroke: #22a6b3; }
+      .purple { stroke: #9b72ef; }
+      .yellow { stroke: #d7a900; }
+      .red { stroke: #ef6461; }
+      .slate { stroke: #8a94a6; }
+    </style>
+
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#9aa4b2"/>
+    </marker>
+
+    <marker id="arrowSoft" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#b7beca"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1200" rx="20" class="bg"/>
+
+  <text x="72" y="70" class="title">個人財務理財儀表板 App｜系統運作架構圖</text>
+  <text x="72" y="104" class="subtitle">
+    使用者透過 SwiftUI 介面操作，各功能模組統一經由 FinanceStore 更新 FinanceVault，並同步驅動圖表、快照、備份與本機加密儲存。
+  </text>
+
+  <!-- User -->
+  <rect x="70" y="155" width="270" height="140" rx="20" fill="#f0e7ff" stroke="#b77af0" stroke-width="4"/>
+  <text x="132" y="200" class="card-title">使用者操作</text>
+  <text x="105" y="236" class="text">新增 / 編輯財務資料</text>
+  <text x="105" y="263" class="text">查看圖表與資產狀態</text>
+
+  <rect x="105" y="275" width="200" height="24" rx="12" fill="#ffffff" stroke="#b77af0" stroke-width="2"/>
+  <text x="128" y="292" class="tech" fill="#8b4ae2">iOS App Interaction</text>
+
+  <!-- UI Layer -->
+  <rect x="430" y="135" width="920" height="230" rx="24" fill="#eef2ff" stroke="#6c7df4" stroke-width="4"/>
+  <text x="472" y="180" class="section-title" fill="#5367e8">SwiftUI 介面層</text>
+
+  <rect x="472" y="195" width="360" height="28" rx="14" fill="#ffffff" stroke="#6c7df4" stroke-width="2"/>
+  <text x="495" y="214" class="tech" fill="#5367e8">SwiftUI · TabView · NavigationStack · List / Form</text>
+
+  <rect x="858" y="195" width="310" height="28" rx="14" fill="#ffffff" stroke="#6c7df4" stroke-width="2"/>
+  <text x="883" y="214" class="tech" fill="#5367e8">Swift Charts · Interactive Donut Charts</text>
+
+  <rect x="470" y="245" width="150" height="85" rx="14" class="soft blue"/>
+  <text x="512" y="278" class="card-title">總覽</text>
+  <text x="495" y="306" class="small">KPI / 趨勢</text>
+
+  <rect x="645" y="245" width="150" height="85" rx="14" class="soft blue"/>
+  <text x="685" y="278" class="card-title">記帳</text>
+  <text x="668" y="306" class="small">收支 / 預算</text>
+
+  <rect x="820" y="245" width="150" height="85" rx="14" class="soft blue"/>
+  <text x="860" y="278" class="card-title">投資</text>
+  <text x="842" y="306" class="small">台股 / 美股</text>
+
+  <rect x="995" y="245" width="150" height="85" rx="14" class="soft blue"/>
+  <text x="1035" y="278" class="card-title">銀行</text>
+  <text x="1018" y="306" class="small">帳戶 / 貸款</text>
+
+  <rect x="1170" y="245" width="150" height="85" rx="14" class="soft blue"/>
+  <text x="1198" y="278" class="card-title">保險房產</text>
+  <text x="1193" y="306" class="small">保單 / 估值</text>
+
+  <!-- External services -->
+  <rect x="1445" y="145" width="285" height="220" rx="22" fill="#f4fff5" stroke="#5f8c63" stroke-width="4"/>
+  <text x="1484" y="190" class="section-title" fill="#4d704f">外部資料服務</text>
+
+  <rect x="1480" y="205" width="210" height="26" rx="13" fill="#ffffff" stroke="#5f8c63" stroke-width="2"/>
+  <text x="1510" y="224" class="tech" fill="#4d704f">URLSession · JSONDecoder</text>
+
+  <rect x="1475" y="245" width="225" height="42" rx="10" class="soft green"/>
+  <text x="1520" y="273" class="text">Yahoo Finance</text>
+
+  <rect x="1475" y="298" width="225" height="42" rx="10" class="soft green"/>
+  <text x="1548" y="326" class="text">Stooq</text>
+
+  <text x="1492" y="352" class="small">股價更新・歷史回填・外幣換算</text>
+
+  <!-- FinanceStore -->
+  <rect x="520" y="440" width="740" height="170" rx="24" fill="#ffffff" stroke="#2f80ed" stroke-width="5"/>
+  <text x="804" y="486" class="section-title" fill="#2f80ed">FinanceStore</text>
+
+  <rect x="655" y="505" width="470" height="28" rx="14" fill="#eef6ff" stroke="#2f80ed" stroke-width="2"/>
+  <text x="693" y="524" class="tech" fill="#2f80ed">ObservableObject · @Published · @EnvironmentObject · MainActor</text>
+
+  <text x="598" y="560" class="text">統一接收 UI 操作，負責新增、編輯、刪除、更新股價、建立快照、匯入匯出與儲存。</text>
+  <text x="598" y="590" class="small">所有畫面不直接寫檔，而是透過 FinanceStore 更新核心財務資料。</text>
+
+  <!-- Domain Modules -->
+  <rect x="70" y="695" width="1660" height="250" rx="26" fill="#ffffff" stroke="#d4dbe7" stroke-width="4"/>
+  <text x="110" y="743" class="section-title" fill="#374151">財務功能模組</text>
+
+  <rect x="370" y="718" width="500" height="28" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="395" y="737" class="tech" fill="#475569">Financial Calculation Layer · Net Worth Engine · Snapshot Engine · Currency Conversion</text>
+
+  <rect x="110" y="775" width="180" height="120" rx="16" fill="#ecfdf5" stroke="#36b887" stroke-width="3"/>
+  <text x="152" y="815" class="card-title">記帳模組</text>
+  <text x="135" y="847" class="small">收入 / 支出</text>
+  <text x="135" y="872" class="small">類別 / 預算</text>
+
+  <rect x="315" y="775" width="180" height="120" rx="16" fill="#eff6ff" stroke="#5b73f2" stroke-width="3"/>
+  <text x="357" y="815" class="card-title">投資模組</text>
+  <text x="340" y="847" class="small">持倉 / 融資</text>
+  <text x="340" y="872" class="small">損益 / CSV</text>
+
+  <rect x="520" y="775" width="180" height="120" rx="16" fill="#ecfeff" stroke="#22a6b3" stroke-width="3"/>
+  <text x="562" y="815" class="card-title">銀行模組</text>
+  <text x="545" y="847" class="small">帳戶資產</text>
+  <text x="545" y="872" class="small">券商細分</text>
+
+  <rect x="725" y="775" width="180" height="120" rx="16" fill="#fff7ed" stroke="#f59e0b" stroke-width="3"/>
+  <text x="767" y="815" class="card-title">貸款模組</text>
+  <text x="750" y="847" class="small">本金 / 利率</text>
+  <text x="750" y="872" class="small">還款進度</text>
+
+  <rect x="930" y="775" width="180" height="120" rx="16" fill="#faf5ff" stroke="#9b72ef" stroke-width="3"/>
+  <text x="972" y="815" class="card-title">保險模組</text>
+  <text x="955" y="847" class="small">保費 / 現金值</text>
+  <text x="955" y="872" class="small">繳費提醒</text>
+
+  <rect x="1135" y="775" width="180" height="120" rx="16" fill="#fefce8" stroke="#d7a900" stroke-width="3"/>
+  <text x="1177" y="815" class="card-title">房產模組</text>
+  <text x="1160" y="847" class="small">估值 / 租金</text>
+  <text x="1160" y="872" class="small">房貸後淨值</text>
+
+  <rect x="1340" y="775" width="180" height="120" rx="16" fill="#fff1f2" stroke="#ef6461" stroke-width="3"/>
+  <text x="1382" y="815" class="card-title">規劃模組</text>
+  <text x="1365" y="847" class="small">理財目標</text>
+  <text x="1365" y="872" class="small">健康檢查</text>
+
+  <!-- Core Data -->
+  <rect x="515" y="1010" width="760" height="135" rx="24" fill="#f8fafc" stroke="#64748b" stroke-width="5"/>
+  <text x="792" y="1055" class="section-title" fill="#475569">FinanceVault</text>
+
+  <rect x="660" y="1072" width="470" height="28" rx="14" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <text x="702" y="1091" class="tech" fill="#475569">Codable · JSONEncoder · JSONDecoder · Core Domain Models</text>
+
+  <text x="585" y="1125" class="text">Transactions・Stocks・Accounts・Loans・Policies・RealEstate・Goals・Snapshots</text>
+
+  <!-- Storage and Export -->
+  <rect x="70" y="1000" width="335" height="150" rx="22" fill="#f5f3ff" stroke="#9b72ef" stroke-width="4"/>
+  <text x="125" y="1045" class="section-title" fill="#7c3aed">本機安全儲存</text>
+  <rect x="100" y="1065" width="250" height="26" rx="13" fill="#ffffff" stroke="#9b72ef" stroke-width="2"/>
+  <text x="118" y="1084" class="tech" fill="#7c3aed">CryptoKit · AES-GCM · Keychain</text>
+  <text x="105" y="1120" class="text">LocalAuthentication / Face ID</text>
+
+  <rect x="1395" y="1000" width="335" height="150" rx="22" fill="#fffbeb" stroke="#d7a900" stroke-width="4"/>
+  <text x="1463" y="1045" class="section-title" fill="#a67800">備份與輸出</text>
+  <rect x="1425" y="1065" width="250" height="26" rx="13" fill="#ffffff" stroke="#d7a900" stroke-width="2"/>
+  <text x="1460" y="1084" class="tech" fill="#a67800">FileDocument · FileImporter</text>
+  <text x="1430" y="1120" class="text">Encrypted Backup / JSON / CSV</text>
+
+  <!-- Arrows -->
+  <path d="M340 225 L430 225" class="arrow"/>
+  <path d="M890 365 L890 440" class="arrow"/>
+  <path d="M890 610 L890 695" class="arrow"/>
+  <path d="M890 945 L890 1010" class="arrow"/>
+
+  <path d="M1260 520 L1445 285" class="arrow"/>
+  <path d="M1445 315 L1260 545" class="return"/>
+
+  <path d="M515 1075 L405 1075" class="arrow"/>
+  <path d="M1275 1075 L1395 1075" class="arrow"/>
+
+  <path d="M1275 1030 C1390 930 1410 705 1290 585" class="return"/>
+  <path d="M515 1030 C395 930 380 705 510 585" class="return"/>
+
+  <!-- Footer -->
+  <rect x="430" y="1160" width="920" height="28" rx="10" fill="#e9eefb" stroke="#c7d2fe" stroke-width="2"/>
+  <text x="500" y="1179" class="small">
+    運作重點：SwiftUI 操作 → FinanceStore 狀態管理 → FinanceVault 核心模型 → 圖表、快照、備份與加密儲存同步更新。
+  </text>
+</svg>
