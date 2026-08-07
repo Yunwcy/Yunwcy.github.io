@@ -1,0 +1,183 @@
+<svg width="1600" height="1420" viewBox="0 0 1600 1420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: #f4f6fb; }
+      .layer-title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .card-title { font: 700 23px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #151927; }
+      .text { font: 500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #596275; }
+      .small { font: 600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6b7280; }
+      .chip { font: 700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .card { fill: #ffffff; stroke-width: 2.2; }
+      .arrow { stroke: #b7bfcc; stroke-width: 6; fill: none; marker-end: url(#arrowhead); }
+      .thin-arrow { stroke: #c4cad6; stroke-width: 3.5; fill: none; marker-end: url(#arrowhead-small); }
+    </style>
+
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#b7bfcc"/>
+    </marker>
+
+    <marker id="arrowhead-small" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M2,2 L8,5 L2,8 Z" fill="#c4cad6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="1420" rx="18" class="bg"/>
+
+  <!-- Layer 5: Presentation -->
+  <rect x="45" y="35" width="1510" height="250" rx="28" fill="#eef2ff" stroke="#9aa8ff" stroke-width="4"/>
+  <text x="85" y="88" class="layer-title" fill="#6370f5">第 5 層　展示層（SwiftUI Presentation）</text>
+
+  <rect x="85" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="126" y="151" class="card-title">總覽</text>
+  <text x="112" y="184" class="text">KPI 卡片</text>
+  <text x="112" y="209" class="text">資產 / 負債圖</text>
+
+  <rect x="320" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="360" y="151" class="card-title">日常記帳</text>
+  <text x="348" y="184" class="text">收入 / 支出</text>
+  <text x="348" y="209" class="text">類別 / 篩選</text>
+
+  <rect x="555" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="595" y="151" class="card-title">股票投資</text>
+  <text x="583" y="184" class="text">台股 / 美股</text>
+  <text x="583" y="209" class="text">收益 / CSV</text>
+
+  <rect x="790" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="830" y="151" class="card-title">銀行貸款</text>
+  <text x="818" y="184" class="text">帳戶分布</text>
+  <text x="818" y="209" class="text">貸款進度</text>
+
+  <rect x="1025" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="1065" y="151" class="card-title">保險房產</text>
+  <text x="1053" y="184" class="text">保費 / 現金值</text>
+  <text x="1053" y="209" class="text">估值 / 租金</text>
+
+  <rect x="1260" y="112" width="235" height="120" rx="16" class="card" stroke="#c4ccff"/>
+  <text x="1300" y="151" class="card-title">安全與說明</text>
+  <text x="1290" y="184" class="text">備份 / 匯入</text>
+  <text x="1290" y="209" class="text">使用說明書</text>
+
+  <path d="M800 285 L800 345" class="arrow"/>
+
+  <!-- Layer 4: UX Components -->
+  <rect x="45" y="340" width="1510" height="230" rx="28" fill="#ecfeff" stroke="#67e8f9" stroke-width="4"/>
+  <text x="85" y="392" class="layer-title" fill="#0891b2">第 4 層　互動元件層（Charts・Forms・Export UI）</text>
+
+  <rect x="85" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
+  <text x="128" y="458" class="card-title">Swift Charts</text>
+  <text x="112" y="490" class="text">折線圖・長條圖</text>
+  <text x="112" y="514" class="text">甜甜圈點擊顯示數值</text>
+
+  <rect x="375" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
+  <text x="418" y="458" class="card-title">表單與編輯</text>
+  <text x="402" y="490" class="text">左欄名稱 / 右欄輸入</text>
+  <text x="402" y="514" class="text">必填提示・小提醒</text>
+
+  <rect x="665" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
+  <text x="708" y="458" class="card-title">檔案操作</text>
+  <text x="692" y="490" class="text">JSON 匯入 / 匯出</text>
+  <text x="692" y="514" class="text">CSV 投資紀錄</text>
+
+  <rect x="955" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
+  <text x="998" y="458" class="card-title">資料提醒</text>
+  <text x="982" y="490" class="text">資料健康檢查</text>
+  <text x="982" y="514" class="text">快照 / 繳費提醒</text>
+
+  <rect x="1245" y="420" width="250" height="105" rx="16" class="card" stroke="#a5f3fc"/>
+  <text x="1288" y="458" class="card-title">安全狀態</text>
+  <text x="1272" y="490" class="text">Face ID 說明</text>
+  <text x="1272" y="514" class="text">背景遮蔽 / 截圖遮蔽</text>
+
+  <path d="M800 570 L800 630" class="arrow"/>
+
+  <!-- Layer 3: Application Logic -->
+  <rect x="45" y="625" width="1510" height="305" rx="28" fill="#eafff5" stroke="#70e5b5" stroke-width="4"/>
+  <text x="85" y="677" class="layer-title" fill="#079668">第 3 層　應用邏輯層（Application Logic）</text>
+
+  <rect x="85" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="123" y="744" class="card-title">FinanceStore</text>
+  <text x="112" y="777" class="text">ObservableObject</text>
+  <text x="112" y="802" class="text">狀態管理</text>
+  <text x="112" y="827" class="text">CRUD / Save</text>
+
+  <rect x="330" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="370" y="744" class="card-title">Snapshot</text>
+  <text x="357" y="777" class="text">資產快照</text>
+  <text x="357" y="802" class="text">股票損益快照</text>
+  <text x="357" y="827" class="text">歷史趨勢</text>
+
+  <rect x="575" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="615" y="744" class="card-title">Quote Service</text>
+  <text x="602" y="777" class="text">Yahoo Finance</text>
+  <text x="602" y="802" class="text">Stooq 備援</text>
+  <text x="602" y="827" class="text">歷史回填</text>
+
+  <rect x="820" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="860" y="744" class="card-title">Importer</text>
+  <text x="847" y="777" class="text">網頁 JSON 轉換</text>
+  <text x="847" y="802" class="text">欄位遷移</text>
+  <text x="847" y="827" class="text">錯誤提示</text>
+
+  <rect x="1065" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="1105" y="744" class="card-title">Exporter</text>
+  <text x="1092" y="777" class="text">加密備份</text>
+  <text x="1092" y="802" class="text">明文 JSON</text>
+  <text x="1092" y="827" class="text">投資 CSV</text>
+
+  <rect x="1310" y="705" width="185" height="145" rx="16" class="card" stroke="#98efd0"/>
+  <text x="1348" y="744" class="card-title">Advice</text>
+  <text x="1337" y="777" class="text">理財順序</text>
+  <text x="1337" y="802" class="text">預算提醒</text>
+  <text x="1337" y="827" class="text">資料檢查</text>
+
+  <rect x="85" y="870" width="1410" height="35" rx="12" fill="#d9fbe9" stroke="#98efd0"/>
+  <text x="115" y="894" class="small">核心計算：資產淨值 = 現金 + 股票市值 + 保單現金價值 + 房地產估值 - 貸款 - 股票融資 - 保單借款</text>
+
+  <path d="M800 930 L800 990" class="arrow"/>
+
+  <!-- Layer 2: Financial Modules -->
+  <rect x="45" y="985" width="1510" height="285" rx="28" fill="#fff9e8" stroke="#ffd25a" stroke-width="4"/>
+  <text x="85" y="1037" class="layer-title" fill="#d67a00">第 2 層　財務模組與分析層（Financial Domain Modules）</text>
+
+  <rect x="85" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="125" y="1104" class="card-title">記帳</text>
+  <text x="112" y="1137" class="text">收入 / 支出</text>
+  <text x="112" y="1162" class="text">類別 / 帳戶</text>
+  <text x="112" y="1187" class="text">預算進度</text>
+
+  <rect x="320" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="360" y="1104" class="card-title">投資</text>
+  <text x="347" y="1137" class="text">台股 / 美股</text>
+  <text x="347" y="1162" class="text">損益 / 報酬率</text>
+  <text x="347" y="1187" class="text">配置 / 趨勢</text>
+
+  <rect x="555" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="595" y="1104" class="card-title">銀行貸款</text>
+  <text x="582" y="1137" class="text">銀行 / 券商帳戶</text>
+  <text x="582" y="1162" class="text">房貸 / 車貸</text>
+  <text x="582" y="1187" class="text">還款壓力</text>
+
+  <rect x="790" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="830" y="1104" class="card-title">保險</text>
+  <text x="817" y="1137" class="text">現金價值</text>
+  <text x="817" y="1162" class="text">年化保費</text>
+  <text x="817" y="1187" class="text">保障 / 投資拆分</text>
+
+  <rect x="1025" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="1065" y="1104" class="card-title">房地產</text>
+  <text x="1052" y="1137" class="text">購入價 / 估值</text>
+  <text x="1052" y="1162" class="text">租金 / 稅費</text>
+  <text x="1052" y="1187" class="text">房貸後淨值</text>
+
+  <rect x="1260" y="1065" width="235" height="145" rx="16" class="card" stroke="#ffe08a"/>
+  <text x="1300" y="1104" class="card-title">理財規劃</text>
+  <text x="1287" y="1137" class="text">緊急預備金</text>
+  <text x="1287" y="1162" class="text">旅遊 / 退休目標</text>
+  <text x="1287" y="1187" class="text">建議順序</text>
+
+  <path d="M800 1270 L800 1325" class="arrow"/>
+
+  <!-- Layer 1 -->
+  <rect x="45" y="1320" width="1510" height="80" rx="28" fill="#f4edff" stroke="#b69cff" stroke-width="4"/>
+  <text x="85" y="1370" class="layer-title" fill="#7c4dff">第 1 層　資料與安全層：FinanceVault・File Protection・AES-GCM・Keychain・LocalAuthentication・iPhone Local Storage</text>
+</svg>

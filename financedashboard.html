@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Finance Dashboard App | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, #f1f6ec, #eaf2e2);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 12px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card code {
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+
+/* Role: two-person cards */
+.role-people {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.role-person-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 28px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.role-person-card.mine { border: 2px solid var(--primary-green); }
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.role-name { font-weight: 700; color: var(--text-color); font-size: 1.05rem; }
+.role-title { font-size: 0.85rem; color: var(--primary-green); font-weight: 600; }
+.role-person-card p { margin: 0; font-size: 0.95rem; }
+.role-person-card ul { padding-left: 20px; margin: 0; font-size: 0.92rem; }
+.role-person-card ul li { margin-bottom: 10px; }
+.role-person-card ul li:last-child { margin-bottom: 0; }
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Demo screenshots */
+.demo-intro { font-size: 0.9rem; opacity: 0.75; margin: -8px 0 20px 0; text-align: center; }
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+.screenshot-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.screenshot-card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    cursor: zoom-in;
+    display: block;
+}
+.screenshot-caption {
+    font-size: 0.88rem;
+    color: var(--text-color);
+    margin-top: 10px;
+    text-align: center;
+}
+.screenshot-caption strong { color: var(--dark-green); }
+.screenshot-placeholder-box {
+    width: 100%;
+    height: 175px;
+    border: 2px dashed rgba(46,139,87,0.35);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--primary-green);
+    background: rgba(213,236,198,0.25);
+}
+.screenshot-placeholder-box i { font-size: 1.7rem; opacity: 0.55; }
+.screenshot-placeholder-box span { font-size: 0.75rem; opacity: 0.7; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Feature cards */
+.feature-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.feature-header h4 { margin: 0; font-size: 1.02rem; color: var(--text-color); }
+.feature-card ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+.feature-card ul li { margin-bottom: 8px; }
+.feature-card ul li:last-child { margin-bottom: 0; }
+.feature-card ul li strong { color: var(--dark-green); }
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.15rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+.challenge-block.solution {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.solution code { background: var(--card-bg); }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card, .feature-card, .role-person-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">📱 <span data-i18n="badge">Case Study · iOS App</span></span>
+    <h1 data-i18n="title">Personal Finance Dashboard App</h1>
+    <div class="subtitle" data-i18n="subtitle">An all-in-one, locally-encrypted personal finance tracker for iPhone</div>
+    <div class="meta" data-i18n="meta">iOS app solo-built from a team web concept · Since 2026/05</div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#features" data-i18n="tocFeatures">Features</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/financedashboard/tech-stack.svg" alt="5-layer architecture diagram" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="techCaption">5-layer architecture: presentation (SwiftUI), interactive components (Charts / Forms / Export), application logic (Store / Snapshot / Quote / Import-Export / Advice), financial domain modules (expenses, investing, banking, insurance, real estate, planning), and data &amp; security (FinanceVault, AES-GCM, Keychain, Face ID)</div>
+    </div>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Interface</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">SwiftUI</span>
+                <span class="tech-chip">Swift Charts</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Data &amp; State</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">FinanceStore (ObservableObject)</span>
+                <span class="tech-chip">FinanceVault Data Model</span>
+                <span class="tech-chip">Local JSON Storage</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">Integrations &amp; Services</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">StockQuoteService</span>
+                <span class="tech-chip">Yahoo Finance / Stooq</span>
+                <span class="tech-chip">WebDashboardImporter</span>
+                <span class="tech-chip">CSV / JSON Export</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Security</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">CryptoKit (AES-GCM)</span>
+                <span class="tech-chip">Keychain</span>
+                <span class="tech-chip">LocalAuthentication (Face ID)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="features">
+    <h2><i class="fas fa-star"></i> <span data-i18n="featuresTitle">Features</span></h2>
+    <div class="feature-groups">
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-chart-pie"></i></div><h4 data-i18n="f1Title">Financial Overview</h4></div>
+            <ul data-i18n-html="f1List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-receipt"></i></div><h4 data-i18n="f2Title">Daily Expense Tracking</h4></div>
+            <ul data-i18n-html="f2List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-chart-line"></i></div><h4 data-i18n="f3Title">Stock Investment</h4></div>
+            <ul data-i18n-html="f3List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-building-columns"></i></div><h4 data-i18n="f4Title">Banking &amp; Loans</h4></div>
+            <ul data-i18n-html="f4List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-file-shield"></i></div><h4 data-i18n="f5Title">Insurance Policies</h4></div>
+            <ul data-i18n-html="f5List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-house"></i></div><h4 data-i18n="f6Title">Real Estate</h4></div>
+            <ul data-i18n-html="f6List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-bullseye"></i></div><h4 data-i18n="f7Title">Financial Planning</h4></div>
+            <ul data-i18n-html="f7List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-lock"></i></div><h4 data-i18n="f8Title">Data Security &amp; Backup</h4></div>
+            <ul data-i18n-html="f8List"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="role-people">
+        <div class="role-person-card">
+            <div class="role-header">
+                <div class="role-icon"><i class="fas fa-pen-ruler"></i></div>
+                <div>
+                    <div class="role-name">Janice</div>
+                    <div class="role-title" data-i18n="janiceTitle">Product Designer / Concept Owner</div>
+                </div>
+            </div>
+            <p data-i18n="janiceContent">Janice came up with the project's core concept, planned the overall feature architecture of the finance dashboard, and designed and built the web version — laying the foundation for the iOS app that followed.</p>
+        </div>
+        <div class="role-person-card mine">
+            <div class="role-header">
+                <div class="role-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                <div>
+                    <div class="role-name" data-i18n="myName">Me</div>
+                    <div class="role-title" data-i18n="myTitle">iOS App Developer / System Builder</div>
+                </div>
+            </div>
+            <ul data-i18n-html="myList"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">Financial data scattered across platforms</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c1Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">Users need long-term tracking, not just a snapshot</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c2Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">Web JSON format didn't match the app's data model</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c3Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c3Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">4</span> <span data-i18n="c4Title">Sensitive data can't just live in a plain file</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c4Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c4Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">5</span> <span data-i18n="c5Title">Stock prices and P&amp;L need to stay current</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c5Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c5Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">6</span> <span data-i18n="c6Title">Insurance and investment data shouldn't be lumped together</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n="c6Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n="c6Solution"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="demo">
+    <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
+    <p class="demo-intro" data-i18n="demoIntro">Screenshots are on their way — here's what each screen will show:</p>
+    <div class="screenshot-grid">
+        <!-- TODO: replace box with <img src="case-studies/financedashboard/screenshot1.png" onclick="openLightbox(this.src)"> once provided -->
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot1Caption"><strong>Unlock Screen</strong> — Face ID / passcode unlock, highlighting data security</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot2Caption"><strong>Financial Overview</strong> — total assets, liabilities, net worth, this month's income/expenses, plus asset composition and net worth trend charts</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot3Caption"><strong>Daily Expense Tracking</strong> — add income/expense form, category / account / currency / amount fields, and filtering</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot4Caption"><strong>Stock Investment</strong> — TW/US P&amp;L panels, holdings detail, tap-to-reveal donut chart, CSV export</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot5Caption"><strong>Stock P&amp;L Trend</strong> — total, TW, and US P&amp;L, or a 3-line comparison over time</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot6Caption"><strong>Banking &amp; Loans</strong> — bank/account asset distribution, brokerage account breakdown, loan repayment progress</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot7Caption"><strong>Insurance Policies</strong> — overview, annualized premium structure, investment/savings vs. medical/protection split, next payment reminder</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot8Caption"><strong>Real Estate</strong> — overview, valuation distribution, rental income and fixed costs</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot9Caption"><strong>Data Security</strong> — Face ID / Keychain / AES-GCM / JSON backup explainer, encrypted backup and plain-text JSON export</div>
+        </div>
+        <div class="screenshot-card">
+            <div class="screenshot-placeholder-box"><i class="fas fa-image"></i><span data-i18n="comingSoon">Coming soon</span></div>
+            <div class="screenshot-caption" data-i18n-html="shot10Caption"><strong>In-App User Guide</strong> — a walkthrough page to help first-time users get started</div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html#home" data-i18n="footerHome">Home</a></p>
+            <p><a href="about.html" data-i18n="footerAbout">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="footerAwards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="footerExperiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="footerCertifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="footerConferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="footerOtherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Case Study · iOS App",
+                title: "Personal Finance Dashboard App",
+                subtitle: "An all-in-one, locally-encrypted personal finance tracker for iPhone",
+                meta: "iOS app solo-built from a team web concept · Since 2026/05",
+                tocProblem: "Problem",
+                tocTech: "Tech Stack",
+                tocFeatures: "Features",
+                tocRole: "My Role",
+                tocChallenges: "Challenges",
+                tocDemo: "Demo",
+                problemTitle: "Problem Background",
+                problemContent: "<p>Personal financial data is usually scattered across different places: daily expenses in one app, stock investments with a brokerage, insurance policies on paper or in an insurer's own system, and bank accounts and loans spread across different financial institutions. When users want to answer a simple question — “What are my total assets right now? How much do I owe? Is my cash flow healthy? Are my investments and insurance being fully tracked?” — they usually have to piece it together by hand, a tedious process that's easy to get wrong or leave gaps in.</p><p>This project set out to build a locally-encrypted, all-in-one personal finance dashboard app for long-term tracking. It isn't just an expense tracker — it brings expense tracking, stocks, bank accounts, loans, insurance, real estate, financial goals, and data backup together in a single iPhone app, so users can see their net worth, cash flow, investment performance, and overall financial health at a glance.</p>",
+                techTitle: "Tech Stack",
+                techCaption: "5-layer architecture: presentation (SwiftUI), interactive components (Charts / Forms / Export), application logic (Store / Snapshot / Quote / Import-Export / Advice), financial domain modules (expenses, investing, banking, insurance, real estate, planning), and data & security (FinanceVault, AES-GCM, Keychain, Face ID)",
+                techGroup1: "Interface",
+                techGroup2: "Data & State",
+                techGroup3: "Integrations & Services",
+                techGroup4: "Security",
+                featuresTitle: "Features",
+                f1Title: "Financial Overview",
+                f1List: "<li>Shows total assets, total liabilities, and current net worth</li><li>Shows this month's income, expenses, and cash flow</li><li>Asset composition donut chart</li><li>Liability composition chart</li><li>Income / expense trend chart</li><li>Expense category breakdown chart</li><li>Net worth trend over time</li><li>One-tap daily asset snapshot</li>",
+                f2Title: "Daily Expense Tracking",
+                f2List: "<li>Add income and expense entries</li><li>Supports account, category, currency, amount, and notes</li><li>Custom income/expense categories</li><li>If a category doesn't exist yet, create it on the fly — it syncs to your saved categories</li><li>Filter by type, category, account, and date</li><li>Budget limits and spending alerts</li>",
+                f3Title: "Stock Investment",
+                f3List: "<li>Supports both Taiwan and US stock holdings</li><li>Tracks ticker, name, broker, shares, average cost, current price, and monthly DCA amount</li><li>Separate P&amp;L panels for Taiwan and US holdings</li><li>Shows total market value, total cost, unrealized P&amp;L, and return rate</li><li>One-tap price refresh</li><li>Yahoo Finance / Stooq as price data sources</li><li>Historical price backfill</li><li>Stock P&amp;L snapshots</li><li>Export investment records to CSV</li><li>Tap into the donut chart to see each ticker's value, weight, and P&amp;L</li>",
+                f4Title: "Banking & Loans",
+                f4List: "<li>Tracks bank accounts, brokerage accounts, emergency funds, credit cards, and e-wallets</li><li>Shows account asset distribution</li><li>A dedicated panel that breaks out brokerage/securities accounts separately</li><li>Manages mortgages, auto loans, personal loans, student loans, and other debt</li><li>Shows remaining principal, interest rate, monthly payment, and repayment progress</li><li>Loans are automatically factored into total liabilities</li>",
+                f5Title: "Insurance Policies",
+                f5List: "<li>Tracks policy name, insurer, type, currency, premium, payment frequency, and coverage amount</li><li>Tracks cash value / surrender value</li><li>Supports policy loans and loan interest rate</li><li>Shows the total premium due each year</li><li>Set a next-payment-due date</li><li>Distinguishes investment/savings-type from medical/protection-type policies</li><li>Shows policy type allocation, annualized premium structure, and premium purpose breakdown</li>",
+                f6Title: "Real Estate",
+                f6List: "<li>Tracks primary residence, rental properties, commercial real estate, land, and parking spaces</li><li>Tracks purchase price, current valuation, purchase date, monthly rent, taxes, and management fees</li><li>Can link to a mortgage to calculate the property's net value after debt</li><li>Property valuations are counted into total assets</li><li>Monthly rental income feeds into the asset analysis</li>",
+                f7Title: "Financial Planning",
+                f7List: "<li>Set goals like an emergency fund, travel fund, retirement investing, or a home down payment</li><li>Tracks target amount, current savings, and deadline</li><li>Shows a recommended financial-planning order</li><li>Helps users check whether they already have an emergency fund, insurance, investments, and long-term goals in place</li>",
+                f8Title: "Data Security & Backup",
+                f8List: "<li>Unlock with Face ID / Touch ID / device passcode</li><li>Local data encrypted with AES-GCM</li><li>Encryption key stored in the Keychain</li><li>Data is automatically masked when the app goes to the background</li><li>Encrypted backup support</li><li>Manual plain-text JSON export</li><li>Import from the original web version's JSON</li><li>Export investment records to CSV</li><li>Built-in data health check and an in-app user guide</li>",
+                roleTitle: "My Role",
+                janiceTitle: "Product Designer / Concept Owner",
+                janiceContent: "Janice came up with the project's core concept, planned the overall feature architecture of the finance dashboard, and designed and built the web version — laying the foundation for the iOS app that followed.",
+                myName: "Me",
+                myTitle: "iOS App Developer / System Builder",
+                myList: "<li>Extended Janice's concept and the web version's foundation into a native iOS app</li><li>Built the app's main interface and multi-tab architecture with SwiftUI</li><li>Designed a complete data model integrating expense tracking, stocks, bank accounts, loans, insurance, real estate, and financial goals</li><li>Implemented the financial overview, net worth, cash flow, investment P&amp;L, and insurance analysis features</li><li>Built interactive charts and donut charts with Swift Charts</li><li>Implemented JSON import/export to migrate data from the original web version into the app</li><li>Implemented local encryption and Face ID / passcode unlock with CryptoKit, Keychain, and LocalAuthentication</li><li>Handled app testing, Xcode deployment, and on-device installation on a physical iPhone</li>",
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "Financial data scattered across platforms",
+                c1Problem: "Users' financial information is usually scattered across different platforms — banking apps, brokerage apps, insurer records, mortgage details, manual spreadsheets, and so on. Even when every piece of data exists somewhere, it's hard to quickly answer ‘What are my total assets right now? What's my net worth? Is my debt load too high?’",
+                c1Solution: "I designed <code>FinanceVault</code> as the core data model, unifying expense records, stocks, bank accounts, loans, policies, real estate, financial goals, and snapshots into one structure. The overview page then pulls it all together — cash, stocks, policy cash value, real estate valuation, liabilities, income, expenses, and net worth trend — in a single view.",
+                c2Title: "Users need long-term tracking, not just a snapshot",
+                c2Problem: "Net worth and investment P&L change over time — with only a snapshot of the current numbers, users have no way to see how their finances are actually trending.",
+                c2Solution: "I added a daily asset snapshot and a stock P&L snapshot mechanism. Users can manually create a snapshot for today, and snapshots recalculate after updating stock prices or editing asset data. Charts then plot net worth, asset composition, and stock P&L over time, so users can actually see how their finances are moving.",
+                c3Title: "Web JSON format didn't match the app's data model",
+                c3Problem: "The original web version stored data as JSON in localStorage, with field names that didn't fully match the app's native data model. A direct import could misalign fields, silently zero out data, or fail to parse at all.",
+                c3Solution: "I built <code>WebDashboardImporter</code> to convert the original web JSON format — mapping fields like <code>transactions</code>, <code>stocks</code>, <code>accounts</code>, <code>loans</code>, <code>policies</code>, <code>realEstate</code>, <code>goals</code>, and <code>snapshots</code> into the app's internal models — plus added clear error messages so users don't accidentally try to import an encrypted backup as plain-text JSON.",
+                c4Title: "Sensitive data can't just live in a plain file",
+                c4Problem: "A finance app records highly sensitive data — assets, liabilities, stocks, policies, real estate — and storing it in plain text on the phone would be a real risk.",
+                c4Solution: "I encrypted the local database using CryptoKit's AES-GCM and stored the master key in the Keychain. The app unlocks with Face ID, Touch ID, or the device passcode. Backups can be exported encrypted, and plain-text JSON export is designed as a manual, explicit action so an unencrypted file is never generated automatically.",
+                c5Title: "Stock prices and P&L need to stay current",
+                c5Problem: "Stock values and P&L change with the market — if prices are entered entirely by hand, they go stale fast.",
+                c5Solution: "I built <code>StockQuoteService</code>, pulling prices from Yahoo Finance and Stooq. The investment page has a one-tap price refresh, plus historical price backfill, so the stock P&amp;L trend chart reflects actual past price movement instead of just a flat line.",
+                c6Title: "Insurance and investment data shouldn't be lumped together",
+                c6Problem: "Some insurance is purely protective — medical or life insurance — while other policies are really investment or savings vehicles, like savings-type or investment-linked policies. Looking only at the total policy value makes it easy to misread someone's actual financial position.",
+                c6Solution: "The insurance module tracks policy type, payment frequency, annualized premium, cash value, policy loans, premium purpose, and next payment date. The UI splits investment/savings-type premiums from medical/protection-type premiums, and tracks how much total premium is due each year.",
+                demoTitle: "Demo",
+                demoIntro: "Screenshots are on their way — here's what each screen will show:",
+                comingSoon: "Coming soon",
+                shot1Caption: "<strong>Unlock Screen</strong> — Face ID / passcode unlock, highlighting data security",
+                shot2Caption: "<strong>Financial Overview</strong> — total assets, liabilities, net worth, this month's income/expenses, plus asset composition and net worth trend charts",
+                shot3Caption: "<strong>Daily Expense Tracking</strong> — add income/expense form, category / account / currency / amount fields, and filtering",
+                shot4Caption: "<strong>Stock Investment</strong> — TW/US P&amp;L panels, holdings detail, tap-to-reveal donut chart, CSV export",
+                shot5Caption: "<strong>Stock P&amp;L Trend</strong> — total, TW, and US P&amp;L, or a 3-line comparison over time",
+                shot6Caption: "<strong>Banking &amp; Loans</strong> — bank/account asset distribution, brokerage account breakdown, loan repayment progress",
+                shot7Caption: "<strong>Insurance Policies</strong> — overview, annualized premium structure, investment/savings vs. medical/protection split, next payment reminder",
+                shot8Caption: "<strong>Real Estate</strong> — overview, valuation distribution, rental income and fixed costs",
+                shot9Caption: "<strong>Data Security</strong> — Face ID / Keychain / AES-GCM / JSON backup explainer, encrypted backup and plain-text JSON export",
+                shot10Caption: "<strong>In-App User Guide</strong> — a walkthrough page to help first-time users get started",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerAbout: "About Me",
+                footerExperiences: "Experiences",
+                footerPublications: "Publications",
+                footerCertifications: "Certifications",
+                footerProjects: "Projects",
+                footerCompetitions: "Competitions",
+                footerConferences: "Conferences",
+                footerAwards: "Awards",
+                footerOtherExperiences: "Other Experiences",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "作品案例．iOS App",
+                title: "個人理財儀表板 App",
+                subtitle: "本機加密、全方位的個人理財追蹤 iOS App",
+                meta: "由團隊網頁版發想延伸，個人獨立開發 iOS App．自 2026/05 起",
+                tocProblem: "問題背景",
+                tocTech: "技術堆疊",
+                tocFeatures: "功能特色",
+                tocRole: "我的角色",
+                tocChallenges: "挑戰與解法",
+                tocDemo: "Demo",
+                problemTitle: "問題背景",
+                problemContent: "<p>個人理財資料通常分散在不同地方：日常記帳在一個 App、股票投資在券商、保險保單在紙本或保險公司系統、銀行帳戶與貸款又在不同金融機構。使用者若想知道「我現在到底有多少資產？負債多少？現金流是否健康？投資和保險是否有被完整追蹤？」往往需要自己手動整理，過程繁瑣且容易遺漏。</p><p>本專案希望打造一個本機加密、全方位、可長期追蹤的個人財務儀表板 App。它不是單純記帳工具，而是把記帳、股票、銀行帳戶、貸款、保險、房地產、理財目標與資料備份整合在同一個 iPhone App 中，讓使用者能用一個畫面快速掌握資產淨值、現金流、投資損益與財務健康狀態。</p>",
+                techTitle: "技術堆疊",
+                techCaption: "五層架構：展示層（SwiftUI）、互動元件層（圖表／表單／匯出）、應用邏輯層（Store／快照／股價／匯入匯出／建議）、財務模組層（記帳／投資／銀行貸款／保險／房地產／理財規劃），以及資料與安全層（FinanceVault、AES-GCM、Keychain、Face ID）",
+                techGroup1: "介面",
+                techGroup2: "資料與狀態管理",
+                techGroup3: "整合與服務",
+                techGroup4: "安全機制",
+                featuresTitle: "功能特色",
+                f1Title: "財務總覽",
+                f1List: "<li>顯示總資產、總負債與目前淨值</li><li>顯示本月收入、本月支出與現金流</li><li>支援資產組成甜甜圈圖</li><li>支援負債組成圖</li><li>支援收入／支出趨勢圖</li><li>支援支出類別分布圖</li><li>支援總資產淨值趨勢</li><li>可建立今日資產快照</li>",
+                f2Title: "日常記帳",
+                f2List: "<li>新增收入與支出</li><li>支援帳戶、類別、幣別、金額與備註</li><li>可自訂收支類別</li><li>新增記帳時若類別不存在，可直接新增並同步到常用類別</li><li>可依類型、類別、帳戶與日期篩選</li><li>支援預算設定與支出提醒</li>",
+                f3Title: "股票投資",
+                f3List: "<li>支援台股與美股持倉</li><li>記錄股票代號、名稱、券商、股數、平均成本、目前股價與月定期定額</li><li>支援台股收益面板與美股收益面板</li><li>顯示總市值、總成本、未實現損益與報酬率</li><li>支援一鍵更新股價</li><li>支援 Yahoo Finance／Stooq 股價來源</li><li>支援歷史股價回填</li><li>支援股票損益快照</li><li>支援投資紀錄匯出 CSV</li><li>甜甜圈圖可點選查看個別代號市值、占比與損益</li>",
+                f4Title: "銀行與貸款",
+                f4List: "<li>記錄銀行帳戶、證券帳戶、緊急預備金、信用卡與電子支付帳戶</li><li>顯示帳戶資產分布</li><li>額外拆分券商／證券帳戶面板</li><li>管理房貸、車貸、信貸、學貸與其他貸款</li><li>顯示剩餘本金、年利率、月付金額與還款進度</li><li>貸款會自動納入總負債</li>",
+                f5Title: "保險保單",
+                f5List: "<li>記錄保單名稱、公司、類型、幣別、保費、繳費頻率與保額</li><li>支援現金價值／解約金追蹤</li><li>支援保單借款與借款利率</li><li>顯示每年要繳的保費</li><li>可填寫下次繳費日</li><li>可區分投資／儲蓄型與醫療／保障型</li><li>顯示保單類型配置、年化保費結構與保費用途拆分</li>",
+                f6Title: "房地產",
+                f6List: "<li>記錄自宅、出租住宅、商用不動產、土地、車位等資產</li><li>追蹤購入價、目前估值、購入日期、月租金、稅費與管理費</li><li>可連結房貸，計算房產扣除貸款後的淨值</li><li>房地產估值會納入總資產</li><li>月租金可納入資產分析參考</li>",
+                f7Title: "理財規劃",
+                f7List: "<li>設定緊急預備金、旅遊基金、退休投資、購屋頭款等目標</li><li>追蹤目標金額、目前已存與期限</li><li>顯示理財順序建議</li><li>協助使用者檢查是否已有緊急預備金、保險、投資與長期目標</li>",
+                f8Title: "資料安全與備份",
+                f8List: "<li>使用 Face ID／Touch ID／裝置密碼解鎖</li><li>使用 AES-GCM 加密本機資料</li><li>使用 Keychain 保存加密金鑰</li><li>App 切到背景時自動遮蔽資料</li><li>支援加密備份</li><li>支援明文 JSON 手動匯出</li><li>支援原網頁 JSON 匯入</li><li>支援投資紀錄 CSV 匯出</li><li>提供資料健康檢查與 App 使用說明</li>",
+                roleTitle: "我負責的部分",
+                janiceTitle: "Product Designer / 專案發想人",
+                janiceContent: "Janice 負責提出專案的核心想法，規劃整體理財儀表板的功能架構，並完成網頁版的設計與實作，作為後續 iOS App 開發的基礎。",
+                myName: "我",
+                myTitle: "iOS App Developer / System Builder",
+                myList: "<li>將 Janice 的想法與網頁版基礎延伸成 iOS App</li><li>使用 SwiftUI 建置 App 主要介面與多頁籤架構</li><li>建立完整資料模型，整合記帳、股票、銀行帳戶、貸款、保險、房地產與理財目標</li><li>實作財務總覽、資產淨值、現金流、投資損益與保險分析功能</li><li>使用 Swift Charts 製作互動式圖表與甜甜圈圖</li><li>實作 JSON 匯入／匯出，支援原網頁版資料轉換到 App</li><li>使用 CryptoKit、Keychain 與 LocalAuthentication 實作本機加密與 Face ID／裝置密碼解鎖</li><li>負責 App 測試、Xcode 部署與 iPhone 實機安裝調整</li>",
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "財務資料分散，難以看出完整資產狀況",
+                c1Problem: "使用者的財務資訊通常散落在不同平台，例如銀行 App、券商 App、保險公司資料、房貸資訊、手動記帳表格等。即使每一項資料都存在，也很難快速回答「我現在總資產多少？淨值多少？負債壓力是否過高？」",
+                c1Solution: "設計 <code>FinanceVault</code> 作為核心資料模型，將記帳、股票、銀行帳戶、貸款、保單、房地產、理財目標與快照紀錄整合成同一個資料結構。App 透過總覽頁集中顯示現金、股票、保單現金價值、房地產估值、負債、收入、支出與淨值趨勢。",
+                c2Title: "使用者需要長期追蹤，而不是只看當下數字",
+                c2Problem: "資產淨值與投資損益會隨時間變動，如果只有目前資料，使用者無法觀察長期趨勢。",
+                c2Solution: "加入每日資產快照與股票損益快照機制。使用者可以手動建立今日快照，也能在更新股價、修改資產資料後重新計算。圖表會顯示淨值、資產組成、股票損益趨勢，讓使用者看見財務變化。",
+                c3Title: "原網頁版 JSON 與 App 資料模型格式不同",
+                c3Problem: "最初的網頁版資料使用 localStorage JSON 儲存，欄位命名與 App 原生模型不完全一致。直接匯入可能造成欄位對不上、資料變成 0 或無法解析。",
+                c3Solution: "建立 <code>WebDashboardImporter</code>，支援原網頁 JSON 格式轉換。它會將 <code>transactions</code>、<code>stocks</code>、<code>accounts</code>、<code>loans</code>、<code>policies</code>、<code>realEstate</code>、<code>goals</code>、<code>snapshots</code> 等欄位轉換成 App 內部模型。同時加入錯誤提示，避免使用者誤把加密備份當作明文 JSON 匯入。",
+                c4Title: "財務資料敏感，不能只靠普通檔案儲存",
+                c4Problem: "理財 App 會記錄資產、負債、股票、保單與房產等敏感資料，如果直接以明文存在手機中，風險較高。",
+                c4Solution: "使用 CryptoKit 的 AES-GCM 將本機資料庫加密，並將主金鑰存放於 Keychain。App 開啟時透過 Face ID、Touch ID 或裝置密碼解鎖。資料備份也支援加密匯出，明文 JSON 則設計成手動觸發，避免自動產生未加密檔案。",
+                c5Title: "股票價格與投資損益需要更新",
+                c5Problem: "股票市值與損益會隨市場變動，如果完全手動輸入，容易過時。",
+                c5Solution: "建立 <code>StockQuoteService</code>，透過 Yahoo Finance 與 Stooq 取得股價資料。投資頁提供一鍵更新股價，並支援歷史股價回填，讓股票收益趨勢圖不只是水平線，而能反映過去股價變化。",
+                c6Title: "保險資料和投資資料性質不同，不能混在一起看",
+                c6Problem: "保險有些屬於保障型，例如醫療險、壽險；有些則偏投資或儲蓄，例如儲蓄險、投資型保單。若只看保單總額，容易誤判資產狀況。",
+                c6Solution: "保險模組加入保單類型、保費頻率、年化保費、現金價值、保單借款、保費用途與下次繳費日。介面上可以拆分投資／儲蓄型與醫療／保障型保費，並追蹤每年需要繳多少保費。",
+                demoTitle: "系統展示",
+                demoIntro: "Demo 截圖準備中，以下是預計呈現的畫面：",
+                comingSoon: "準備中",
+                shot1Caption: "<strong>App 解鎖畫面</strong> — 顯示 Face ID／裝置密碼解鎖，用來凸顯資料安全",
+                shot2Caption: "<strong>財務總覽頁</strong> — 顯示總資產、總負債、淨值、本月收入與支出，並含資產組成圖與淨值趨勢圖",
+                shot3Caption: "<strong>日常記帳頁</strong> — 新增收入／支出表單、類別／帳戶／幣別／金額欄位、篩選功能畫面",
+                shot4Caption: "<strong>股票投資頁</strong> — 台股／美股收益面板、持倉明細、股票分布甜甜圈圖點選後顯示數值、投資 CSV 匯出按鈕",
+                shot5Caption: "<strong>股票損益趨勢圖</strong> — 顯示總損益、台股損益、美股損益或三線比較",
+                shot6Caption: "<strong>銀行與貸款頁</strong> — 銀行／帳戶資產分布、券商／證券帳戶細分、貸款還款進度",
+                shot7Caption: "<strong>保險保單頁</strong> — 保險總覽、年化保費結構、投資／儲蓄型與醫療／保障型拆分、下次繳費日提醒",
+                shot8Caption: "<strong>房地產頁</strong> — 房地產總覽、估值分布、租金收入與固定支出",
+                shot9Caption: "<strong>資料安全頁</strong> — Face ID／Keychain／AES-GCM／JSON 備份說明、加密備份與明文 JSON 匯出功能",
+                shot10Caption: "<strong>App 使用說明書頁</strong> — 讓初學者知道如何開始使用",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerAbout: "關於我",
+                footerExperiences: "經歷",
+                footerPublications: "學術發表",
+                footerCertifications: "證照",
+                footerProjects: "專案作品",
+                footerCompetitions: "競賽經歷",
+                footerConferences: "研討會",
+                footerAwards: "獲獎紀錄",
+                footerOtherExperiences: "其他經歷",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>

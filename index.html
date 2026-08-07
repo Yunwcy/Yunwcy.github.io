@@ -41,14 +41,10 @@
         body {
             font-family: 'Noto Serif TC', serif;
             color: var(--text-color);
-            background: linear-gradient(135deg, 
-                rgba(213, 236, 198, 0.5), 
-                rgba(220, 233, 190, 0.5), 
-                rgba(180, 218, 144, 0.5), 
-                rgba(212, 228, 175, 0.5), 
-                rgba(202, 226, 167, 0.5)
-            );
-            opacity: 0.8;
+            /* A flatter, lighter, evenly-toned sage green — the old 5-stop
+               gradient plus body opacity compounded with card backgrounds
+               and made some areas look noticeably darker/muddier than others */
+            background: linear-gradient(135deg, #f1f6ec, #eaf2e2);
         }
 
         /* Navigation Styles */
@@ -952,32 +948,33 @@
             }
         }
 
-        /* 手機螢幕 (599px以下) - 顯示1個卡片 */
+        /* 手機螢幕 (599px以下) - 顯示1個卡片；沒有箭頭了，卡片可以寬一點更清楚 */
         @media (max-width: 599px) {
             .swiper-container, .projects-slider-container {
-                max-width: 350px;     /* 給手機版卡片足夠空間 */
-                padding: 0 30px;      /* 增加左右padding */
+                max-width: 400px;
+                padding: 0 20px;      /* 縮小左右padding，讓卡片用到更多寬度 */
             }
-            
+
             .project-card {
-                width: 290px;
-                height: 520px;
+                width: 100%;
+                max-width: 340px;
+                height: 540px;
                 padding: 18px;
             }
-            
+
             .project-card img {
                 width: 140px;
                 height: 140px;
             }
-            
+
             .project-card h3 {
                 font-size: 0.95rem;
                 min-height: 45px;
                 line-height: 1.2;
             }
-            
+
             .project-card .project-desc {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 -webkit-line-clamp: 3;
             }
             
@@ -1297,13 +1294,13 @@
         <div class="menu-items" id="menu-items">
             <a href="#home" data-i18n="nav.home">Home</a>
             <a href="about.html" data-i18n="nav.about">About me</a>
+            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
+            <a href="#awards" data-i18n="nav.awards">Awards</a>
             <a href="#experiences" data-i18n="nav.experiences">Experiences</a>
             <a href="#publications" data-i18n="nav.publications">Publications</a>
             <a href="#certifications" data-i18n="nav.certifications">Certifications</a>
-            <a href="#projects" data-i18n="nav.projects">Projects</a>
-            <a href="#competitions" data-i18n="nav.competitions">Competitions</a>
             <a href="#conferences" data-i18n="nav.conferences">Conferences</a>
-            <a href="#awards" data-i18n="nav.awards">Awards</a>
             <a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a>
         </div>
         <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
@@ -1485,6 +1482,11 @@
                             <span class="project-tag" data-i18n="tags.fintech">FinTech</span>
                         </div>
                         <p class="project-desc" data-i18n="projects.financeApp.desc">A locally-encrypted personal finance app integrating expense tracking, stocks, insurance, real estate, and net worth tracking</p>
+                        <div class="project-links">
+                            <a href="financedashboard.html" class="project-link">
+                                <i class="fas fa-arrow-right"></i><span data-i18n="projects.more">More</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -2133,6 +2135,52 @@
         </div>
     </section>
 
+    <!-- Research Experience Section -->
+    <section class="content-section" id="experiences">
+        <h2 class="section-title fade-in" data-i18n="researchSection.title">Research Experience</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2024/09 - 2026/07</div>
+                    <h3 data-i18n="timeline.position">Lead Research Assistant</h3>
+                    <p data-i18n-html="timeline.projectTitle"><strong>Digital Support, Unimpeded Communication:</strong> The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment</p>
+                    <p data-i18n="timeline.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</em></p>
+                    <!-- <p data-i18n="timeline.funding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</p> -->
+                    <!-- <ul>
+                        <li data-i18n="timeline.task1">Developing multimodal dialogue systems for speech-impaired users</li>
+                        <li data-i18n="timeline.task2">Implementing cross-lingual communication support technologies</li>
+                        <li data-i18n="timeline.task3">Researching inclusive AI technologies for accessibility</li>
+                    </ul> -->
+                    <div class="timeline-links">
+                        <a href="https://yunwcy.github.io/aiitntpu.html" target="_blank" class="timeline-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span data-i18n="timeline.projectLink">View Project Details</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2025/12 - 2026/02</div>
+                    <h3 data-i18n="timelineEsg.position">Data Annotator</h3>
+                    <p data-i18n-html="timelineEsg.projectTitle"><strong>ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project:</strong> AI CUP 2026 VeriPromiseESG</p>
+                    <p data-i18n="timelineEsg.subProject"><em>Ministry of Education — AI CUP 2026 National Collegiate Artificial Intelligence Professional Domain Thematic Competition Project</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-content">
+                    <div class="date">2024/09 - 2025/12</div>
+                    <h3 data-i18n="timelineLang.position">Research Assistant</h3>
+                    <p data-i18n-html="timelineLang.projectTitle"><strong>Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities</strong></p>
+                    <p data-i18n="timelineLang.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Publications Section -->
     <section class="content-section" id="publications">
         <h2 class="section-title fade-in" data-i18n="publications.title">Publications</h2>
@@ -2223,71 +2271,6 @@
         </div>
     </section>
 
-    <!-- Research Experience Section -->
-    <section class="content-section" id="experiences">
-        <h2 class="section-title fade-in" data-i18n="researchSection.title">Research Experience</h2>
-        
-        <div class="timeline">
-            <div class="timeline-item fade-in">
-                <div class="timeline-content">
-                    <div class="date">2024/09 - 2026/07</div>
-                    <h3 data-i18n="timeline.position">Lead Research Assistant</h3>
-                    <p data-i18n-html="timeline.projectTitle"><strong>Digital Support, Unimpeded Communication:</strong> The Development, Support and Promotion of AI-assisted Communication Assistive Devices for Speech Impairment</p>
-                    <p data-i18n="timeline.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System for Inclusive Communication Support</em></p>
-                    <!-- <p data-i18n="timeline.funding">National Science and Technology Council (NSTC 113-2425-H-305-003-), 2023/05/01 - 2026/04/30</p> -->
-                    <!-- <ul>
-                        <li data-i18n="timeline.task1">Developing multimodal dialogue systems for speech-impaired users</li>
-                        <li data-i18n="timeline.task2">Implementing cross-lingual communication support technologies</li>
-                        <li data-i18n="timeline.task3">Researching inclusive AI technologies for accessibility</li>
-                    </ul> -->
-                    <div class="timeline-links">
-                        <a href="https://yunwcy.github.io/aiitntpu.html" target="_blank" class="timeline-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span data-i18n="timeline.projectLink">View Project Details</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-content">
-                    <div class="date">2025/12 - 2026/02</div>
-                    <h3 data-i18n="timelineEsg.position">Data Annotator</h3>
-                    <p data-i18n-html="timelineEsg.projectTitle"><strong>ESG Sustainability Commitment Verification Competition and Annotation Data Collection Project:</strong> AI CUP 2026 VeriPromiseESG</p>
-                    <p data-i18n="timelineEsg.subProject"><em>Ministry of Education — AI CUP 2026 National Collegiate Artificial Intelligence Professional Domain Thematic Competition Project</em></p>
-                </div>
-            </div>
-
-            <div class="timeline-item fade-in">
-                <div class="timeline-content">
-                    <div class="date">2024/09 - 2025/12</div>
-                    <h3 data-i18n="timelineLang.position">Research Assistant</h3>
-                    <p data-i18n-html="timelineLang.projectTitle"><strong>Research on Speech Processing, Synthesis, Recognition, and Sentence Construction for People with Language Disabilities</strong></p>
-                    <p data-i18n="timelineLang.subProject"><em>Sub-project 3: Multimodal Cross-lingual Task-Oriented Dialogue System</em></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Conferences Section -->
-    <section class="content-section" id="conferences">
-        <h2 class="section-title fade-in">
-            <span data-i18n="conferences.title">Conferences</span>
-            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="conferences.viewPhotos">📸 View Photos</a>
-        </h2>
-        <div class="experience-list fade-in">
-            <ul>
-                <li data-i18n="conferences.itam31">31st International Conference on IT Applications and Management, Jinju, Korea, 2025/10/26-30</li>
-                <li data-i18n="conferences.twsc22025">TWSC2 2025 Conference (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04</li>
-                <li>
-                    <span data-i18n="conferences.ntcir18">NTCIR-18 Conference (The 18th NII Testbeds and Community for Information access Research), Tokyo, Japan, 2025/06/10-13</span>
-                    <a href="https://yunwcy.github.io/ntcir18" style="color: #2E8B57; font-weight: bold;">More ></a>
-                </li>
-                <li data-i18n="conferences.icim2025">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
-            </ul>
-        </div>
-    </section>
-
     <!-- Certificates Section with Swiper -->
     <section class="content-section" id="certifications">
         <h2 class="section-title fade-in">
@@ -2375,6 +2358,25 @@
         </div>
     </section>
 
+    <!-- Conferences Section -->
+    <section class="content-section" id="conferences">
+        <h2 class="section-title fade-in">
+            <span data-i18n="conferences.title">Conferences</span>
+            <a href="https://yunwcy.github.io/photos" class="photo-link" data-i18n="conferences.viewPhotos">📸 View Photos</a>
+        </h2>
+        <div class="experience-list fade-in">
+            <ul>
+                <li data-i18n="conferences.itam31">31st International Conference on IT Applications and Management, Jinju, Korea, 2025/10/26-30</li>
+                <li data-i18n="conferences.twsc22025">TWSC2 2025 Conference (2025 Taiwan Symposium On Cloud And Services Computing), New Taipei, Taiwan, 2025/07/03-04</li>
+                <li>
+                    <span data-i18n="conferences.ntcir18">NTCIR-18 Conference (The 18th NII Testbeds and Community for Information access Research), Tokyo, Japan, 2025/06/10-13</span>
+                    <a href="https://yunwcy.github.io/ntcir18" style="color: #2E8B57; font-weight: bold;">More ></a>
+                </li>
+                <li data-i18n="conferences.icim2025">2025 International Conference on Information Management, New Taipei, Taiwan, 2025/05/16</li>
+            </ul>
+        </div>
+    </section>
+
     <!-- Other Experiences Section -->
     <section class="content-section" id="other-experiences">
         <h2 class="section-title fade-in">
@@ -2414,13 +2416,13 @@
                 <h3 data-i18n="footer.links">Links</h3>
                 <p><a href="#home" data-i18n="nav.home">Home</a></p>
                 <p><a href="about.html" data-i18n="nav.about">About Me</a></p>
+                <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
+                <p><a href="#competitions" data-i18n="nav.competitions">Competitions</a></p>
+                <p><a href="#awards" data-i18n="nav.awards">Awards</a></p>
                 <p><a href="#experiences" data-i18n="nav.experiences">Experiences</a></p>
                 <p><a href="#publications" data-i18n="nav.publications">Publications</a></p>
                 <p><a href="#certifications" data-i18n="nav.certifications">Certifications</a></p>
-                <p><a href="#projects" data-i18n="nav.projects">Projects</a></p>
-                <p><a href="#competitions" data-i18n="nav.competitions">Competitions</a></p>
                 <p><a href="#conferences" data-i18n="nav.conferences">Conferences</a></p>
-                <p><a href="#awards" data-i18n="nav.awards">Awards</a></p>
                 <p><a href="#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a></p>
             </div>
 
@@ -3115,6 +3117,7 @@
                     el: '.certificates-swiper .swiper-pagination',
                     clickable: true,
                     dynamicBullets: true,
+                    dynamicMainBullets: 5,
                 },
                 breakpoints: {
                     320: {
@@ -3149,6 +3152,7 @@
                     el: '.awards-swiper .swiper-pagination',
                     clickable: true,
                     dynamicBullets: true,
+                    dynamicMainBullets: 5,
                 },
                 breakpoints: {
                     320: {
@@ -3180,6 +3184,7 @@
                     el: '.projects-swiper .swiper-pagination',
                     clickable: true,
                     dynamicBullets: true,
+                    dynamicMainBullets: 5,
                 },
                 breakpoints: {
                     320: {
