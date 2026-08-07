@@ -242,7 +242,12 @@ body {
 .demo-subheading i { color: var(--primary-green); }
 .screenshot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    /* Capped max track width (not 1fr) so a row with only one or two
+       screenshots doesn't stretch that card to the full container width —
+       every card stays the same uniform, fully-visible size no matter how
+       many share its row. */
+    grid-template-columns: repeat(auto-fit, minmax(170px, 220px));
+    justify-content: center;
     gap: 20px;
 }
 .screenshot-card {
@@ -250,6 +255,11 @@ body {
     border-radius: 14px;
     padding: 12px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.screenshot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
 }
 /* Screenshots are real iPhone captures — frame them like a phone (tall
    portrait rectangle) instead of a wide landscape crop, so nothing
