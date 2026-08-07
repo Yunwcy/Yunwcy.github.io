@@ -258,6 +258,29 @@
             color: #fff;
         }
 
+        .view-all-row {
+            display: flex;
+            justify-content: center;
+            margin: -14px auto 30px auto;
+        }
+
+        .view-all-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 6px 4px;
+            border-bottom: 1.5px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .view-all-link:hover {
+            border-bottom-color: var(--primary-green);
+        }
+
         /* System vs. Report badge shown on each project card */
         .project-type-badge {
             position: absolute;
@@ -783,6 +806,10 @@
             background: linear-gradient(135deg, #e0a72e, #c98a1a);
         }
 
+        .featured-badge.blue {
+            background: linear-gradient(135deg, #3b82c4, #2563a0);
+        }
+
         .featured-card-body h3 {
             color: var(--text-color);
             font-size: 1.3rem;
@@ -989,6 +1016,15 @@
             .project-link {
                 font-size: 0.75rem;
                 padding: 5px 8px;
+            }
+
+            /* Certificates / Awards cards were a fixed 280px — let them use
+               the available width instead, matching the Projects treatment */
+            .cert-card {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                min-height: 350px;
             }
         }
 
@@ -1313,8 +1349,8 @@
     <section class="hero" id="home">
         <img src="images/forest.png" alt="Hero Image" class="hero-image">
         <div class="hero-content">
-            <h1 data-i18n="hero.title">Welcome to My Page!</h1>
-            <p data-i18n-html="hero.intro">Hi, I'm Yun! A master's student at <strong>National Taipei University, Institute of Information Management</strong> and a research assistant at <strong><a href="https://www.aifitesg.org/" style="color: #2E8B57; font-weight: bold;">IFIT Lab</a></strong>.</p>
+            <h1 data-i18n="hero.title">Welcome to Yun's Page!</h1>
+            <p data-i18n-html="hero.intro">Hi, I'm Cheng-Yun Wu! I graduated with a Master's degree from the Institute of Information Management, <strong>National Taipei University</strong>, where I worked as a research assistant at <strong><a href="https://www.aifitesg.org/" style="color: #2E8B57; font-weight: bold;">IFIT Lab</a></strong>.</p>
             <p data-i18n-html="hero.research">My research focuses on <strong>AI</strong> and <strong>multimodal</strong> applications, and I am passionate about developing intelligent systems that enhance communication and accessibility.</p>
             <p data-i18n-html="hero.explore">Explore more <a href="about.html" style="color: #2E8B57; font-weight: bold;">about me</a>!</p>
         </div>
@@ -1327,14 +1363,15 @@
             <div class="featured-card fade-in">
                 <img src="projects/Thesis.jpg" alt="Agentic Multimodal RAG-Enhanced Dialogue System">
                 <div class="featured-card-body">
-                    <span class="featured-badge" data-i18n="featuredSection.badge">Featured</span>
+                    <span class="featured-badge blue" data-i18n="featuredSection.badgeLicensed">🎓 Featured · Licensed</span>
                     <h3 data-i18n="featuredSection.thesis.title">Agentic Multimodal RAG-Enhanced Dialogue System</h3>
                     <p class="featured-tagline" data-i18n="featuredSection.thesis.tagline">Master's thesis: an agentic multimodal RAG dialogue system for university sports administration, integrating text, image, and speech input.</p>
                     <div class="featured-tags">
-                        <span class="project-tag" data-i18n="tags.agentic_ai">Agentic AI</span>
                         <span class="project-tag">RAG</span>
-                        <span class="project-tag" data-i18n="tags.multimodal">Multimodal</span>
-                        <span class="project-tag" data-i18n="tags.sports">Sports Management</span>
+                        <span class="project-tag" data-i18n="tags.agentic_ai">Agentic AI</span>
+                        <span class="project-tag" data-i18n="tags.multimodal_dialog_sys">Multimodal Dialogue Systems</span>
+                        <span class="project-tag" data-i18n="tags.conversational_ai">Conversational AI</span>
+                        <span class="project-tag" data-i18n="tags.sports_administration">Sports Administration</span>
                     </div>
                     <a href="thesis.html" class="featured-more"><span data-i18n="featuredSection.viewCase">View Case Study</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
@@ -1380,6 +1417,9 @@
             <button class="project-filter-btn active" data-filter="all" data-i18n="projectsSection.filterAll">All</button>
             <button class="project-filter-btn" data-filter="system" data-i18n="projectsSection.filterSystem">🖥️ Systems</button>
             <button class="project-filter-btn" data-filter="report" data-i18n="projectsSection.filterReport">📄 Reports</button>
+        </div>
+        <div class="view-all-row fade-in">
+            <a href="project.html" class="view-all-link"><span data-i18n="projectsSection.viewAll">View All Projects</span> <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="swiper projects-swiper">
             <div class="swiper-wrapper">
@@ -2464,8 +2504,8 @@
                                 otherExperiences: "Other Experiences"
                             },
                             hero: {
-                                title: "Welcome to My Page!",
-                                intro: "Hi, I'm Yun! I hold a Master's in Information Management from <strong>National Taipei University</strong>, where I worked as a research assistant at <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
+                                title: "Welcome to Yun's Page!",
+                                intro: "Hi, I'm Cheng-Yun Wu! I graduated with a Master's degree from the Institute of Information Management, <strong>National Taipei University</strong>, where I worked as a research assistant at <strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>.",
                                 research: "I specialize in developing <strong>multimodal, RAG-enhanced dialogue systems</strong> and <strong>agentic AI</strong> applications, with achievements including publications at international conferences, multiple AI competition wins, and systems I've independently built and deployed to production — I'm best at building intelligent conversational AI assistants.",
                                 explore: "Explore more <a href='about.html' style='color: #2E8B57; font-weight: bold;'>about me</a>!"
                             },
@@ -2473,6 +2513,7 @@
                                 title: "🌟 Featured Case Studies",
                                 badge: "Featured",
                                 badgeWinner: "🏆 Competition Winner",
+                                badgeLicensed: "🎓 Featured · Licensed",
                                 viewCase: "View Case Study",
                                 thesis: {
                                     title: "Agentic Multimodal RAG-Enhanced Dialogue System",
@@ -2523,6 +2564,7 @@
                                 filterAll: "All",
                                 filterSystem: "🖥️ Systems",
                                 filterReport: "📄 Reports",
+                                viewAll: "View All Projects",
                                 badgeSystem: "🖥️ System",
                                 badgeReport: "📄 Report"
                             },
@@ -2682,7 +2724,8 @@
                                 conversational_ai: "Conversational AI",
                                 multimodal_dialog_sys: "Multimodal Dialogue Systems",
                                 digital_serv_enh: "Digital Service Enhancement",
-                                agentic_ai: "Agentic AI"
+                                agentic_ai: "Agentic AI",
+                                sports_administration: "Sports Administration"
                             },
                             competitions: {
                                 title: "Competitions",
@@ -2786,7 +2829,7 @@
                             },
                             hero: {
                                 title: "歡迎來到我的個人網站！",
-                                intro: "嗨，我是Yun！國立臺北大學資訊管理研究所畢業，研究所期間擔任<strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>研究助理。",
+                                intro: "嗨，我是吳承耘！國立臺北大學資訊管理研究所畢業，研究所期間擔任<strong><a href='https://www.aifitesg.org/' style='color: #2E8B57; font-weight: bold;'>IFIT Lab</a></strong>研究助理。",
                                 research: "我專長是開發<strong>多模態、RAG增強的對話系統</strong>與<strong>代理式AI（Agentic AI）應用</strong>，成果包括多篇國際研討會論文發表、多項AI競賽獲獎，以及自行建置並實際部署上線的系統，最擅長建置AI智慧對話助理。",
                                 explore: "<a href='about.html' style='color: #2E8B57; font-weight: bold;'>了解更多</a>關於我的資訊！"
                             },
@@ -2794,6 +2837,7 @@
                                 title: "🌟 精選案例",
                                 badge: "精選",
                                 badgeWinner: "🏆 競賽冠軍",
+                                badgeLicensed: "🎓 精選．已授權",
                                 viewCase: "查看完整案例",
                                 thesis: {
                                     title: "Agentic Multimodal RAG-Enhanced Dialogue System",
@@ -2844,6 +2888,7 @@
                                 filterAll: "全部",
                                 filterSystem: "🖥️ 系統作品",
                                 filterReport: "📄 報告文件",
+                                viewAll: "查看全部作品",
                                 badgeSystem: "🖥️ 系統",
                                 badgeReport: "📄 報告"
                             },
@@ -3003,7 +3048,8 @@
                                 conversational_ai: "對話AI",
                                 multimodal_dialog_sys: "多模態對話系統",
                                 digital_serv_enh: "數位服務強化",
-                                agentic_ai: "代理式AI"
+                                agentic_ai: "代理式AI",
+                                sports_administration: "體育行政"
                             },
                             competitions: {
                                 title: "競賽經歷",

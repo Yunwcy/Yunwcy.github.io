@@ -242,21 +242,26 @@ body {
 .demo-subheading i { color: var(--primary-green); }
 .screenshot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 20px;
 }
 .screenshot-card {
     background: var(--card-bg);
     border-radius: 14px;
-    padding: 14px;
+    padding: 12px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
+/* Screenshots are real iPhone captures — frame them like a phone (tall
+   portrait rectangle) instead of a wide landscape crop, so nothing
+   important gets cut off */
 .screenshot-card img {
     width: 100%;
-    height: 175px;
+    aspect-ratio: 9 / 18;
+    height: auto;
     object-fit: cover;
     object-position: top;
-    border-radius: 8px;
+    border-radius: 14px;
+    border: 1px solid rgba(46,139,87,0.15);
     cursor: zoom-in;
     display: block;
 }
@@ -811,8 +816,15 @@ const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, { threshold: 0.12 });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+// Safety net: some mobile browsers fail to fire IntersectionObserver for
+// very tall sections, which would otherwise leave content permanently
+// invisible (opacity: 0) — force-reveal anything still hidden after a beat.
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
 
 document.addEventListener('DOMContentLoaded', function () {
     i18next.use(i18nextBrowserLanguageDetector).init({

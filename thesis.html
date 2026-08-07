@@ -233,6 +233,22 @@ body {
 .challenge-block { margin-bottom: 16px; }
 .challenge-block:last-child { margin-bottom: 0; }
 .challenge-block p { margin: 0; }
+.challenge-card > p { margin: 0; }
+
+/* System contributions impact callout */
+.impact-note {
+    background: linear-gradient(135deg, rgba(224,167,46,0.15), rgba(46,139,87,0.12));
+    border: 1.5px solid rgba(46,139,87,0.3);
+    border-radius: 14px;
+    padding: 20px 26px;
+    margin-bottom: 22px;
+    font-weight: 600;
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.impact-note i { font-size: 1.4rem; color: #c9832e; flex-shrink: 0; }
 .challenge-block.solution {
     background: var(--light-green);
     border-left: 4px solid var(--primary-green);
@@ -316,6 +332,7 @@ footer {
         <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
         <a href="#role" data-i18n="tocRole">My Role</a>
         <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#contributions" data-i18n="tocContributions">Contributions</a>
         <a href="#demo" data-i18n="tocDemo">Demo</a>
     </div>
 </div>
@@ -427,6 +444,26 @@ footer {
     </div>
 </section>
 
+<section class="case-section fade-in" id="contributions">
+    <h2><i class="fas fa-seedling"></i> <span data-i18n="contribTitle">System Contributions</span></h2>
+    <div class="impact-note"><i class="fas fa-graduation-cap"></i> <span data-i18n-html="licenseNote"></span></div>
+
+    <div class="challenge-card">
+        <h3><span class="num">01</span> <span data-i18n="contrib1Title">Lowering the cost of finding information and repeated back-and-forth</span></h3>
+        <p data-i18n="contrib1Content"></p>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">02</span> <span data-i18n="contrib2Title">Making complex administrative questions faster to answer</span></h3>
+        <p data-i18n="contrib2Content"></p>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">03</span> <span data-i18n="contrib3Title">A more natural, multimodal front door to administrative services</span></h3>
+        <p data-i18n="contrib3Content"></p>
+    </div>
+</section>
+
 <section class="case-section fade-in" id="demo">
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
     <div class="video-wrap">
@@ -483,8 +520,15 @@ const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, { threshold: 0.12 });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+// Safety net: some mobile browsers fail to fire IntersectionObserver for
+// very tall sections, which would otherwise leave content permanently
+// invisible (opacity: 0) — force-reveal anything still hidden after a beat.
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
 
 document.addEventListener('DOMContentLoaded', function () {
     i18next.use(i18nextBrowserLanguageDetector).init({
@@ -506,6 +550,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocTech: "Tech Stack",
                 tocRole: "My Role",
                 tocChallenges: "Challenges",
+                tocContributions: "Contributions",
                 tocDemo: "Demo",
                 problemTitle: "Problem Background",
                 problemContent: "<p>University sports administration covers a wide range of information — venue reservations, PE course schedules, competition activities, regulations, announcements, forms, and FAQs. However, this information is scattered across different web pages, documents, and images, forcing users to search through multiple pages on their own, while administrative staff repeatedly answer similar questions.</p><p>Traditional keyword search or rule-based chatbots work well for single, well-defined questions, but struggle with complex queries that require integrating multiple conditions, cross-referencing data sources, or interpreting images and speech. This project therefore builds an <strong>Agentic Multimodal Retrieval-Augmented Generation (Agentic Multimodal RAG)</strong> dialogue system for university sports administration — integrating text, image, and speech input, and using knowledge retrieval, tool routing, and conversational memory to provide well-grounded, more complete administrative answers.</p>",
@@ -532,6 +577,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Title: "A single automated score doesn't fully reflect system quality",
                 c3Problem: "Early in the research, I found that automated RAG evaluation results can be skewed by the choice of judge model, answer length, and phrasing. For instance, when the system integrates multiple sources into a more complete answer, that doesn't automatically score higher on every metric — relying on a single model or a single metric risks a one-sided read of system performance.",
                 c3Solution: "I redesigned the evaluation pipeline: using multiple judge models of different sizes and providers; running per-question paired comparisons with statistical significance testing; building separate datasets for simple factual queries and complex tool-routing queries; evaluating Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together; and pairing this with semi-structured interviews and post-use surveys to capture real-world usability that automated scores can't see. This mixed-methods approach — automated evaluation, statistical analysis, and user research — avoids relying on any single score and gives a fuller picture of the system's practical value in real administrative settings.",
+                contribTitle: "System Contributions",
+                licenseNote: "Following the thesis defense, the university licensed the system for continued use, with plans to expand it into a full campus-wide AI Agent platform — concrete evidence that this research translates into real, ongoing value.",
+                contrib1Title: "Lowering the cost of finding information and repeated back-and-forth",
+                contrib1Content: "Consolidates information that used to be scattered across announcements, regulations, forms, course pages, and competition pages into a single conversational entry point, so users can just ask in natural language instead of digging through multiple web pages and documents. It also handles routine, public, document-based FAQs on its own, cutting down how often staff have to answer the same questions.",
+                contrib2Title: "Making complex administrative questions faster to answer",
+                contrib2Content: "Through Agentic RAG and tool routing, the system picks the right information source for each question and integrates evidence across documents. Compared to plain keyword search, users can ask multi-condition questions in one go — venue eligibility, application steps, required documents, related regulations — and get a single, more complete answer instead of piecing it together themselves.",
+                contrib3Title: "A more natural, multimodal front door to administrative services",
+                contrib3Content: "Beyond text, the system accepts image and voice input, so users can ask directly about a screenshot of an announcement, a form, or other visual material, and keep following up in context. It shifts department websites from a \"users go find the information\" model to a more intuitive \"users state what they need, the system pulls it together\" interaction.",
                 demoTitle: "Demo",
                 footerContact: "Contact",
                 footerUniversity: "National Taipei University",
@@ -564,6 +617,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocTech: "技術堆疊",
                 tocRole: "我的角色",
                 tocChallenges: "挑戰與解法",
+                tocContributions: "系統貢獻",
                 tocDemo: "Demo",
                 problemTitle: "問題背景",
                 problemContent: "<p>大學體育行政涵蓋場地借用、體育課程、競賽活動、法規、公告、表單及常見問答等資訊。然而，這些資料分散於不同網頁、文件及圖片中，使用者往往需要自行搜尋多個頁面，行政人員也必須重複回覆相似問題。</p><p>傳統關鍵字搜尋或規則式聊天機器人，較適合處理單一且明確的問題，難以理解需要整合多項條件、跨資料來源或包含圖片與語音的複雜查詢。因此，本專案建置一套應用於大學體育行政的<strong>代理式多模態檢索增強生成對話系統（Agentic Multimodal Retrieval-Augmented Generation, Agentic Multimodal RAG）</strong>，整合文字、圖片與語音輸入，並透過知識檢索、工具路由及對話記憶，提供具資料依據且較完整的行政資訊回覆。</p>",
@@ -590,6 +644,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Title: "單一自動評估分數無法完整反映系統品質",
                 c3Problem: "研究初期發現，RAG 自動評估結果可能受到 Judge Model、回答長度及措辭方式影響。例如，系統將多項資料整合為較完整的答案時，不一定會在所有指標上獲得較高分數；若只使用單一模型或單一指標，容易對系統表現產生片面解讀。",
                 c3Solution: "我重新設計評估流程：使用多個不同規模與來源的語言模型作為 Judge Model；以每個問題為單位進行配對比較及統計檢定；分別建立簡單事實查詢與複雜工具路由查詢資料集；同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall 與 Answer Completeness；搭配半結構式訪談及使用後問卷，補充自動評估無法觀察的實際使用感受。透過自動評估、統計分析與使用者研究的混合方法，避免僅依賴單一分數，並更完整地說明系統在真實行政情境中的實用性。",
+                contribTitle: "系統貢獻",
+                licenseNote: "系統於論文口試後獲學校授權採用，將持續擴充為完整的校園 AI Agent 系統，是本研究成果實際落地應用的具體證明。",
+                contrib1Title: "降低行政資訊查找與重複溝通成本",
+                contrib1Content: "將原本分散於公告、法規、表單、課程與競賽頁面的資訊整合至單一對話入口，使用者可直接以自然語言詢問，減少自行瀏覽多個網頁與文件的時間；同時可協助處理例行、公開且文件導向的常見問題，降低行政人員重複回覆的負擔。",
+                contrib2Title: "提升複雜行政問題的資訊取得效率",
+                contrib2Content: "透過 Agentic RAG 與工具路由機制，系統能依照問題內容選擇適合的行政資訊來源，並整合不同文件中的資訊。相較於單純的關鍵字搜尋，使用者可以直接詢問包含多項條件的問題，例如場地資格、申請流程、所需文件與相關規定，取得較完整的一站式回答。",
+                contrib3Title: "提供更自然且多元的行政服務入口",
+                contrib3Content: "除了文字查詢，系統亦支援圖片與語音輸入，讓使用者可直接針對公告截圖、表格或其他視覺資料進行詢問，並延續前後文進行追問。將原本以「使用者尋找資料」為主的行政網站，轉化為更直覺的「使用者提出需求、系統主動整理資訊」互動模式。",
                 demoTitle: "Demo",
                 footerContact: "聯絡方式",
                 footerUniversity: "國立臺北大學",

@@ -523,8 +523,15 @@ const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-}, { threshold: 0.12 });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+// Safety net: some mobile browsers fail to fire IntersectionObserver for
+// very tall sections, which would otherwise leave content permanently
+// invisible (opacity: 0) — force-reveal anything still hidden after a beat.
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
 
 document.addEventListener('DOMContentLoaded', function () {
     i18next.use(i18nextBrowserLanguageDetector).init({

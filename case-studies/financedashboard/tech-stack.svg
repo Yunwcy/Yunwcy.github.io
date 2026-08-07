@@ -1,183 +1,96 @@
-<svg width="1600" height="1420" viewBox="0 0 1600 1420" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      .bg { fill: #f4f6fb; }
-      .layer-title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      .card-title { font: 700 23px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #151927; }
-      .text { font: 500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #596275; }
-      .small { font: 600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6b7280; }
-      .chip { font: 700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      .card { fill: #ffffff; stroke-width: 2.2; }
-      .arrow { stroke: #b7bfcc; stroke-width: 6; fill: none; marker-end: url(#arrowhead); }
-      .thin-arrow { stroke: #c4cad6; stroke-width: 3.5; fill: none; marker-end: url(#arrowhead-small); }
-    </style>
-
-    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M2,2 L10,6 L2,10 Z" fill="#b7bfcc"/>
-    </marker>
-
-    <marker id="arrowhead-small" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-      <path d="M2,2 L8,5 L2,8 Z" fill="#c4cad6"/>
-    </marker>
-  </defs>
-
-  <rect x="0" y="0" width="1600" height="1420" rx="18" class="bg"/>
-
-  <!-- Layer 5: Presentation -->
-  <rect x="45" y="35" width="1510" height="250" rx="28" fill="#eef2ff" stroke="#9aa8ff" stroke-width="4"/>
-  <text x="85" y="88" class="layer-title" fill="#6370f5">第 5 層　展示層（SwiftUI Presentation）</text>
-
-  <rect x="85" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="126" y="151" class="card-title">總覽</text>
-  <text x="112" y="184" class="text">KPI 卡片</text>
-  <text x="112" y="209" class="text">資產 / 負債圖</text>
-
-  <rect x="320" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="360" y="151" class="card-title">日常記帳</text>
-  <text x="348" y="184" class="text">收入 / 支出</text>
-  <text x="348" y="209" class="text">類別 / 篩選</text>
-
-  <rect x="555" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="595" y="151" class="card-title">股票投資</text>
-  <text x="583" y="184" class="text">台股 / 美股</text>
-  <text x="583" y="209" class="text">收益 / CSV</text>
-
-  <rect x="790" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="830" y="151" class="card-title">銀行貸款</text>
-  <text x="818" y="184" class="text">帳戶分布</text>
-  <text x="818" y="209" class="text">貸款進度</text>
-
-  <rect x="1025" y="112" width="210" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="1065" y="151" class="card-title">保險房產</text>
-  <text x="1053" y="184" class="text">保費 / 現金值</text>
-  <text x="1053" y="209" class="text">估值 / 租金</text>
-
-  <rect x="1260" y="112" width="235" height="120" rx="16" class="card" stroke="#c4ccff"/>
-  <text x="1300" y="151" class="card-title">安全與說明</text>
-  <text x="1290" y="184" class="text">備份 / 匯入</text>
-  <text x="1290" y="209" class="text">使用說明書</text>
-
-  <path d="M800 285 L800 345" class="arrow"/>
-
-  <!-- Layer 4: UX Components -->
-  <rect x="45" y="340" width="1510" height="230" rx="28" fill="#ecfeff" stroke="#67e8f9" stroke-width="4"/>
-  <text x="85" y="392" class="layer-title" fill="#0891b2">第 4 層　互動元件層（Charts・Forms・Export UI）</text>
-
-  <rect x="85" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
-  <text x="128" y="458" class="card-title">Swift Charts</text>
-  <text x="112" y="490" class="text">折線圖・長條圖</text>
-  <text x="112" y="514" class="text">甜甜圈點擊顯示數值</text>
-
-  <rect x="375" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
-  <text x="418" y="458" class="card-title">表單與編輯</text>
-  <text x="402" y="490" class="text">左欄名稱 / 右欄輸入</text>
-  <text x="402" y="514" class="text">必填提示・小提醒</text>
-
-  <rect x="665" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
-  <text x="708" y="458" class="card-title">檔案操作</text>
-  <text x="692" y="490" class="text">JSON 匯入 / 匯出</text>
-  <text x="692" y="514" class="text">CSV 投資紀錄</text>
-
-  <rect x="955" y="420" width="260" height="105" rx="16" class="card" stroke="#a5f3fc"/>
-  <text x="998" y="458" class="card-title">資料提醒</text>
-  <text x="982" y="490" class="text">資料健康檢查</text>
-  <text x="982" y="514" class="text">快照 / 繳費提醒</text>
-
-  <rect x="1245" y="420" width="250" height="105" rx="16" class="card" stroke="#a5f3fc"/>
-  <text x="1288" y="458" class="card-title">安全狀態</text>
-  <text x="1272" y="490" class="text">Face ID 說明</text>
-  <text x="1272" y="514" class="text">背景遮蔽 / 截圖遮蔽</text>
-
-  <path d="M800 570 L800 630" class="arrow"/>
-
-  <!-- Layer 3: Application Logic -->
-  <rect x="45" y="625" width="1510" height="305" rx="28" fill="#eafff5" stroke="#70e5b5" stroke-width="4"/>
-  <text x="85" y="677" class="layer-title" fill="#079668">第 3 層　應用邏輯層（Application Logic）</text>
-
-  <rect x="85" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="123" y="744" class="card-title">FinanceStore</text>
-  <text x="112" y="777" class="text">ObservableObject</text>
-  <text x="112" y="802" class="text">狀態管理</text>
-  <text x="112" y="827" class="text">CRUD / Save</text>
-
-  <rect x="330" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="370" y="744" class="card-title">Snapshot</text>
-  <text x="357" y="777" class="text">資產快照</text>
-  <text x="357" y="802" class="text">股票損益快照</text>
-  <text x="357" y="827" class="text">歷史趨勢</text>
-
-  <rect x="575" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="615" y="744" class="card-title">Quote Service</text>
-  <text x="602" y="777" class="text">Yahoo Finance</text>
-  <text x="602" y="802" class="text">Stooq 備援</text>
-  <text x="602" y="827" class="text">歷史回填</text>
-
-  <rect x="820" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="860" y="744" class="card-title">Importer</text>
-  <text x="847" y="777" class="text">網頁 JSON 轉換</text>
-  <text x="847" y="802" class="text">欄位遷移</text>
-  <text x="847" y="827" class="text">錯誤提示</text>
-
-  <rect x="1065" y="705" width="220" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="1105" y="744" class="card-title">Exporter</text>
-  <text x="1092" y="777" class="text">加密備份</text>
-  <text x="1092" y="802" class="text">明文 JSON</text>
-  <text x="1092" y="827" class="text">投資 CSV</text>
-
-  <rect x="1310" y="705" width="185" height="145" rx="16" class="card" stroke="#98efd0"/>
-  <text x="1348" y="744" class="card-title">Advice</text>
-  <text x="1337" y="777" class="text">理財順序</text>
-  <text x="1337" y="802" class="text">預算提醒</text>
-  <text x="1337" y="827" class="text">資料檢查</text>
-
-  <rect x="85" y="870" width="1410" height="35" rx="12" fill="#d9fbe9" stroke="#98efd0"/>
-  <text x="115" y="894" class="small">核心計算：資產淨值 = 現金 + 股票市值 + 保單現金價值 + 房地產估值 - 貸款 - 股票融資 - 保單借款</text>
-
-  <path d="M800 930 L800 990" class="arrow"/>
-
-  <!-- Layer 2: Financial Modules -->
-  <rect x="45" y="985" width="1510" height="285" rx="28" fill="#fff9e8" stroke="#ffd25a" stroke-width="4"/>
-  <text x="85" y="1037" class="layer-title" fill="#d67a00">第 2 層　財務模組與分析層（Financial Domain Modules）</text>
-
-  <rect x="85" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="125" y="1104" class="card-title">記帳</text>
-  <text x="112" y="1137" class="text">收入 / 支出</text>
-  <text x="112" y="1162" class="text">類別 / 帳戶</text>
-  <text x="112" y="1187" class="text">預算進度</text>
-
-  <rect x="320" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="360" y="1104" class="card-title">投資</text>
-  <text x="347" y="1137" class="text">台股 / 美股</text>
-  <text x="347" y="1162" class="text">損益 / 報酬率</text>
-  <text x="347" y="1187" class="text">配置 / 趨勢</text>
-
-  <rect x="555" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="595" y="1104" class="card-title">銀行貸款</text>
-  <text x="582" y="1137" class="text">銀行 / 券商帳戶</text>
-  <text x="582" y="1162" class="text">房貸 / 車貸</text>
-  <text x="582" y="1187" class="text">還款壓力</text>
-
-  <rect x="790" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="830" y="1104" class="card-title">保險</text>
-  <text x="817" y="1137" class="text">現金價值</text>
-  <text x="817" y="1162" class="text">年化保費</text>
-  <text x="817" y="1187" class="text">保障 / 投資拆分</text>
-
-  <rect x="1025" y="1065" width="210" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="1065" y="1104" class="card-title">房地產</text>
-  <text x="1052" y="1137" class="text">購入價 / 估值</text>
-  <text x="1052" y="1162" class="text">租金 / 稅費</text>
-  <text x="1052" y="1187" class="text">房貸後淨值</text>
-
-  <rect x="1260" y="1065" width="235" height="145" rx="16" class="card" stroke="#ffe08a"/>
-  <text x="1300" y="1104" class="card-title">理財規劃</text>
-  <text x="1287" y="1137" class="text">緊急預備金</text>
-  <text x="1287" y="1162" class="text">旅遊 / 退休目標</text>
-  <text x="1287" y="1187" class="text">建議順序</text>
-
-  <path d="M800 1270 L800 1325" class="arrow"/>
-
-  <!-- Layer 1 -->
-  <rect x="45" y="1320" width="1510" height="80" rx="28" fill="#f4edff" stroke="#b69cff" stroke-width="4"/>
-  <text x="85" y="1370" class="layer-title" fill="#7c4dff">第 1 層　資料與安全層：FinanceVault・File Protection・AES-GCM・Keychain・LocalAuthentication・iPhone Local Storage</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1206" viewBox="0 0 1200 1206" role="img">
+<title>個人財務理財儀表板 App 技術堆疊圖</title>
+<desc>四層架構：展示層（SwiftUI）、應用邏輯層（FinanceStore 與服務）、財務模組層（記帳、投資、銀行貸款、保險、房地產、理財規劃）、資料與安全層（FinanceVault、加密、生物辨識）。</desc>
+<rect x="0" y="0" width="1200" height="1206" fill="#f6f4ef"/>
+<text x="600.0" y="62" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="#686f7a">SYSTEM ARCHITECTURE</text>
+<text x="600.0" y="92" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="28" font-weight="800" fill="#20242c">個人財務理財儀表板 App｜技術堆疊圖</text>
+<text x="600.0" y="120" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" fill="#686f7a">SwiftUI 全端 iOS 架構：展示層・應用邏輯層・財務模組層・資料與安全層</text>
+<rect x="40" y="140" width="1120" height="236" rx="18" fill="#eef0fd" stroke="#4a55e0" stroke-width="1.8"/>
+<rect x="64" y="160" width="71" height="26" rx="13" fill="#ffffff" stroke="#4a55e0" stroke-width="1.3"/>
+<text x="99.5" y="173.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#4a55e0">第 4 層</text>
+<text x="147" y="173.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#4a55e0">展示層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">SwiftUI Presentation</tspan></text>
+<rect x="64" y="194" width="345.3333333333333" height="146" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="236.7" y="243.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">頁籤導覽</text>
+<text x="236.7" y="267.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">總覽・記帳・投資</text>
+<text x="236.7" y="291.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">銀行・保險・房產・規劃</text>
+<rect x="427.3333333333333" y="194" width="345.3333333333333" height="146" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="600.0" y="243.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">Swift Charts</text>
+<text x="600.0" y="267.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">互動式圖表</text>
+<text x="600.0" y="291.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">甜甜圈點選顯示數值</text>
+<rect x="790.6666666666666" y="194" width="345.3333333333333" height="146" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="963.3" y="243.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">表單與操作</text>
+<text x="963.3" y="267.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">新增／編輯／篩選</text>
+<text x="963.3" y="291.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">快照建立・資料匯出</text>
+<rect x="156.66666666666666" y="350" width="160" height="26" rx="13" fill="#e7ebfd"/>
+<text x="236.7" y="363.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#3a46c9">TabView + NavigationStack</text>
+<line x1="600.0" y1="384" x2="600.0" y2="412" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,412 607.0,412 600.0,424" fill="#686f7a"/>
+<rect x="40" y="422" width="1120" height="262" rx="18" fill="#eaf9f1" stroke="#0f9d64" stroke-width="1.8"/>
+<rect x="64" y="442" width="71" height="26" rx="13" fill="#ffffff" stroke="#0f9d64" stroke-width="1.3"/>
+<text x="99.5" y="455.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#0f9d64">第 3 層</text>
+<text x="147" y="455.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#0f9d64">應用邏輯層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">FinanceStore &amp; Services</tspan></text>
+<rect x="64" y="476" width="254.5" height="172" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="191.2" y="538.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">FinanceStore</text>
+<text x="191.2" y="562.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">ObservableObject</text>
+<text x="191.2" y="586.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">狀態管理・CRUD・儲存</text>
+<rect x="336.5" y="476" width="254.5" height="172" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="463.8" y="538.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">Snapshot Engine</text>
+<text x="463.8" y="562.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">資產快照・股票損益快照</text>
+<text x="463.8" y="586.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">驅動淨值／損益趨勢圖</text>
+<rect x="609.0" y="476" width="254.5" height="172" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="736.2" y="538.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">StockQuoteService</text>
+<text x="736.2" y="562.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">Yahoo Finance・Stooq</text>
+<text x="736.2" y="586.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">股價更新・歷史回填</text>
+<rect x="881.5" y="476" width="254.5" height="172" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="1008.8" y="538.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="16" font-weight="700" fill="#20242c">Importer / Exporter</text>
+<text x="1008.8" y="562.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="13.5" font-weight="400" fill="#686f7a">原網頁 JSON 轉換</text>
+<text x="1008.8" y="586.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" font-weight="400" fill="#686f7a">加密備份・明文JSON・CSV</text>
+<rect x="290.0" y="654" width="620" height="26" rx="13" fill="#e7ebfd"/>
+<text x="600.0" y="667.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#3a46c9">核心計算：淨值 = 現金＋股票市值＋保單現金價值＋房地產估值－貸款－保單借款</text>
+<line x1="600.0" y1="692" x2="600.0" y2="720" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,720 607.0,720 600.0,732" fill="#686f7a"/>
+<rect x="40" y="730" width="1120" height="210" rx="18" fill="#fdf1e4" stroke="#d9711a" stroke-width="1.8"/>
+<rect x="64" y="750" width="71" height="26" rx="13" fill="#ffffff" stroke="#d9711a" stroke-width="1.3"/>
+<text x="99.5" y="763.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#d9711a">第 2 層</text>
+<text x="147" y="763.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#d9711a">財務模組層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Financial Domain Modules</tspan></text>
+<rect x="64" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="147.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">記帳</text>
+<text x="147.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">收入／支出</text>
+<text x="147.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">類別・預算</text>
+<rect x="245.0" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="328.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">投資</text>
+<text x="328.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">台股／美股</text>
+<text x="328.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">持倉・損益・CSV</text>
+<rect x="426.0" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="509.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">銀行貸款</text>
+<text x="509.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">帳戶資產</text>
+<text x="509.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">貸款還款進度</text>
+<rect x="607.0" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="690.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">保險</text>
+<text x="690.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">現金價值</text>
+<text x="690.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">年化保費結構</text>
+<rect x="788.0" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="871.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">房地產</text>
+<text x="871.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">估值・租金</text>
+<text x="871.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">房貸後淨值</text>
+<rect x="969.0" y="784" width="167.0" height="130" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="1052.5" y="828.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">理財規劃</text>
+<text x="1052.5" y="849.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="400" fill="#686f7a">目標進度</text>
+<text x="1052.5" y="870.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="11.5" font-weight="400" fill="#686f7a">每月預算建議</text>
+<line x1="600.0" y1="948" x2="600.0" y2="976" stroke="#c9c3b2" stroke-width="2.5" stroke-dasharray="2,6" stroke-linecap="round"/>
+<polygon points="593.0,976 607.0,976 600.0,988" fill="#686f7a"/>
+<rect x="40" y="986" width="1120" height="150" rx="18" fill="#f6eefc" stroke="#8a3fd1" stroke-width="1.8"/>
+<rect x="64" y="1006" width="71" height="26" rx="13" fill="#ffffff" stroke="#8a3fd1" stroke-width="1.3"/>
+<text x="99.5" y="1019.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#8a3fd1">第 1 層</text>
+<text x="147" y="1019.0" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="18.5" font-weight="800" fill="#8a3fd1">資料與安全層<tspan font-size="14" font-weight="600" fill="#686f7a" dx="6">Data &amp; Security</tspan></text>
+<rect x="64" y="1040" width="345.3333333333333" height="76" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="236.7" y="1066.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">FinanceVault</text>
+<text x="236.7" y="1090.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#686f7a">Codable 核心資料模型</text>
+<rect x="427.3333333333333" y="1040" width="345.3333333333333" height="76" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="600.0" y="1066.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">CryptoKit・Keychain</text>
+<text x="600.0" y="1090.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#686f7a">AES-GCM 本機加密</text>
+<rect x="790.6666666666666" y="1040" width="345.3333333333333" height="76" rx="12" fill="#ffffff" stroke="#e4e0d4" stroke-width="1.5"/>
+<text x="963.3" y="1066.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="15" font-weight="700" fill="#20242c">LocalAuthentication</text>
+<text x="963.3" y="1090.0" text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="12.5" font-weight="400" fill="#686f7a">Face ID・背景遮蔽・截圖偵測</text>
+<text x="600.0" y="1176" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans TC', system-ui, sans-serif" font-size="12.5" fill="#686f7a">個人財務理財儀表板 App・技術堆疊圖</text>
 </svg>

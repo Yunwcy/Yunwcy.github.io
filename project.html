@@ -1,694 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Yun</title>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Add i18next scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.16/i18next.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-http-backend/1.4.0/i18next-http-backend.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Noto Serif TC', serif;
-            text-align: center;
-            color: #5A4A42;
-            background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5));
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-        .menu-icon {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        .menu-items {
-            display: flex;
-            gap: 20px;
-        }
-        .menu-items a {
-            color: #2E8B57;
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 10px 15px;
-            font-weight: bold;
-        }
-        .menu-items a:hover {
-            background: rgba(46, 139, 87, 0.2);
-            border-radius: 5px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, #f1f6ec, #eaf2e2);
+    line-height: 1.7;
+    min-height: 100vh;
+}
 
-        /* Language switcher styles */
-        .language-switcher {
-            display: flex;
-            gap: 5px;
-        }
-        .language-btn {
-            background: #2E8B57;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .language-btn:hover {
-            background: #236b43;
-        }
-        
-        @media (max-width: 768px) {
-            .menu-icon {
-                display: block;
-            }
-            .menu-items {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 10px 0;
-                text-align: center;
-            }
-            .menu-items.active {
-                display: flex;
-            }
-            footer {
-                padding: 15px 8px;
-                font-size: 0.7rem;
-              }
-            
-              .footer-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-              }
-            
-              .footer-column {
-                min-width: unset;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-              }
-            
-              .footer-column p,
-              .footer-column a {
-                font-size: 0.65rem;
-              }
-            
-              .footer-note,
-              .footer-bottom {
-                font-size: 0.65rem;
-                margin-top: 10px;
-            }
-        }
-        .content {
-          max-width: 1100px; /* ✅ 增加寬度讓一排放3張 */
-          margin: 100px auto;
-          padding: 20px;
-          background: rgba(255, 255, 255, 0.7);
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          text-align: center;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #5A4A42;
-        }
-        h1, h2, h3, strong {
-            font-weight: 700;
-        }
-        .project-grid {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center; /* ✅ 水平置中卡片 */
-          gap: 20px;
-        }
-        .project-card {
-          width: 300px;
-          height: 420px;
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          text-align: left;
-          padding: 15px;
-          box-sizing: border-box;
-        }
-          
-        .project-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .project-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover; /* ✅ 固定圖片大小裁切超出 */
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
-        }
-        
-        .project-card h4 {
-            margin: 10px 0 5px;
-            color: #5A4A42;
-            font-size: 1rem;
-        }
-        .project-card h3 {
-            font-size: 1rem;
-            margin: 10px 0 5px;
-            color: #333;
-            font-weight: bold;
-        }
-        .project-card small {
-            font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 8px;
-            display: block;
-        }
-                
-        .project-card p {
-            font-size: 0.85rem;
-            color: #444;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4; /* ✅ 最多四行 */
-            -webkit-box-orient: vertical;
-            margin-bottom: auto;
-        }
-                
-        .project-card a {
-            display: inline-block;
-            font-weight: bold;
-            color: #2E8B57;
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-top: auto;
-        }
-        
-        .project-card a:hover {
-            text-decoration: underline;
-        }
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.menu-icon { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-green); }
+.menu-items { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.menu-items a { color: var(--primary-green); text-decoration: none; font-size: 0.95rem; padding: 8px 10px; font-weight: bold; border-radius: 6px; white-space: nowrap; }
+.menu-items a:hover { background: rgba(46, 139, 87, 0.15); }
+.navbar.nav-compact .menu-icon { display: block; }
+.navbar.nav-compact .menu-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.97);
+    flex-direction: column;
+    padding: 10px 20px 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+.navbar.nav-compact .menu-items.active { display: flex; }
+.navbar.nav-compact .menu-items a { padding: 10px 6px; }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.language-btn:hover { background: var(--dark-green); }
 
+/* Header */
+.gallery-hero {
+    padding: 130px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.gallery-hero h1 {
+    font-size: 2.1rem;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+}
+.gallery-hero .subtitle {
+    font-size: 1rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+}
+.back-link:hover { text-decoration: underline; }
 
-        footer {
-            background: rgba(213, 236, 198, 0.7);
-            padding: 40px 20px;
-            color: #5A4A42;
-            font-family: 'Noto Serif TC', serif;
-            font-size: 0.8rem;
-        }
-        footer {
-            background: rgba(213, 236, 198, 0.7);
-            padding: 20px 10px;
-            color: #5A4A42;
-            font-family: 'Noto Serif TC', serif;
-            font-size: 0.8rem;
-        }
+.project-filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 8px;
+}
+.project-filter-btn {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(46,139,87,0.35);
+    color: var(--primary-green);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.project-filter-btn:hover { background: rgba(46,139,87,0.1); }
+.project-filter-btn.active { background: var(--primary-green); color: #fff; border-color: var(--primary-green); }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+.status-msg {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-color);
+    opacity: 0.75;
+    font-size: 1rem;
+}
+.status-msg i { display: block; font-size: 1.8rem; margin-bottom: 12px; color: var(--primary-green); }
 
-        .footer-column {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 10px;
-        }
+/* Grid */
+.all-projects-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 30px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 26px;
+}
+.grid-item { display: flex; }
+.grid-item.is-hidden { display: none; }
 
-        .footer-column h3 {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+/* Project card (matches index.html's project-card) */
+.project-type-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.project-type-badge.system { background: var(--primary-green); color: #fff; }
+.project-type-badge.report { background: rgba(255, 255, 255, 0.9); color: var(--text-color); border: 1px solid rgba(0, 0, 0, 0.1); }
 
-        .footer-column p, .footer-column a {
-            font-size: 0.7rem;
-            margin: 5px 0;
-            text-decoration: none;
-            color: #2E8B57;
-        }
+.project-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+}
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+.project-card img { width: 160px; height: 160px; object-fit: cover; object-position: center; border-radius: 8px; margin: 0 auto 15px auto; display: block; }
+.project-card h3 { color: var(--primary-green); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; min-height: 55px; }
+.project-card .project-date { color: var(--dark-green); font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; }
+.project-card .project-desc { color: var(--text-color); line-height: 1.4; margin-bottom: 15px; font-size: 0.88rem; flex-grow: 1; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+.project-tag { background: var(--light-green); color: var(--primary-green); padding: 3px 6px; border-radius: 12px; font-size: 0.68rem; font-weight: 600; }
+.project-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.project-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; background: var(--primary-green); color: white; text-decoration: none; border-radius: 15px; font-size: 0.78rem; font-weight: 600; transition: all 0.3s ease; }
+.project-link:hover { background: var(--dark-green); color: white; transform: translateY(-2px); }
 
-        .footer-column a:hover {
-            text-decoration: underline;
-        }
-        .footer-note {
-            font-size: 0.7rem;
-            color: #444;
-            text-align: center;
-            margin-top: 10px;
-            padding-bottom: 10px;
-        }
+footer { background: rgba(213, 236, 198, 0.8); padding: 40px 20px 20px; margin-top: 40px; }
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
 
-        .footer-bottom {
-            text-align: center;
-            font-size: 0.7rem;
-            margin-top: 15px;
-        }
-
-        .footer-bottom p:last-child {
-            font-size: 0.7rem;
-        }
-        @media (max-width: 992px) {
-          .project-card {
-            width: 45%;
-          }
-        }
-        
-        @media (max-width: 600px) {
-          .project-card {
-            width: 90%;
-          }
-        }
-    </style>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu-items');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
-        }
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            const yearSpan = document.getElementById("year");
-            if (yearSpan) {
-              yearSpan.textContent = new Date().getFullYear();
-            }
-            
-            // Initialize i18next
-            initializeI18n();
-        });
-        
-        // Language resources
-        const resources = {
-            en: {
-                translation: {
-                    // Navigation
-                    "home": "Home",
-                    "about": "About me",
-                    "experiences": "Experiences",
-                    "projects": "Projects",
-                    "contact": "Contact",
-                    
-                    // Content
-                    "projectsTitle": "Projects",
-                    
-                    // Project Cards
-                    "TWSC22025": "2025 Taiwan Symposium On Cloud And Services Computing Conference",
-                    "TWSC22025Desc": "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities",
-
-                    "SEgroupFinalTitle": "2025 Group Final Report in Software Engineering Course",
-                    "SEgroupFinalDesc": "InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise",
-
-                    "SEperFinalTitle":"2025 Individual Final Report in Software Engineering Course",
-                    "SEperFinalDesc":"Multimodal Dialogue System for Chinese Taipei University Sports Federation",
-
-                    "AnyoTitle":"2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition",
-                    "AnyoDesc": "Anyong Fresh AI-Powered Healthy Recipe Recommendation System",
-
-                    "TradiqTitle": "2025 The 3rd NTPU AI Smart Application Innovation Competition",
-                    "TradiqDesc": "A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions",
-
-                    "CodeMigoTitle": "CodeMigo – A Tiny Growing CodePet",
-                    "codemigoDesc": "A simple CodePet that grows with your coding time. Feed XP by logging your coding time",
-
-                    "inquairyTitle": "2025 Group Report in Software Engineering Course",
-                    "inquairyDesc": "InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise",
-                    
-                    "tariffTitle": "2025 Best AI Awards",
-                    "tariffDesc": "A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions",
-                    
-                    "secaseTitle": "2025 Case Study in Software Engineering Course",
-                    "secaseDesc": "AI-PoweredEducation: A Case Study of Khanmigo",
-                    
-                    "sinopacTitle": "2025 SinoPac Holdings Business Proposal Competition",
-                    "sinopacDesc": "\"Yong\" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System",
-                    
-                    "marketingTitle": "2024 Research Methodology Course",
-                    "marketingDesc": "Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education",
-                    
-                    "aiFinalTitle": "2024 Final Project in AI course",
-                    "aiFinalDesc": "Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management",
-                    
-                    "usrTitle": "2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition",
-                    "usrDesc": "A sustainable marketing project promoting Australian tea tree essential oil",
-                    
-                    "aiCaseTitle": "2024 Case Study in AI course",
-                    "aiCaseDesc": "AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan",
-                    
-                    "moreLink": "More",
-                    
-                    // Footer
-                    "contactHeading": "Contact",
-                    "university": "National Taipei University",
-                    "linksHeading": "Links",
-                    "connectHeading": "Connect",
-                    "copyright": "© {{year}} Cheng-Yun Wu. All rights reserved.",
-                    "disclaimer": "This site is for academic and personal portfolio use only.",
-                    
-                    // Language switcher
-                    "switchLang": "中文"
-                }
-            },
-            zh: {
-                translation: {
-                    // Navigation
-                    "home": "首頁",
-                    "about": "關於我",
-                    "experiences": "經歷",
-                    "projects": "專案",
-                    "contact": "聯絡方式",
-                    
-                    // Content
-                    "projectsTitle": "專案",
-                    
-                    // Project Cards
-                    "TWSC22025": "2025年臺灣雲端與服務計算研討會",
-                    "TWSC22025Desc": "建置具備 RAG 強化之多語與多模態對話能力的包容性溝通系統",
-
-                    "SEgroupFinalTitle": "2025 軟體工程課程團體期末報告",
-                    "SEgroupFinalDesc": "InquAIry：用AI激發你的好奇心！為教育和企業提供智慧、可擴展的AI學習支持",
-
-                    "SEperFinalTitle":"2025 軟體工程課程個人期末報告",
-                    "SEperFinalDesc":"針對中華民國大專院校體育總會的多模態對話系統",
-
-                    "AnyoTitle":"2025 TSC 第十屆崇越行銷大賞：AI 應用行銷競賽",
-                    "AnyoDesc": "安永鮮物 AI 健康食譜推薦系統",
-
-                    "TradiqTitle": "2025 第三屆臺北大學AI智慧應用創新競賽",
-                    "TradiqDesc": "一個關稅查詢系統，利用RAG技術整合文件，幫助企業和機構有效應對國際貿易變化",
-
-                    "CodeMigoTitle": "CodeMigo – 小小成長型 CodePet",
-                    "codemigoDesc": "陪你寫程式，隨時間成長的小寵物。 輸入寫程式的時間，就能餵食 XP~",
-
-                    "inquairyTitle": "2025 軟體工程課程團體報告",
-                    "inquairyDesc": "InquAIry：用AI激發你的好奇心！為教育和企業提供智慧、可擴展的AI學習支持",
-                    
-                    "tariffTitle": "2025 經濟部智慧創新大賞",
-                    "tariffDesc": "一個關稅查詢系統，利用RAG技術整合文件，幫助企業和機構有效應對國際貿易變化並做出明智決策",
-                    
-                    "secaseTitle": "2025 軟體工程課程個案研究",
-                    "secaseDesc": "AI 驅動的教育：Khanmigo 的個案研究",
-                    
-                    "sinopacTitle": "2025 永豐金控商業提案競賽",
-                    "sinopacDesc": "「永」遠不怕沒話說 – 客戶互動循環優化訓練系統",
-                    
-                    "marketingTitle": "2024 研究方法課程",
-                    "marketingDesc": "應用檢索增強生成（RAG）建立聊天機器人教學助手：行銷教育中的案例研究",
-                    
-                    "aiFinalTitle": "2024 AI課程期末專案",
-                    "aiFinalDesc": "大型語言模型在智慧城市交通管理AI驅動交通查詢代理中的應用",
-                    
-                    "usrTitle": "2024 臺北大學 USR x 生成式 AI 永續共創行銷企劃競賽",
-                    "usrDesc": "推廣澳洲茶樹精油的永續行銷項目",
-                    
-                    "aiCaseTitle": "2024 AI課程個案研究",
-                    "aiCaseDesc": "AI驅動智慧交通：新加坡和台灣的比較",
-                    
-                    "moreLink": "了解更多",
-                    
-                    // Footer
-                    "contactHeading": "聯絡方式",
-                    "university": "國立臺北大學",
-                    "linksHeading": "連結",
-                    "connectHeading": "社群媒體",
-                    "copyright": "© {{year}} 吳承耘。保留所有權利。",
-                    "disclaimer": "本網站僅供學術和個人作品集使用。",
-                    
-                    // Language switcher
-                    "switchLang": "English"
-                }
-            }
-        };
-        
-        // Initialize i18next
-        function initializeI18n() {
-            i18next
-                .init({
-                    lng: 'en', // Default language
-                    resources: resources,
-                    interpolation: {
-                        escapeValue: false
-                    }
-                })
-                .then(function() {
-                    updateContent();
-                });
-        }
-        
-        // Switch language function
-        function switchLanguage() {
-            const currentLang = i18next.language;
-            const newLang = currentLang === 'en' ? 'zh' : 'en';
-            i18next.changeLanguage(newLang, function() {
-                updateContent();
-                document.documentElement.lang = newLang;
-            });
-        }
-        
-        // Update all content with translations
-        function updateContent() {
-            // Update navigation
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (key) {
-                    if (element.tagName === 'INPUT' && element.type === 'button') {
-                        element.value = i18next.t(key);
-                    } else {
-                        element.textContent = i18next.t(key);
-                    }
-                }
-            });
-            
-            // Update attributes
-            document.querySelectorAll('[data-i18n-attr]').forEach(element => {
-                const attrData = element.getAttribute('data-i18n-attr');
-                if (attrData) {
-                    const [attr, key] = attrData.split(':');
-                    if (attr && key) {
-                        element.setAttribute(attr, i18next.t(key));
-                    }
-                }
-            });
-            
-            // Update year in copyright
-            const year = new Date().getFullYear();
-            document.getElementById('copyright').innerHTML = i18next.t('copyright', { year: year });
-        }
-    </script>
+@media (max-width: 600px) {
+    .gallery-hero { padding-top: 110px; }
+    .gallery-hero h1 { font-size: 1.5rem; }
+    .all-projects-grid { padding: 20px 16px 60px; grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-    <div class="navbar">
-        <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
-        <div class="menu-items" id="menu-items">
-            <a href="https://yunwcy.github.io/" data-i18n="home">Home</a>
-            <a href="https://yunwcy.github.io/about" data-i18n="about">About me</a>
-            <a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a>
-            <a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a>
-            <a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a>
-        </div>
-        <div class="language-switcher">
-            <input type="button" class="language-btn" value="中文" data-i18n="switchLang" onclick="switchLanguage()">
-        </div>
+<div class="navbar" id="navbar">
+    <span class="menu-icon" id="menu-icon" onclick="toggleMenu()">☰</span>
+    <div class="menu-items" id="menu-items">
+        <a href="index.html#home" data-i18n="nav.home">Home</a>
+        <a href="about.html" data-i18n="nav.about">About me</a>
+        <a href="index.html#projects" data-i18n="nav.projects">Projects</a>
+        <a href="index.html#competitions" data-i18n="nav.competitions">Competitions</a>
+        <a href="index.html#awards" data-i18n="nav.awards">Awards</a>
+        <a href="index.html#experiences" data-i18n="nav.experiences">Experiences</a>
+        <a href="index.html#publications" data-i18n="nav.publications">Publications</a>
+        <a href="index.html#certifications" data-i18n="nav.certifications">Certifications</a>
+        <a href="index.html#conferences" data-i18n="nav.conferences">Conferences</a>
+        <a href="index.html#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a>
     </div>
-    
-    <div class="content">
-        <h1 data-i18n="projectsTitle">Projects</h1>
-        <div class="project-grid">
-          <!-- <p>This page will showcase various projects, including descriptions, links, and images (e.g., QR codes for LineBot, execution pages, or project demos).</p> -->
-          
-            <!-- TWSC2 2025 -->
-            <div class="project-card">
-                <img src="projects/TWSC2.jpg" alt="TWSC22025">
-                <h3 data-i18n="TWSC22025">2025 Taiwan Symposium On Cloud And Services Computing Conference</h3>
-                <small>2025/07/04</small>
-                <p data-i18n="TWSC22025Desc">Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities</p>
-                <a href="https://drive.google.com/file/d/1Zslp5PXvFnOvTxhhdvj8WZ71K9vcCB5F/view?usp=sharing" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
 
-            <!-- SE Group Final 2025 -->
-            <div class="project-card">
-                <img src="projects/logo_InquAIry.jpg" alt="SEgroupFinal">
-                <h3 data-i18n="SEgroupFinalTitle">2025 Group Final Report in Software Engineering Course</h3>
-                <small>2025/06/04</small>
-                <p data-i18n="SEgroupFinalDesc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
-                <a href="https://drive.google.com/file/d/1-iDAW9wnQ_-7gZd3F6ABPFK4wbSQ_Azh/view?usp=sharing" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- Thesis2025 -->
-            <div class="project-card">
-                <img src="projects/Thesis.jpg" alt="Thesis">
-                <h3 data-i18n="SEperFinalTitle">2025 Individual Final Report in Software Engineering Course</h3>
-                <small>2025/05/28</small>
-                <p data-i18n="SEperFinalDesc">Multimodal Dialogue System for Chinese Taipei University Sports Federation</p>
-                <a href="https://drive.google.com/file/d/14NKV-BZc9VlG1iTngiMQQSDXbf5r6_oL/view?usp=sharing" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- Anyo -->
-            <div class="project-card">
-                <img src="projects/Anyo.jpg" alt="Anyo">
-                <h3 data-i18n="AnyoTitle">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition</h3>
-                <small>2025/04/27</small>
-                <p data-i18n="AnyoDesc">Anyong Fresh AI-Powered Healthy Recipe Recommendation System</p>
-                <a href="https://youtu.be/KN0zhCcEdcI" target="_blank">🔗 Youtube</a>
-                <a href="https://docs.google.com/presentation/d/1EhryTBCbG52EIYrDSUyS2RaWy4OJ9gmL/edit?usp=sharing&ouid=103078681710745961578&rtpof=true&sd=true" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-            
-            <!-- TradiqAI -->
-            <div class="project-card">
-                <img src="projects/TRADIQAI.png" alt="Tradiq">
-                <h3 data-i18n="TradiqTitle">2025 The 3rd NTPU AI Smart Application Innovation Competition</h3>
-                <small>2025/04/18</small>
-                <p data-i18n="TradiqDesc">A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
-                <a href="https://youtu.be/otihb7V_ji4" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- CodeMigo -->
-            <div class="project-card">
-                <img src="projects/CodeMigo.png" alt="CodeMigo">
-                <h3 data-i18n="CodeMigoTitle">CodeMigo – A Tiny Growing CodePet</h3>
-                <small>2025/04/17</small>
-                <p data-i18n="codemigoDesc">A simple CodePet that grows with your coding time. Feed XP by logging your coding time</p>
-                <a href="https://github.com/Yunwcy/CodeMigo" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>  
-
-            <!-- InquAIry -->
-            <div class="project-card">
-                <img src="projects/logo_InquAIry-1.png" alt="InquAIry">
-                <h3 data-i18n="inquairyTitle">2025 Group Report in Software Engineering Course</h3>
-                <small>2025/04/09</small>
-                <p data-i18n="inquairyDesc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
-                <a href="https://inquairy.github.io/" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-        
-            <!-- TariffMyBiz -->
-            <div class="project-card">
-                <img src="projects/tariff.jpg" alt="TariffMyBiz">
-                <h3 data-i18n="tariffTitle">2025 Best AI Awards</h3>
-                <small>2025/04/07</small>
-                <p data-i18n="tariffDesc">A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
-                <a href="https://www.youtube.com/watch?v=CgjfBryTFVQ" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-                <a href="https://github.com/Yunwcy/TariffMyBiz" target="_blank">🔗 Github</a>
-            </div>
-
-            <!-- SE casestudy -->
-            <div class="project-card">
-                <img src="projects/SEcasestudy.jpg" alt="SEcasestudy">
-                <h3 data-i18n="secaseTitle">2025 Case Study in Software Engineering Course</h3>
-                <small>2025/03/12</small>
-                <p data-i18n="secaseDesc">AI-PoweredEducation: A Case Study of Khanmigo</p>
-                <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- SinoPac Holdings Business Proposal Competition -->
-            <div class="project-card">
-                <img src="projects/SinoPac.png" alt="SinoPac">
-                <h3 data-i18n="sinopacTitle">2025 SinoPac Holdings Business Proposal Competition</h3>
-                <small>2025/03/06</small>
-                <p data-i18n="sinopacDesc">"Yong" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System</p>
-                <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- Marketing chatbot -->
-            <div class="project-card">
-                <img src="projects/Marketing_chatbot.jpeg" alt="MarketingChatbotFile">
-                <h3 data-i18n="marketingTitle">2024 Research Methodology Course</h3>
-                <small>2025/01/02</small>
-                <p data-i18n="marketingDesc">Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education</p>
-                <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- AI final -->
-            <div class="project-card"> 
-                <img src="projects/trafficAIagent.jpeg" alt="AIFinal">
-                <h3 data-i18n="aiFinalTitle">2024 Final Project in AI course</h3>
-                <small>2024/12/24</small>
-                <p data-i18n="aiFinalDesc">Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management</p>
-                <a href="https://drive.google.com/file/d/1iKgSGS5WUQz0RFl6fkfr3iaJ4to2G_CH/view?usp=drive_link" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- USR -->
-            <div class="project-card">
-                <img src="projects/USR.jpg" alt="USRdocument">
-                <h3 data-i18n="usrTitle">2024 NTPU USR x Generative AI Sustainable Co-Creation Marketing Competition</h3>
-                <small>2024/11/24</small>
-                <p data-i18n="usrDesc">A sustainable marketing project promoting Australian tea tree essential oil</p>
-                <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-            <!-- AI Case study -->
-            <div class="project-card">
-                <img src="projects/aicasestudy.jpg" alt="AIcasestudy">
-                <h3 data-i18n="aiCaseTitle">2024 Case Study in AI course</h3>
-                <small>2024/11/19</small>
-                <p data-i18n="aiCaseDesc">AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan</p>
-                <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank">🔗 <span data-i18n="moreLink">More</span></a>
-            </div>
-
-        </div>
-
+<div class="gallery-hero">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToHome">Back to Home</span></a>
+    <h1 data-i18n="pageTitle">All Projects</h1>
+    <div class="subtitle" data-i18n="pageSubtitle">Every project in one place, no swiping required</div>
+    <div class="project-filter-bar">
+        <button class="project-filter-btn active" data-filter="all" data-i18n="filterAll">All</button>
+        <button class="project-filter-btn" data-filter="system" data-i18n="filterSystem">🖥️ Systems</button>
+        <button class="project-filter-btn" data-filter="report" data-i18n="filterReport">📄 Reports</button>
     </div>
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu-items');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('active');
-            icon.textContent = menu.classList.contains('active') ? '✖' : '☰';
-        }
-    </script>
-    <footer>
-        <div class="footer-container">
-          <div class="footer-column">
-            <h3 data-i18n="contactHeading">Contact</h3>
-            <p>✉️ yunwcy@gmail.com</p>
-            <p>📍 <span data-i18n="university">National Taipei University</span></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="linksHeading">Links</h3>
-            <p><a href="https://yunwcy.github.io/" data-i18n="home">Home</a></p>
-            <p><a href="https://yunwcy.github.io/about" data-i18n="about">About Me</a></p>
-            <p><a href="https://yunwcy.github.io/research" data-i18n="experiences">Experiences</a></p>
-            <p><a href="https://yunwcy.github.io/project" data-i18n="projects">Projects</a></p>
-            <p><a href="https://yunwcy.github.io/contact" data-i18n="contact">Contact</a></p>
-          </div>
-      
-          <div class="footer-column">
-            <h3 data-i18n="connectHeading">Connect</h3>
+</div>
+
+<div class="status-msg" id="status-msg"><i class="fas fa-spinner fa-spin"></i><span data-i18n="loadingMsg">Loading projects…</span></div>
+<div class="all-projects-grid" id="all-projects-grid" style="display:none;"></div>
+
+<!-- Hidden source: index.html is the single source of truth for project
+     cards. We load it off-screen, let its own script render/translate the
+     cards, then clone the results here — so this page can never drift out
+     of sync with the homepage. -->
+<iframe id="source-frame" src="index.html" style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; border:0;" aria-hidden="true"></iframe>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footer.contact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footer.university">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footer.links">Links</h3>
+            <p><a href="index.html#home" data-i18n="nav.home">Home</a></p>
+            <p><a href="about.html" data-i18n="nav.about">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="nav.projects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="nav.competitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="nav.awards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="nav.experiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="nav.publications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="nav.certifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="nav.conferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="nav.otherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footer.connect">Connect</h3>
             <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
             <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
-          </div>
         </div>
-      
-        <div class="footer-bottom">
-          <p class="footer-note" id="copyright" data-i18n="copyright">© <span id="year"></span> Cheng-Yun Wu. All rights reserved.</p>
-          <p data-i18n="disclaimer">This site is for academic and personal portfolio use only.</p>
-        </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footer.copyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu-items');
+    const navbar = document.getElementById('navbar');
+    if (navbar.classList.contains('nav-compact')) menu.classList.toggle('active');
+}
+document.addEventListener('click', function (e) {
+    const navbar = document.getElementById('navbar');
+    const menu = document.getElementById('menu-items');
+    if (navbar.classList.contains('nav-compact') && menu.classList.contains('active')) {
+        if (!navbar.contains(e.target)) menu.classList.remove('active');
+    }
+});
+function updateNavMode() {
+    const navbar = document.getElementById('navbar');
+    const menu = document.getElementById('menu-items');
+    const icon = document.getElementById('menu-icon');
+    if (!navbar || !menu || !icon) return;
+    navbar.classList.remove('nav-compact');
+    menu.classList.remove('active');
+    icon.textContent = '☰';
+    if (menu.scrollWidth > menu.clientWidth + 1) {
+        navbar.classList.add('nav-compact');
+    }
+}
+let navResizeTimer;
+window.addEventListener('resize', function () {
+    clearTimeout(navResizeTimer);
+    navResizeTimer = setTimeout(updateNavMode, 150);
+});
+if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(updateNavMode);
+}
+
+// ---- Sync project cards live from index.html ----
+// index.html is the single source of truth: we load it off-screen, wait for
+// its OWN i18next to finish translating, then clone its rendered cards here.
+let currentFilter = 'all';
+
+function frameLanguage() {
+    const frame = document.getElementById('source-frame');
+    try {
+        const w = frame.contentWindow;
+        if (w && w.i18next && w.i18next.isInitialized) {
+            return w.i18next.language.startsWith('zh') ? 'zh' : 'en';
+        }
+    } catch (e) {}
+    return null;
+}
+
+// i18next.language can flip to the new value slightly before its
+// changeLanguage() callback has actually finished rewriting textContent —
+// so a raw "projects.foo.desc"-style key can briefly be in the DOM even
+// after the language check passes. Treat that as "not ready yet".
+function looksLikeRawKey(text) {
+    return /^[\w-]+(\.[\w-]+)+$/.test((text || '').trim());
+}
+
+function renderCardsFromFrame() {
+    const frame = document.getElementById('source-frame');
+    let doc;
+    try { doc = frame.contentDocument; } catch (e) { return false; }
+    if (!doc) return false;
+    // Don't clone until the iframe's own i18next has actually finished
+    // translating — otherwise we can grab pre-translation fallback text.
+    const lang = frameLanguage();
+    if (!lang) return false;
+    const slides = doc.querySelectorAll('#projects .swiper-slide');
+    if (!slides.length) return false;
+    const sampleDesc = doc.querySelector('#projects .project-desc');
+    if (sampleDesc && looksLikeRawKey(sampleDesc.textContent)) return false;
+
+    const grid = document.getElementById('all-projects-grid');
+    grid.innerHTML = '';
+    slides.forEach(function (slide) {
+        const card = slide.querySelector('.project-card');
+        if (!card) return;
+        const clone = card.cloneNode(true);
+        // The clone still carries data-i18n/data-i18n-html from index.html.
+        // This page's own i18next instance doesn't have those project-text
+        // keys in its (much smaller) resource bundle, so if we left the
+        // attributes in place, this page's own updateContent() would
+        // "translate" them into raw missing-key strings the next time it
+        // runs. The text is already correctly translated from the source
+        // frame — strip the attributes so nothing here re-processes it.
+        clone.removeAttribute('data-i18n');
+        clone.removeAttribute('data-i18n-html');
+        clone.querySelectorAll('[data-i18n], [data-i18n-html]').forEach(function (el) {
+            el.removeAttribute('data-i18n');
+            el.removeAttribute('data-i18n-html');
+        });
+        const wrap = document.createElement('div');
+        wrap.className = 'grid-item';
+        wrap.setAttribute('data-type', slide.getAttribute('data-type') || 'all');
+        wrap.appendChild(clone);
+        grid.appendChild(wrap);
+    });
+    applyFilter(currentFilter);
+    document.getElementById('status-msg').style.display = 'none';
+    grid.style.display = 'grid';
+
+    // Keep this page's own chrome language in lockstep with what we just
+    // rendered, so the toggle button and page text never disagree with the
+    // cards.
+    if (i18next.isInitialized && !i18next.language.startsWith(lang)) {
+        i18next.changeLanguage(lang, window.updateContent);
+    }
+    return true;
+}
+
+function applyFilter(filter) {
+    currentFilter = filter;
+    document.querySelectorAll('.grid-item').forEach(function (item) {
+        const type = item.getAttribute('data-type');
+        item.classList.toggle('is-hidden', filter !== 'all' && type !== filter);
+    });
+}
+
+document.querySelectorAll('.project-filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.project-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        applyFilter(btn.getAttribute('data-filter'));
+    });
+});
+
+function pollForCards(triesLeft) {
+    if (renderCardsFromFrame()) { return; }
+    if (triesLeft <= 0) {
+        document.getElementById('status-msg').innerHTML =
+            '<i class="fas fa-triangle-exclamation"></i><span data-i18n="errorMsg">Could not load projects — please view them on the homepage instead.</span>';
+        if (window.updateContent) window.updateContent();
+        return;
+    }
+    setTimeout(function () { pollForCards(triesLeft - 1); }, 150);
+}
+
+document.getElementById('source-frame').addEventListener('load', function () {
+    pollForCards(80);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                langButton: "中文",
+                backToHome: "Back to Home",
+                pageTitle: "All Projects",
+                pageSubtitle: "Every project in one place, no swiping required",
+                filterAll: "All",
+                filterSystem: "🖥️ Systems",
+                filterReport: "📄 Reports",
+                loadingMsg: "Loading projects…",
+                errorMsg: "Could not load projects — please view them on the homepage instead.",
+                nav: {
+                    home: "Home", about: "About me", experiences: "Experiences", publications: "Publications",
+                    certifications: "Certifications", projects: "Projects", competitions: "Competitions",
+                    conferences: "Conferences", awards: "Awards", otherExperiences: "Other Experiences"
+                },
+                footer: {
+                    contact: "Contact", university: "National Taipei University", links: "Links", connect: "Connect",
+                    copyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+                }
+            }},
+            zh: { translation: {
+                langButton: "English",
+                backToHome: "返回首頁",
+                pageTitle: "所有專案作品",
+                pageSubtitle: "一次看完全部作品，不用一直滑動",
+                filterAll: "全部",
+                filterSystem: "🖥️ 系統作品",
+                filterReport: "📄 報告文件",
+                loadingMsg: "作品載入中…",
+                errorMsg: "作品載入失敗，請直接到首頁查看。",
+                nav: {
+                    home: "首頁", about: "關於我", experiences: "經歷", publications: "學術發表",
+                    certifications: "證照", projects: "專案作品", competitions: "競賽經歷",
+                    conferences: "研討會", awards: "獲獎紀錄", otherExperiences: "其他經歷"
+                },
+                footer: {
+                    contact: "聯絡方式", university: "國立臺北大學", links: "導覽", connect: "社群媒體",
+                    copyright: "© 2026 吳承耘。保留所有權利。"
+                }
+            }}
+        }
+    }, function () {
+        updateContent();
+        updateNavMode();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+    // Exposed on window: renderCardsFromFrame() (declared outside this
+    // closure, at top level) needs to call this too when it syncs this
+    // page's chrome language to match the iframe's.
+    window.updateContent = updateContent;
+
+    let langSwitchInFlight = false;
+    window.switchLanguage = function () {
+        // Ignore re-clicks while a switch is already resolving — overlapping
+        // calls raced each other and left the iframe/page out of sync.
+        if (langSwitchInFlight) return;
+        langSwitchInFlight = true;
+
+        // The iframe is the source of truth for the cards' language. Flip
+        // it first, then poll until it reports the new language is fully
+        // applied, and re-clone — this page's own chrome gets synced to
+        // match as a side effect of renderCardsFromFrame().
+        const frame = document.getElementById('source-frame');
+        const wantLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        try {
+            if (frame.contentWindow && typeof frame.contentWindow.switchLanguage === 'function') {
+                frame.contentWindow.switchLanguage();
+            }
+        } catch (e) { /* ignore — fall through to local-only toggle below */ }
+
+        let tries = 0;
+        (function waitForFrameLang() {
+            const lang = frameLanguage();
+            if (lang === wantLang && renderCardsFromFrame()) { langSwitchInFlight = false; return; }
+            if (++tries > 40) {
+                i18next.changeLanguage(wantLang, updateContent);
+                langSwitchInFlight = false;
+                return;
+            }
+            setTimeout(waitForFrameLang, 100);
+        })();
+    };
+});
+</script>
 </body>
 </html>
