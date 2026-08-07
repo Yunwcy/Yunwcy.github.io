@@ -43,7 +43,7 @@ body {
     backdrop-filter: blur(10px);
 }
 .menu-icon { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-green); }
-.menu-items { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.menu-items { display: flex; align-items: center; flex: 1 1 auto; min-width: 0; flex-wrap: nowrap; overflow: hidden; gap: 6px 16px; justify-content: flex-end; margin-right: 16px; }
 .menu-items a { color: var(--primary-green); text-decoration: none; font-size: 0.95rem; padding: 8px 10px; font-weight: bold; border-radius: 6px; white-space: nowrap; }
 .menu-items a:hover { background: rgba(46, 139, 87, 0.15); }
 .navbar.nav-compact .menu-icon { display: block; }
@@ -55,6 +55,8 @@ body {
     width: 100%;
     background: rgba(255, 255, 255, 0.97);
     flex-direction: column;
+    flex-wrap: nowrap;
+    overflow: visible;
     padding: 10px 20px 16px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.08);
 }
@@ -284,11 +286,23 @@ function updateNavMode() {
     const navbar = document.getElementById('navbar');
     const menu = document.getElementById('menu-items');
     const icon = document.getElementById('menu-icon');
+    const langBtn = document.getElementById('lang-toggle');
     if (!navbar || !menu || !icon) return;
     navbar.classList.remove('nav-compact');
     menu.classList.remove('active');
     icon.textContent = '☰';
-    if (menu.scrollWidth > menu.clientWidth + 1) {
+    // Sum the links' own rendered widths instead of comparing menu.scrollWidth
+    // to menu.clientWidth — with flex-shrink:1 children that refuse to shrink
+    // below their (white-space:nowrap) content width, some browsers don't
+    // reliably report that overflow via scrollWidth on the flex container.
+    const links = menu.querySelectorAll('a');
+    const gap = 16; // matches the menu-items column-gap
+    let contentWidth = 0;
+    links.forEach(a => { contentWidth += a.getBoundingClientRect().width; });
+    contentWidth += gap * Math.max(0, links.length - 1);
+    const langWidth = langBtn ? langBtn.getBoundingClientRect().width : 0;
+    const available = navbar.clientWidth - langWidth - 56; // navbar padding + icon/margins buffer
+    if (contentWidth > available) {
         navbar.classList.add('nav-compact');
     }
 }
