@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knovyra | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0 0 14px 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 10px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card strong { color: var(--dark-green); }
+
+/* Role header */
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Feature cards */
+.feature-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.feature-header h4 { margin: 0; font-size: 1.02rem; color: var(--text-color); }
+.feature-card ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+.feature-card ul li { margin-bottom: 8px; }
+.feature-card ul li:last-child { margin-bottom: 0; }
+.feature-card ul li strong { color: var(--dark-green); }
+
+/* Trade-off cards (choice vs. what was set aside, and why) */
+.tradeoff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+}
+.tradeoff-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.tradeoff-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.98rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.tradeoff-card h4 i { color: var(--primary-green); }
+.tradeoff-card ul { padding-left: 18px; margin: 0; font-size: 0.87rem; }
+.tradeoff-card ul li { margin-bottom: 6px; }
+.tradeoff-card ul li:last-child { margin-bottom: 0; }
+.tradeoff-card strong { color: var(--dark-green); }
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+.challenge-block.solution {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.solution code, .challenge-card code {
+    background: var(--card-bg);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+.case-card code {
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+
+/* Bullet lists inside cards, for concise problem/solution content */
+.challenge-block ul, .challenge-card > ul {
+    padding-left: 18px;
+    margin: 0;
+    font-size: 0.9rem;
+}
+.challenge-block ul li, .challenge-card > ul li { margin-bottom: 6px; }
+.challenge-block ul li:last-child, .challenge-card > ul li:last-child { margin-bottom: 0; }
+.challenge-block.solution ul { color: var(--dark-green); }
+.challenge-block.solution strong { color: var(--primary-green); }
+
+/* Impact / proof-point cards */
+.impact-intro {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin: 0 0 22px 0;
+}
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+.proof-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.proof-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+}
+.proof-card h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--text-color); }
+.proof-card p { margin: 0; font-size: 0.9rem; }
+.proof-card strong { color: var(--dark-green); }
+
+/* Demo screenshots */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+.screenshot-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.screenshot-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    border: 1px solid rgba(46,139,87,0.15);
+    cursor: zoom-in;
+    display: block;
+}
+.screenshot-caption {
+    font-size: 0.88rem;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+.screenshot-caption strong { color: var(--dark-green); }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card, .feature-card, .tradeoff-card, .proof-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">🎯 <span data-i18n="badge">Featured Case Study · Solo Project</span></span>
+    <h1 data-i18n="title">Knovyra — Agentic Enterprise Intelligence Platform</h1>
+    <div class="subtitle" data-i18n="subtitle">Multi-step agent investigations with cited evidence, human approval gates, and reusable knowledge</div>
+    <div class="meta" data-i18n="meta">Solo project · Built 2026 · All company data is synthetic</div>
+    <div class="case-links">
+        <a class="case-link" href="https://knovyra.vercel.app/" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="linkSystem">Live System</span></a>
+    </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#flow" data-i18n="tocFlow">System Flow</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#features" data-i18n="tocFeatures">Features</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#impact" data-i18n="tocImpact">Impact</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="flow">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="flowTitle">System Flow</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/knovyra/system-flow.svg" alt="Knovyra system flow diagram" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="flowCaption">One full request lifecycle: user question → Knowledge Flywheel similarity check → Agent Planner → tool-call loop (6 tools, capped at 8 steps) → submit_conclusion → ApprovalRequest (PENDING) → Manager decision at /approvals → write only after approval → AuditLog</div>
+    </div>
+    <div class="case-card">
+        <p data-i18n-html="flowNote">The point of this diagram isn't really "how the AI answers a question" — it's that <strong>the line from "AI proposes" to "human approves" to "then it's written"</strong> is never skipped, anywhere in the flow.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/knovyra/tech-stack.svg" alt="Knovyra tech stack diagram" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="techCaption">4 layers: Frontend (Next.js 16 + Agent Console + Dashboards) / Application (API Routes + role governance + rate limiting) / Intelligence (Agent Planner + 6 function-calling tools) / Infrastructure (Vercel + Postgres/Neon + Vercel Blob + OpenAI/Anthropic, swappable)</div>
+    </div>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Frontend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Next.js 16 App Router</span>
+                <span class="tech-chip">TypeScript / React 19</span>
+                <span class="tech-chip">Tailwind CSS v4</span>
+                <span class="tech-chip">react-markdown + remark-gfm</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Application</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Next.js API Routes</span>
+                <span class="tech-chip">Role Governance</span>
+                <span class="tech-chip">Postgres Rate Limiting</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">AI / Intelligence</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Vercel AI SDK (streamText)</span>
+                <span class="tech-chip">6 Function-Calling Tools</span>
+                <span class="tech-chip">generateObject</span>
+                <span class="tech-chip">Multimodal OCR</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Infrastructure</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Vercel Serverless</span>
+                <span class="tech-chip">Postgres (Neon) + Prisma</span>
+                <span class="tech-chip">Vercel Blob</span>
+                <span class="tech-chip">OpenAI / Anthropic</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="case-card" style="margin-bottom:18px;">
+        <p data-i18n="considerIntro" style="margin:0;">Every item below is a case of "there's a more common way to do this, but given this project's actual context, I chose something else."</p>
+    </div>
+    <div class="tradeoff-grid">
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-database"></i> <span data-i18n="t1Title">Cosine similarity in JS, not pgvector</span></h4>
+            <ul data-i18n-html="t1List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-lock"></i> <span data-i18n="t2Title">Parameter-limited query tools, not model-written SQL</span></h4>
+            <ul data-i18n-html="t2List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-flag-checkered"></i> <span data-i18n="t3Title">submit_conclusion as a structured stop condition</span></h4>
+            <ul data-i18n-html="t3List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-code-compare"></i> <span data-i18n="t4Title">Rule-based document cross-checking, not another LLM call</span></h4>
+            <ul data-i18n-html="t4List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-gauge-high"></i> <span data-i18n="t5Title">Postgres sliding-window rate limiting, not Redis</span></h4>
+            <ul data-i18n-html="t5List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-coins"></i> <span data-i18n="t6Title">Mini-tier models throughout</span></h4>
+            <ul data-i18n-html="t6List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-stream"></i> <span data-i18n="t7Title">Hand-rolled NDJSON streaming, not the AI SDK's built-in stream</span></h4>
+            <ul data-i18n-html="t7List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-plug"></i> <span data-i18n="t8Title">Internal tool layer shaped like MCP</span></h4>
+            <ul data-i18n-html="t8List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-cloud"></i> <span data-i18n="t9Title">Vercel serverless, not an always-on container</span></h4>
+            <ul data-i18n-html="t9List"></ul>
+        </div>
+        <div class="tradeoff-card">
+            <h4><i class="fas fa-file-image"></i> <span data-i18n="t10Title">Two-stage OCR-then-extract for image documents</span></h4>
+            <ul data-i18n-html="t10List"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Solo Full-Stack &amp; AI Engineer</div>
+        </div>
+        <p data-i18n="roleContent">Built entirely alone, end to end: the data model (Prisma schema across 5 groups), a reproducible synthetic-data generator (fixed RNG seed, with 5 deliberately planted anomaly stories), the agent tool-call loop and its 6 tools, the document-extraction and rule-based cross-validation pipeline, the Knowledge Flywheel (similarity retrieval + reuse tracking), the governance layer (role permissions, approval queue, audit log), 9+ frontend pages and the UI/UX, deployment and CI, and all of the documentation (README, architecture-decision notes). No collaborators, no outside design files.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="features">
+    <h2><i class="fas fa-star"></i> <span data-i18n="featuresTitle">Features</span></h2>
+    <div class="feature-groups">
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-robot"></i></div><h4 data-i18n="f1Title">Operations Agent</h4></div>
+            <ul data-i18n-html="f1List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-file-invoice"></i></div><h4 data-i18n="f2Title">Document Intelligence</h4></div>
+            <ul data-i18n-html="f2List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-arrows-spin"></i></div><h4 data-i18n="f3Title">Knowledge Flywheel</h4></div>
+            <ul data-i18n-html="f3List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-list-check"></i></div><h4 data-i18n="f4Title">Jira-Style Issue Tracking</h4></div>
+            <ul data-i18n-html="f4List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-user-shield"></i></div><h4 data-i18n="f5Title">Governance &amp; Audit</h4></div>
+            <ul data-i18n-html="f5List"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">OpenAI's strict structured-output mode rejects .optional() fields</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c1Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">A Prisma unique constraint blocked a second approval request</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c2Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">The "plan" kept reappearing in the stream</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c3Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c3Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">4</span> <span data-i18n="c4Title">Long JSON strings blew out the tool-call cards</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c4Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c4Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">5</span> <span data-i18n="c5Title">Unrealistic synthetic-data growth buried a planted anomaly</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c5Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c5Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">6</span> <span data-i18n="c6Title">The ts-node seed script couldn't resolve @/ path aliases</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c6Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c6Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">7</span> <span data-i18n="c7Title">A private repo link ended up on the public homepage</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c7Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c7Solution"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="impact">
+    <h2><i class="fas fa-chart-line"></i> <span data-i18n="impactTitle">Expected Impact &amp; System Value</span></h2>
+    <p class="impact-intro" data-i18n="impactIntro">This is a portfolio demo with no real production traffic, so I won't quote "N hours saved" or "N% more efficient" numbers with no real users behind them. What's honest to say instead is what this system concretely proves:</p>
+    <div class="proof-grid">
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+            <h4 data-i18n="p1Title">All 5 planted anomalies, found with correct evidence</h4>
+            <p data-i18n="p1Content">Supplier price hikes, customer churn, inventory buildup, stockouts, chronically late supplier deliveries — the agent surfaces every one of them, citing the actual database numbers and document content that produced the answer, not a lucky guess.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-route"></i></div>
+            <h4 data-i18n="p2Title">The governance loop runs end to end</h4>
+            <p data-i18n="p2Content">Propose → approve → write → audit — all four steps have real, queryable data behind them. It's not a UI mockup of a flow that doesn't actually happen.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-recycle"></i></div>
+            <h4 data-i18n="p3Title">Knowledge reuse verified in practice</h4>
+            <p data-i18n="p3Content">Resolve an issue, write down the fix — ask a similar question later, and the agent actually cites that resolution and declines to suggest a duplicate. That's the Jira-style historical-case integration working at small scale, not a claim on a slide.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-file-shield"></i></div>
+            <h4 data-i18n="p4Title">Document intelligence holds up on messy input</h4>
+            <p data-i18n="p4Content">69 synthetic documents mix clean tables, forwarded-email-style casual invoices, handwritten-style receiving slips, and scanned images/screenshots — run through real vision OCR plus structured extraction, not just the cleanest format.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-bullseye"></i></div>
+            <h4 data-i18n="p5Title">A working answer to a real integration question</h4>
+            <p data-i18n="p5Content">The combination of an MCP-shaped tool layer, enforced citations, and an approval gate is a direct answer to "how do you bring agentic AI into an existing system like Jira without losing control" — answered with a running system, not a slide.</p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="demo">
+    <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Screen Walkthrough</span></h2>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/agent-investigating.png" alt="Agent investigation in progress" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d1Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/agent-conclusion.png" alt="Agent final answer and proposed follow-up" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d2Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/approvals-manager.png" alt="Approvals queue, Manager view" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d3Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/flagged-document.png" alt="Flagged invoice with cross-document validation" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d4Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/knowledge-base.png" alt="Knowledge base and reuse stats" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d5Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/approvals-analyst.png" alt="Approvals queue, Analyst view" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d6Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/audit-log.png" alt="Audit log" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d7Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/dashboard.png" alt="Dashboard with live synthetic data" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d8Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/agent-landing.png" alt="Agent landing screen" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d9Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/homepage.png" alt="Knovyra homepage" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d10Caption"></div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html#home" data-i18n="footerHome">Home</a></p>
+            <p><a href="about.html" data-i18n="footerAbout">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="footerAwards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="footerExperiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="footerCertifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="footerConferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="footerOtherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Featured Case Study · Solo Project",
+                title: "Knovyra — Agentic Enterprise Intelligence Platform",
+                subtitle: "Multi-step agent investigations with cited evidence, human approval gates, and reusable knowledge",
+                meta: "Solo project · Built 2026 · All company data is synthetic",
+                linkSystem: "Live System",
+                tocProblem: "Problem",
+                tocFlow: "System Flow",
+                tocTech: "Tech Stack",
+                tocConsiderations: "Trade-offs",
+                tocRole: "My Role",
+                tocFeatures: "Features",
+                tocChallenges: "Challenges",
+                tocImpact: "Impact",
+                tocDemo: "Demo",
+                problemTitle: "Problem Background",
+                problemContent: "<p>Most AI portfolio pieces stop at the \"feed data to an LLM, answer questions\" RAG-demo stage. But where enterprises actually get stuck adopting agentic AI usually isn't \"can it call an LLM\" — it's these four things:</p><ul><li>Can it reason across multiple systems, not just query one vector index?</li><li>Can a human actually see how it reached a conclusion, instead of just trusting a paragraph of text?</li><li>Are you willing to let the AI actually act, or does every single step need a human in the loop?</li><li>Does something investigated today have to be investigated again tomorrow?</li></ul><p><strong>Knovyra</strong> is a complete, runnable POC built directly against those four questions: an enterprise intelligence and operations platform for a fictional mid-sized electronics-components company, \"Meridian Electronics Co.\" An agent plans multi-step investigations across structured databases and documents; every conclusion can be traced back to its evidence; any consequential action has to be approved by a human before it's written; and every completed investigation gets folded back into reusable knowledge for next time. All data — products, customers, suppliers, transactions, documents — is synthetically generated and contains no real company information.</p>",
+                flowTitle: "System Flow",
+                flowCaption: "One full request lifecycle: user question → Knowledge Flywheel similarity check → Agent Planner → tool-call loop (6 tools, capped at 8 steps) → submit_conclusion → ApprovalRequest (PENDING) → Manager decision at /approvals → write only after approval → AuditLog",
+                flowNote: "The point of this diagram isn't really \"how the AI answers a question\" — it's that <strong>the line from \"AI proposes\" to \"human approves\" to \"then it's written\"</strong> is never skipped, anywhere in the flow.",
+                techTitle: "Tech Stack",
+                techCaption: "4 layers: Frontend (Next.js 16 + Agent Console + Dashboards) / Application (API Routes + role governance + rate limiting) / Intelligence (Agent Planner + 6 function-calling tools) / Infrastructure (Vercel + Postgres/Neon + Vercel Blob + OpenAI/Anthropic, swappable)",
+                techGroup1: "Frontend",
+                techGroup2: "Application",
+                techGroup3: "AI / Intelligence",
+                techGroup4: "Infrastructure",
+                considerTitle: "Engineering Trade-offs",
+                considerIntro: "Every item below is a case of \"there's a more common way to do this, but given this project's actual context, I chose something else.\"",
+                t1Title: "Cosine similarity in JS, not pgvector",
+                t1List: "<li><strong>Chose:</strong> compute cosine similarity in JS over a Float[] column, instead of the pgvector extension.</li><li><strong>Why:</strong> the tables are hundreds of rows, not millions — and switching Postgres providers later doesn't have to worry about extension availability. Portability over a theoretically faster ANN search.</li>",
+                t2Title: "Parameter-limited query tools, not model-written SQL",
+                t2List: "<li><strong>Chose:</strong> query_sales_db / query_purchase_db with fixed, limited parameters instead of letting the model write SQL directly.</li><li><strong>Why:</strong> the security boundary lives in the tool layer, not in a prompt asking the model nicely not to query things — a model can never do more than the tool itself allows.</li>",
+                t3Title: "submit_conclusion as a structured stop condition",
+                t3List: "<li><strong>Chose:</strong> a structured tool call to converge on an answer, instead of parsing free text for a \"conclusion.\"</li><li><strong>Why:</strong> the final answer and any proposed action are typed, validated data — not a guess regexed out of a paragraph.</li>",
+                t4Title: "Rule-based document cross-checking, not another LLM call",
+                t4List: "<li><strong>Chose:</strong> pure numeric comparison to catch amount/quantity mismatches between documents, instead of asking an LLM \"do these two documents agree?\"</li><li><strong>Why:</strong> math is explainable, deterministic, and can't hallucinate a discrepancy that isn't there. The LLM's job is extraction, not judgment.</li>",
+                t5Title: "Postgres sliding-window rate limiting, not Redis",
+                t5List: "<li><strong>Chose:</strong> a Postgres sliding-window counter over Upstash Redis.</li><li><strong>Why:</strong> this is a public demo running on personal API quota — one fewer external service is one fewer thing to operate, and the volume is well within what Postgres handles fine.</li>",
+                t6Title: "Mini-tier models throughout",
+                t6List: "<li><strong>Chose:</strong> gpt-5.4-mini / claude-haiku-4-5 everywhere, not flagship models.</li><li><strong>Why:</strong> deliberate cost discipline, not a capability shortfall — it also forces tighter prompt and tool design instead of leaning on raw model power.</li>",
+                t7Title: "Hand-rolled NDJSON streaming, not the AI SDK's built-in stream",
+                t7List: "<li><strong>Chose:</strong> a custom NDJSON event stream over the AI SDK's built-in UIMessage stream.</li><li><strong>Why:</strong> the built-in format is designed for chat bubbles — it doesn't fit an evidence-trail UI where every tool call needs to become its own card with its own citation.</li>",
+                t8Title: "Internal tool layer shaped like MCP",
+                t8List: "<li><strong>Chose:</strong> tools defined as name + zod schema + execute(), instead of calling Prisma directly with no extra layer.</li><li><strong>Why:</strong> swapping in a real Jira/Confluence MCP server should, in theory, only require replacing what's inside execute() — the agent loop, UI, and governance layer shouldn't need to change at all.</li>",
+                t9Title: "Vercel serverless, not an always-on container",
+                t9List: "<li><strong>Chose:</strong> Vercel's pay-per-invocation serverless functions over an always-on container (e.g. Zeabur).</li><li><strong>Why:</strong> a low-traffic portfolio site can run at close to $0; a hard step cap plus streaming responses solves the timeout risk architecturally, instead of paying for idle always-on capacity.</li>",
+                t10Title: "Two-stage OCR-then-extract for image documents",
+                t10List: "<li><strong>Chose:</strong> OCR to text first, then structured extraction, instead of handing an image straight to the model and hoping for structured JSON.</li><li><strong>Why:</strong> if the extraction stage fails, the OCR intermediate result is still saved and searchable — a failed document doesn't just vanish with nothing kept.</li>",
+                roleTitle: "My Role",
+                roleSubtitle: "Solo Full-Stack & AI Engineer",
+                roleContent: "Built entirely alone, end to end: the data model (Prisma schema across 5 groups), a reproducible synthetic-data generator (fixed RNG seed, with 5 deliberately planted anomaly stories), the agent tool-call loop and its 6 tools, the document-extraction and rule-based cross-validation pipeline, the Knowledge Flywheel (similarity retrieval + reuse tracking), the governance layer (role permissions, approval queue, audit log), 9+ frontend pages and the UI/UX, deployment and CI, and all of the documentation (README, architecture-decision notes). No collaborators, no outside design files.",
+                featuresTitle: "Features",
+                f1Title: "Operations Agent",
+                f1List: "<li>Ask a business question — the agent plans and runs a multi-step investigation: querying sales/purchasing databases, searching internal documents, running a fixed calculation library, and checking the knowledge base for prior similar analyses.</li><li>Every step streams to the screen in real time; the final answer carries cited sources — not a paragraph of text with no origin.</li>",
+                f2Title: "Document Intelligence",
+                f2List: "<li>Upload POs, invoices, contracts, etc. — including scans and screenshots, not just clean text.</li><li>LLM structured extraction, followed by rule-based (non-LLM) cross-validation to catch amount/quantity mismatches.</li><li>Anything past a severity threshold is automatically routed into the approval queue.</li>",
+                f3Title: "Knowledge Flywheel",
+                f3List: "<li>Every completed investigation, once approved, becomes a searchable knowledge asset.</li><li>The next similar question checks here first — new tokens are only spent if it's actually reused, and every check (reused or not) is logged.</li>",
+                f4Title: "Jira-Style Issue Tracking",
+                f4List: "<li>Lightweight IssueOrTask tickets (Open → In Progress → Resolved, with a written resolution).</li><li>Before suggesting a new ticket, the agent calls search_similar_issues to check whether a similar problem was already handled — verified in practice: asked about an already-resolved issue, the agent cites the original fix and proactively skips a duplicate suggestion.</li>",
+                f5Title: "Governance & Audit",
+                f5List: "<li>Roles (Analyst / Manager) are cookie-simulated, but every write operation is enforced server-side against the actual role — front-end role switching can't bypass it.</li><li>Every consequential action is recorded in the Audit Log.</li>",
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "OpenAI's strict structured-output mode rejects .optional() fields",
+                c1Problem: "Using <code>generateObject</code> for document extraction, any Zod schema field marked <code>.optional()</code> triggered a 400 error — strict mode requires every key to appear in <code>required</code>.",
+                c1Solution: "Switched every optional field to <code>.nullable()</code> instead — problem solved across the board.",
+                c2Title: "A Prisma unique constraint blocked a second approval request",
+                c2Problem: "<code>ApprovalRequest.sessionId</code> was originally <code>@unique</code> (one approval request per session), but the real-world case is one session can produce two separate proposed actions in sequence (e.g. open a ticket, then later save a knowledge asset) — the second write hit a P2002 error.",
+                c2Solution: "Loosened the schema relation to one-to-many and shipped a migration for it.",
+                c3Title: "The \"plan\" kept reappearing in the stream",
+                c3Problem: "The agent's plan text should only ever appear once, but the emit condition just checked \"is the text non-empty\" — so every subsequent tool-call event re-sent the same plan text again.",
+                c3Solution: "Added a <code>planEmitted</code> boolean flag to gate it — that was the actual fix.",
+                c4Title: "Long JSON strings blew out the tool-call cards",
+                c4Problem: "Tool-call cards displaying query parameters would have a long, unbreakable string push the card straight past its container's edge.",
+                c4Solution: "Added <code>word-break: break-all</code> — and used the opportunity to also improve two related UX gaps: whether users could ask a follow-up after an answer, and whether a stuck query gave any feedback at all.",
+                c5Title: "Unrealistic synthetic-data growth buried a planted anomaly",
+                c5Problem: "Purchase order volume (50–400 per order) was far larger than sales volume (averaging 9 per order), so inventory grew without bound — burying the deliberately planted \"inventory buildup / stockout\" anomaly story in pure noise.",
+                c5Solution: "Recalibrated purchase volume down to 15–45 per order. This is also why every new synthetic-data generator added since then gets its <strong>volume</strong> sanity-checked first, not just its format.",
+                c6Title: "The ts-node seed script couldn't resolve @/ path aliases",
+                c6Problem: "The seed script runs directly through ts-node, bypassing Next.js's own bundling pipeline — so any module imported via <code>@/lib/...</code> failed with \"Cannot find module.\" This surfaced when adding real vision-based extraction for image documents, since the seed script needed to call the app's own extraction logic directly.",
+                c6Solution: "Any module that needs to be usable from <strong>both</strong> sides now uses relative imports instead of the alias — fixed locally per-module, not by changing the global config.",
+                c7Title: "A private repo link ended up on the public homepage",
+                c7Problem: "Adding a \"View Source\" link to the homepage, forgot the repo was actually private — the link 404'd for every visitor.",
+                c7Solution: "Pulled the link, confirmed nothing in the entire git history leaked a secret, <em>then</em> made the repo public and added the link back. <strong>Check first, open second</strong> — not the other way around.",
+                impactTitle: "Expected Impact & System Value",
+                impactIntro: "This is a portfolio demo with no real production traffic, so I won't quote \"N hours saved\" or \"N% more efficient\" numbers with no real users behind them. What's honest to say instead is what this system concretely proves:",
+                p1Title: "All 5 planted anomalies, found with correct evidence",
+                p1Content: "Supplier price hikes, customer churn, inventory buildup, stockouts, chronically late supplier deliveries — the agent surfaces every one of them, citing the actual database numbers and document content that produced the answer, not a lucky guess.",
+                p2Title: "The governance loop runs end to end",
+                p2Content: "Propose → approve → write → audit — all four steps have real, queryable data behind them. It's not a UI mockup of a flow that doesn't actually happen.",
+                p3Title: "Knowledge reuse verified in practice",
+                p3Content: "Resolve an issue, write down the fix — ask a similar question later, and the agent actually cites that resolution and declines to suggest a duplicate. That's the Jira-style historical-case integration working at small scale, not a claim on a slide.",
+                p4Title: "Document intelligence holds up on messy input",
+                p4Content: "69 synthetic documents mix clean tables, forwarded-email-style casual invoices, handwritten-style receiving slips, and scanned images/screenshots — run through real vision OCR plus structured extraction, not just the cleanest format.",
+                p5Title: "A working answer to a real integration question",
+                p5Content: "The combination of an MCP-shaped tool layer, enforced citations, and an approval gate is a direct answer to \"how do you bring agentic AI into an existing system like Jira without losing control\" — answered with a running system, not a slide.",
+                demoTitle: "Screen Walkthrough",
+                d1Caption: "<strong>Investigation in progress.</strong> The agent's plan streams first, then each tool call becomes its own card — checked knowledge base, searched documents, queried purchasing database — showing the exact query, the result, and a quoted source snippet.",
+                d2Caption: "<strong>Final answer, with the math shown.</strong> Calculation tool calls compute the actual percent changes, then a cited Conclusion box explains the answer in full sentences, followed by a proposed follow-up action awaiting approval.",
+                d3Caption: "<strong>/approvals as a Manager.</strong> Every pending item — here, a batch of flagged invoices — gets explicit Approve / Reject buttons. Nothing leaves this queue without one of these being clicked.",
+                d4Caption: "<strong>A flagged invoice.</strong> Extracted fields on the right, and a rule-based cross-check against the matching purchase order below it — flagging that this invoice's subtotal is 8.0% higher than the PO, marked CRITICAL.",
+                d5Caption: "<strong>Knowledge base.</strong> Every resolved investigation can become a searchable asset, with real reuse tracking — including an explicit note that \"tokens saved\" is a documented heuristic, not a measured value.",
+                d6Caption: "<strong>The same queue, as an Analyst.</strong> No Approve/Reject buttons here — just a banner explaining why. The role check happens server-side, so this isn't just a hidden button.",
+                d7Caption: "<strong>Audit log.</strong> Every consequential action — tool calls, agent sessions, approval decisions, issue status changes — is recorded with who did it and when.",
+                d8Caption: "<strong>Dashboard.</strong> Live metrics computed from the synthetic dataset (24 products, 30 customers, 15 suppliers, 9 months of data), plus an explicit list of the 5 anomaly stories deliberately planted for the agent to find.",
+                d9Caption: "<strong>Agent landing screen.</strong> Example questions to get started, plus a running history of recent investigations — this is also where the Knowledge Flywheel gets tested for reuse on repeat questions.",
+                d10Caption: "<strong>Homepage.</strong> States the pitch and the honesty disclosure up front — this is a self-built demo, and every company, product, and document on the site is fictional.",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerAbout: "About Me",
+                footerExperiences: "Experiences",
+                footerPublications: "Publications",
+                footerCertifications: "Certifications",
+                footerProjects: "Projects",
+                footerCompetitions: "Competitions",
+                footerConferences: "Conferences",
+                footerAwards: "Awards",
+                footerOtherExperiences: "Other Experiences",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "精選案例．個人專案",
+                title: "Knovyra — 代理式企業智能平台",
+                subtitle: "跨系統多步驟代理人調查、證據可追溯、人類核准閘門、可重用知識",
+                meta: "個人專案．2026 年開發．全部資料皆為合成生成",
+                linkSystem: "系統",
+                tocProblem: "問題背景",
+                tocFlow: "系統流程",
+                tocTech: "技術堆疊",
+                tocConsiderations: "工程權衡",
+                tocRole: "我的角色",
+                tocFeatures: "功能特色",
+                tocChallenges: "挑戰與解法",
+                tocImpact: "成效與價值",
+                tocDemo: "Demo",
+                problemTitle: "問題背景",
+                problemContent: "<p>多數 AI 作品集停在「餵資料給 LLM、回答問題」的 RAG demo 階段，但企業導入 agentic AI 真正卡關的地方通常不在「能不能呼叫 LLM」，而在後面四件事：</p><ul><li>能不能跨多個系統推理，不是只查一個向量索引？</li><li>能不能讓人看懂它怎麼得出這個結論，而不是要人盲目相信一段話？</li><li>敢不敢讓 AI 真的動手，還是每一步都要人在迴圈裡？</li><li>今天查過的東西，明天還要重查一次嗎？</li></ul><p><strong>Knovyra</strong> 是針對這四個問題做的一個完整、可運行的 POC：一個虛構中型電子零件公司「Meridian Electronics Co.」的企業智能與行動平台——代理人規劃跨結構化資料庫與文件的多步驟調查、每個結論都能追回證據來源、任何有影響力的動作都要人核准後才寫入、每次完成的調查都能沉澱成下次可重用的知識。全部資料（產品、客戶、供應商、交易、文件）皆為合成生成，不含任何真實公司資訊。</p>",
+                flowTitle: "系統流程",
+                flowCaption: "一次使用者提問的完整生命週期：提問 → Knowledge Flywheel 相似度檢查 → Agent Planner 規劃 → 工具呼叫迴圈（6 個工具，上限 8 步）→ submit_conclusion 結構化終止 → 建立 ApprovalRequest（PENDING）→ Manager 於 /approvals 決策 → 核准後才寫入 → AuditLog 紀錄",
+                flowNote: "這張圖的重點其實不是「AI 怎麼回答問題」，是<strong>「AI 提議、人核准、才寫入」這條線</strong>從頭到尾沒有一處被繞過。",
+                techTitle: "技術堆疊",
+                techCaption: "四層架構：展示層（Next.js 16 + Agent Console + Dashboard 頁面群）／應用層（API Routes + 角色治理 + Rate Limiting）／AI 智能層（Agent Planner + 6 個 Function Calling Tools）／基礎架構層（Vercel + Postgres/Neon + Vercel Blob + OpenAI/Anthropic，可替換）",
+                techGroup1: "展示層",
+                techGroup2: "應用層",
+                techGroup3: "AI 智能層",
+                techGroup4: "基礎架構",
+                considerTitle: "工程權衡",
+                considerIntro: "每一項都是「本來有更常見的做法，但基於這個專案的實際情境選了別的」。",
+                t1Title: "JS 端做 cosine similarity，非 pgvector",
+                t1List: "<li><strong>選擇：</strong>JS 端計算 cosine similarity（Float[] 欄位），而非 pgvector 擴充套件。</li><li><strong>為什麼：</strong>表格量級是幾百列，不是幾百萬列；換掉 Postgres 供應商時不用擔心擴充套件是否可用，可攜性優先於理論上更快的 ANN 搜尋。</li>",
+                t2Title: "限定參數的查詢工具，非讓模型寫 SQL",
+                t2List: "<li><strong>選擇：</strong>query_sales_db／query_purchase_db 限定固定參數，而非讓模型直接寫 SQL。</li><li><strong>為什麼：</strong>安全邊界畫在工具層，不是靠 prompt 約束模型「不要亂查」——模型永遠不可能做到工具本身沒開放的操作。</li>",
+                t3Title: "submit_conclusion 當結構化終止條件",
+                t3List: "<li><strong>選擇：</strong>用結構化工具收斂答案，而非解析模型的自由文本找「結論」。</li><li><strong>為什麼：</strong>最終答案與建議動作是型別化、驗證過的資料，不是從一段話裡 regex 出來的猜測。</li>",
+                t4Title: "規則式文件交叉驗證，非再呼叫一次 LLM",
+                t4List: "<li><strong>選擇：</strong>純數學比對兩份文件的金額／數量落差，而非再呼叫一次 LLM 判斷「這兩份文件對得上嗎」。</li><li><strong>為什麼：</strong>純數學比對可解釋、有確定性、不會自己幻覺出一個不存在的落差；LLM 只負責「抽取」，不負責「判斷對錯」。</li>",
+                t5Title: "Postgres 滑動視窗做 rate limit，非 Redis",
+                t5List: "<li><strong>選擇：</strong>Postgres 滑動視窗計數，而非 Upstash Redis。</li><li><strong>為什麼：</strong>這是一個用個人 API 額度撐的公開 demo，多一個外部服務等於多一個要顧的東西；量級小到 Postgres 完全夠用。</li>",
+                t6Title: "全程只用 mini 級模型",
+                t6List: "<li><strong>選擇：</strong>全程使用 gpt-5.4-mini／claude-haiku-4-5，而非旗艦模型。</li><li><strong>為什麼：</strong>刻意的成本控制，不是能力不夠——同時也逼自己把 prompt／工具設計得更精準，而不是靠模型蠻力。</li>",
+                t7Title: "自寫 NDJSON 逐步事件串流",
+                t7List: "<li><strong>選擇：</strong>自寫 NDJSON 事件串流，而非 AI SDK 內建的 UIMessage stream。</li><li><strong>為什麼：</strong>內建格式是為聊天氣泡設計的，套不進「每個工具呼叫都要單獨成卡片、附引用來源」這種證據軌跡 UI。</li>",
+                t8Title: "內部工具層刻意做成 MCP 形狀",
+                t8List: "<li><strong>選擇：</strong>工具定義為 name + zod schema + execute()，而非直接寫死呼叫 Prisma、不多包一層。</li><li><strong>為什麼：</strong>換成真的 Jira／Confluence MCP server，理論上只要換掉 execute() 內部實作，agent loop／UI／治理層完全不用動。</li>",
+                t9Title: "Vercel serverless，非常駐容器",
+                t9List: "<li><strong>選擇：</strong>Vercel 按呼叫計費的 serverless，而非 Zeabur 常駐容器。</li><li><strong>為什麼：</strong>低流量作品集網站幾乎可以維持 $0；用「硬性步驟上限＋串流回應」在架構上解決 timeout 風險，而不是花錢買一個不會用滿的常駐容器。</li>",
+                t10Title: "圖片文件走兩段式：先 OCR 再結構化抽取",
+                t10List: "<li><strong>選擇：</strong>先 OCR 轉文字、再結構化抽取，而非直接把圖丟給模型硬幹出結構化 JSON。</li><li><strong>為什麼：</strong>前段失敗（看不清楚）時，OCR 的中間結果還是會被存下來、可被搜尋，不會整份文件因為抽取失敗而什麼都沒留下。</li>",
+                roleTitle: "我負責的部分",
+                roleSubtitle: "全端與 AI 工程師（獨立開發）",
+                roleContent: "一個人從零到有獨立完成——資料模型設計（Prisma schema，5 大群組）、可重現的合成資料生成引擎（固定 RNG seed，含刻意埋入的 5 個異常故事）、Agent 工具呼叫迴圈與 6 個工具、文件抽取與規則式交叉驗證管線、Knowledge Flywheel（相似度檢索＋重用追蹤）、審核治理層（角色權限＋核准佇列＋Audit Log）、9 個以上的前台頁面與 UI/UX、部署與 CI，以及全部文件（README、架構決策說明）。沒有協作者、沒有外部設計稿。",
+                featuresTitle: "系統具體功能",
+                f1Title: "Operations Agent（調查代理人）",
+                f1List: "<li>問一個商業問題，代理人規劃並執行多步驟調查——查銷售／採購資料庫、搜內部文件、跑固定的計算函式庫、查知識庫裡有沒有做過類似分析。</li><li>每一步即時串流到畫面，最終答案附引用來源，不是一段沒有出處的文字。</li>",
+                f2Title: "Document Intelligence（文件智能）",
+                f2List: "<li>上傳 PO、發票、合約等文件，含掃描件／截圖，非純文字也支援。</li><li>LLM 結構化抽取 → 規則式（非 LLM）交叉驗證，抓出金額／數量落差。</li><li>超過嚴重度門檻自動進審核佇列。</li>",
+                f3Title: "Knowledge Flywheel（知識飛輪）",
+                f3List: "<li>每個完成的調查都能被核准並沉澱成可搜尋的知識資產。</li><li>下次類似提問，代理人先查這裡，真的重用了才花新的 token，且重用與否都有紀錄可查。</li>",
+                f4Title: "Jira 式議題追蹤",
+                f4List: "<li>輕量的 IssueOrTask 追蹤票（Open → In Progress → Resolved ＋解決方案文字）。</li><li>代理人在建議開新票之前，會先呼叫 search_similar_issues 檢查過去是否已經處理過同類問題——已驗證：問一個已解決過的問題，代理人會直接引用當初的解法，並主動放棄重複建議。</li>",
+                f5Title: "治理與稽核",
+                f5List: "<li>角色（Analyst／Manager）僅用 cookie 模擬，但所有寫入操作在伺服器端強制驗證角色，前端切換無法繞過。</li><li>每個有影響力的動作都留在 Audit Log。</li>",
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "OpenAI structured output 嚴格模式拒收 .optional() 欄位",
+                c1Problem: "用 <code>generateObject</code> 做文件抽取時，Zod schema 裡凡是 <code>.optional()</code> 的欄位一律回傳 400——嚴格模式要求每個 key 都出現在 required 裡。",
+                c1Solution: "全面改成 <code>.nullable()</code>，一次性解決所有欄位的問題。",
+                c2Title: "Prisma unique constraint 卡住第二次核准請求",
+                c2Problem: "<code>ApprovalRequest.sessionId</code> 原本設 <code>@unique</code>（一個 session 對一個核准請求），但實際場景是同一個 session 可能先後產生兩個獨立的建議動作（先建追蹤票、後存知識資產）——寫入第二筆時噴 P2002。",
+                c2Solution: "改 schema 把關聯放寬成一對多，補一支 migration 解決。",
+                c3Title: "串流事件裡的「plan」重複出現",
+                c3Problem: "Agent 執行時的計畫文字理論上只該出現一次，但因為判斷條件只寫「文字不是空的就送」，結果每一個後續工具呼叫事件都把同一段計畫又送了一次。",
+                c3Solution: "加一個 <code>planEmitted</code> 布林旗標才擋住，這才是真正的解法。",
+                c4Title: "長 JSON 字串把卡片撐爆",
+                c4Problem: "Tool-call 卡片顯示查詢參數時，長字串（沒有空白可斷行）直接把容器撐出邊界。",
+                c4Solution: "補一個 <code>word-break: break-all</code> 解決，順手也做了「問完能不能追問」「查詢卡住有沒有提示」這兩個相關的 UX 補強。",
+                c5Title: "合成資料的成長速度不合理，蓋掉了刻意埋的異常",
+                c5Problem: "採購量級（50–400／單）遠超過銷售量級（平均 9／單），庫存無限往上長，把刻意埋的「庫存堆積／缺貨」異常故事直接淹沒在雜訊裡。",
+                c5Solution: "重新校準採購量級到 15–45／單解決——這也是為什麼之後每加一種新的合成資料生成器，我都會先檢查<strong>量級</strong>是否合理，不是只檢查格式對不對。",
+                c6Title: "ts-node 種子腳本無法解析 @/ 路徑別名",
+                c6Problem: "種子腳本用 ts-node 直接執行，不經過 Next.js 的打包流程，所以套件內用 <code>@/lib/...</code> 引用的模組一律 Cannot find module。在新增「圖片文件走真實 vision 抽取」功能、種子腳本需要直接呼叫應用程式的抽取邏輯時踩到。",
+                c6Solution: "讓那些<strong>兩邊都要用</strong>的模組一律改用相對路徑引用，只針對個別模組修，不是全域改設定檔。",
+                c7Title: "私有 GitHub repo 的連結被放上公開首頁",
+                c7Problem: "要在首頁加一個「查看原始碼」連結時，忘了 repo 其實是 private，連結對訪客一律 404。",
+                c7Solution: "先移除連結上線、確認整個 git 歷史沒有洩漏任何金鑰後，<em>才</em>把 repo 設為 public、把連結加回來——<strong>順序是先查再開</strong>，不是先開再說。",
+                impactTitle: "預期成效、系統價值",
+                impactIntro: "這是一個沒有真實流量的作品集 demo，所以我不會端出「省下 N 小時／N% 效率提升」這種沒有實際使用者支撐的數字。比較誠實的說法是這個系統具體證明了什麼：",
+                p1Title: "5 個刻意埋入的異常故事，全部查出且引用正確證據",
+                p1Content: "供應商漲價、客戶流失、庫存堆積、缺貨、供應商 delivery 長期延遲——代理人全部能查出來，且引用正確的證據，不是巧合對到答案，是真的按資料庫數字＋文件內容推導出來的。",
+                p2Title: "治理迴圈端到端跑通",
+                p2Content: "提議 → 核准 → 寫入 → 稽核，四步都有實際資料可查，不是 UI 上畫好看的假流程。",
+                p3Title: "知識重用迴圈驗證成功",
+                p3Content: "解決一個議題、寫下解法，之後問類似問題，代理人真的引用了那個解法，並主動放棄重複建議——這是「Jira 式歷史案例整合」在小規模上真實可行的證據，不是投影片上的一句話。",
+                p4Title: "文件智能撐得住「不整齊」的輸入",
+                p4Content: "69 份合成文件裡混了乾淨表格、轉寄郵件式的口語發票、倉管手寫式收貨單、甚至掃描件／截圖圖片——真的跑過 vision OCR 再結構化抽取，不是只示範最漂亮的那一種格式。",
+                p5Title: "對一個真實整合問題給出可運行的答案",
+                p5Content: "這套「MCP 形狀的工具層＋強制證據＋核准閘門」的組合，直接回答了「怎麼在不失控的前提下把 agentic AI 導入現有系統（尤其是 Jira）」這個問題——用一個可運行的系統回答，不是用投影片回答。",
+                demoTitle: "畫面導覽",
+                d1Caption: "<strong>調查進行中。</strong>代理人的計畫先串流出現，接著每個工具呼叫各自成一張卡片——查詢知識庫、搜尋文件、查詢採購資料庫——顯示確切的查詢參數、結果與引用的原文片段。",
+                d2Caption: "<strong>最終答案，連計算過程都攤開。</strong>計算工具算出實際的漲跌幅百分比，接著綠色的「結論」區塊用完整句子附引用說明答案，下方是等待核准的建議後續動作。",
+                d3Caption: "<strong>以 Manager 身分檢視 /approvals。</strong>每一筆待審項目（這裡是一批被標記的發票）都有明確的核准／駁回按鈕，沒有東西能不經過這一步就離開佇列。",
+                d4Caption: "<strong>一張被標記的發票。</strong>右側是抽取出的欄位，下方是與對應採購單的規則式交叉比對——標出這張發票的小計比 PO 高 8.0%，標記為 CRITICAL。",
+                d5Caption: "<strong>知識庫。</strong>每個完成的調查都能沉澱成可搜尋的資產，並有真實的重用追蹤機制——畫面上也明確標註「估計節省的 token」是有記錄依據的推估值，不是實測值。",
+                d6Caption: "<strong>同一個佇列，換成 Analyst 身分。</strong>沒有核准／駁回按鈕，只有一則提示說明原因。角色驗證是在伺服器端執行的，不只是把按鈕藏起來而已。",
+                d7Caption: "<strong>稽核紀錄。</strong>每個有影響力的動作——工具呼叫、代理人執行階段、核准決策、議題狀態變更——都記錄了是誰、在什麼時候做的。",
+                d8Caption: "<strong>儀表板。</strong>從合成資料集即時計算出的指標（24 項產品、30 位客戶、15 家供應商、9 個月資料），並列出 5 個刻意埋入、留給代理人去查出來的異常故事。",
+                d9Caption: "<strong>Agent 起始畫面。</strong>提供範例問題快速上手，也保留最近調查的歷史紀錄——重複提問時，Knowledge Flywheel 的重用機制就是在這裡被驗證的。",
+                d10Caption: "<strong>首頁。</strong>開場就講清楚產品定位，也直接揭露這是一個自建的 demo 環境，網站上所有公司、產品與文件皆為虛構。",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerAbout: "關於我",
+                footerExperiences: "經歷",
+                footerPublications: "學術發表",
+                footerCertifications: "證照",
+                footerProjects: "專案作品",
+                footerCompetitions: "競賽經歷",
+                footerConferences: "研討會",
+                footerAwards: "獲獎紀錄",
+                footerOtherExperiences: "其他經歷",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>

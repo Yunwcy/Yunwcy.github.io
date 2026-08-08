@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1462" viewBox="0 0 1180 1462" role="img">
+<title>Knovyra 系統流程架構圖</title>
+<desc>使用者提問經過 Knowledge Flywheel 相似度檢查、Agent Planner 規劃、工具呼叫迴圈、submit_conclusion 結構化終止，若有建議動作則建立待審核的 ApprovalRequest，由 Manager 在伺服器端驗證角色後核准或駁回，核准後才真正寫入資料，並全程記錄 AuditLog。</desc>
+<rect width="1180" height="1700" rx="20" fill="#f8fafc"/>
+<defs>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#94a3b8"/></marker>
+</defs>
+<rect x="40" y="40" width="700" height="80" rx="16" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+<text x="390.0" y="69.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#334155">使用者提問</text>
+  <text x="390.0" y="91.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#64748b">例：「六、七月毛利為什麼下滑？」（/agent）</text>
+<path d="M390.0 120 L390.0 150" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="150" width="700" height="130" rx="16" fill="#eef2ff" stroke="#818cf8" stroke-width="2.5"/>
+<text x="66.0" y="180.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#3730a3">Knowledge Flywheel 相似度檢查</text>
+<text x="66.0" y="206.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">向量化提問，與既有 KnowledgeAsset 做 JS cosine similarity</text>
+  <text x="66.0" y="226.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">超過門檻 → 在花費 token 前先提示「已有相似調查」</text>
+  <text x="66.0" y="246.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#3730a3" font-style="italic">每次提示都記錄 KnowledgeReuseEvent（不論是否被採用）</text>
+<path d="M740 215.0 L780 215.0" stroke="#818cf8" stroke-width="2.5" fill="none" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<rect x="780" y="160" width="360" height="110" rx="16" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2.5"/>
+<text x="960.0" y="183.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#3730a3">相似度夠高</text>
+  <text x="960.0" y="204.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">顯示既有結論</text>
+  <text x="960.0" y="225.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">使用者可選擇沿用</text>
+  <text x="960.0" y="246.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">或仍要求全新調查</text>
+<text x="406.0" y="297.0" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#64748b">沒有相近結果 → 展開新調查</text>
+<path d="M390.0 280 L390.0 314" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="314" width="700" height="100" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="2.5"/>
+<text x="66.0" y="344.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#92400e">Agent Planner 規劃步驟</text>
+<text x="66.0" y="370.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">streamText 產生調查計畫（要查哪些工具、依序為何、為什麼）— 計畫本身也串流到畫面上</text>
+  <text x="66.0" y="390.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">計畫寫入 AgentSession.plan，供之後回顧</text>
+<path d="M390.0 414 L390.0 444" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="444" width="700" height="230" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="2.5"/>
+<text x="66.0" y="474.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#92400e">工具呼叫迴圈</text>
+<text x="714.0" y="474.0" text-anchor="end" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#b45309">stepCountIs(8) 上限</text>
+<rect x="66.0" y="496" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="169.3" y="514.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">query_sales_db</text>
+<rect x="286.66666666666663" y="496" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="390.0" y="514.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">query_purchase_db</text>
+<rect x="507.3333333333333" y="496" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="610.7" y="514.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">search_documents</text>
+<rect x="66.0" y="542" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="169.3" y="560.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">calculate</text>
+<rect x="286.66666666666663" y="542" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="390.0" y="560.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">search_knowledge_base</text>
+<rect x="507.3333333333333" y="542" width="206.66666666666666" height="36" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="610.7" y="560.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#78350f">search_similar_issues</text>
+<path d="M714 514.0 C 746 484.0, 746 590.0, 714 560.0" stroke="#f59e0b" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+<text x="734.0" y="537.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#b45309" transform="rotate(90 734.0 537.0)">反覆挑選</text>
+<rect x="60" y="602" width="660" height="60" rx="10" fill="#ecfdf5" stroke="#34b978" stroke-width="1.5"/>
+<text x="390.0" y="622.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" fill="#065f46">每一步都持久化為 AgentStep + Citation</text>
+  <text x="390.0" y="641.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="500" fill="#166534">以 NDJSON 即時串流到 /agent 畫面 → 面試現場能看到「思考過程」而非等待轉圈</text>
+<path d="M390.0 674 L390.0 704" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="704" width="700" height="130" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="2.5"/>
+<text x="66.0" y="734.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#92400e">submit_conclusion 結構化終止</text>
+<text x="66.0" y="760.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">stopWhen: hasToolCall("submit_conclusion") — 用結構化工具收斂，不解析自由文本</text>
+  <text x="66.0" y="780.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">產出：帶引用標記的最終答案 ＋（可能的）proposedAction</text>
+  <text x="66.0" y="800.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#92400e" font-style="italic">誠實表態：證據不足時明確說「無法確認」，不硬掰答案</text>
+<text x="406.0" y="851.0" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#64748b">若有 proposedAction → 進入審核</text>
+<path d="M390.0 834 L390.0 868" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="868" width="700" height="90" rx="16" fill="#f5f3ff" stroke="#a78bfa" stroke-width="2.5"/>
+<text x="66.0" y="898.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#5b21b6">建立 ApprovalRequest （PENDING）</text>
+<text x="66.0" y="924.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">CREATE_ISSUE / SAVE_KNOWLEDGE_ASSET / FLAG_DOCUMENT — 尚未有任何資料被寫入或變更</text>
+<path d="M390.0 958 L390.0 988" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="988" width="700" height="140" rx="16" fill="#ecfdf5" stroke="#34b978" stroke-width="2.5"/>
+<text x="66.0" y="1018.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#065f46">Manager 於 /approvals 決策</text>
+<text x="66.0" y="1044.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">伺服器端驗證角色（actorRole !== "MANAGER" → 403），前端切換無法繞過</text>
+  <text x="66.0" y="1064.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">核准或駁回都寫入 decidedByRole / decidedAt / reason</text>
+  <text x="66.0" y="1084.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">駁回 → 流程在此結束，不留下任何新資料</text>
+<path d="M740 1058.0 L780 1058.0" stroke="#34b978" stroke-width="2.5" fill="none" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<rect x="780" y="1003" width="360" height="110" rx="16" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2.5"/>
+<text x="960.0" y="1026.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#065f46">駁回</text>
+  <text x="960.0" y="1047.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">AuditLog 記一筆</text>
+  <text x="960.0" y="1068.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">「駁回」決策</text>
+  <text x="960.0" y="1089.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#475569">流程結束</text>
+<text x="406.0" y="1145.0" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#64748b">核准</text>
+<path d="M390.0 1128 L390.0 1162" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="1162" width="700" height="150" rx="16" fill="#f5f3ff" stroke="#a78bfa" stroke-width="2.5"/>
+<text x="66.0" y="1192.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#5b21b6">核准後才真正寫入</text>
+<text x="66.0" y="1218.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">IssueOrTask（追蹤票）／KnowledgeAsset（含 embedding）／確認文件的 FLAGGED 狀態</text>
+  <text x="66.0" y="1238.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">三者共用同一個 actionType 分派邏輯（decide/route.ts），沒有各自為政的寫入路徑</text>
+  <text x="66.0" y="1258.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#5b21b6" font-style="italic">這是整個治理設計的核心：AI 只能「提議」，寫入權永遠在核准之後</text>
+<path d="M390.0 1312 L390.0 1342" stroke="#94a3b8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<rect x="40" y="1342" width="700" height="90" rx="16" fill="#f5f3ff" stroke="#a78bfa" stroke-width="2.5"/>
+<text x="66.0" y="1372.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#5b21b6">AuditLog 紀錄</text>
+<text x="66.0" y="1398.0" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#475569">actorRole · action · entityType/Id · metadata — 每個有影響力的動作都留痕，可在 /audit 查閱</text>
+</svg>

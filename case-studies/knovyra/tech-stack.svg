@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1010" viewBox="0 0 1280 1010" role="img">
+<title>Knovyra 技術堆疊圖</title>
+<desc>四層架構：展示層（Next.js 16、Agent Console、Dashboard）、應用層（API Routes、角色治理、Rate Limiting）、AI 智能層（Agent Planner、6 個 Function Calling Tools）、基礎架構層（Vercel、Postgres、Vercel Blob、OpenAI/Anthropic）。</desc>
+<rect width="1280" height="1010" rx="20" fill="#f8fafc"/>
+<rect x="20" y="20" width="1240" height="210" rx="22" fill="#eef2ff" stroke="#6c7df4" stroke-width="2.5"/>
+<text x="640.0" y="54.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="800" fill="#4338ca">第 4 層　展示層（Frontend）</text>
+<rect x="40" y="80" width="384.0" height="136" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+<text x="232.0" y="115.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#312e81">Next.js 16 App Router</text>
+  <text x="232.0" y="137.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">TypeScript · React 19</text>
+  <text x="232.0" y="159.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Tailwind CSS v4</text>
+  <text x="232.0" y="181.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">react-markdown + remark-gfm</text>
+<rect x="448.0" y="80" width="384.0" height="136" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+<text x="640.0" y="115.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#312e81">Agent Console （/agent）</text>
+  <text x="640.0" y="137.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">NDJSON 即時證據串流</text>
+  <text x="640.0" y="159.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Tool-call 卡片 + 引用來源</text>
+  <text x="640.0" y="181.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">相似投資調查橫幅（Flywheel）</text>
+<rect x="856.0" y="80" width="384.0" height="136" rx="12" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+<text x="1048.0" y="115.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#312e81">Dashboard 頁面群</text>
+  <text x="1048.0" y="137.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Sales · Purchasing · Inventory</text>
+  <text x="1048.0" y="159.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Documents · Knowledge · Issues</text>
+  <text x="1048.0" y="181.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Approvals · Audit（角色門控 UI）</text>
+<rect x="20" y="250" width="1240" height="190" rx="22" fill="#ecfdf5" stroke="#34b978" stroke-width="2.5"/>
+<text x="640.0" y="284.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="800" fill="#166534">第 3 層　應用層（Application）</text>
+<rect x="40" y="310" width="384.0" height="116" rx="12" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+<text x="232.0" y="335.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#065f46">API Routes</text>
+  <text x="232.0" y="357.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">/api/agent/query（串流）</text>
+  <text x="232.0" y="379.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">/api/documents/[id]/extract</text>
+  <text x="232.0" y="401.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">/api/approvals/[id]/decide</text>
+<rect x="448.0" y="310" width="384.0" height="116" rx="12" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+<text x="640.0" y="335.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#065f46">角色治理 Governance</text>
+  <text x="640.0" y="357.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Analyst / Manager Cookie</text>
+  <text x="640.0" y="379.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">伺服器端角色強制驗證</text>
+  <text x="640.0" y="401.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">（前端切換無法繞過）</text>
+<rect x="856.0" y="310" width="384.0" height="116" rx="12" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+<text x="1048.0" y="335.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#065f46">Rate Limiting</text>
+  <text x="1048.0" y="357.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">Postgres 滑動視窗計數</text>
+  <text x="1048.0" y="379.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">自清理 · 免 Redis</text>
+  <text x="1048.0" y="401.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">每 IP / 每小時上限</text>
+<rect x="20" y="470" width="1240" height="260" rx="22" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+<text x="640.0" y="504.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="800" fill="#92400e">第 2 層　AI 智能層（Intelligence）</text>
+<rect x="40" y="530" width="380" height="186" rx="12" fill="#ffffff" stroke="#fcd34d" stroke-width="2"/>
+<text x="230.0" y="570.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#92400e">Agent Planner</text>
+  <text x="230.0" y="591.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">streamText 工具呼叫迴圈</text>
+  <text x="230.0" y="612.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">stepCountIs(8) 步驟上限</text>
+  <text x="230.0" y="633.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12.5" font-weight="500" fill="#4b5568">submit_conclusion 結構化終止</text>
+  <text x="230.0" y="654.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#b45309">+ 多模態 OCR（掃描件/截圖）</text>
+  <text x="230.0" y="675.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#b45309">+ generateObject 結構化抽取</text>
+<rect x="444" y="530" width="796" height="186" rx="12" fill="#ffffff" stroke="#fcd34d" stroke-width="2"/>
+<text x="842.0" y="556.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15.5" font-weight="800" fill="#92400e">Function Calling Tools （6）</text>
+<rect x="464.0" y="578" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="585.3" y="595.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">query_sales_db</text>
+<rect x="720.6666666666666" y="578" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="842.0" y="595.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">query_purchase_db</text>
+<rect x="977.3333333333333" y="578" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="1098.7" y="595.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">search_documents</text>
+<rect x="464.0" y="622" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="585.3" y="639.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">calculate</text>
+<rect x="720.6666666666666" y="622" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="842.0" y="639.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">search_knowledge_base</text>
+<rect x="977.3333333333333" y="622" width="242.66666666666666" height="34" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="1098.7" y="639.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#78350f">search_similar_issues</text>
+<text x="464.0" y="672.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11.5" font-weight="600" fill="#b45309">← MCP-shaped：名稱 + zod schema + execute()，比照 MCP server 工具形狀</text>
+<rect x="20" y="750" width="1240" height="240" rx="22" fill="#f5f3ff" stroke="#9b72ef" stroke-width="2.5"/>
+<text x="640.0" y="784.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="21" font-weight="800" fill="#5b21b6">第 1 層　基礎架構（Infrastructure）</text>
+<rect x="40" y="810" width="285.0" height="166" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+<text x="182.5" y="872.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#4c1d95">Vercel</text>
+  <text x="182.5" y="893.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">Serverless Functions</text>
+  <text x="182.5" y="914.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">Hobby tier · 自動部署</text>
+<rect x="345.0" y="810" width="285.0" height="166" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+<text x="487.5" y="872.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#4c1d95">Postgres （Neon）</text>
+  <text x="487.5" y="893.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">Prisma ORM</text>
+  <text x="487.5" y="914.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">JS Cosine Similarity</text>
+<rect x="650.0" y="810" width="285.0" height="166" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+<text x="792.5" y="872.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#4c1d95">Vercel Blob</text>
+  <text x="792.5" y="893.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">檔案 / 圖片儲存</text>
+  <text x="792.5" y="914.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">OIDC 驗證（免靜態 token）</text>
+<rect x="955.0" y="810" width="285.0" height="166" rx="12" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+<text x="1097.5" y="872.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14.5" font-weight="800" fill="#4c1d95">OpenAI / Anthropic</text>
+  <text x="1097.5" y="893.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">gpt-5.4-mini</text>
+  <text x="1097.5" y="914.0" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12" font-weight="500" fill="#4b5568">claude-haiku-4-5（可替換）</text>
+</svg>
