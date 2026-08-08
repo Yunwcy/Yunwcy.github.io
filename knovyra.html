@@ -254,31 +254,31 @@ body {
 .feature-card ul li:last-child { margin-bottom: 0; }
 .feature-card ul li strong { color: var(--dark-green); }
 
-/* Trade-off cards (choice vs. what was set aside, and why) */
-.tradeoff-grid {
+/* Engineering considerations (cost / speed / accuracy / stability) */
+.consider-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 18px;
 }
-.tradeoff-card {
+.consider-card {
     background: var(--card-bg);
     border-radius: 14px;
     padding: 20px 22px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
-.tradeoff-card h4 {
-    margin: 0 0 10px 0;
-    font-size: 0.98rem;
-    color: var(--text-color);
+.consider-card .consider-label {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
 }
-.tradeoff-card h4 i { color: var(--primary-green); }
-.tradeoff-card ul { padding-left: 18px; margin: 0; font-size: 0.87rem; }
-.tradeoff-card ul li { margin-bottom: 6px; }
-.tradeoff-card ul li:last-child { margin-bottom: 0; }
-.tradeoff-card strong { color: var(--dark-green); }
+.consider-card ul { padding-left: 18px; margin: 0; font-size: 0.87rem; }
+.consider-card ul li { margin-bottom: 6px; }
+.consider-card ul li:last-child { margin-bottom: 0; }
+.consider-card strong { color: var(--dark-green); }
 
 /* Challenge cards */
 .challenge-card {
@@ -385,10 +385,11 @@ body {
 .proof-card p { margin: 0; font-size: 0.9rem; }
 .proof-card strong { color: var(--dark-green); }
 
-/* Demo screenshots */
+/* Demo screenshots — real desktop captures, so pair two per row instead of
+   three; a third column made each screenshot too small to read. */
 .screenshot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     gap: 22px;
 }
 .screenshot-card {
@@ -399,7 +400,7 @@ body {
 }
 .screenshot-card img {
     width: 100%;
-    height: 190px;
+    height: 280px;
     object-fit: cover;
     object-position: top;
     border-radius: 8px;
@@ -452,7 +453,7 @@ footer {
 @media (max-width: 600px) {
     .case-hero { padding-top: 110px; }
     .case-hero h1 { font-size: 1.6rem; }
-    .case-card, .challenge-card, .feature-card, .tradeoff-card, .proof-card { padding: 20px; }
+    .case-card, .challenge-card, .feature-card, .consider-card, .proof-card { padding: 20px; }
 }
 </style>
 </head>
@@ -493,9 +494,6 @@ footer {
     <div class="diagram-box">
         <img src="case-studies/knovyra/system-flow.svg" alt="Knovyra system flow diagram" onclick="openLightbox(this.src)">
         <div class="diagram-caption" data-i18n="flowCaption">One full request lifecycle: user question → Knowledge Flywheel similarity check → Agent Planner → tool-call loop (6 tools, capped at 8 steps) → submit_conclusion → ApprovalRequest (PENDING) → Manager decision at /approvals → write only after approval → AuditLog</div>
-    </div>
-    <div class="case-card">
-        <p data-i18n-html="flowNote">The point of this diagram isn't really "how the AI answers a question" — it's that <strong>the line from "AI proposes" to "human approves" to "then it's written"</strong> is never skipped, anywhere in the flow.</p>
     </div>
 </section>
 
@@ -546,49 +544,22 @@ footer {
 
 <section class="case-section fade-in" id="considerations">
     <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
-    <div class="case-card" style="margin-bottom:18px;">
-        <p data-i18n="considerIntro" style="margin:0;">Every item below is a case of "there's a more common way to do this, but given this project's actual context, I chose something else."</p>
-    </div>
-    <div class="tradeoff-grid">
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-database"></i> <span data-i18n="t1Title">Cosine similarity in JS, not pgvector</span></h4>
-            <ul data-i18n-html="t1List"></ul>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <ul data-i18n-html="considerCost"></ul>
         </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-lock"></i> <span data-i18n="t2Title">Parameter-limited query tools, not model-written SQL</span></h4>
-            <ul data-i18n-html="t2List"></ul>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <ul data-i18n-html="considerSpeed"></ul>
         </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-flag-checkered"></i> <span data-i18n="t3Title">submit_conclusion as a structured stop condition</span></h4>
-            <ul data-i18n-html="t3List"></ul>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <ul data-i18n-html="considerAccuracy"></ul>
         </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-code-compare"></i> <span data-i18n="t4Title">Rule-based document cross-checking, not another LLM call</span></h4>
-            <ul data-i18n-html="t4List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-gauge-high"></i> <span data-i18n="t5Title">Postgres sliding-window rate limiting, not Redis</span></h4>
-            <ul data-i18n-html="t5List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-coins"></i> <span data-i18n="t6Title">Mini-tier models throughout</span></h4>
-            <ul data-i18n-html="t6List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-stream"></i> <span data-i18n="t7Title">Hand-rolled NDJSON streaming, not the AI SDK's built-in stream</span></h4>
-            <ul data-i18n-html="t7List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-plug"></i> <span data-i18n="t8Title">Internal tool layer shaped like MCP</span></h4>
-            <ul data-i18n-html="t8List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-cloud"></i> <span data-i18n="t9Title">Vercel serverless, not an always-on container</span></h4>
-            <ul data-i18n-html="t9List"></ul>
-        </div>
-        <div class="tradeoff-card">
-            <h4><i class="fas fa-file-image"></i> <span data-i18n="t10Title">Two-stage OCR-then-extract for image documents</span></h4>
-            <ul data-i18n-html="t10List"></ul>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
+            <ul data-i18n-html="considerStability"></ul>
         </div>
     </div>
 </section>
@@ -754,32 +725,8 @@ footer {
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Screen Walkthrough</span></h2>
     <div class="screenshot-grid">
         <div class="screenshot-card">
-            <img src="case-studies/knovyra/agent-investigating.png" alt="Agent investigation in progress" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d1Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/agent-conclusion.png" alt="Agent final answer and proposed follow-up" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d2Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/approvals-manager.png" alt="Approvals queue, Manager view" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d3Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/flagged-document.png" alt="Flagged invoice with cross-document validation" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d4Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/knowledge-base.png" alt="Knowledge base and reuse stats" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d5Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/approvals-analyst.png" alt="Approvals queue, Analyst view" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d6Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/audit-log.png" alt="Audit log" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d7Caption"></div>
+            <img src="case-studies/knovyra/homepage.png" alt="Knovyra homepage" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d10Caption"></div>
         </div>
         <div class="screenshot-card">
             <img src="case-studies/knovyra/dashboard.png" alt="Dashboard with live synthetic data" onclick="openLightbox(this.src)">
@@ -790,8 +737,32 @@ footer {
             <div class="screenshot-caption" data-i18n-html="d9Caption"></div>
         </div>
         <div class="screenshot-card">
-            <img src="case-studies/knovyra/homepage.png" alt="Knovyra homepage" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d10Caption"></div>
+            <img src="case-studies/knovyra/agent-investigating.png" alt="Agent investigation in progress" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d1Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/agent-conclusion.png" alt="Agent final answer and proposed follow-up" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d2Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/knowledge-base.png" alt="Knowledge base and reuse stats" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d5Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/approvals-manager.png" alt="Approvals queue, Manager view" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d3Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/approvals-analyst.png" alt="Approvals queue, Analyst view" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d6Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/audit-log.png" alt="Audit log" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d7Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/flagged-document.png" alt="Flagged invoice with cross-document validation" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d4Caption"></div>
         </div>
     </div>
 </section>
@@ -878,7 +849,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 problemContent: "<p>Most AI portfolio pieces stop at the \"feed data to an LLM, answer questions\" RAG-demo stage. But where enterprises actually get stuck adopting agentic AI usually isn't \"can it call an LLM\" — it's these four things:</p><ul><li>Can it reason across multiple systems, not just query one vector index?</li><li>Can a human actually see how it reached a conclusion, instead of just trusting a paragraph of text?</li><li>Are you willing to let the AI actually act, or does every single step need a human in the loop?</li><li>Does something investigated today have to be investigated again tomorrow?</li></ul><p><strong>Knovyra</strong> is a complete, runnable POC built directly against those four questions: an enterprise intelligence and operations platform for a fictional mid-sized electronics-components company, \"Meridian Electronics Co.\" An agent plans multi-step investigations across structured databases and documents; every conclusion can be traced back to its evidence; any consequential action has to be approved by a human before it's written; and every completed investigation gets folded back into reusable knowledge for next time. All data — products, customers, suppliers, transactions, documents — is synthetically generated and contains no real company information.</p>",
                 flowTitle: "System Flow",
                 flowCaption: "One full request lifecycle: user question → Knowledge Flywheel similarity check → Agent Planner → tool-call loop (6 tools, capped at 8 steps) → submit_conclusion → ApprovalRequest (PENDING) → Manager decision at /approvals → write only after approval → AuditLog",
-                flowNote: "The point of this diagram isn't really \"how the AI answers a question\" — it's that <strong>the line from \"AI proposes\" to \"human approves\" to \"then it's written\"</strong> is never skipped, anywhere in the flow.",
                 techTitle: "Tech Stack",
                 techCaption: "4 layers: Frontend (Next.js 16 + Agent Console + Dashboards) / Application (API Routes + role governance + rate limiting) / Intelligence (Agent Planner + 6 function-calling tools) / Infrastructure (Vercel + Postgres/Neon + Vercel Blob + OpenAI/Anthropic, swappable)",
                 techGroup1: "Frontend",
@@ -886,27 +856,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup3: "AI / Intelligence",
                 techGroup4: "Infrastructure",
                 considerTitle: "Engineering Trade-offs",
-                considerIntro: "Every item below is a case of \"there's a more common way to do this, but given this project's actual context, I chose something else.\"",
-                t1Title: "Cosine similarity in JS, not pgvector",
-                t1List: "<li><strong>Chose:</strong> compute cosine similarity in JS over a Float[] column, instead of the pgvector extension.</li><li><strong>Why:</strong> the tables are hundreds of rows, not millions — and switching Postgres providers later doesn't have to worry about extension availability. Portability over a theoretically faster ANN search.</li>",
-                t2Title: "Parameter-limited query tools, not model-written SQL",
-                t2List: "<li><strong>Chose:</strong> query_sales_db / query_purchase_db with fixed, limited parameters instead of letting the model write SQL directly.</li><li><strong>Why:</strong> the security boundary lives in the tool layer, not in a prompt asking the model nicely not to query things — a model can never do more than the tool itself allows.</li>",
-                t3Title: "submit_conclusion as a structured stop condition",
-                t3List: "<li><strong>Chose:</strong> a structured tool call to converge on an answer, instead of parsing free text for a \"conclusion.\"</li><li><strong>Why:</strong> the final answer and any proposed action are typed, validated data — not a guess regexed out of a paragraph.</li>",
-                t4Title: "Rule-based document cross-checking, not another LLM call",
-                t4List: "<li><strong>Chose:</strong> pure numeric comparison to catch amount/quantity mismatches between documents, instead of asking an LLM \"do these two documents agree?\"</li><li><strong>Why:</strong> math is explainable, deterministic, and can't hallucinate a discrepancy that isn't there. The LLM's job is extraction, not judgment.</li>",
-                t5Title: "Postgres sliding-window rate limiting, not Redis",
-                t5List: "<li><strong>Chose:</strong> a Postgres sliding-window counter over Upstash Redis.</li><li><strong>Why:</strong> this is a public demo running on personal API quota — one fewer external service is one fewer thing to operate, and the volume is well within what Postgres handles fine.</li>",
-                t6Title: "Mini-tier models throughout",
-                t6List: "<li><strong>Chose:</strong> gpt-5.4-mini / claude-haiku-4-5 everywhere, not flagship models.</li><li><strong>Why:</strong> deliberate cost discipline, not a capability shortfall — it also forces tighter prompt and tool design instead of leaning on raw model power.</li>",
-                t7Title: "Hand-rolled NDJSON streaming, not the AI SDK's built-in stream",
-                t7List: "<li><strong>Chose:</strong> a custom NDJSON event stream over the AI SDK's built-in UIMessage stream.</li><li><strong>Why:</strong> the built-in format is designed for chat bubbles — it doesn't fit an evidence-trail UI where every tool call needs to become its own card with its own citation.</li>",
-                t8Title: "Internal tool layer shaped like MCP",
-                t8List: "<li><strong>Chose:</strong> tools defined as name + zod schema + execute(), instead of calling Prisma directly with no extra layer.</li><li><strong>Why:</strong> swapping in a real Jira/Confluence MCP server should, in theory, only require replacing what's inside execute() — the agent loop, UI, and governance layer shouldn't need to change at all.</li>",
-                t9Title: "Vercel serverless, not an always-on container",
-                t9List: "<li><strong>Chose:</strong> Vercel's pay-per-invocation serverless functions over an always-on container (e.g. Zeabur).</li><li><strong>Why:</strong> a low-traffic portfolio site can run at close to $0; a hard step cap plus streaming responses solves the timeout risk architecturally, instead of paying for idle always-on capacity.</li>",
-                t10Title: "Two-stage OCR-then-extract for image documents",
-                t10List: "<li><strong>Chose:</strong> OCR to text first, then structured extraction, instead of handing an image straight to the model and hoping for structured JSON.</li><li><strong>Why:</strong> if the extraction stage fails, the OCR intermediate result is still saved and searchable — a failed document doesn't just vanish with nothing kept.</li>",
+                considerCostLabel: "Cost",
+                considerCost: "<li><strong>Mini-tier models throughout</strong> (gpt-5.4-mini / claude-haiku-4-5, not flagship) — trades some reasoning ceiling for a cost structure a public demo can run on personal API quota, and forces tighter prompt/tool design instead of relying on raw model power.</li><li><strong>Postgres sliding-window rate limiting</strong> instead of Redis — one fewer paid external service; the volume is small enough that a self-cleaning table is plenty.</li><li><strong>Vercel serverless</strong> instead of an always-on container — near-$0 for a low-traffic site; timeout risk is solved with a step cap and streaming, not by paying for idle capacity.</li>",
+                considerSpeedLabel: "Speed",
+                considerSpeed: "<li><strong>NDJSON step-by-step streaming</strong> instead of waiting for the full investigation — more implementation complexity, but the first tool call is visible almost immediately.</li><li><strong>Rule-based cross-validation</strong> (pure math) completes in milliseconds, with no extra LLM round-trip — a 3-way win with accuracy and cost.</li><li><strong>Two-stage OCR-then-extract</strong> for images deliberately trades speed for accuracy — one of the few places this project gives up speed on purpose.</li>",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "<li><strong>Rule-based cross-validation:</strong> deterministic math can't hallucinate a discrepancy that isn't there — the LLM only extracts, it never judges right or wrong.</li><li><strong>submit_conclusion</strong> structured stop condition: the final answer and any proposed action are typed, schema-validated data, not a guess regexed out of free text.</li><li><strong>Two-stage OCR-then-extract:</strong> each step can be checked independently, so a bad extraction is easy to catch instead of hidden inside one model call.</li>",
+                considerStabilityLabel: "Stability",
+                considerStability: "<li><strong>Parameter-limited query tools,</strong> not model-written SQL — the model is architecturally incapable of doing anything the tool doesn't allow.</li><li><strong>Approval governance</strong> (propose → Manager decision → only then write): the worst case for a wrong agent judgment is a rejected proposal, never bad data silently written.</li><li><strong>stepCountIs(8)</strong> step cap stops the agent from looping forever — also a cost cap in disguise.</li><li><strong>Internal tool layer shaped like MCP:</strong> one extra layer of abstraction now, in exchange for not rewriting the agent loop/UI/governance layer when a real MCP server replaces it later.</li>",
                 roleTitle: "My Role",
                 roleSubtitle: "Solo Full-Stack & AI Engineer",
                 roleContent: "Built entirely alone, end to end: the data model (Prisma schema across 5 groups), a reproducible synthetic-data generator (fixed RNG seed, with 5 deliberately planted anomaly stories), the agent tool-call loop and its 6 tools, the document-extraction and rule-based cross-validation pipeline, the Knowledge Flywheel (similarity retrieval + reuse tracking), the governance layer (role permissions, approval queue, audit log), 9+ frontend pages and the UI/UX, deployment and CI, and all of the documentation (README, architecture-decision notes). No collaborators, no outside design files.",
@@ -1005,7 +962,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 problemContent: "<p>多數 AI 作品集停在「餵資料給 LLM、回答問題」的 RAG demo 階段，但企業導入 agentic AI 真正卡關的地方通常不在「能不能呼叫 LLM」，而在後面四件事：</p><ul><li>能不能跨多個系統推理，不是只查一個向量索引？</li><li>能不能讓人看懂它怎麼得出這個結論，而不是要人盲目相信一段話？</li><li>敢不敢讓 AI 真的動手，還是每一步都要人在迴圈裡？</li><li>今天查過的東西，明天還要重查一次嗎？</li></ul><p><strong>Knovyra</strong> 是針對這四個問題做的一個完整、可運行的 POC：一個虛構中型電子零件公司「Meridian Electronics Co.」的企業智能與行動平台——代理人規劃跨結構化資料庫與文件的多步驟調查、每個結論都能追回證據來源、任何有影響力的動作都要人核准後才寫入、每次完成的調查都能沉澱成下次可重用的知識。全部資料（產品、客戶、供應商、交易、文件）皆為合成生成，不含任何真實公司資訊。</p>",
                 flowTitle: "系統流程",
                 flowCaption: "一次使用者提問的完整生命週期：提問 → Knowledge Flywheel 相似度檢查 → Agent Planner 規劃 → 工具呼叫迴圈（6 個工具，上限 8 步）→ submit_conclusion 結構化終止 → 建立 ApprovalRequest（PENDING）→ Manager 於 /approvals 決策 → 核准後才寫入 → AuditLog 紀錄",
-                flowNote: "這張圖的重點其實不是「AI 怎麼回答問題」，是<strong>「AI 提議、人核准、才寫入」這條線</strong>從頭到尾沒有一處被繞過。",
                 techTitle: "技術堆疊",
                 techCaption: "四層架構：展示層（Next.js 16 + Agent Console + Dashboard 頁面群）／應用層（API Routes + 角色治理 + Rate Limiting）／AI 智能層（Agent Planner + 6 個 Function Calling Tools）／基礎架構層（Vercel + Postgres/Neon + Vercel Blob + OpenAI/Anthropic，可替換）",
                 techGroup1: "展示層",
@@ -1013,27 +969,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 techGroup3: "AI 智能層",
                 techGroup4: "基礎架構",
                 considerTitle: "工程權衡",
-                considerIntro: "每一項都是「本來有更常見的做法，但基於這個專案的實際情境選了別的」。",
-                t1Title: "JS 端做 cosine similarity，非 pgvector",
-                t1List: "<li><strong>選擇：</strong>JS 端計算 cosine similarity（Float[] 欄位），而非 pgvector 擴充套件。</li><li><strong>為什麼：</strong>表格量級是幾百列，不是幾百萬列；換掉 Postgres 供應商時不用擔心擴充套件是否可用，可攜性優先於理論上更快的 ANN 搜尋。</li>",
-                t2Title: "限定參數的查詢工具，非讓模型寫 SQL",
-                t2List: "<li><strong>選擇：</strong>query_sales_db／query_purchase_db 限定固定參數，而非讓模型直接寫 SQL。</li><li><strong>為什麼：</strong>安全邊界畫在工具層，不是靠 prompt 約束模型「不要亂查」——模型永遠不可能做到工具本身沒開放的操作。</li>",
-                t3Title: "submit_conclusion 當結構化終止條件",
-                t3List: "<li><strong>選擇：</strong>用結構化工具收斂答案，而非解析模型的自由文本找「結論」。</li><li><strong>為什麼：</strong>最終答案與建議動作是型別化、驗證過的資料，不是從一段話裡 regex 出來的猜測。</li>",
-                t4Title: "規則式文件交叉驗證，非再呼叫一次 LLM",
-                t4List: "<li><strong>選擇：</strong>純數學比對兩份文件的金額／數量落差，而非再呼叫一次 LLM 判斷「這兩份文件對得上嗎」。</li><li><strong>為什麼：</strong>純數學比對可解釋、有確定性、不會自己幻覺出一個不存在的落差；LLM 只負責「抽取」，不負責「判斷對錯」。</li>",
-                t5Title: "Postgres 滑動視窗做 rate limit，非 Redis",
-                t5List: "<li><strong>選擇：</strong>Postgres 滑動視窗計數，而非 Upstash Redis。</li><li><strong>為什麼：</strong>這是一個用個人 API 額度撐的公開 demo，多一個外部服務等於多一個要顧的東西；量級小到 Postgres 完全夠用。</li>",
-                t6Title: "全程只用 mini 級模型",
-                t6List: "<li><strong>選擇：</strong>全程使用 gpt-5.4-mini／claude-haiku-4-5，而非旗艦模型。</li><li><strong>為什麼：</strong>刻意的成本控制，不是能力不夠——同時也逼自己把 prompt／工具設計得更精準，而不是靠模型蠻力。</li>",
-                t7Title: "自寫 NDJSON 逐步事件串流",
-                t7List: "<li><strong>選擇：</strong>自寫 NDJSON 事件串流，而非 AI SDK 內建的 UIMessage stream。</li><li><strong>為什麼：</strong>內建格式是為聊天氣泡設計的，套不進「每個工具呼叫都要單獨成卡片、附引用來源」這種證據軌跡 UI。</li>",
-                t8Title: "內部工具層刻意做成 MCP 形狀",
-                t8List: "<li><strong>選擇：</strong>工具定義為 name + zod schema + execute()，而非直接寫死呼叫 Prisma、不多包一層。</li><li><strong>為什麼：</strong>換成真的 Jira／Confluence MCP server，理論上只要換掉 execute() 內部實作，agent loop／UI／治理層完全不用動。</li>",
-                t9Title: "Vercel serverless，非常駐容器",
-                t9List: "<li><strong>選擇：</strong>Vercel 按呼叫計費的 serverless，而非 Zeabur 常駐容器。</li><li><strong>為什麼：</strong>低流量作品集網站幾乎可以維持 $0；用「硬性步驟上限＋串流回應」在架構上解決 timeout 風險，而不是花錢買一個不會用滿的常駐容器。</li>",
-                t10Title: "圖片文件走兩段式：先 OCR 再結構化抽取",
-                t10List: "<li><strong>選擇：</strong>先 OCR 轉文字、再結構化抽取，而非直接把圖丟給模型硬幹出結構化 JSON。</li><li><strong>為什麼：</strong>前段失敗（看不清楚）時，OCR 的中間結果還是會被存下來、可被搜尋，不會整份文件因為抽取失敗而什麼都沒留下。</li>",
+                considerCostLabel: "成本",
+                considerCost: "<li><strong>全程只用 mini 級模型</strong>（gpt-5.4-mini／claude-haiku-4-5，非旗艦模型）——犧牲部分推理上限，換到公開 demo 用個人 API 額度也撐得住的成本結構，也逼自己把 prompt／工具設計得更精準。</li><li><strong>Postgres 滑動視窗做 rate limit，</strong>非 Redis——少一個要付費、要顧狀態的外部服務，量級小到完全夠用。</li><li><strong>Vercel serverless 按呼叫計費，</strong>非常駐容器——低流量網站趨近 $0，timeout 風險改用步驟上限＋串流回應解決，不是花錢買安心。</li>",
+                considerSpeedLabel: "速度",
+                considerSpeed: "<li><strong>NDJSON 逐步串流回應，</strong>非等整個調查跑完才回傳——實作更複雜，但第一個工具呼叫完成就能看到東西，體感延遲大幅降低。</li><li><strong>規則式交叉驗證</strong>（純數學比對）毫秒級完成，不需要多一次 LLM 網路來回，同時是準確性與成本的三重收益。</li><li><strong>圖片文件先 OCR 再結構化抽取</strong>（兩段式）：主動拿速度換準確性與可除錯性，是少數刻意變慢的地方。</li>",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "<li><strong>規則式交叉驗證：</strong>純數學比對是確定性的，不會幻覺出不存在的落差；LLM 只負責抽取，不負責判斷對錯。</li><li><strong>submit_conclusion</strong> 結構化終止：最終答案與建議動作是型別化、通過驗證的資料，不是從自由文本猜出來的結論。</li><li><strong>圖片文件兩段式抽取：</strong>每一步可獨立檢查，比一次性要求模型吐出 JSON 更容易抓到抽取哪裡失真。</li>",
+                considerStabilityLabel: "穩定性",
+                considerStability: "<li><strong>限定參數的查詢工具，</strong>非讓模型寫 SQL——模型在架構上就不可能執行工具沒開放的操作。</li><li><strong>核准治理層</strong>（提議 → Manager 決策 → 才寫入）：任何一步判斷錯了，最多提議被駁回，不會有資料被錯誤寫入。</li><li><strong>stepCountIs(8)</strong> 步驟上限，防止 agent 陷入不會停下來的迴圈，也是成本上限的另一種說法。</li><li><strong>內部工具層做成 MCP 形狀：</strong>多包一層抽象，換來日後接上真的 MCP server 時，agent loop／UI／治理層完全不用重寫。</li>",
                 roleTitle: "我負責的部分",
                 roleSubtitle: "全端與 AI 工程師（獨立開發）",
                 roleContent: "一個人從零到有獨立完成——資料模型設計（Prisma schema，5 大群組）、可重現的合成資料生成引擎（固定 RNG seed，含刻意埋入的 5 個異常故事）、Agent 工具呼叫迴圈與 6 個工具、文件抽取與規則式交叉驗證管線、Knowledge Flywheel（相似度檢索＋重用追蹤）、審核治理層（角色權限＋核准佇列＋Audit Log）、9 個以上的前台頁面與 UI/UX、部署與 CI，以及全部文件（README、架構決策說明）。沒有協作者、沒有外部設計稿。",
