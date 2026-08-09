@@ -70,6 +70,13 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+.case-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
 .case-badge {
     display: inline-block;
     background: var(--primary-green);
@@ -78,8 +85,10 @@ body {
     font-weight: 700;
     padding: 5px 14px;
     border-radius: 20px;
-    margin-bottom: 18px;
     letter-spacing: 0.5px;
+}
+.case-badge.gold {
+    background: linear-gradient(135deg, #e0a72e, #c98a1a);
 }
 .case-hero h1 {
     font-size: 2.2rem;
@@ -473,7 +482,10 @@ footer {
 </div>
 
 <div class="case-hero">
-    <span class="case-badge">🌟 <span data-i18n="badge">Featured Case Study</span></span>
+    <div class="case-badges">
+        <span class="case-badge">🌟 <span data-i18n="badge">Featured Case Study</span></span>
+        <span class="case-badge gold">🎓 <span data-i18n="badgeLicensedTag">Licensed for Continued Use</span></span>
+    </div>
     <h1 data-i18n="title">Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration</h1>
     <div class="subtitle" data-i18n="subtitle">Master's Thesis · Institute of Information Management, National Taipei University</div>
     <div class="meta" data-i18n="meta">Cheng-Yun Wu · Advisors: Min-Yuh Day, Yen-Chun Lin · 2026</div>
@@ -800,6 +812,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 backToProjects: "Back to Projects",
                 langButton: "中文",
                 badge: "Featured Case Study",
+                badgeLicensedTag: "Licensed for Continued Use",
                 title: "Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration",
                 subtitle: "Master's Thesis · Institute of Information Management, National Taipei University",
                 meta: "Cheng-Yun Wu · Advisors: Min-Yuh Day, Yen-Chun Lin · 2026",
@@ -907,6 +920,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 backToProjects: "返回專案作品",
                 langButton: "English",
                 badge: "精選案例",
+                badgeLicensedTag: "獲校方採用授權",
                 title: "Agentic Multimodal RAG-Enhanced Dialogue System for University Sports Administration",
                 subtitle: "碩士論文．國立臺北大學資訊管理研究所",
                 meta: "吳承耘．指導教授：Min-Yuh Day, Yen-Chun Lin．2026",

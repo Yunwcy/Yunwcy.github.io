@@ -817,8 +817,15 @@
             background: linear-gradient(135deg, #e0a72e, #c98a1a);
         }
 
-        .featured-badge.blue {
-            background: linear-gradient(135deg, #3b82c4, #2563a0);
+        .featured-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .featured-badges .featured-badge {
+            margin-bottom: 0;
         }
 
         .featured-card-body h3 {
@@ -1374,7 +1381,10 @@
             <div class="featured-card fade-in">
                 <img src="projects/Thesis.jpg" alt="Agentic Multimodal RAG-Enhanced Dialogue System">
                 <div class="featured-card-body">
-                    <span class="featured-badge blue" data-i18n="featuredSection.badgeLicensed">🎓 Featured · Licensed</span>
+                    <div class="featured-badges">
+                        <span class="featured-badge" data-i18n="featuredSection.badge">Featured</span>
+                        <span class="featured-badge gold" data-i18n="featuredSection.badgeLicensedTag">🎓 Licensed</span>
+                    </div>
                     <h3 data-i18n="featuredSection.thesis.title">Agentic Multimodal RAG-Enhanced Dialogue System</h3>
                     <p class="featured-tagline" data-i18n="featuredSection.thesis.tagline">Master's thesis: an agentic multimodal RAG dialogue system for university sports administration, integrating text, image, and speech input.</p>
                     <div class="featured-tags">
@@ -1491,8 +1501,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.marketingFinal.desc">Combining multi-platform content, brand characters, and KPI planning to build a Shu's Pottery community that blends entertainment, knowledge, and cultural value</p>
                         <div class="project-links">
-                            <a href="https://canva.link/9sve5qxyn2d4u47" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://canva.link/9sve5qxyn2d4u47" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1512,8 +1522,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.imYourBuddyFinal.desc">IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1kw63_GAWmROCZ959UEtLPRQOBda189-b/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1kw63_GAWmROCZ959UEtLPRQOBda189-b/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1578,8 +1588,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.grandmaSewingBox.desc">Every stitch, every thread—a mark of love. The warmth woven in yarn lives on here forever.</p>
                         <div class="project-links">
-                            <a href="https://yuying-art.vercel.app/" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://yuying-art.vercel.app/" target="_blank" class="project-link project-link-system">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.linkWebsite">Website</span>
                             </a>
                         </div>
                     </div>
@@ -1597,8 +1607,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.marketingMidterm.desc">Using character-driven content and differentiated social strategies to transform Shu's Pottery from product announcements into a more interactive, companionable pottery brand</p>
                         <div class="project-links">
-                            <a href="https://canva.link/9hpz338fl2k6ozg" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://canva.link/9hpz338fl2k6ozg" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1618,8 +1628,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.imYourBuddyMidterm.desc">IM your Buddy: Your School Life Navigator, guiding you smoothly through the journey</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1xCZFapG4t-P1Sekwno3DtgCfP-Ht9Ks6/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1xCZFapG4t-P1Sekwno3DtgCfP-Ht9Ks6/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1658,8 +1668,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.genaiCaseStudy.desc">Exploring how AI can be applied to university administrative automation to improve operational efficiency and deliver smarter campus services</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1lXUw5IqVWROWlub4F6Za6w7VHfN52_R2/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1lXUw5IqVWROWlub4F6Za6w7VHfN52_R2/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1680,8 +1690,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.potteryJourney.desc">The Virtual-Real Pottery Journey: AI Digital Avatar Driven Sustainable Ecosystem</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1nEjPhkC0tB8Ka9BaGHDrtLrBX4pNmuuJ/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1nEjPhkC0tB8Ka9BaGHDrtLrBX4pNmuuJ/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1732,8 +1742,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.esgmidterm.desc">AI-Driven Digital Transformation for Shu’s Pottery</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1tLPThdOBd2sGH3xLNjrgDKkjH3ej2wiu/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1tLPThdOBd2sGH3xLNjrgDKkjH3ej2wiu/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1755,8 +1765,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.itam31.desc">Enhancing Sports Organization Management through a Multimodal Dialogue System</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1rZtoBqqjUvN6QEHkW7mAWyfE-8DFnXqt/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1rZtoBqqjUvN6QEHkW7mAWyfE-8DFnXqt/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1775,8 +1785,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.esgcasestudy.desc">Accuvally: Digital Ticketing for Consumer Insights and Green Innovation</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1DgzlTHimpo22g6YvOCnXUdc9jAGgDrpD/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1DgzlTHimpo22g6YvOCnXUdc9jAGgDrpD/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1797,8 +1807,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.twsc.desc">Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1Zslp5PXvFnOvTxhhdvj8WZ71K9vcCB5F/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1Zslp5PXvFnOvTxhhdvj8WZ71K9vcCB5F/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1818,8 +1828,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.se_group.desc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1-iDAW9wnQ_-7gZd3F6ABPFK4wbSQ_Azh/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1-iDAW9wnQ_-7gZd3F6ABPFK4wbSQ_Azh/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1839,8 +1849,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.thesis.desc">Multimodal Dialogue System for Chinese Taipei University Sports Federation</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/14NKV-BZc9VlG1iTngiMQQSDXbf5r6_oL/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/14NKV-BZc9VlG1iTngiMQQSDXbf5r6_oL/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1863,8 +1873,8 @@
                             <a href="https://youtu.be/KN0zhCcEdcI" target="_blank" class="project-link project-link-video">
                                 <i class="fab fa-youtube"></i>YouTube
                             </a>
-                            <a href="https://docs.google.com/presentation/d/1EhryTBCbG52EIYrDSUyS2RaWy4OJ9gmL/edit?usp=sharing&ouid=103078681710745961578&rtpof=true&sd=true" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://docs.google.com/presentation/d/1EhryTBCbG52EIYrDSUyS2RaWy4OJ9gmL/edit?usp=sharing&ouid=103078681710745961578&rtpof=true&sd=true" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1884,8 +1894,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.tradiq.desc">A interactive tariff inquiry system that leverages RAG technology to integrate files, helping businesses and agencies efficiently navigate international trade changes and make informed decisions</p>
                         <div class="project-links">
-                            <a href="https://youtu.be/otihb7V_ji4" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://youtu.be/otihb7V_ji4" target="_blank" class="project-link project-link-video">
+                                <i class="fab fa-youtube"></i>YouTube
                             </a>
                         </div>
                     </div>
@@ -1926,8 +1936,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.inquairy.desc">InquAIry: Fuel Your Curiosity with AI! Smart, scalable AI learning support for education and enterprise</p>
                         <div class="project-links">
-                            <a href="https://inquairy.github.io/" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://inquairy.github.io/" target="_blank" class="project-link project-link-system">
+                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.linkWebsite">Website</span>
                             </a>
                         </div>
                     </div>
@@ -1971,8 +1981,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.secase.desc">AI-PoweredEducation: A Case Study of Khanmigo</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1tAxMeyn59Rv5Wn3rKn5Jy7geym1EyJZD/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -1992,8 +2002,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.sinopac.desc">"Yong" Never Afraid to Speak Up – Customer Interaction Feedback Optimization Training System</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1WOw3VwBtvit5BA6CvTUw-bQ_O8eNDeUX/view?usp=sharing" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -2013,8 +2023,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.marketing.desc">Applying Retrieval-Augmented Generation (RAG) to Build a Chatbot Teaching Assistant: A Case Study in Marketing Education</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/15wucF0DhYlemtmTmUkid0E0rdYLEfMtI/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -2034,8 +2044,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.ai_final.desc">Application of Large Language Models in AI-Driven Traffic Query Agents for Smart City Traffic Management</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1iKgSGS5WUQz0RFl6fkfr3iaJ4to2G_CH/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1iKgSGS5WUQz0RFl6fkfr3iaJ4to2G_CH/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -2055,8 +2065,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.usr.desc">A sustainable marketing project promoting Australian tea tree essential oil</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1oOG95gYxbOcyz1eQTG-stTAJ9ri1YLwU/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -2076,8 +2086,8 @@
                         </div>
                         <p class="project-desc" data-i18n="projects.ai_case.desc">AI-Driven Smart Transportation: Comparative Insights from Singapore and Taiwan</p>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank" class="project-link project-link-more">
-                                <i class="fas fa-external-link-alt"></i><span data-i18n="projects.more">More</span>
+                            <a href="https://drive.google.com/file/d/1AyAOoPCIEI4pdI2IBc-MT8OflxwU1WRs/view?usp=drive_link" target="_blank" class="project-link project-link-report">
+                                <i class="fas fa-file-alt"></i><span data-i18n="projects.linkReport">Report</span>
                             </a>
                         </div>
                     </div>
@@ -2548,7 +2558,7 @@
                                 title: "🌟 Featured Case Studies",
                                 badge: "Featured",
                                 badgeWinner: "🏆 Competition Winner",
-                                badgeLicensed: "🎓 Featured · Licensed",
+                                badgeLicensedTag: "🎓 Licensed",
                                 viewCase: "View Case Study",
                                 thesis: {
                                     title: "Agentic Multimodal RAG-Enhanced Dialogue System",
@@ -2607,6 +2617,7 @@
                                 more: "More",
                                 linkSystem: "System",
                                 linkWebsite: "Website",
+                                linkReport: "Report",
                                 opeAssistant: {
                                     title: "NTPU OPE Assistant",
                                     desc: "NTPU OPE Assistant is an intelligent assistant for the NTPU Office of Physical Education, answering questions related to physical education affairs"
@@ -2880,7 +2891,7 @@
                                 title: "🌟 精選案例",
                                 badge: "精選",
                                 badgeWinner: "🏆 競賽冠軍",
-                                badgeLicensed: "🎓 精選．已授權",
+                                badgeLicensedTag: "🎓 已授權",
                                 viewCase: "查看完整案例",
                                 thesis: {
                                     title: "Agentic Multimodal RAG-Enhanced Dialogue System",
@@ -2939,6 +2950,7 @@
                                 more: "更多",
                                 linkSystem: "系統",
                                 linkWebsite: "官網",
+                                linkReport: "報告",
                                 opeAssistant: {
                                     title: "NTPU OPE Assistant",
                                     desc: "NTPU OPE Assistant 國立臺北大學體育室智慧助理，可以詢問關於體育室的相關內容"
