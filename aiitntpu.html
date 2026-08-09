@@ -120,6 +120,14 @@ body {
     font-size: 0.9rem;
 }
 .case-link:hover { background: var(--primary-green); color: #fff; }
+.case-link-system { background: var(--primary-green); color: #fff; }
+.case-link-system:hover { background: var(--dark-green); color: #fff; }
+.case-link-video { background: #FF0000; border-color: #FF0000; color: #fff; }
+.case-link-video:hover { background: #cc0000; border-color: #cc0000; color: #fff; }
+.case-link-report { background: #4285F4; border-color: #4285F4; color: #fff; }
+.case-link-report:hover { background: #2f5fc4; border-color: #2f5fc4; color: #fff; }
+.case-link-social { background: #1877F2; border-color: #1877F2; color: #fff; }
+.case-link-social:hover { background: #0f5cc0; border-color: #0f5cc0; color: #fff; }
 
 /* Quick section nav */
 .case-toc {
@@ -398,8 +406,8 @@ footer {
     <div class="subtitle" data-i18n="subtitle">A voice with warmth deserves to be heard by the world. A dialogue with wisdom brings services closer to the heart.</div>
     <div class="meta" data-i18n="meta">NSTC-funded research project · Sub-project 3 Lead Research Assistant · 2023–2026</div>
     <div class="case-links">
-        <a class="case-link" href="https://www.facebook.com/aiitntpu/" target="_blank"><i class="fab fa-facebook-f"></i> <span data-i18n="linkFacebook">Facebook Page</span></a>
-        <a class="case-link" href="https://www.youtube.com/watch?v=tnIHEwei5Xg" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkVideo">Intro Video</span></a>
+        <a class="case-link case-link-social" href="https://www.facebook.com/aiitntpu/" target="_blank"><i class="fab fa-facebook-f"></i> <span data-i18n="linkFacebook">Facebook Page</span></a>
+        <a class="case-link case-link-video" href="https://www.youtube.com/watch?v=tnIHEwei5Xg" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkVideo">Intro Video</span></a>
     </div>
     <div class="case-toc">
         <a href="#overview" data-i18n="tocOverview">Overview</a>
@@ -474,6 +482,10 @@ footer {
             <p data-i18n="ach3Desc">Text, voice, and image input with cross-lingual responses, built and internally tested</p>
         </div>
     </div>
+    <div class="case-links" style="margin-top:24px;">
+        <a class="case-link case-link-report" href="https://drive.google.com/drive/folders/1jRrf7Uyfl-WiIZjQ973kgvepgGKIEg0b?usp=drive_link" target="_blank"><i class="fas fa-folder-open"></i> <span data-i18n="linkReportsFolder">Project Reports Folder</span></a>
+        <a class="case-link case-link-video" href="https://youtu.be/8HIpnfJ5gOM" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkShowcaseVideo">Outcome Showcase Presentation</span></a>
+    </div>
 </section>
 
 <section class="case-section fade-in" id="methodology">
@@ -483,7 +495,7 @@ footer {
             <div class="timeline-date" data-i18n="phase1Label">Phase 1</div>
             <div class="timeline-content">
                 <h5 data-i18n="phase1Title">Needs Assessment &amp; Data Collection</h5>
-                <p data-i18n="phase1Desc">In-depth interviews with 6 social welfare organizations to identify real-world requirements, plus diverse data sources including FAQs and conversation logs.</p>
+                <p data-i18n="phase1Desc">In-depth interviews with 7 social welfare organizations to identify real-world requirements, plus diverse data sources including FAQs and conversation logs.</p>
             </div>
         </div>
         <div class="timeline-item">
@@ -639,10 +651,6 @@ footer {
                 <p style="font-style:italic; opacity:0.8;">Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Hsin-Ting Lu, Yue-Shan Chang, Chen-Yu Chiang, Chao-Yin Lin, Yu-An Lin, Min-Yuh Day</p>
             </div>
         </div>
-    </div>
-    <div class="case-links" style="margin-top:24px;">
-        <a class="case-link" href="https://drive.google.com/drive/folders/1jRrf7Uyfl-WiIZjQ973kgvepgGKIEg0b?usp=drive_link" target="_blank"><i class="fas fa-folder-open"></i> <span data-i18n="linkReportsFolder">Project Reports Folder</span></a>
-        <a class="case-link" href="https://youtu.be/8HIpnfJ5gOM" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkShowcaseVideo">Outcome Showcase Presentation</span></a>
     </div>
 </section>
 
@@ -865,7 +873,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 methodologyTitle: "Research Methodology",
                 phase1Label: "Phase 1",
                 phase1Title: "Needs Assessment & Data Collection",
-                phase1Desc: "In-depth interviews with 6 social welfare organizations to identify real-world requirements, plus diverse data sources including FAQs and conversation logs.",
+                phase1Desc: "In-depth interviews with 7 social welfare organizations to identify real-world requirements, plus diverse data sources including FAQs and conversation logs.",
                 phase2Label: "Phase 2",
                 phase2Title: "AI-Enhanced Knowledge Base Construction",
                 phase2Desc: "Used GPT-4o to generate comprehensive Q&A datasets and built multilingual knowledge bases tailored to each organization's needs.",
@@ -995,7 +1003,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 methodologyTitle: "研究方法",
                 phase1Label: "階段一",
                 phase1Title: "需求評估與資料蒐集",
-                phase1Desc: "深度訪談 6 家社福組織了解實際需求，並蒐集多元資料來源，包括 FAQ 與對話紀錄。",
+                phase1Desc: "深度訪談 7 家社福組織了解實際需求，並蒐集多元資料來源，包括 FAQ 與對話紀錄。",
                 phase2Label: "階段二",
                 phase2Title: "AI 強化知識庫建構",
                 phase2Desc: "運用 GPT-4o 生成完整的問答資料集，並針對各組織需求建置多語言知識庫。",
