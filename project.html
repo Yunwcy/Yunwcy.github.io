@@ -126,6 +126,36 @@ body {
 .project-filter-btn:hover { background: rgba(46,139,87,0.1); }
 .project-filter-btn.active { background: var(--primary-green); color: #fff; border-color: var(--primary-green); }
 
+.filter-group-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-color);
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 14px 0 4px;
+}
+.tag-filter-btn {
+    background: var(--card-bg);
+    border: 1.5px solid rgba(46,139,87,0.25);
+    color: var(--text-color);
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.tag-filter-btn:hover { background: rgba(46,139,87,0.1); }
+.tag-filter-btn.active { background: var(--dark-green); color: #fff; border-color: var(--dark-green); }
+.result-count {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.65;
+    margin: 4px 0 0;
+}
+
 .status-msg {
     text-align: center;
     padding: 60px 20px;
@@ -237,6 +267,22 @@ footer { background: rgba(213, 236, 198, 0.8); padding: 40px 20px 20px; margin-t
         <button class="project-filter-btn" data-filter="system" data-i18n="filterSystem">🖥️ Systems</button>
         <button class="project-filter-btn" data-filter="report" data-i18n="filterReport">📄 Reports</button>
     </div>
+    <div class="filter-group-label" data-i18n="filterByTopic">Filter by Topic</div>
+    <div class="project-filter-bar">
+        <button class="tag-filter-btn active" data-tag="all" data-i18n="tagAll">All Topics</button>
+        <button class="tag-filter-btn" data-tag="rag" data-i18n="tagRag">RAG</button>
+        <button class="tag-filter-btn" data-tag="chatbot" data-i18n="tagChatbot">Chatbot</button>
+        <button class="tag-filter-btn" data-tag="generative_ai" data-i18n="tagGenAi">Generative AI</button>
+        <button class="tag-filter-btn" data-tag="agentic_ai" data-i18n="tagAgentic">Agentic AI</button>
+        <button class="tag-filter-btn" data-tag="multimodal multimodal_dialog_sys dialogue" data-i18n="tagMultimodal">Multimodal &amp; Dialogue</button>
+        <button class="tag-filter-btn" data-tag="fintech" data-i18n="tagFintech">FinTech</button>
+        <button class="tag-filter-btn" data-tag="education ai_education learning" data-i18n="tagEducation">Education</button>
+        <button class="tag-filter-btn" data-tag="sustainability esg usr" data-i18n="tagSustainability">Sustainability &amp; ESG</button>
+        <button class="tag-filter-btn" data-tag="marketing" data-i18n="tagMarketing">Marketing</button>
+        <button class="tag-filter-btn" data-tag="competition ai_competition ai_awards business" data-i18n="tagCompetition">Competition</button>
+        <button class="tag-filter-btn" data-tag="team" data-i18n="tagTeam">Team Project</button>
+    </div>
+    <p class="result-count" id="result-count"></p>
 </div>
 
 <div class="status-msg" id="status-msg"><i class="fas fa-spinner fa-spin"></i><span data-i18n="loadingMsg">Loading projects…</span></div>
@@ -329,6 +375,24 @@ if (document.fonts && document.fonts.ready) {
 // index.html is the single source of truth: we load it off-screen, wait for
 // its OWN i18next to finish translating, then clone its rendered cards here.
 let currentFilter = 'all';
+let currentTag = 'all';
+
+// Reads a card's .project-tag children and returns a stable, language-
+// independent set of identifiers: the data-i18n key (minus the "tags."
+// prefix) when present, or a normalized version of the raw text for tags
+// that are already language-invariant (RAG, LLM, Next.js, etc).
+function computeTagKeys(card) {
+    const keys = [];
+    card.querySelectorAll('.project-tag').forEach(function (el) {
+        const i18nAttr = el.getAttribute('data-i18n');
+        if (i18nAttr) {
+            keys.push(i18nAttr.replace('tags.', ''));
+        } else {
+            keys.push(el.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_'));
+        }
+    });
+    return keys;
+}
 
 function frameLanguage() {
     const frame = document.getElementById('source-frame');
@@ -368,6 +432,9 @@ function renderCardsFromFrame() {
     slides.forEach(function (slide) {
         const card = slide.querySelector('.project-card');
         if (!card) return;
+        // Compute tag keys from the untouched source card, before the
+        // clone below has its data-i18n attributes stripped.
+        const tagKeys = computeTagKeys(card);
         const clone = card.cloneNode(true);
         // The clone still carries data-i18n/data-i18n-html from index.html.
         // This page's own i18next instance doesn't have those project-text
@@ -385,10 +452,11 @@ function renderCardsFromFrame() {
         const wrap = document.createElement('div');
         wrap.className = 'grid-item';
         wrap.setAttribute('data-type', slide.getAttribute('data-type') || 'all');
+        wrap.setAttribute('data-tags', tagKeys.join(' '));
         wrap.appendChild(clone);
         grid.appendChild(wrap);
     });
-    applyFilter(currentFilter);
+    applyFilters();
     document.getElementById('status-msg').style.display = 'none';
     grid.style.display = 'grid';
 
@@ -401,19 +469,41 @@ function renderCardsFromFrame() {
     return true;
 }
 
-function applyFilter(filter) {
-    currentFilter = filter;
-    document.querySelectorAll('.grid-item').forEach(function (item) {
+function applyFilters() {
+    const items = document.querySelectorAll('.grid-item');
+    const tagAliases = currentTag === 'all' ? null : currentTag.split(' ');
+    let visible = 0;
+    items.forEach(function (item) {
         const type = item.getAttribute('data-type');
-        item.classList.toggle('is-hidden', filter !== 'all' && type !== filter);
+        const typeMatches = currentFilter === 'all' || type === currentFilter;
+        const itemTags = (item.getAttribute('data-tags') || '').split(' ');
+        const tagMatches = !tagAliases || tagAliases.some(function (alias) { return itemTags.indexOf(alias) !== -1; });
+        const show = typeMatches && tagMatches;
+        item.classList.toggle('is-hidden', !show);
+        if (show) visible++;
     });
+    const countEl = document.getElementById('result-count');
+    if (countEl && items.length) {
+        const template = i18next.isInitialized ? i18next.t('resultCount', { count: visible }) : '';
+        countEl.textContent = template;
+    }
 }
 
 document.querySelectorAll('.project-filter-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
         document.querySelectorAll('.project-filter-btn').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        applyFilter(btn.getAttribute('data-filter'));
+        currentFilter = btn.getAttribute('data-filter');
+        applyFilters();
+    });
+});
+
+document.querySelectorAll('.tag-filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.tag-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentTag = btn.getAttribute('data-tag');
+        applyFilters();
     });
 });
 
@@ -444,6 +534,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 filterAll: "All",
                 filterSystem: "🖥️ Systems",
                 filterReport: "📄 Reports",
+                filterByTopic: "Filter by Topic",
+                tagAll: "All Topics",
+                tagRag: "RAG",
+                tagChatbot: "Chatbot",
+                tagGenAi: "Generative AI",
+                tagAgentic: "Agentic AI",
+                tagMultimodal: "Multimodal & Dialogue",
+                tagFintech: "FinTech",
+                tagEducation: "Education",
+                tagSustainability: "Sustainability & ESG",
+                tagMarketing: "Marketing",
+                tagCompetition: "Competition",
+                tagTeam: "Team Project",
+                resultCount: "Showing {{count}} projects",
                 loadingMsg: "Loading projects…",
                 errorMsg: "Could not load projects — please view them on the homepage instead.",
                 nav: {
@@ -463,6 +567,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 filterAll: "全部",
                 filterSystem: "🖥️ 系統作品",
                 filterReport: "📄 報告文件",
+                filterByTopic: "依主題篩選",
+                tagAll: "全部主題",
+                tagRag: "RAG",
+                tagChatbot: "聊天機器人",
+                tagGenAi: "生成式AI",
+                tagAgentic: "代理式AI",
+                tagMultimodal: "多模態與對話",
+                tagFintech: "金融科技",
+                tagEducation: "教育",
+                tagSustainability: "永續與ESG",
+                tagMarketing: "行銷",
+                tagCompetition: "競賽",
+                tagTeam: "團隊專案",
+                resultCount: "顯示 {{count}} 個作品",
                 loadingMsg: "作品載入中…",
                 errorMsg: "作品載入失敗，請直接到首頁查看。",
                 nav: {
