@@ -723,13 +723,7 @@ footer {
 
 <section class="case-section fade-in" id="demo">
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Screen Walkthrough</span></h2>
-    <div class="case-card" style="margin-bottom:24px;">
-        <div class="role-header">
-            <div class="role-icon"><i class="fas fa-route"></i></div>
-            <div class="role-title" data-i18n="storyTitle">One Real Investigation, Start to Finish</div>
-        </div>
-        <ol data-i18n-html="storyList"></ol>
-    </div>
+    <p data-i18n="demoIntro" style="text-align:center; margin-bottom:24px; opacity:0.8; font-size:0.95rem;">The screens below follow one real investigation from the live demo, start to finish.</p>
     <div class="screenshot-grid">
         <div class="screenshot-card">
             <img src="case-studies/knovyra/homepage.png" alt="Knovyra homepage" onclick="openLightbox(this.src)">
@@ -922,18 +916,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 p5Title: "A working answer to a real integration question",
                 p5Content: "The combination of an MCP-shaped tool layer, enforced citations, and an approval gate is a direct answer to \"how do you bring agentic AI into an existing system like Jira without losing control\" — answered with a running system, not a slide.",
                 demoTitle: "Screen Walkthrough",
-                storyTitle: "One Real Investigation, Start to Finish",
-                storyList: "<li><strong>Homepage:</strong> Knovyra is an enterprise intelligence platform built for a fictional company, Meridian Electronics Co. The point isn't a chatbot — it's an agent that plans an investigation, keeps evidence, and waits for human approval before it acts.</li><li><strong>Dashboard:</strong> Live operating numbers — $372,829 in 9-month revenue, 30.7% gross margin, 364 sales orders. The \"Planted Stories\" panel lists 5 anomalies seeded into the data on purpose. One of them: supplier Toy-Kuvalis Components raised prices 8% across the board starting June 2026 — that's the thread the rest of this walkthrough follows.</li><li><strong>Asking the agent:</strong> \"Why did the supplier raise prices and hurt our margin?\" This run took 9 tool calls, 11,649 tokens, and 15.1 seconds. The plan shown is the agent's own plan, generated live, not a script written in advance.</li><li><strong>Knowledge base check:</strong> Two related findings turn up, but similarity isn't high enough to skip the investigation, so the agent keeps going and uses them only as context. Reuse doesn't hit every time, and that's the honest state here.</li><li><strong>Documents and purchasing data:</strong> It finds the actual supplier pricing notice (effective 2026-06-15) and pulls Toy-Kuvalis's monthly spend, climbing from $1,606.56 in April to $3,109.70 in June.</li><li><strong>Calculations:</strong> Four calculation cards show the math in the open — a 61.5% unit-price increase, a 112.9% jump in spend with that supplier, and gross margin sliding from 92.7% in June to 89.7% in July.</li><li><strong>Conclusion and proposed action:</strong> The Conclusion box turns those numbers into a real explanation: the margin hit traces back to the supplier's June 15 price increase, not a sales slump. Below it sits a proposed follow-up awaiting approval — the agent proposes, it doesn't act on its own.</li><li><strong>Approvals, Analyst then Manager:</strong> Same screen, two roles. As an Analyst, there's no Approve or Reject button, just a banner explaining why. Switch to Manager and the buttons appear. That check happens server-side, not just hidden in the UI.</li><li><strong>The flagged invoice:</strong> The invoice in question is from Toy-Kuvalis too. Cross-validation flags its subtotal as 8.0% higher than the matching purchase order, marked CRITICAL — the same price increase, showing up in a second, independent piece of evidence.</li><li><strong>Knowledge base and audit log:</strong> This investigation becomes a new knowledge asset for next time. The audit log records who did what, at every step, no exceptions.</li>",
-                d1Caption: "<strong>Investigation in progress.</strong> The agent's plan streams first, then each tool call becomes its own card — checked knowledge base, searched documents, queried purchasing database — showing the exact query, the result, and a quoted source snippet.",
-                d2Caption: "<strong>Final answer, with the math shown.</strong> Calculation tool calls compute the actual percent changes, then a cited Conclusion box explains the answer in full sentences, followed by a proposed follow-up action awaiting approval.",
-                d3Caption: "<strong>/approvals as a Manager.</strong> Every pending item — here, a batch of flagged invoices — gets explicit Approve / Reject buttons. Nothing leaves this queue without one of these being clicked.",
-                d4Caption: "<strong>A flagged invoice.</strong> Extracted fields on the right, and a rule-based cross-check against the matching purchase order below it — flagging that this invoice's subtotal is 8.0% higher than the PO, marked CRITICAL.",
-                d5Caption: "<strong>Knowledge base.</strong> Every resolved investigation can become a searchable asset, with real reuse tracking — including an explicit note that \"tokens saved\" is a documented heuristic, not a measured value.",
-                d6Caption: "<strong>The same queue, as an Analyst.</strong> No Approve/Reject buttons here — just a banner explaining why. The role check happens server-side, so this isn't just a hidden button.",
-                d7Caption: "<strong>Audit log.</strong> Every consequential action — tool calls, agent sessions, approval decisions, issue status changes — is recorded with who did it and when.",
-                d8Caption: "<strong>Dashboard.</strong> Live metrics computed from the synthetic dataset (24 products, 30 customers, 15 suppliers, 9 months of data), plus an explicit list of the 5 anomaly stories deliberately planted for the agent to find.",
-                d9Caption: "<strong>Agent landing screen.</strong> Example questions to get started, plus a running history of recent investigations — this is also where the Knowledge Flywheel gets tested for reuse on repeat questions.",
-                d10Caption: "<strong>Homepage.</strong> States the pitch and the honesty disclosure up front — this is a self-built demo, and every company, product, and document on the site is fictional.",
+                demoIntro: "The screens below follow one real investigation from the live demo, start to finish.",
+                d1Caption: "<strong>I asked why the supplier raise was hurting our margin.</strong> The agent ran 9 tool calls in 15.1 seconds. It checked the knowledge base first, found two related cases that weren't close enough to reuse, then searched documents and queried the purchasing database. Each step streams in as its own card, with the exact query, the result, and a quoted source snippet.",
+                d2Caption: "<strong>Four calculation cards lay out the math:</strong> a 61.5% unit price increase, a 112.9% jump in spend with that supplier, and gross margin sliding from 92.7% in June to 89.7% in July. The Conclusion box turns those numbers into a plain explanation, then proposes a follow-up action that still needs approval.",
+                d3Caption: "<strong>Switch to a Manager account and Approve / Reject buttons appear.</strong> Every pending item here, a batch of flagged invoices, needs one of them clicked before it leaves the queue.",
+                d4Caption: "<strong>This flagged invoice is from the same supplier.</strong> A rule-based check against the matching purchase order found its subtotal is 8.0% higher, marked CRITICAL. It's the same price increase, showing up again in a second piece of evidence.",
+                d5Caption: "<strong>This investigation becomes a new knowledge asset for next time.</strong> Reuse is tracked honestly here too: tokens saved is labeled as an estimate, not a measured value.",
+                d6Caption: "<strong>The same approvals queue, viewed as an Analyst.</strong> There's no Approve or Reject button here, just a banner explaining why. That check runs on the server, not just hidden in the UI.",
+                d7Caption: "<strong>Every consequential action gets logged here:</strong> tool calls, agent sessions, approval decisions, issue status changes, along with who did it and when.",
+                d8Caption: "<strong>Nine months of live metrics:</strong> $372,829 in revenue, 30.7% gross margin, 364 sales orders, computed from a synthetic dataset of 24 products, 30 customers, and 15 suppliers. The Planted Stories panel lists 5 anomalies seeded into the data on purpose. One of them, a supplier price hike, is the thread this walkthrough follows.",
+                d9Caption: "<strong>The agent's starting screen,</strong> with example questions and a history of past investigations. This is also where repeat questions get tested against the Knowledge Flywheel for reuse.",
+                d10Caption: "<strong>Knovyra is a self-built enterprise intelligence demo</strong> for a fictional company, Meridian Electronics Co. Every company, product, and document on the site is made up.",
                 footerContact: "Contact",
                 footerUniversity: "National Taipei University",
                 footerLinks: "Links",
@@ -1037,18 +1030,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 p5Title: "對一個真實整合問題給出可運行的答案",
                 p5Content: "這套「MCP 形狀的工具層＋強制證據＋核准閘門」的組合，直接回答了「怎麼在不失控的前提下把 agentic AI 導入現有系統（尤其是 Jira）」這個問題——用一個可運行的系統回答，不是用投影片回答。",
                 demoTitle: "畫面導覽",
-                storyTitle: "一次真實調查的完整故事線",
-                storyList: "<li><strong>首頁：</strong>Knovyra 是為虛構公司 Meridian Electronics Co. 打造的企業智慧分析平台，重點是一個會規劃調查、留下證據、經人核准才會動手的 agent，不是聊天機器人。</li><li><strong>Dashboard：</strong>即時算出的營運數字——9 個月營收 $372,829、毛利率 30.7%、364 筆銷售訂單。下方「Planted Stories」列出 5 個刻意埋入的異常，其中一個是供應商 Toy-Kuvalis Components 自 2026 年 6 月起全面調漲價格 8%，這是接下來的主線。</li><li><strong>問 Agent：</strong>「Why did the supplier raise prices and hurt our margin?」這一題實際跑了 9 次工具呼叫、11,649 tokens、15.1 秒。畫面上的計畫是 agent 自己即時規劃出來的，不是預先寫好的腳本。</li><li><strong>查知識庫：</strong>找到 2 筆相關的既有結論，但相似度沒有高到觸發直接沿用，agent 仍繼續完整調查，只是把舊結論當作參考脈絡——不是每次都會剛好命中重用，這裡如實呈現。</li><li><strong>搜文件與查資料庫：</strong>找到供應商調價通知的原文（生效日 2026-06-15），並查出 Toy-Kuvalis 這家供應商的月成本從 4 月 1,606.56 一路漲到 6 月 3,109.70。</li><li><strong>計算：</strong>四張計算卡片把算式攤開——單價漲幅 61.5%、該供應商花費暴增 112.9%、毛利率從 6 月 92.7% 掉到 7 月 89.7%。</li><li><strong>結論與建議動作：</strong>結論欄用完整句子把數字串成故事：毛利下滑主因是供應商 6/15 調價，不是業績下滑。下方附上等待核准的建議「Review pricing pass-through for Toy-Kuvalis Components」，這是 agent「提議」的一步，還沒有真的動手。</li><li><strong>Approvals，先 Analyst 再 Manager：</strong>同一個畫面，Analyst 身分看不到核准／駁回按鈕，只有提示說明原因；換成 Manager 身分才出現按鈕。角色驗證在伺服器端執行，不只是前端把按鈕藏起來。</li><li><strong>被標記的發票：</strong>這張發票的供應商正好也是 Toy-Kuvalis，交叉驗證顯示小計比對應採購單高 8.0%，被標成 CRITICAL，正好呼應前面查到的漲價幅度，兩個證據互相印證。</li><li><strong>Knowledge Base 與 Audit Log：</strong>這次調查會沉澱成新的知識資產，供下次類似提問直接引用；Audit Log 則記下每一步是誰、做了什麼，全程留痕。</li>",
-                d1Caption: "<strong>調查進行中。</strong>代理人的計畫先串流出現，接著每個工具呼叫各自成一張卡片——查詢知識庫、搜尋文件、查詢採購資料庫——顯示確切的查詢參數、結果與引用的原文片段。",
-                d2Caption: "<strong>最終答案，連計算過程都攤開。</strong>計算工具算出實際的漲跌幅百分比，接著綠色的「結論」區塊用完整句子附引用說明答案，下方是等待核准的建議後續動作。",
-                d3Caption: "<strong>以 Manager 身分檢視 /approvals。</strong>每一筆待審項目（這裡是一批被標記的發票）都有明確的核准／駁回按鈕，沒有東西能不經過這一步就離開佇列。",
-                d4Caption: "<strong>一張被標記的發票。</strong>右側是抽取出的欄位，下方是與對應採購單的規則式交叉比對——標出這張發票的小計比 PO 高 8.0%，標記為 CRITICAL。",
-                d5Caption: "<strong>知識庫。</strong>每個完成的調查都能沉澱成可搜尋的資產，並有真實的重用追蹤機制——畫面上也明確標註「估計節省的 token」是有記錄依據的推估值，不是實測值。",
-                d6Caption: "<strong>同一個佇列，換成 Analyst 身分。</strong>沒有核准／駁回按鈕，只有一則提示說明原因。角色驗證是在伺服器端執行的，不只是把按鈕藏起來而已。",
-                d7Caption: "<strong>稽核紀錄。</strong>每個有影響力的動作——工具呼叫、代理人執行階段、核准決策、議題狀態變更——都記錄了是誰、在什麼時候做的。",
-                d8Caption: "<strong>儀表板。</strong>從合成資料集即時計算出的指標（24 項產品、30 位客戶、15 家供應商、9 個月資料），並列出 5 個刻意埋入、留給代理人去查出來的異常故事。",
-                d9Caption: "<strong>Agent 起始畫面。</strong>提供範例問題快速上手，也保留最近調查的歷史紀錄——重複提問時，Knowledge Flywheel 的重用機制就是在這裡被驗證的。",
-                d10Caption: "<strong>首頁。</strong>開場就講清楚產品定位，也直接揭露這是一個自建的 demo 環境，網站上所有公司、產品與文件皆為虛構。",
+                demoIntro: "以下畫面依序呈現一次真實調查的完整過程。",
+                d1Caption: "<strong>我問了為什麼供應商漲價會拖累毛利。</strong>Agent 跑了 9 次工具呼叫，花了 15.1 秒。先查知識庫，找到 2 筆相關舊案例但相似度不夠沿用，接著搜尋文件、查詢採購資料庫。每一步都即時串流出現，附上確切查詢參數、結果與引用的原文片段。",
+                d2Caption: "<strong>四張計算卡片把算式攤開：</strong>單價漲幅 61.5%、該供應商花費暴增 112.9%、毛利率從 6 月 92.7% 掉到 7 月 89.7%。結論區塊用完整句子把數字轉成說明，下方附上還在等待核准的建議動作。",
+                d3Caption: "<strong>換成 Manager 身分，核准／駁回按鈕就出現了。</strong>這裡是一批被標記的發票，每一筆都要點過按鈕才能離開佇列。",
+                d4Caption: "<strong>這張被標記的發票，供應商正是同一家。</strong>規則式交叉比對顯示小計比對應採購單高 8.0%，標記為 CRITICAL，同樣的漲價幅度又在另一筆證據上出現。",
+                d5Caption: "<strong>這次調查會沉澱成新的知識資產，供下次直接引用。</strong>重用追蹤也如實標註：節省的 token 是估計值，不是實測值。",
+                d6Caption: "<strong>同一個核准佇列，換成 Analyst 身分。</strong>看不到核准／駁回按鈕，只有提示說明原因。角色驗證在伺服器端執行，不只是前端把按鈕藏起來。",
+                d7Caption: "<strong>每個有影響力的動作都會被記錄下來：</strong>工具呼叫、代理人執行階段、核准決策、議題狀態變更，都附上是誰、在什麼時候做的。",
+                d8Caption: "<strong>9 個月的即時營運數字：</strong>營收 $372,829、毛利率 30.7%、364 筆銷售訂單，來自 24 項產品、30 位客戶、15 家供應商的合成資料集。Planted Stories 面板列出 5 個刻意埋入的異常，其中一個供應商漲價案例，就是這次故事線的主軸。",
+                d9Caption: "<strong>Agent 的起始畫面，</strong>提供範例問題快速上手，也保留最近調查的歷史紀錄。重複提問時，Knowledge Flywheel 的重用機制就是在這裡被驗證的。",
+                d10Caption: "<strong>Knovyra 是一個自建的企業智慧 demo，</strong>服務對象是虛構公司 Meridian Electronics Co.，網站上所有公司、產品與文件皆為虛構。",
                 footerContact: "聯絡方式",
                 footerUniversity: "國立臺北大學",
                 footerLinks: "導覽",
