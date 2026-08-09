@@ -244,19 +244,40 @@ body {
 .challenge-card > p { margin: 0; }
 
 /* System contributions impact callout */
-.impact-note {
-    background: linear-gradient(135deg, rgba(224,167,46,0.15), rgba(46,139,87,0.12));
-    border: 1.5px solid rgba(46,139,87,0.3);
+.license-callout {
+    background: linear-gradient(135deg, #fff6e0, #eef8ef);
+    border: 2px solid #e0a72e;
     border-radius: 14px;
-    padding: 20px 26px;
+    padding: 22px 26px;
     margin-bottom: 22px;
-    font-weight: 600;
-    color: var(--dark-green);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 6px 20px rgba(224,167,46,0.2);
+}
+.license-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: #e0a72e;
+    color: #fff;
     display: flex;
     align-items: center;
-    gap: 14px;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 3px 10px rgba(224,167,46,0.4);
 }
-.impact-note i { font-size: 1.4rem; color: #c9832e; flex-shrink: 0; }
+.license-badge {
+    display: block;
+    font-weight: 800;
+    color: #a9701c;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.license-callout p { margin: 0; font-weight: 600; color: var(--dark-green); }
 
 /* Evaluation section */
 .eval-subheading {
@@ -606,7 +627,13 @@ footer {
 
 <section class="case-section fade-in" id="contributions">
     <h2><i class="fas fa-seedling"></i> <span data-i18n="contribTitle">System Contributions</span></h2>
-    <div class="impact-note"><i class="fas fa-graduation-cap"></i> <span data-i18n-html="licenseNote"></span></div>
+    <div class="license-callout">
+        <div class="license-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+            <span class="license-badge" data-i18n="licenseBadge">Adopted for Continued Use</span>
+            <p data-i18n-html="licenseNote"></p>
+        </div>
+    </div>
 
     <div class="challenge-card">
         <h3><span class="num">01</span> <span data-i18n="contrib1Title">Lowering the cost of finding information and repeated back-and-forth</span></h3>
@@ -824,6 +851,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Problem: "Automated RAG evaluation can be skewed by <strong>judge-model choice, answer length, and phrasing</strong> \u2014 a more complete answer doesn't always score higher on every metric, so relying on a single model or metric risks a one-sided read.",
                 c3Solution: "<li><strong>Multiple judge models</strong> of different sizes/providers, with per-question paired comparisons and statistical significance testing.</li><li>Separate datasets for simple factual vs. complex tool-routing queries; evaluated Faithfulness, Answer Relevancy, Context Recall, Context Entity Recall, and Answer Completeness together.</li><li>Paired with <strong>semi-structured interviews and post-use surveys</strong> to capture real-world usability automated scores can't see.</li>",
                 contribTitle: "System Contributions",
+                licenseBadge: "Adopted for Continued Use",
                 licenseNote: "After the thesis defense, the university proactively asked to keep using the system, with plans to expand it into a full campus-wide AI Agent platform — a sign the research holds real, practical value beyond the academic deliverable.",
                 contrib1Title: "Lowering the cost of finding information and repeated back-and-forth",
                 contrib1Content: "<li>Consolidates info scattered across announcements, regulations, forms, courses, and competitions into <strong>one conversational entry point</strong>.</li><li>Users just ask in natural language, without digging through multiple pages or documents themselves.</li><li>Handles routine, public, document-based FAQs on its own \u2014 <strong>cutting repeated questions</strong> to staff.</li>",
@@ -930,6 +958,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 c3Problem: "RAG 自動評估容易受<strong>Judge Model 選擇、回答長度與措辭</strong>影響——答案更完整不代表每項指標都較高分，僅用單一模型或指標容易產生片面解讀。",
                 c3Solution: "<li>使用<strong>多個不同規模與來源的 Judge Model</strong>，以每題為單位進行配對比較與統計檢定。</li><li>分別建立簡單事實查詢與複雜工具路由查詢資料集，同時評估 Faithfulness、Answer Relevancy、Context Recall、Context Entity Recall、Answer Completeness。</li><li>搭配<strong>半結構式訪談與使用後問卷</strong>，補足自動評估無法觀察的實際使用感受。</li>",
                 contribTitle: "系統貢獻",
+                licenseBadge: "獲校方採用，持續使用中",
                 licenseNote: "論文口試後，校方主動提出希望持續採用本系統，並規劃將其擴充為完整的校園 AI Agent 系統——顯示這項研究成果具備實際應用價值，而不只是學術產出。",
                 contrib1Title: "降低行政資訊查找與重複溝通成本",
                 contrib1Content: "<li>將分散於公告、法規、表單、課程與競賽頁面的資訊整合為<strong>單一對話入口</strong>。</li><li>使用者可直接以自然語言詢問，不必自行翻找多個網頁與文件。</li><li>自動處理例行、公開的文件導向問題，<strong>降低行政人員重複回覆</strong>的負擔。</li>",
