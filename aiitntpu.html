@@ -463,9 +463,9 @@ footer {
         </div>
         <div class="achievement-card">
             <div class="achievement-icon"><i class="fas fa-comments"></i></div>
-            <span class="achievement-number">2,056</span>
+            <span class="achievement-number">2,505</span>
             <h4 data-i18n="ach2Title">Cumulative Responses</h4>
-            <p data-i18n="ach2Desc">Served since deployment began in June 2024</p>
+            <p data-i18n="ach2Desc">Served between June 2024 and May 2026</p>
         </div>
         <div class="achievement-card">
             <div class="achievement-icon"><i class="fas fa-globe"></i></div>
@@ -640,6 +640,10 @@ footer {
             </div>
         </div>
     </div>
+    <div class="case-links" style="margin-top:24px;">
+        <a class="case-link" href="https://drive.google.com/drive/folders/1jRrf7Uyfl-WiIZjQ973kgvepgGKIEg0b?usp=drive_link" target="_blank"><i class="fas fa-folder-open"></i> <span data-i18n="linkReportsFolder">Project Reports Folder</span></a>
+        <a class="case-link" href="https://youtu.be/8HIpnfJ5gOM" target="_blank"><i class="fab fa-youtube"></i> <span data-i18n="linkShowcaseVideo">Outcome Showcase Presentation</span></a>
+    </div>
 </section>
 
 <section class="case-section fade-in" id="media">
@@ -650,11 +654,11 @@ footer {
     <p class="media-note" data-i18n="mediaDesc">The project has been covered across print, digital, TV, and radio outlets:</p>
     <div class="timeline-container">
         <div class="timeline-item">
-            <div class="timeline-date">2026/07/05</div>
+            <div class="timeline-date">2025/07/05</div>
             <div class="timeline-content">
                 <h5 data-i18n="media1Title">科技社群敲敲門 Podcast</h5>
                 <p data-i18n="media1Desc">Using AI to restore communication rights for people with speech disorders — inside NTPU's ReVoice project, featuring Prof. Yu-Shan Chang and Prof. Chao-Yin Lin</p>
-                <a class="readmore-link" href="https://tradio.gov.taipei/channel/OTky" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="readMore">Read More</span></a>
+                <a class="readmore-link" href="https://open.spotify.com/episode/6tejpdn5TfcSyQpsfBlRpl" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="readMore">Read More</span></a>
             </div>
         </div>
         <div class="timeline-item">
@@ -849,12 +853,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 roleTitle: "My Role",
                 roleSubtitle: "Lead Research Assistant, Sub-project 3",
                 roleIntro: "As the lead research assistant for Sub-project 3, I'm the main point of contact between the research team and our 7 partner organizations, and I own the system end to end, from requirements through production.",
-                roleList: "<li><strong>Requirements &amp; stakeholder coordination:</strong> Led in-depth interviews with 6 partner social welfare organizations to translate their day-to-day communication barriers into concrete system requirements, then stayed the team's main technical point of contact as the partnership grew to 7 organizations.</li><li><strong>System architecture &amp; development:</strong> Designed and built the RAG-based multimodal dialogue system from the ground up — architecture design (e5-base embeddings + FAISS retrieval, GPT-4o/Mistral generation), API integration across the LINE Messaging API and Google Cloud Run, and the Gradio web interface.</li><li><strong>Prompt engineering &amp; output quality:</strong> Iteratively tuned prompts and retrieval strategies for each partner organization's own knowledge base, improving answer accuracy and tone across four languages — Chinese, English, Taiwanese, and Vietnamese.</li><li><strong>Cross-functional needs assessment:</strong> Worked directly with each partner organization's staff to identify which real questions and workflows were worth automating, and where a chatbot's answers could and couldn't be trusted.</li><li><strong>Documentation &amp; knowledge transfer:</strong> Wrote the project's technical reports, trained partner-organization staff on day-to-day use and maintenance, and onboarded new research assistants joining the sub-project.</li><li><strong>Deployment ownership:</strong> Took the system from prototype through field testing to production across all 7 partner organizations, now serving 2,000+ cumulative responses since launch.</li>",
+                roleList: "<li><strong>Requirements &amp; stakeholder coordination:</strong> Led interviews with 7 partner social welfare organizations to translate their day-to-day communication barriers into concrete system requirements, and stayed Sub-project 3's main technical point of contact for all 7 partner organizations.</li><li><strong>System architecture &amp; development:</strong> Built the RAG-based multimodal dialogue system from the ground up, including architecture design (e5-base embeddings + FAISS retrieval, GPT-4o/Mistral generation) and API integration across the LINE Messaging API and Google Cloud Run.</li><li><strong>Prompt engineering &amp; output quality:</strong> Iteratively tuned prompts and retrieval strategies for each partner organization's own knowledge base, improving answer accuracy and tone across four languages — Chinese, English, Taiwanese, and Vietnamese.</li><li><strong>Cross-functional needs assessment:</strong> Worked directly with each partner organization's staff to identify which real questions and workflows were worth automating, and where a chatbot's answers could and couldn't be trusted.</li><li><strong>Documentation:</strong> Wrote the project's quarterly and annual progress reports, and put together presentation decks for project outcome showcases.</li><li><strong>Deployment ownership:</strong> Took the system from prototype through field testing to full production, now serving 2,000+ cumulative responses since launch.</li>",
                 achievementsTitle: "Current Achievements",
                 ach1Title: "Partner Organizations",
                 ach1Desc: "AI-powered LINE bots deployed and live in production",
                 ach2Title: "Cumulative Responses",
-                ach2Desc: "Served since deployment began in June 2024",
+                ach2Desc: "Served between June 2024 and May 2026",
                 ach3Number: "Multimodal",
                 ach3Title: "Gradio Web Platform",
                 ach3Desc: "Text, voice, and image input with cross-lingual responses, built and internally tested",
@@ -896,6 +900,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 impact4Desc: "Groundwork for market-ready assistive communication technology.",
                 publicationsTitle: "Publications & Presentations",
                 pubTwscTitle: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities",
+                linkReportsFolder: "Project Reports Folder",
+                linkShowcaseVideo: "Outcome Showcase Presentation",
                 mediaTitle: "Media & Social Coverage",
                 mediaFacebook: "Follow the Project on Facebook",
                 mediaDesc: "The project has been covered across print, digital, TV, and radio outlets:",
@@ -977,12 +983,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 roleTitle: "我負責的部分",
                 roleSubtitle: "子計畫三主要研究助理負責人",
                 roleIntro: "身為子計畫三的主要研究助理負責人，我是研究團隊與 7 個合作組織之間的主要窗口，也一手包辦系統從需求到上線的整個過程。",
-                roleList: "<li><strong>需求訪談與跨組織協調：</strong>主導與 6 家社福組織的深度訪談，把他們日常溝通上遇到的實際困難轉化成具體的系統需求；系統上線後合作組織擴展到 7 家，我持續作為研究團隊與這 7 個合作組織之間的主要技術窗口。</li><li><strong>系統架構與開發：</strong>從零開始設計並開發這套 RAG 多模態對話系統——架構設計（e5-base 嵌入模型＋FAISS 檢索、GPT-4o/Mistral 生成）、API 整合（LINE Messaging API、Google Cloud Run），以及 Gradio 網頁介面。</li><li><strong>Prompt Engineering 與輸出品質：</strong>針對每個合作組織各自的知識庫，反覆調整提示詞與檢索策略，提升中文、英文、台語、越南語四種語言下的回答準確度與語氣。</li><li><strong>跨部門需求評估：</strong>直接與各合作組織的第一線人員合作，找出哪些真實問題與流程值得自動化，並評估聊天機器人回答能被信任的邊界在哪裡。</li><li><strong>文件撰寫與知識轉移：</strong>撰寫計畫技術報告，教合作組織的工作人員如何日常維護與使用系統，也帶新加入子計畫的研究助理上手。</li><li><strong>部署與上線：</strong>從原型一路做到實地測試，最終讓系統在全部 7 個合作組織正式上線，累計服務超過 2,000 次回應。</li>",
+                roleList: "<li><strong>需求訪談與跨組織協調：</strong>主導與 7 家社福組織的訪談，把他們日常溝通上遇到的實際困難轉化成具體的系統需求；我持續作為子三研究團隊與這 7 個合作組織之間的主要技術窗口。</li><li><strong>系統架構與開發：</strong>從零開始開發這套 RAG 多模態對話系統，包括架構設計（e5-base 嵌入模型＋FAISS 檢索、GPT-4o/Mistral 生成）、API 整合（LINE Messaging API、Google Cloud Run）。</li><li><strong>Prompt Engineering 與輸出品質：</strong>針對每個合作組織各自的知識庫，反覆調整提示詞與檢索策略，提升中文、英文、台語、越南語四種語言下的回答準確度與語氣。</li><li><strong>跨部門需求評估：</strong>直接與各合作組織的第一線人員合作，找出哪些真實問題與流程值得自動化，並評估聊天機器人回答能被信任的邊界在哪裡。</li><li><strong>文件撰寫：</strong>撰寫計畫季度與年度報告，以及成果發表時的簡報等。</li><li><strong>部署與上線：</strong>從原型一路做到實地測試，最終讓系統在全部上線，累計服務超過 2,000 次回應。</li>",
                 achievementsTitle: "現階段成果",
                 ach1Title: "合作組織",
                 ach1Desc: "AI LINE Bot 已部署並正式上線",
                 ach2Title: "累計回應數",
-                ach2Desc: "自 2024 年 6 月部署以來的累計服務回應數",
+                ach2Desc: "服務期間為 2024 年 6 月至 2026 年 5 月",
                 ach3Number: "多模態",
                 ach3Title: "Gradio 網頁平台",
                 ach3Desc: "支援文字、語音、圖像輸入與跨語言回應，已完成開發與內部測試",
@@ -1024,6 +1030,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 impact4Desc: "為市場化的輔助溝通技術打下基礎。",
                 publicationsTitle: "學術發表",
                 pubTwscTitle: "Implementing an Inclusive Communication System with RAG-enhanced Multilingual and Multimodal Dialogue Capabilities",
+                linkReportsFolder: "成果報告資料夾",
+                linkShowcaseVideo: "成果發表會簡報影片",
                 mediaTitle: "媒體與社群報導",
                 mediaFacebook: "追蹤計畫 Facebook",
                 mediaDesc: "計畫已陸續獲得平面、數位、電視與廣播媒體報導：",
