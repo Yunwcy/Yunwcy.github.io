@@ -723,6 +723,13 @@ footer {
 
 <section class="case-section fade-in" id="demo">
     <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Screen Walkthrough</span></h2>
+    <div class="case-card" style="margin-bottom:24px;">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-route"></i></div>
+            <div class="role-title" data-i18n="storyTitle">One Real Investigation, Start to Finish</div>
+        </div>
+        <ol data-i18n-html="storyList"></ol>
+    </div>
     <div class="screenshot-grid">
         <div class="screenshot-card">
             <img src="case-studies/knovyra/homepage.png" alt="Knovyra homepage" onclick="openLightbox(this.src)">
@@ -745,24 +752,24 @@ footer {
             <div class="screenshot-caption" data-i18n-html="d2Caption"></div>
         </div>
         <div class="screenshot-card">
-            <img src="case-studies/knovyra/knowledge-base.png" alt="Knowledge base and reuse stats" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d5Caption"></div>
+            <img src="case-studies/knovyra/approvals-analyst.png" alt="Approvals queue, Analyst view" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d6Caption"></div>
         </div>
         <div class="screenshot-card">
             <img src="case-studies/knovyra/approvals-manager.png" alt="Approvals queue, Manager view" onclick="openLightbox(this.src)">
             <div class="screenshot-caption" data-i18n-html="d3Caption"></div>
         </div>
         <div class="screenshot-card">
-            <img src="case-studies/knovyra/approvals-analyst.png" alt="Approvals queue, Analyst view" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d6Caption"></div>
+            <img src="case-studies/knovyra/flagged-document.png" alt="Flagged invoice with cross-document validation" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d4Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/knovyra/knowledge-base.png" alt="Knowledge base and reuse stats" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d5Caption"></div>
         </div>
         <div class="screenshot-card">
             <img src="case-studies/knovyra/audit-log.png" alt="Audit log" onclick="openLightbox(this.src)">
             <div class="screenshot-caption" data-i18n-html="d7Caption"></div>
-        </div>
-        <div class="screenshot-card">
-            <img src="case-studies/knovyra/flagged-document.png" alt="Flagged invoice with cross-document validation" onclick="openLightbox(this.src)">
-            <div class="screenshot-caption" data-i18n-html="d4Caption"></div>
         </div>
     </div>
 </section>
@@ -915,6 +922,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 p5Title: "A working answer to a real integration question",
                 p5Content: "The combination of an MCP-shaped tool layer, enforced citations, and an approval gate is a direct answer to \"how do you bring agentic AI into an existing system like Jira without losing control\" — answered with a running system, not a slide.",
                 demoTitle: "Screen Walkthrough",
+                storyTitle: "One Real Investigation, Start to Finish",
+                storyList: "<li><strong>Homepage:</strong> Knovyra is an enterprise intelligence platform built for a fictional company, Meridian Electronics Co. The point isn't a chatbot — it's an agent that plans an investigation, keeps evidence, and waits for human approval before it acts.</li><li><strong>Dashboard:</strong> Live operating numbers — $372,829 in 9-month revenue, 30.7% gross margin, 364 sales orders. The \"Planted Stories\" panel lists 5 anomalies seeded into the data on purpose. One of them: supplier Toy-Kuvalis Components raised prices 8% across the board starting June 2026 — that's the thread the rest of this walkthrough follows.</li><li><strong>Asking the agent:</strong> \"Why did the supplier raise prices and hurt our margin?\" This run took 9 tool calls, 11,649 tokens, and 15.1 seconds. The plan shown is the agent's own plan, generated live, not a script written in advance.</li><li><strong>Knowledge base check:</strong> Two related findings turn up, but similarity isn't high enough to skip the investigation, so the agent keeps going and uses them only as context. Reuse doesn't hit every time, and that's the honest state here.</li><li><strong>Documents and purchasing data:</strong> It finds the actual supplier pricing notice (effective 2026-06-15) and pulls Toy-Kuvalis's monthly spend, climbing from $1,606.56 in April to $3,109.70 in June.</li><li><strong>Calculations:</strong> Four calculation cards show the math in the open — a 61.5% unit-price increase, a 112.9% jump in spend with that supplier, and gross margin sliding from 92.7% in June to 89.7% in July.</li><li><strong>Conclusion and proposed action:</strong> The Conclusion box turns those numbers into a real explanation: the margin hit traces back to the supplier's June 15 price increase, not a sales slump. Below it sits a proposed follow-up awaiting approval — the agent proposes, it doesn't act on its own.</li><li><strong>Approvals, Analyst then Manager:</strong> Same screen, two roles. As an Analyst, there's no Approve or Reject button, just a banner explaining why. Switch to Manager and the buttons appear. That check happens server-side, not just hidden in the UI.</li><li><strong>The flagged invoice:</strong> The invoice in question is from Toy-Kuvalis too. Cross-validation flags its subtotal as 8.0% higher than the matching purchase order, marked CRITICAL — the same price increase, showing up in a second, independent piece of evidence.</li><li><strong>Knowledge base and audit log:</strong> This investigation becomes a new knowledge asset for next time. The audit log records who did what, at every step, no exceptions.</li>",
                 d1Caption: "<strong>Investigation in progress.</strong> The agent's plan streams first, then each tool call becomes its own card — checked knowledge base, searched documents, queried purchasing database — showing the exact query, the result, and a quoted source snippet.",
                 d2Caption: "<strong>Final answer, with the math shown.</strong> Calculation tool calls compute the actual percent changes, then a cited Conclusion box explains the answer in full sentences, followed by a proposed follow-up action awaiting approval.",
                 d3Caption: "<strong>/approvals as a Manager.</strong> Every pending item — here, a batch of flagged invoices — gets explicit Approve / Reject buttons. Nothing leaves this queue without one of these being clicked.",
@@ -1028,6 +1037,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 p5Title: "對一個真實整合問題給出可運行的答案",
                 p5Content: "這套「MCP 形狀的工具層＋強制證據＋核准閘門」的組合，直接回答了「怎麼在不失控的前提下把 agentic AI 導入現有系統（尤其是 Jira）」這個問題——用一個可運行的系統回答，不是用投影片回答。",
                 demoTitle: "畫面導覽",
+                storyTitle: "一次真實調查的完整故事線",
+                storyList: "<li><strong>首頁：</strong>Knovyra 是為虛構公司 Meridian Electronics Co. 打造的企業智慧分析平台，重點是一個會規劃調查、留下證據、經人核准才會動手的 agent，不是聊天機器人。</li><li><strong>Dashboard：</strong>即時算出的營運數字——9 個月營收 $372,829、毛利率 30.7%、364 筆銷售訂單。下方「Planted Stories」列出 5 個刻意埋入的異常，其中一個是供應商 Toy-Kuvalis Components 自 2026 年 6 月起全面調漲價格 8%，這是接下來的主線。</li><li><strong>問 Agent：</strong>「Why did the supplier raise prices and hurt our margin?」這一題實際跑了 9 次工具呼叫、11,649 tokens、15.1 秒。畫面上的計畫是 agent 自己即時規劃出來的，不是預先寫好的腳本。</li><li><strong>查知識庫：</strong>找到 2 筆相關的既有結論，但相似度沒有高到觸發直接沿用，agent 仍繼續完整調查，只是把舊結論當作參考脈絡——不是每次都會剛好命中重用，這裡如實呈現。</li><li><strong>搜文件與查資料庫：</strong>找到供應商調價通知的原文（生效日 2026-06-15），並查出 Toy-Kuvalis 這家供應商的月成本從 4 月 1,606.56 一路漲到 6 月 3,109.70。</li><li><strong>計算：</strong>四張計算卡片把算式攤開——單價漲幅 61.5%、該供應商花費暴增 112.9%、毛利率從 6 月 92.7% 掉到 7 月 89.7%。</li><li><strong>結論與建議動作：</strong>結論欄用完整句子把數字串成故事：毛利下滑主因是供應商 6/15 調價，不是業績下滑。下方附上等待核准的建議「Review pricing pass-through for Toy-Kuvalis Components」，這是 agent「提議」的一步，還沒有真的動手。</li><li><strong>Approvals，先 Analyst 再 Manager：</strong>同一個畫面，Analyst 身分看不到核准／駁回按鈕，只有提示說明原因；換成 Manager 身分才出現按鈕。角色驗證在伺服器端執行，不只是前端把按鈕藏起來。</li><li><strong>被標記的發票：</strong>這張發票的供應商正好也是 Toy-Kuvalis，交叉驗證顯示小計比對應採購單高 8.0%，被標成 CRITICAL，正好呼應前面查到的漲價幅度，兩個證據互相印證。</li><li><strong>Knowledge Base 與 Audit Log：</strong>這次調查會沉澱成新的知識資產，供下次類似提問直接引用；Audit Log 則記下每一步是誰、做了什麼，全程留痕。</li>",
                 d1Caption: "<strong>調查進行中。</strong>代理人的計畫先串流出現，接著每個工具呼叫各自成一張卡片——查詢知識庫、搜尋文件、查詢採購資料庫——顯示確切的查詢參數、結果與引用的原文片段。",
                 d2Caption: "<strong>最終答案，連計算過程都攤開。</strong>計算工具算出實際的漲跌幅百分比，接著綠色的「結論」區塊用完整句子附引用說明答案，下方是等待核准的建議後續動作。",
                 d3Caption: "<strong>以 Manager 身分檢視 /approvals。</strong>每一筆待審項目（這裡是一批被標記的發票）都有明確的核准／駁回按鈕，沒有東西能不經過這一步就離開佇列。",
