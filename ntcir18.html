@@ -295,6 +295,12 @@ body {
 .diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
 
 /* Awards */
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
 .award-card {
     background: var(--card-bg);
     border-radius: 14px;
@@ -304,7 +310,6 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 20px;
 }
 .award-card img { max-width: 100%; max-height: 260px; object-fit: contain; border-radius: 8px; cursor: zoom-in; margin-bottom: 14px; }
 .award-card h4 { margin: 0 0 6px 0; color: var(--primary-green); font-size: 1.05rem; }
@@ -377,7 +382,8 @@ footer {
     <div class="meta" data-i18n="meta">NTCIR-18 Conference · Prompt Engineering &amp; Fine-tuning · Jun 10&ndash;13, 2025, Tokyo, Japan</div>
     <div class="authors" data-i18n="authors">Jun-Yu Wu, Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Min-Yuh Day (advisor) · Information Management, National Taipei University</div>
     <div class="case-links">
-        <a class="case-link case-link-report" href="case-studies/ntcir18/paper.pdf" target="_blank"><i class="fas fa-file-pdf"></i> <span data-i18n="linkPaper">Read the Paper</span></a>
+        <a class="case-link case-link-report" href="https://drive.google.com/file/d/1HX_msFEX0B7h-xAyOjhMfcICUt-7j5Jg/view?usp=drive_link" target="_blank"><i class="fas fa-file-pdf"></i> <span data-i18n="linkPaper">Read the Paper</span></a>
+        <a class="case-link case-link-report" href="https://drive.google.com/file/d/1H0S32lcctwYDAy-34j7TurNTxysc04fs/view?usp=drive_link" target="_blank"><i class="fas fa-file-powerpoint"></i> <span data-i18n="linkSlides">Slides</span></a>
         <a class="case-link case-link-report" href="case-studies/ntcir18/poster.png" target="_blank" onclick="event.preventDefault(); openLightbox('case-studies/ntcir18/poster.png');"><i class="fas fa-image"></i> <span data-i18n="linkPoster">View the Poster</span></a>
     </div>
     <div class="case-toc">
@@ -386,6 +392,7 @@ footer {
         <a href="#role" data-i18n="tocRole">My Role</a>
         <a href="#finetuning" data-i18n="tocFinetuning">Fine-tuning</a>
         <a href="#results" data-i18n="tocResults">Results</a>
+        <a href="#finarg" data-i18n="tocFinarg">FinArg-2 Track</a>
         <a href="#awards" data-i18n="tocAwards">Awards</a>
         <a href="#team" data-i18n="tocTeam">Team</a>
     </div>
@@ -481,6 +488,12 @@ footer {
     <h2><i class="fas fa-chart-line"></i> <span data-i18n="resultsTitle">Results</span></h2>
     <div class="achievement-grid">
         <div class="achievement-card">
+            <div class="achievement-icon"><i class="fas fa-medal"></i></div>
+            <span class="achievement-number">7/8</span>
+            <h4 data-i18n="res0Title">Subtask First Places</h4>
+            <p data-i18n="res0Desc">First place in 7 of 8 subtasks on the MedNLP-CHAT multilingual risk assessment Joint Accuracy metric</p>
+        </div>
+        <div class="achievement-card">
             <div class="achievement-icon"><i class="fas fa-layer-group"></i></div>
             <span class="achievement-number">24</span>
             <h4 data-i18n="res1Title">Systems Submitted</h4>
@@ -529,12 +542,49 @@ footer {
     </div>
 </section>
 
+<section class="case-section fade-in" id="finarg">
+    <h2><i class="fas fa-chart-line"></i> <span data-i18n="finargTitle">FinArg-2 Track</span></h2>
+    <div class="case-card">
+        <p data-i18n-html="finargIntro">IMNTPU also submitted a second, separate paper to NTCIR-18's <strong>FinArg-2</strong> task, led by teammate <strong>Bor-Jen Chen</strong>. All five of us are co-authors on both papers, but my own hands-on work was on the MedNLP-CHAT track above &mdash; the summary below covers what the team built for FinArg-2.</p>
+        <p data-i18n="finargTask">FinArg-2 focuses on temporal reasoning in financial statements from earnings calls and social media: given a claim, a model has to identify its temporal reference point and predict how long the statement stays valid.</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4><i class="fas fa-sliders"></i> <span data-i18n="fa1Title">Model Fine-tuning</span></h4>
+            <p data-i18n="fa1Desc">BERT, RoBERTa, and DistilBERT for encoder-based approaches; GPT-4o Mini for decoder-based approaches.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-database"></i> <span data-i18n="fa2Title">Data Augmentation</span></h4>
+            <p data-i18n="fa2Desc">Generated semantic variations of training examples to address class imbalance in the financial dataset.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-clock"></i> <span data-i18n="fa3Title">Temporal Reasoning</span></h4>
+            <p data-i18n="fa3Desc">Classified argument claims by their temporal reference points within financial contexts.</p>
+        </div>
+    </div>
+    <div class="case-card" style="margin-top:20px;">
+        <p data-i18n-html="finargResult">Combining fine-tuned models with prompt engineering, the team's FinArg-2 systems reached <strong>first place in key subtasks</strong>, demonstrating strong potential for financial semantic reasoning applications.</p>
+    </div>
+</section>
+
 <section class="case-section fade-in" id="awards">
     <h2><i class="fas fa-award"></i> <span data-i18n="awardsTitle">Awards</span></h2>
-    <div class="award-card" onclick="openLightbox('awards/medNLP_best_oral.jpg')">
-        <img src="awards/medNLP_best_oral.jpg" alt="NTCIR-18 MedNLP-CHAT Best Oral Presentation Award">
-        <h4 data-i18n="award1Title">Best Oral Presentation Award</h4>
-        <p data-i18n="award1Desc">NTCIR-18 MedNLP-CHAT Task &middot; Tokyo, Japan &middot; June 2025</p>
+    <div class="awards-grid">
+        <div class="award-card" onclick="openLightbox('awards/medNLP_best_oral.jpg')">
+            <img src="awards/medNLP_best_oral.jpg" alt="NTCIR-18 MedNLP-CHAT Best Oral Presentation Award">
+            <h4 data-i18n="award1Title">Best Oral Presentation Award</h4>
+            <p data-i18n="award1Desc">NTCIR-18 MedNLP-CHAT Task &middot; Tokyo, Japan &middot; June 2025</p>
+        </div>
+        <div class="award-card" onclick="openLightbox('awards/finArg_best_oral.jpg')">
+            <img src="awards/finArg_best_oral.jpg" alt="NTCIR-18 FinArg-2 Best Oral Presentation Award">
+            <h4 data-i18n="award2Title">Best Oral Presentation Award</h4>
+            <p data-i18n="award2Desc">NTCIR-18 FinArg-2 Task &middot; Tokyo, Japan &middot; June 2025</p>
+        </div>
+        <div class="award-card" onclick="openLightbox('awards/finArg_best_poster.jpg')">
+            <img src="awards/finArg_best_poster.jpg" alt="NTCIR-18 FinArg-2 Best Poster Award">
+            <h4 data-i18n="award3Title">Best Poster Award</h4>
+            <p data-i18n="award3Desc">NTCIR-18 FinArg-2 Task &middot; Tokyo, Japan &middot; June 2025</p>
+        </div>
     </div>
 </section>
 
@@ -643,12 +693,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     meta: "NTCIR-18 Conference · Prompt Engineering & Fine-tuning · Jun 10–13, 2025, Tokyo, Japan",
                     authors: "Jun-Yu Wu, Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Min-Yuh Day (advisor) · Information Management, National Taipei University",
                     linkPaper: "Read the Paper",
+                    linkSlides: "Slides",
                     linkPoster: "View the Poster",
                     tocOverview: "Overview",
                     tocArchitecture: "System Architecture",
                     tocRole: "My Role",
                     tocFinetuning: "Fine-tuning",
                     tocResults: "Results",
+                    tocFinarg: "FinArg-2 Track",
                     tocAwards: "Awards",
                     tocTeam: "Team",
                     overviewTitle: "Task Overview",
@@ -684,6 +736,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     ft3Desc: "Three-shot prompting with English, Japanese, and French examples together.",
                     ftResult: "On Legal Risk assessment, the fine-tuned multilingual system reached a <strong>0.576 Macro F1</strong> on the Japanese dataset, ahead of the GPT-4o few-shot baseline's 0.456. Overall, though, fine-tuning's gains were limited by a small 212-sample training set, so few-shot prompting with larger LLMs generally performed better across the other risk categories.",
                     resultsTitle: "Results",
+                    res0Title: "Subtask First Places",
+                    res0Desc: "First place in 7 of 8 subtasks on the MedNLP-CHAT multilingual risk assessment Joint Accuracy metric",
                     res1Title: "Systems Submitted",
                     res1Desc: "The most of any participating team, across every language track",
                     res2Title: "Risk Dimensions",
@@ -701,21 +755,35 @@ document.addEventListener('DOMContentLoaded', function () {
                     find3Desc: "Some systems stayed highly confident even when wrong, showing that trust-weighted voting can amplify overconfidence rather than correct it.",
                     find4Title: "Future work",
                     find4Desc: "We proposed a Trust-Guided Agentic AI architecture, adding self-consistency filtering, dynamic trust updating, and Chain-of-Thought reasoning, since formalized in a follow-up paper.",
+                    finargTitle: "FinArg-2 Track",
+                    finargIntro: "IMNTPU also submitted a second, separate paper to NTCIR-18's <strong>FinArg-2</strong> task, led by teammate <strong>Bor-Jen Chen</strong>. All five of us are co-authors on both papers, but my own hands-on work was on the MedNLP-CHAT track above — the summary below covers what the team built for FinArg-2.",
+                    finargTask: "FinArg-2 focuses on temporal reasoning in financial statements from earnings calls and social media: given a claim, a model has to identify its temporal reference point and predict how long the statement stays valid.",
+                    fa1Title: "Model Fine-tuning",
+                    fa1Desc: "BERT, RoBERTa, and DistilBERT for encoder-based approaches; GPT-4o Mini for decoder-based approaches.",
+                    fa2Title: "Data Augmentation",
+                    fa2Desc: "Generated semantic variations of training examples to address class imbalance in the financial dataset.",
+                    fa3Title: "Temporal Reasoning",
+                    fa3Desc: "Classified argument claims by their temporal reference points within financial contexts.",
+                    finargResult: "Combining fine-tuned models with prompt engineering, the team's FinArg-2 systems reached <strong>first place in key subtasks</strong>, demonstrating strong potential for financial semantic reasoning applications.",
                     awardsTitle: "Awards",
                     award1Title: "Best Oral Presentation Award",
                     award1Desc: "NTCIR-18 MedNLP-CHAT Task · Tokyo, Japan · June 2025",
+                    award2Title: "Best Oral Presentation Award",
+                    award2Desc: "NTCIR-18 FinArg-2 Task · Tokyo, Japan · June 2025",
+                    award3Title: "Best Poster Award",
+                    award3Desc: "NTCIR-18 FinArg-2 Task · Tokyo, Japan · June 2025",
                     teamTitle: "Team",
                     teamIntro: "The IMNTPU team, from National Taipei University's Information Management program, advised by Prof. Min-Yuh Day.",
                     team1Name: "Prof. Min-Yuh Day",
-                    team1Title: "Team Advisor",
+                    team1Title: "Team Advisor, Professor at Department of Information Management, NTPU",
                     team2Name: "Jun-Yu Wu",
-                    team2Title: "Team Captain",
+                    team2Title: "Team Captain, Department of Leisure and Sport Management, NTPU",
                     team3Name: "Cheng-Yun Wu",
-                    team3Title: "MedNLP-CHAT Vice Captain",
+                    team3Title: "MedNLP-CHAT Vice Captain, Graduate Institute of Information Management, NTPU",
                     team4Name: "Wen-Hsin Hsiao",
-                    team4Title: "Team Vice Captain",
+                    team4Title: "Vice Captain, Graduate Institute of Information Management, NTPU",
                     team5Name: "Bor-Jen Chen",
-                    team5Title: "Team Member",
+                    team5Title: "FinArg-2 Captain, Graduate Institute of Information Management, NTPU",
                     footerContact: "Contact",
                     footerUniversity: "National Taipei University",
                     footerLinks: "Links",
@@ -743,12 +811,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     meta: "NTCIR-18 國際研討會．Prompt Engineering 與模型微調．2025年6月10-13日，日本東京",
                     authors: "吳峻宇、吳承耘、陳柏臻、蕭文欣、戴敏育教授（指導）．國立臺北大學資訊管理學系",
                     linkPaper: "閱讀論文",
+                    linkSlides: "簡報",
                     linkPoster: "查看海報",
                     tocOverview: "計畫概述",
                     tocArchitecture: "系統架構",
                     tocRole: "我負責的部分",
                     tocFinetuning: "模型微調",
                     tocResults: "研究成果",
+                    tocFinarg: "FinArg-2 賽道",
                     tocAwards: "獲獎紀錄",
                     tocTeam: "團隊成員",
                     overviewTitle: "任務概述",
@@ -784,6 +854,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     ft3Desc: "Three-shot提示同時包含英文、日文、法文範例。",
                     ftResult: "在法律風險判斷任務中，微調的多語言系統在日文資料集上達到<strong>0.576 Macro F1</strong>，優於GPT-4o Few-shot基準的0.456。不過整體而言，由於訓練集僅212筆樣本規模有限，微調的成效受限，其他風險類別仍是搭配大型LLM的Few-shot提示表現較佳。",
                     resultsTitle: "研究成果",
+                    res0Title: "子任務第一名數",
+                    res0Desc: "在MedNLP-CHAT多語言風險判斷的Joint Accuracy指標上，8個子任務中拿下7項第一",
                     res1Title: "提交系統數",
                     res1Desc: "橫跨所有語言賽道，為參賽隊伍中最多",
                     res2Title: "風險評估面向",
@@ -801,21 +873,35 @@ document.addEventListener('DOMContentLoaded', function () {
                     find3Desc: "部分系統即使判斷錯誤仍維持高信心，顯示加權投票機制有可能放大過度自信，而非修正錯誤。",
                     find4Title: "未來方向",
                     find4Desc: "我們提出了Trust-Guided代理式AI架構，加入自我一致性篩選、動態信任更新與Chain-of-Thought推理，並已在後續論文中正式提出。",
+                    finargTitle: "FinArg-2 賽道",
+                    finargIntro: "IMNTPU團隊另外也向NTCIR-18的<strong>FinArg-2</strong>任務投稿了第二篇論文，由隊友<strong>陳柏臻</strong>主導。我們5人在兩篇論文中都是共同作者，但我個人實際動手的部分是上方的MedNLP-CHAT賽道，以下是團隊在FinArg-2的成果摘要。",
+                    finargTask: "FinArg-2聚焦於法說會與社群媒體中財務聲明的時間推理：給定一則聲明，模型須辨識其時間參照點，並預測該聲明內容的有效期間。",
+                    fa1Title: "模型微調",
+                    fa1Desc: "編碼器類方法使用BERT、RoBERTa、DistilBERT；解碼器類方法使用GPT-4o Mini。",
+                    fa2Title: "資料增強",
+                    fa2Desc: "生成訓練樣本的語義變化版本，以解決金融資料集中的類別不平衡問題。",
+                    fa3Title: "時間推理",
+                    fa3Desc: "依論證聲明在財務語境中的時間參照點進行分類。",
+                    finargResult: "結合微調模型與Prompt Engineering，團隊的FinArg-2系統在關鍵子任務中<strong>獲得第一名</strong>，展現財務語意推理應用的強大潛力。",
                     awardsTitle: "獲獎紀錄",
                     award1Title: "最佳口頭報告獎",
                     award1Desc: "NTCIR-18 MedNLP-CHAT任務．日本東京．2025年6月",
+                    award2Title: "最佳口頭報告獎",
+                    award2Desc: "NTCIR-18 FinArg-2任務．日本東京．2025年6月",
+                    award3Title: "最佳海報獎",
+                    award3Desc: "NTCIR-18 FinArg-2任務．日本東京．2025年6月",
                     teamTitle: "團隊成員",
                     teamIntro: "IMNTPU團隊來自國立臺北大學資訊管理學系，由戴敏育教授指導。",
                     team1Name: "戴敏育教授",
-                    team1Title: "團隊指導教授",
+                    team1Title: "團隊指導教授，國立臺北大學資訊管理學系教授",
                     team2Name: "吳峻宇",
-                    team2Title: "團隊隊長",
+                    team2Title: "總隊長，國立臺北大學休閒運動管理學系",
                     team3Name: "吳承耘",
-                    team3Title: "MedNLP-CHAT副隊長",
+                    team3Title: "MedNLP-CHAT副隊長，國立臺北大學資訊管理研究所",
                     team4Name: "蕭文欣",
-                    team4Title: "團隊副隊長",
+                    team4Title: "總副隊長，國立臺北大學資訊管理研究所",
                     team5Name: "陳柏臻",
-                    team5Title: "團隊成員",
+                    team5Title: "FinArg-2隊長，國立臺北大學資訊管理研究所",
                     footerContact: "聯絡方式",
                     footerUniversity: "國立臺北大學",
                     footerLinks: "導覽",
