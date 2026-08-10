@@ -147,27 +147,111 @@
             padding-bottom: 15px;
         }
 
-        .dropdown-container {
+        /* Event picker grid */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
             margin: 30px 0;
-            display: flex;
-            justify-content: center;
+            text-align: left;
         }
 
-        select {
-            padding: 12px 20px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            border: 2px solid var(--primary-green);
+        .event-card {
             background: white;
-            color: var(--text-color);
-            max-width: 80%;
+            border: 2px solid rgba(46, 139, 87, 0.25);
+            border-radius: 12px;
+            padding: 16px 18px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s;
+            font-family: 'Noto Serif TC', serif;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        .event-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(46, 139, 87, 0.15);
+        }
+
+        .event-card.active {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .event-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .event-card.active .event-name {
+            color: white;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+
+        .event-card.active .event-meta {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .event-count {
+            background: rgba(46, 139, 87, 0.12);
+            color: var(--primary-green);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .event-card.active .event-count {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 50px 20px 20px;
+            opacity: 0.6;
+        }
+
+        .empty-state .icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        /* Gallery heading, shown once an event is selected */
+        .gallery-heading {
+            text-align: left;
+            margin: 20px 0 6px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(46, 139, 87, 0.15);
+        }
+
+        .gallery-heading h2 {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin: 0 0 4px 0;
+        }
+
+        .gallery-heading p {
+            font-size: 0.88rem;
+            opacity: 0.7;
+            margin: 0;
         }
 
         /* 照片畫廊樣式 */
@@ -181,12 +265,17 @@
 
         .photo-gallery img {
             width: 100%;
-            height: 150px;
+            height: 170px;
             object-fit: cover;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.4s;
             border: 3px solid transparent;
+            opacity: 0;
+        }
+
+        .photo-gallery img.loaded {
+            opacity: 1;
         }
 
         .photo-gallery img:hover {
@@ -228,6 +317,53 @@
 
         .close:hover {
             opacity: 0.7;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.8rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.35);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(46, 139, 87, 0.6);
+        }
+
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.95rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 16px;
+            border-radius: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 2.2rem;
+            }
+            .lightbox-prev { left: 8px; }
+            .lightbox-next { right: 8px; }
         }
 
         /* Footer樣式 */
@@ -306,6 +442,10 @@
                 height: 120px;
             }
 
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -361,29 +501,70 @@
     <!-- 主要內容 -->
     <div class="content">
         <h1 data-i18n="content.photos">Photos</h1>
-        <div class="dropdown-container">
-            <select onchange="loadImages(event)">
-                <option value="" data-i18n="content.selectEvent">Select an Event</option>
-                <option value="nstc" data-i18n="content.nstcEvent">Technology Inclusion Projects Achievement Presentation</option>
-                <option value="fintech2024" data-i18n="content.fintechEvent">FinTech Taipei 2024</option>
-                <option value="japan2024" data-i18n="content.japanEvent">Academic exchange visit to Japan</option>
-                <option value="bestAI2025" data-i18n="content.bestAIAwards">2025 Best AI Awards - Final contest</option>
-                <option value="icim2025" data-i18n="content.icim2025">2025 International Conference on Information Management</option>
-                <option value="ntpuAI" data-i18n="content.ntpuAI">2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest</option>
-                <option value="tsc2025" data-i18n="content.tsc2025">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest</option>
-                <option value="ntcir18" data-i18n="content.ntcir18">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference</option>
-                <option value="itam31" data-i18n="content.itam31">31st International Conference on IT Applications and Management (ITAM-31) &amp; Korea Academic Exchange</option>
-                <option value="usr2025" data-i18n="content.usr2025">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)</option>
-                <option value="ntpuAiAgent2026" data-i18n="content.ntpuAiAgent2026">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition</option>
-            </select>
+        <div class="event-grid" id="event-grid">
+            <button class="event-card" data-event="ntpuAiAgent2026" data-date="2026/05/22" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.ntpuAiAgent2026">North Taiwan University Alliance AI Agent Innovation and Entrepreneurship Interdisciplinary Competition</span>
+                <span class="event-meta"><span class="event-date">2026/05/22</span><span class="event-count">12</span></span>
+            </button>
+            <button class="event-card" data-event="usr2025" data-date="2025/12/12" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.usr2025">2025 NTPU USR Sustainability × Technology Proposal Competition (REsolution 再想解方)</span>
+                <span class="event-meta"><span class="event-date">2025/12/12</span><span class="event-count">4</span></span>
+            </button>
+            <button class="event-card" data-event="itam31" data-date="2025/10/26-30" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.itam31">31st International Conference on IT Applications and Management (ITAM-31) &amp; Korea Academic Exchange</span>
+                <span class="event-meta"><span class="event-date">2025/10/26-30</span><span class="event-count">23</span></span>
+            </button>
+            <button class="event-card" data-event="ntcir18" data-date="2025/06/10-13" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.ntcir18">NTCIR-18 (The 18th NII Testbeds and Community for Information access Research) Conference</span>
+                <span class="event-meta"><span class="event-date">2025/06/10-13</span><span class="event-count">13</span></span>
+            </button>
+            <button class="event-card" data-event="tsc2025" data-date="2025/05/24" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.tsc2025">2025 The 10th TSC Marketing Symposium: AI Application Marketing Competition - Final contest</span>
+                <span class="event-meta"><span class="event-date">2025/05/24</span><span class="event-count">4</span></span>
+            </button>
+            <button class="event-card" data-event="ntpuAI" data-date="2025/05/22" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.ntpuAI">2025 The 3rd NTPU AI Smart Application Innovation Competition - Final contest</span>
+                <span class="event-meta"><span class="event-date">2025/05/22</span><span class="event-count">6</span></span>
+            </button>
+            <button class="event-card" data-event="icim2025" data-date="2025/05/16" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.icim2025">2025 International Conference on Information Management</span>
+                <span class="event-meta"><span class="event-date">2025/05/16</span><span class="event-count">10</span></span>
+            </button>
+            <button class="event-card" data-event="bestAI2025" data-date="2025/05/03" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.bestAIAwards">2025 Best AI Awards - Final contest</span>
+                <span class="event-meta"><span class="event-date">2025/05/03</span><span class="event-count">5</span></span>
+            </button>
+            <button class="event-card" data-event="japan2024" data-date="2024" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.japanEvent">Academic exchange visit to Japan</span>
+                <span class="event-meta"><span class="event-date">2024</span><span class="event-count">15</span></span>
+            </button>
+            <button class="event-card" data-event="fintech2024" data-date="2024" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.fintechEvent">FinTech Taipei 2024</span>
+                <span class="event-meta"><span class="event-date">2024</span><span class="event-count">4</span></span>
+            </button>
+            <button class="event-card" data-event="nstc" data-date="2024" onclick="selectEvent(this)">
+                <span class="event-name" data-i18n="content.nstcEvent">Technology Inclusion Projects Achievement Presentation</span>
+                <span class="event-meta"><span class="event-date">2024</span><span class="event-count">4</span></span>
+            </button>
+        </div>
+        <div class="empty-state" id="empty-state">
+            <div class="icon">📷</div>
+            <p data-i18n="content.emptyState">Select an event above to view photos</p>
+        </div>
+        <div class="gallery-heading" id="gallery-heading" style="display:none;">
+            <h2 id="gallery-heading-title"></h2>
+            <p id="gallery-heading-meta"></p>
         </div>
         <div class="photo-gallery" id="photo-gallery"></div>
     </div>
-    
+
     <!-- 燈箱 -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="close">&times;</span>
-        <img id="lightbox-img">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); showPrev();">&#8249;</span>
+        <img id="lightbox-img" onclick="event.stopPropagation()">
+        <span class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); showNext();">&#8250;</span>
+        <span class="lightbox-counter" id="lightbox-counter"></span>
     </div>
 
     <!-- Footer -->
@@ -464,55 +645,95 @@
             document.fonts.ready.then(updateNavMode);
         }
 
-        // 載入選定活動的圖片
-        function loadImages(event) {
-            const selectedEvent = event.target.value;
+        // 目前圖庫的照片清單與燈箱目前顯示的索引
+        let currentPhotos = [];
+        let currentIndex = 0;
+
+        const imageNum = {
+            'nstc': 4,
+            'fintech2024': 4,
+            'japan2024': 15,
+            'bestAI2025': 5,
+            'icim2025': 10,
+            'ntpuAI': 6,
+            'tsc2025': 4,
+            'ntcir18': 13,
+            'itam31': 23,
+            'usr2025': 4,
+            'ntpuAiAgent2026': 12
+        };
+
+        // 點選活動卡片，載入該活動的照片
+        function selectEvent(card) {
+            const selectedEvent = card.getAttribute('data-event');
+            const eventDate = card.getAttribute('data-date');
+
+            document.querySelectorAll('.event-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
             const galleryContainer = document.getElementById("photo-gallery");
             galleryContainer.innerHTML = "";
-        
-            const imageNum = {
-                'nstc': 4,
-                'fintech2024': 4,
-                'japan2024': 15,
-                'bestAI2025': 5,
-                'icim2025': 10,
-                'ntpuAI': 6,
-                'tsc2025': 4,
-                'ntcir18': 13,
-                'itam31': 23,
-                'usr2025': 4,
-                'ntpuAiAgent2026': 12
-            };
-        
-            if (selectedEvent) {
-                let numImages = imageNum[selectedEvent] || 0;
-                for (let i = 1; i <= numImages; i++) {
-                    let imgSrc = "";
-        
-                    if (selectedEvent === 'nstc' || selectedEvent === 'fintech2024') {
-                        imgSrc = `images/${selectedEvent}/image${i}.JPG`;
-                    } else {
-                        imgSrc = `images/${selectedEvent}/image${i}.jpg`;
-                    }
-        
-                    let imgElement = document.createElement("img");
-                    imgElement.src = imgSrc;
-                    imgElement.onclick = () => openLightbox(imgSrc);
-                    galleryContainer.appendChild(imgElement);
-                }
+
+            const numImages = imageNum[selectedEvent] || 0;
+            currentPhotos = [];
+            for (let i = 1; i <= numImages; i++) {
+                const ext = (selectedEvent === 'nstc' || selectedEvent === 'fintech2024') ? 'JPG' : 'jpg';
+                const imgSrc = `images/${selectedEvent}/image${i}.${ext}`;
+                currentPhotos.push(imgSrc);
+
+                const imgElement = document.createElement("img");
+                imgElement.src = imgSrc;
+                imgElement.loading = "lazy";
+                imgElement.onload = () => imgElement.classList.add('loaded');
+                imgElement.onclick = () => openLightbox(i - 1);
+                galleryContainer.appendChild(imgElement);
             }
-        }        
-        
+
+            document.getElementById('empty-state').style.display = 'none';
+            const heading = document.getElementById('gallery-heading');
+            heading.style.display = 'block';
+            document.getElementById('gallery-heading-title').textContent = card.querySelector('.event-name').textContent;
+            const countLabel = i18next.t('content.photoCount', { count: numImages });
+            document.getElementById('gallery-heading-meta').textContent = eventDate + ' · ' + countLabel;
+        }
+
         // 開啟燈箱顯示大圖
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
             document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightbox-img').src = currentPhotos[currentIndex];
+            document.getElementById('lightbox-counter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
+        }
+
+        function showPrev() {
+            if (!currentPhotos.length) return;
+            currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+            updateLightboxImage();
+        }
+
+        function showNext() {
+            if (!currentPhotos.length) return;
+            currentIndex = (currentIndex + 1) % currentPhotos.length;
+            updateLightboxImage();
         }
 
         // 關閉燈箱
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
+
+        // 鍵盤操作：左右鍵切換、Esc關閉
+        document.addEventListener('keydown', function (e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.style.display !== 'flex') return;
+            if (e.key === 'ArrowLeft') showPrev();
+            else if (e.key === 'ArrowRight') showNext();
+            else if (e.key === 'Escape') closeLightbox();
+        });
 
         // 頁面載入完成後初始化
         document.addEventListener("DOMContentLoaded", function () {
@@ -544,6 +765,8 @@
                             content: {
                                 photos: "Photos",
                                 selectEvent: "Select an Event",
+                                emptyState: "Select an event above to view photos",
+                                photoCount: "{{count}} photos",
                                 nstcEvent: "Technology Inclusion Projects Achievement Presentation",
                                 fintechEvent: "FinTech Taipei 2024",
                                 japanEvent: "Academic exchange visit to Japan",
@@ -584,6 +807,8 @@
                             content: {
                                 photos: "照片",
                                 selectEvent: "選擇活動",
+                                emptyState: "選擇上方活動即可查看照片",
+                                photoCount: "{{count}} 張照片",
                                 nstcEvent: "國科會計畫成果發表會",
                                 fintechEvent: "台北金融科技展 2024",
                                 japanEvent: "日本學術交流訪問",
