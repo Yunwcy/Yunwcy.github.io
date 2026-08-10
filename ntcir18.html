@@ -3,73 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NTCIR-18 Research Project | Yun</title>
+<title>IMNTPU at NTCIR-18 MedNLP-CHAT Task | Yun</title>
 <link rel="icon" type="image/png" href="images/logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
-
 <style>
-/* CSS 變數定義 - 定義整個網站的主要顏色和樣式變數 */
 :root {
-    --primary-green: #2E8B57;           /* 主要綠色 */
-    --light-green: rgba(213, 236, 198, 0.8);  /* 淺綠色 */
-    --medium-green: rgba(180, 218, 144, 0.7); /* 中綠色 */
-    --dark-green: #1e5d3a;             /* 深綠色 */
-    --text-color: #5A4A42;             /* 文字顏色 */
-    --card-bg: rgba(255, 255, 255, 0.9); /* 卡片背景色 */
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
 }
-
-/* 全域樣式重置 */
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    max-width: 100vw;
-    overflow-x: hidden;
-}
-
-/* 網頁主體樣式 */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
 body {
     font-family: 'Noto Serif TC', serif;
     color: var(--text-color);
-    background: linear-gradient(135deg, 
-        rgba(213, 236, 198, 0.5), 
-        rgba(220, 233, 190, 0.5), 
-        rgba(180, 218, 144, 0.5), 
-        rgba(212, 228, 175, 0.5), 
-        rgba(202, 226, 167, 0.5));
-    line-height: 1.6;
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
     min-height: 100vh;
 }
-
-/* 導航列樣式 */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     padding: 10px 20px;
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
-    backdrop-filter: blur(10px); /* 背景模糊效果 */
+    backdrop-filter: blur(10px);
 }
-
-.nav-brand {
-    color: var(--primary-green);
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-}
-
 .back-link {
     color: var(--primary-green);
     text-decoration: none;
@@ -77,1428 +48,813 @@ body {
     padding: 8px 16px;
     border-radius: 5px;
     transition: all 0.3s;
+    white-space: nowrap;
 }
-
-.back-link:hover {
-    background: rgba(46, 139, 87, 0.2);
-    color: var(--dark-green);
-}
-
-/* 語言切換按鈕樣式 */
-.language-switcher {
-    display: flex;
-    gap: 5px;
-}
-
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
 .language-btn {
-    padding: 5px 10px;
     background: var(--primary-green);
     color: #fff;
     border: none;
+    padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: bold;
-    transition: background 0.3s;
 }
+.language-btn:hover { background: var(--dark-green); }
 
-.language-btn:hover {
-    background: var(--dark-green);
-}
-
-/* 主要內容區域樣式 */
-.main-content {
-    padding: 100px 40px 60px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* 頁面標題樣式 */
-.page-title {
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
     text-align: center;
-    font-size: 2.5rem;
-    color: var(--primary-green);
-    font-weight: 700;
-    margin-bottom: 20px;
-    border-bottom: 3px solid var(--primary-green);
-    padding-bottom: 15px;
 }
-
-.page-subtitle {
-    text-align: center;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-bottom: 50px;
-    font-style: italic;
-}
-
-/* 內容卡片樣式 */
-.content-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-/* 區塊標題樣式 */
-.section-header {
-    color: var(--primary-green);
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 25px;
-    border-left: 5px solid var(--primary-green);
-    padding-left: 20px;
-}
-
-.subsection-header {
-    color: var(--dark-green);
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 30px 0 20px 0;
-}
-
-/* 專案概覽網格樣式 */
-.project-overview {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin: 30px 0;
-}
-
-.overview-card {
-    background: rgba(46, 139, 87, 0.05);
-    border-left: 4px solid var(--primary-green);
-    padding: 25px;
-    border-radius: 8px;
-}
-
-.overview-card h4 {
-    color: var(--primary-green);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-/* 時間軸樣式 */
-.timeline-container {
-    position: relative;
-    margin: 30px 0;
-}
-
-.timeline-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 30px;
-}
-
-.timeline-date {
+.case-badge {
+    display: inline-block;
     background: var(--primary-green);
     color: #fff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    min-width: 120px;
-    text-align: center;
-    margin-right: 20px;
-}
-
-.timeline-content {
-    flex: 1;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-content h5 {
-    color: var(--primary-green);
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 1.9rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
     margin-bottom: 10px;
 }
-
-/* 功能網格樣式 */
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin: 30px 0;
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
 }
-
-.feature-card {
-    background: var(--card-bg);
-    border: 2px solid var(--light-green);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
+.case-hero .authors {
+    font-size: 0.88rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 22px;
+    font-style: italic;
 }
-
-.feature-icon {
-    font-size: 2.5rem;
-    color: var(--primary-green);
-    margin-bottom: 15px;
-}
-
-/* 技術標籤樣式 */
-.tech-stack {
+.case-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px 0;
+    justify-content: center;
+    gap: 12px;
 }
-
-.tech-tag {
-    background: var(--light-green);
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
     color: var(--primary-green);
-    padding: 8px 16px;
-    border-radius: 20px;
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
     font-size: 0.9rem;
-    font-weight: 600;
-    border: 2px solid var(--medium-green);
 }
+.case-link:hover { background: var(--primary-green); color: #fff; }
+.case-link-report { background: #4285F4; border-color: #4285F4; color: #fff; }
+.case-link-report:hover { background: #2f5fc4; border-color: #2f5fc4; color: #fff; }
 
-/* 專案資訊卡片區塊樣式 */
-.project-info-section {
-    margin: 50px 0;
-}
-
-.info-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.info-card {
-    background: var(--card-bg);
-    border-left: 5px solid var(--primary-green);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.info-card h3 {
-    color: var(--primary-green);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.info-card p {
-    color: var(--text-color);
-    font-size: 1rem;
-    margin: 0;
-}
-
-/* 統計卡片區塊樣式 */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
-}
-
-.stats-card {
-    background: var(--primary-green);
-    color: white;
-    padding: 30px 20px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(46, 139, 87, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.stats-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(46, 139, 87, 0.4);
-}
-
-.stats-number {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.stats-label {
-    font-size: 1rem;
-    font-weight: 600;
-    opacity: 0.9;
-}
-
-/* 強調框樣式 */
-.highlight-box {
-    background: rgba(46, 139, 87, 0.05);
-    border: 2px solid var(--light-green);
-    border-radius: 10px;
-    padding: 25px;
-    margin: 25px 0;
-}
-
-.highlight-box h4 {
-    color: var(--primary-green);
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-/* 任務卡片樣式 */
-.task-category {
-    background: var(--card-bg);
-    border: 2px solid var(--light-green);
-    border-radius: 12px;
-    padding: 25px;
-    margin: 20px 0;
-    border-left: 5px solid var(--primary-green);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.task-category:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(46, 139, 87, 0.2);
-}
-
-.task-category h3 {
-    color: var(--primary-green);
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-/* 方法學樣式 */
-.methodology-container {
+/* Quick section nav */
+.case-toc {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
 }
-
-.method-section {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid var(--primary-green);
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
 }
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
 
-.method-header {
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 10px;
 }
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 12px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card strong { color: var(--dark-green); }
 
-.method-icon {
-    font-size: 2rem;
-    background: rgba(46, 139, 87, 0.1);
-    padding: 10px;
+/* Role header */
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    background: var(--light-green);
+    color: var(--dark-green);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.2rem;
 }
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
 
-.method-header h3 {
-    margin: 0;
-    color: var(--primary-green);
-    font-size: 1.4rem;
-}
-
-.method-steps {
+/* Overview grid */
+.overview-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+.overview-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.overview-card h4 { color: var(--primary-green); font-size: 0.98rem; margin: 0 0 8px 0; }
+.overview-card p { margin: 0; font-size: 0.88rem; }
+
+/* Achievement / stat cards */
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    margin-top: 20px;
 }
-
-.step-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 15px;
-    background: rgba(46, 139, 87, 0.05);
-    border-radius: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
+.achievement-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
+.achievement-icon { font-size: 1.8rem; color: var(--primary-green); margin-bottom: 10px; }
+.achievement-number { font-size: 2rem; font-weight: 800; color: var(--primary-green); display: block; margin-bottom: 4px; }
+.achievement-card h4 { margin: 4px 0 6px 0; font-size: 0.95rem; color: var(--text-color); }
+.achievement-card p { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
-.step-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+/* System / fine-tune cards (reused as feature grid) */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
 }
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.feature-card h4 { color: var(--primary-green); margin: 0 0 10px 0; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+.feature-card p { margin: 0; font-size: 0.9rem; }
+.feature-card strong { color: var(--dark-green); }
 
-.step-icon {
-    font-size: 1.5rem;
-    background: var(--primary-green);
-    color: white;
-    padding: 8px;
-    border-radius: 50%;
+/* Impact / proof-point cards */
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+.proof-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.proof-icon {
     width: 40px;
     height: 40px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
 }
+.proof-card h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--text-color); }
+.proof-card p { margin: 0; font-size: 0.9rem; }
+.proof-card strong { color: var(--dark-green); }
 
-.step-content h4 {
-    margin: 0 0 5px 0;
-    color: var(--text-color);
-    font-size: 1.1rem;
+/* Poster / diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-top: 20px;
 }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
 
-.step-content p {
-    margin: 0;
-    color: var(--text-color);
-    font-size: 0.95rem;
-    line-height: 1.4;
+/* Awards */
+.award-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
 }
+.award-card img { max-width: 100%; max-height: 260px; object-fit: contain; border-radius: 8px; cursor: zoom-in; margin-bottom: 14px; }
+.award-card h4 { margin: 0 0 6px 0; color: var(--primary-green); font-size: 1.05rem; }
+.award-card p { margin: 0; font-size: 0.9rem; opacity: 0.85; }
 
-/* 獎項網格樣式 */
-.awards-grid {
+/* Team grid */
+.team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
-
-.award-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.award-card:hover {
-    transform: scale(1.02);
-}
-
-.award-card img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.award-card h4 {
-    margin: 10px 0 5px 0;
-    font-size: 1.1rem;
-    color: var(--text-color);
-}
-
-.award-card p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
-/* 團隊網格樣式 */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
 .team-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
     background: var(--card-bg);
+    border-radius: 14px;
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
-
-.team-member:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
 .team-member img {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--primary-green);
-    margin-bottom: 15px;
+    border: 3px solid var(--light-green);
+    margin-bottom: 12px;
 }
+.team-member h4 { margin: 0 0 4px 0; color: var(--primary-green); font-size: 0.95rem; }
+.team-member p { margin: 0; font-size: 0.8rem; opacity: 0.85; line-height: 1.4; }
 
-.team-member h4 {
-    margin: 10px 0 5px 0;
-    font-size: 1.1rem;
-    color: var(--primary-green);
-    font-weight: 700;
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
 }
-
-.team-member p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--text-color);
-    line-height: 1.4;
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
 }
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
 
-/* Lightbox */
-.lightbox { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0,0,0,0.8); 
-    justify-content: center; 
-    align-items: center; 
-    z-index: 2000; 
-}
-
-.lightbox img { 
-    max-width: 80%; 
-    max-height: 80%; 
-    border-radius: 10px; 
-}
-
-.lightbox.active { 
-    display: flex; 
-}
-
-/* 動畫效果 */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-    .main-content {
-        padding: 100px 20px 60px;
-    }
-    
-    .page-title {
-        font-size: 2rem;
-    }
-    
-    .timeline-item {
-        flex-direction: column;
-    }
-    
-    .timeline-date {
-        margin-right: 0;
-        margin-bottom: 15px;
-        align-self: flex-start;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .methodology-container {
-        gap: 20px;
-    }
-    
-    .method-section {
-        padding: 20px;
-    }
-    
-    .method-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .method-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-    }
-    
-    .step-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .step-icon {
-        align-self: center;
-    }
-    
-    .awards-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: row;  /* 改回水平排列 */
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px 15px;    /* 縮小 padding */
-        flex-wrap: nowrap;    /* 不換行 */
-    }
-    
-    .nav-brand {
-        font-size: 1rem;     /* 縮小品牌字體 */
-        flex: 1;
-        text-align: left;
-    }
-    
-    .back-link {
-        font-size: 0.85rem;  /* 縮小返回連結字體 */
-        padding: 5px 8px;    /* 縮小 padding */
-        white-space: nowrap; /* 防止換行 */
-    }
-    
-    .language-btn {
-        font-size: 0.8rem;   /* 縮小語言按鈕字體 */
-        padding: 4px 8px;    /* 縮小 padding */
-    }
-    
-    .main-content {
-        padding: 80px 15px 40px;  /* 調整上方間距 */
-    }
-    
-    .page-title {
-        font-size: 1.5rem;   /* 縮小標題字體 */
-        line-height: 1.3;    /* 調整行高 */
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 6px 10px;   /* 進一步縮小 */
-    }
-    
-    .nav-brand {
-        font-size: 0.9rem;   /* 更小的品牌字體 */
-    }
-    
-    .back-link {
-        font-size: 0.8rem;   /* 更小的返回連結 */
-        padding: 4px 6px;
-    }
-    
-    .language-btn {
-        font-size: 0.75rem;  /* 更小的語言按鈕 */
-        padding: 3px 6px;
-    }
-    
-    .main-content {
-        padding: 70px 10px 30px;  /* 更緊湊的間距 */
-    }
-    
-    .page-title {
-        font-size: 1.3rem;   /* 更小的標題 */
-        margin-bottom: 15px;
-    }
-    
-    .page-subtitle {
-        font-size: 1rem;     /* 縮小副標題 */
-        margin-bottom: 30px;
-    }
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.4rem; }
+    .case-card, .achievement-card, .overview-card, .feature-card, .proof-card, .award-card, .team-member { padding: 20px; }
 }
 </style>
 </head>
-
 <body>
-<!-- 導航列 -->
 <div class="navbar">
-  <a href="index.html" class="nav-brand" data-i18n="nav.brand">Yun's Portfolio</a>
-  <a href="index.html" class="back-link" data-i18n="nav.back">← Back to Home</a>
-  <div class="language-switcher">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
     <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
-  </div>
 </div>
 
-<!-- 主要內容區域 -->
-<div class="main-content">
-    <!-- 頁面標題 -->
-    <h1 class="page-title fade-in" data-i18n="page.title">NTCIR-18</h1>
-    <p class="page-subtitle fade-in" data-i18n="page.subtitle">The 18th NII Testbeds and Community for Information access Research</p>
-
-    <!-- 會議資訊區塊 -->
-    <div class="project-info-section fade-in">
-        <div class="info-cards-grid">
-            <!-- 主辦機構卡片 -->
-            <div class="info-card">
-                <h3 data-i18n="info.organizer.title">Organizer</h3>
-                <p data-i18n="info.organizer.content">National Institute of Informatics (NII), Japan</p>
-            </div>
-
-            <!-- 會議日期卡片 -->
-            <div class="info-card">
-                <h3 data-i18n="info.date.title">Conference Date</h3>
-                <p data-i18n="info.date.content">June 10-13, 2025</p>
-            </div>
-
-            <!-- 地點卡片 -->
-            <div class="info-card">
-                <h3 data-i18n="info.location.title">Location</h3>
-                <p data-i18n="info.location.content">Tokyo, Japan</p>
-            </div>
-
-            <!-- 參與團隊卡片 -->
-            <div class="info-card">
-                <h3 data-i18n="info.team.title">Participating Team</h3>
-                <p data-i18n="info.team.content">IMNTPU Team, National Taipei University</p>
-            </div>
-        </div>
-
-        <!-- 統計卡片區塊 -->
-        <div class="stats-grid">
-            <div class="stats-card">
-                <span class="stats-number">2</span>
-                <span class="stats-label" data-i18n="stats.tasks">Tasks Participated</span>
-            </div>
-            <div class="stats-card">
-                <span class="stats-number">7/8</span>
-                <span class="stats-label" data-i18n="stats.awards">First Place Awards</span>
-            </div>
-            <div class="stats-card">
-                <span class="stats-number">4</span>
-                <span class="stats-label" data-i18n="stats.languages">Languages Supported</span>
-            </div>
-            <div class="stats-card">
-                <span class="stats-number">AI</span>
-                <span class="stats-label" data-i18n="stats.approach">Research Approach</span>
-            </div>
-        </div>
+<div class="case-hero">
+    <span class="case-badge">🏅 <span data-i18n="badge">Best Oral Presentation Award · NTCIR-18 Conference</span></span>
+    <h1 data-i18n="title">IMNTPU at NTCIR-18 MedNLP-CHAT Task: Evaluating Agentic AI for Multilingual Risk Assessment in Medical Chatbots</h1>
+    <div class="subtitle" data-i18n="subtitle">A multilingual risk-classification system for medical chatbot responses, built with fine-tuned models, few-shot LLM prompting, and agentic multi-model voting</div>
+    <div class="meta" data-i18n="meta">NTCIR-18 Conference · Prompt Engineering &amp; Fine-tuning · Jun 10&ndash;13, 2025, Tokyo, Japan</div>
+    <div class="authors" data-i18n="authors">Jun-Yu Wu, Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Min-Yuh Day (advisor) · Information Management, National Taipei University</div>
+    <div class="case-links">
+        <a class="case-link case-link-report" href="case-studies/ntcir18/paper.pdf" target="_blank"><i class="fas fa-file-pdf"></i> <span data-i18n="linkPaper">Read the Paper</span></a>
+        <a class="case-link case-link-report" href="case-studies/ntcir18/poster.png" target="_blank" onclick="event.preventDefault(); openLightbox('case-studies/ntcir18/poster.png');"><i class="fas fa-image"></i> <span data-i18n="linkPoster">View the Poster</span></a>
     </div>
-
-    <!-- 會議介紹 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="introduction.title">Conference Introduction</h2>
-        <div class="highlight-box">
-            <h4 data-i18n="introduction.about.title">About NTCIR-18</h4>
-            <p data-i18n="introduction.about.content">NTCIR-18 is a biennial evaluation workshop series organized by the National Institute of Informatics (NII) to advance research in information access technologies such as information retrieval, question answering, and text summarization. The conference brings together international researchers to collaborate on cutting-edge AI and NLP challenges.</p>
-        </div>
-
-        <div class="project-overview">
-            <div class="overview-card">
-                <h4 data-i18n="introduction.focus.title">Research Focus</h4>
-                <p data-i18n="introduction.focus.content">Information access technologies, multilingual AI, and specialized domain applications</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="introduction.impact.title">Global Impact</h4>
-                <p data-i18n="introduction.impact.content">Advancing international collaboration in AI research and evaluation methodologies</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="introduction.participation.title">Our Achievement</h4>
-                <p data-i18n="introduction.participation.content">Outstanding performance in medical AI and financial reasoning tasks</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="introduction.innovation.title">Innovation Highlight</h4>
-                <p data-i18n="introduction.innovation.content">Novel approaches combining multiple AI models and prompt engineering</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 參與任務 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="tasks.title">Tasks Participated</h2>
-        <p data-i18n="tasks.intro">The IMNTPU team participated in two main tasks during NTCIR-18, achieving outstanding results:</p>
-        
-        <div class="task-category">
-            <h3 data-i18n="tasks.medNLP.title">MedNLP-CHAT</h3>
-            <p data-i18n="tasks.medNLP.content">Medical Natural Language Processing Dialogue System Evaluation - This task focuses on analyzing whether medical chatbot responses to patient questions contain potential medical, legal, or ethical risks. The dataset includes Japanese and German corpora with corresponding English and French translations. Our team achieved exceptional performance, winning first place in 7 out of 8 subtasks in multilingual risk assessment Joint Accuracy metrics.</p>
-        </div>
-        
-        <div class="task-category">
-            <h3 data-i18n="tasks.finArg.title">FinArg-2</h3>
-            <p data-i18n="tasks.finArg.content">Financial Argument Temporal Reasoning - This task focuses on temporal reasoning of statements in earnings calls and social media, requiring models to identify temporal reference points in statements and predict the validity period of statement content. Our team combined fine-tuning models and prompt engineering approaches, achieving first place in key subtasks and demonstrating strong potential in financial semantic reasoning applications.</p>
-        </div>
-    </div>
-
-    <!-- 研究方法 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="methodology.title">Research Methodology</h2>
-        <p data-i18n="methodology.intro">Our research employed innovative methodologies for both tasks, combining state-of-the-art approaches in natural language processing and machine learning.</p>
-        
-        <div class="methodology-container">
-            <div class="method-section">
-                <div class="method-header">
-                    <span class="method-icon">🏥</span>
-                    <h3 data-i18n="methodology.medNLP.title">MedNLP-CHAT Methodology</h3>
-                </div>
-                <div class="method-steps">
-                    <div class="step-item">
-                        <div class="step-icon">🤖</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.medNLP.agentic.title">Agentic AI Framework</h4>
-                            <p data-i18n="methodology.medNLP.agentic.desc">Multi-model collaborative approach with majority voting and weighted scoring systems</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-icon">💬</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.medNLP.prompt.title">Prompt Engineering</h4>
-                            <p data-i18n="methodology.medNLP.prompt.desc">Three-shot prompting with GPT-4o, Claude 3.5 Sonnet, Mistral small latest</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-icon">⚖️</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.medNLP.risk.title">Risk Assessment</h4>
-                            <p data-i18n="methodology.medNLP.risk.desc">Medical, legal, and ethical risk evaluation across multiple languages</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="method-section">
-                <div class="method-header">
-                    <span class="method-icon">💰</span>
-                    <h3 data-i18n="methodology.finArg.title">FinArg-2 Methodology</h3>
-                </div>
-                <div class="method-steps">
-                    <div class="step-item">
-                        <div class="step-icon">🔧</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.finArg.finetune.title">Model Fine-tuning</h4>
-                            <p data-i18n="methodology.finArg.finetune.desc">BERT, RoBERTa, DistilBERT for encoder-based tasks; GPT-4o Mini for decoder-based</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-icon">📊</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.finArg.augment.title">Data Augmentation</h4>
-                            <p data-i18n="methodology.finArg.augment.desc">Semantic variation generation to address class imbalance in financial datasets</p>
-                        </div>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-icon">⏰</div>
-                        <div class="step-content">
-                            <h4 data-i18n="methodology.finArg.temporal.title">Temporal Reasoning</h4>
-                            <p data-i18n="methodology.finArg.temporal.desc">Classification of argument claims based on temporal references in financial contexts</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h3 class="subsection-header" data-i18n="methodology.tech.title">Technical Approach</h3>
-        <div class="tech-stack">
-            <span class="tech-tag">Natural Language Processing</span>
-            <span class="tech-tag">Machine Learning</span>
-            <span class="tech-tag">Deep Learning</span>
-            <span class="tech-tag">Prompt Engineering</span>
-            <span class="tech-tag">Multilingual AI</span>
-            <span class="tech-tag">Medical Risk Assessment</span>
-            <span class="tech-tag">Financial Reasoning</span>
-            <span class="tech-tag">Temporal Analysis</span>
-            <span class="tech-tag">Ensemble Methods</span>
-            <span class="tech-tag">Large Language Models</span>
-        </div>
-    </div>
-
-    <!-- 研究成果 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="results.title">Research Results</h2>
-        <div class="highlight-box">
-            <h4 data-i18n="results.achievement.title">Outstanding Achievement</h4>
-            <p data-i18n="results.achievement.content">The IMNTPU team achieved remarkable results in both tasks. In FinArg-2, we secured first place in key subtasks through our innovative combination of fine-tuning models and prompt engineering. For MedNLP-CHAT, our multi-model collaborative approach effectively identified potential risks, achieving first place in 7 out of 8 subtasks in multilingual risk assessment. These achievements demonstrate our team's excellence in financial semantic reasoning and medical risk assessment applications.</p>
-        </div>
-
-        <!-- 成果特色功能網格 -->
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
-                <h4 data-i18n="results.features.medNLP.title">MedNLP Excellence</h4>
-                <p data-i18n="results.features.medNLP.desc">First place in 7/8 subtasks for multilingual medical risk assessment</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                <h4 data-i18n="results.features.finArg.title">FinArg Innovation</h4>
-                <p data-i18n="results.features.finArg.desc">Leading performance in financial temporal reasoning tasks</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-globe"></i></div>
-                <h4 data-i18n="results.features.multilingual.title">Multilingual Success</h4>
-                <p data-i18n="results.features.multilingual.desc">Effective cross-language performance across multiple domains</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-brain"></i></div>
-                <h4 data-i18n="results.features.innovation.title">AI Innovation</h4>
-                <p data-i18n="results.features.innovation.desc">Novel ensemble approaches and prompt engineering techniques</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 獲得獎項 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="awards.title">Awards & Recognition</h2>
-        <p data-i18n="awards.content">We are proud to have received multiple prestigious awards for our contributions to NTCIR-18:</p>
-        
-        <div class="awards-grid">
-            <div class="award-card" onclick="openLightbox('awards/medNLP_best_oral.jpg')">
-                <img src="awards/medNLP_best_oral.jpg" alt="MedNLP-CHAT Best Oral Presentation Award">
-                <h4 data-i18n="awards.medNLP.oral.title">Best Oral Presentation Award</h4>
-                <p data-i18n="awards.medNLP.oral.subtitle">MedNLP-CHAT Task</p>
-            </div>
-            <div class="award-card" onclick="openLightbox('awards/finArg_best_oral.jpg')">
-                <img src="awards/finArg_best_oral.jpg" alt="FinArg-2 Best Oral Presentation Award">
-                <h4 data-i18n="awards.finArg.oral.title">Best Oral Presentation Award</h4>
-                <p data-i18n="awards.finArg.oral.subtitle">FinArg-2 Task</p>
-            </div>
-            <div class="award-card" onclick="openLightbox('awards/finArg_best_poster.jpg')">
-                <img src="awards/finArg_best_poster.jpg" alt="FinArg-2 Best Poster Award">
-                <h4 data-i18n="awards.finArg.poster.title">Best Poster Award</h4>
-                <p data-i18n="awards.finArg.poster.subtitle">FinArg-2 Task</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 團隊成員 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="team.title">Team Members</h2>
-        <p data-i18n="team.content">The IMNTPU team consists of members from National Taipei University, led by Professor Min-Yuh Day:</p>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <img src="team/myday_photo.png" alt="Professor Min-Yuh Day">
-                <h4 data-i18n="team.members.advisor.name">Prof. Min-Yuh Day</h4>
-                <p data-i18n="team.members.advisor.title">Team Advisor, Professor at Department of Information Management, NTPU</p>
-            </div>
-            <div class="team-member">
-                <img src="team/jeremy_photo.png" alt="Jun-Yu Wu">
-                <h4 data-i18n="team.members.captain.name">Jun-Yu Wu</h4>
-                <p data-i18n="team.members.captain.title">Team Captain, Department of Leisure and Sport Management, NTPU</p>
-            </div>
-            <div class="team-member">
-                <img src="team/carol_photo.png" alt="Wen-Hsin Hsiao">
-                <h4 data-i18n="team.members.viceCaptain.name">Wen-Hsin Hsiao</h4>
-                <p data-i18n="team.members.viceCaptain.title">Vice Captain, Graduate Institute of Information Management, NTPU</p>
-            </div>
-            <div class="team-member">
-                <img src="team/Yun_photo2.png" alt="Cheng-Yun Wu">
-                <h4 data-i18n="team.members.medNLP.name">Cheng-Yun Wu</h4>
-                <p data-i18n="team.members.medNLP.title">MedNLP-CHAT Vice Captain, Graduate Institute of Information Management, NTPU</p>
-            </div>
-            <div class="team-member">
-                <img src="team/jen_photo.png" alt="Bor-Jen Chen">
-                <h4 data-i18n="team.members.finArg.name">Bor-Jen Chen</h4>
-                <p data-i18n="team.members.finArg.title">FinArg-2 Captain, Graduate Institute of Information Management, NTPU</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 影響與貢獻 -->
-    <div class="content-card fade-in">
-        <h2 class="section-header" data-i18n="impact.title">Impact & Contributions</h2>
-        <div class="project-overview">
-            <div class="overview-card">
-                <h4 data-i18n="impact.research.title">Research Contribution</h4>
-                <p data-i18n="impact.research.content">Advancing multilingual AI and risk assessment methodologies</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="impact.innovation.title">Technical Innovation</h4>
-                <p data-i18n="impact.innovation.content">Novel ensemble approaches for medical and financial AI applications</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="impact.collaboration.title">International Collaboration</h4>
-                <p data-i18n="impact.collaboration.content">Contributing to global AI research community and evaluation standards</p>
-            </div>
-            <div class="overview-card">
-                <h4 data-i18n="impact.applications.title">Real-world Applications</h4>
-                <p data-i18n="impact.applications.content">Practical solutions for medical chatbot safety and financial analysis</p>
-            </div>
-        </div>
+    <div class="case-toc">
+        <a href="#overview" data-i18n="tocOverview">Overview</a>
+        <a href="#architecture" data-i18n="tocArchitecture">System Architecture</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#finetuning" data-i18n="tocFinetuning">Fine-tuning</a>
+        <a href="#results" data-i18n="tocResults">Results</a>
+        <a href="#awards" data-i18n="tocAwards">Awards</a>
+        <a href="#team" data-i18n="tocTeam">Team</a>
     </div>
 </div>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" alt="Award certificate">
+<section class="case-section fade-in" id="overview">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="overviewTitle">Task Overview</span></h2>
+    <div class="case-card">
+        <p data-i18n-html="overviewIntro">The NTCIR-18 MedNLP-CHAT task evaluates whether a medical chatbot's response to a patient's question carries <strong>medical, ethical, or legal risk</strong>. Our team, IMNTPU, built a multilingual risk-classification system combining fine-tuned small models, few-shot prompting with frontier LLMs, and agentic multi-model voting. We submitted 24 systems across all language tracks, the most of any participating team, and the paper won the <strong>Best Oral Presentation Award</strong>.</p>
+    </div>
+    <div class="overview-grid">
+        <div class="overview-card">
+            <h4 data-i18n="ov1Title">Goal</h4>
+            <p data-i18n="ov1Desc">Classify whether a chatbot's response to a patient's question poses a medical, ethical, or legal risk.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="ov2Title">Input &amp; Output</h4>
+            <p data-i18n="ov2Desc">Patient question + chatbot answer pairs, labeled with binary risk indicators; the Japanese set also includes subjective scores for fluency, helpfulness, and harmlessness.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="ov3Title">Languages</h4>
+            <p data-i18n="ov3Desc">Japanese and German source datasets, each professionally translated into English and French.</p>
+        </div>
+        <div class="overview-card">
+            <h4 data-i18n="ov4Title">My Focus</h4>
+            <p data-i18n="ov4Desc">Prompt engineering across models, shot counts, and temperature settings, plus co-writing the paper's methodology section.</p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="architecture">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="archTitle">System Architecture</span></h2>
+    <div class="case-card">
+        <p data-i18n="archIntro">We submitted three systems across every language track, each built on a shared foundation of prompt-engineered LLMs and layered with a different aggregation strategy.</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4><i class="fas fa-robot"></i> <span data-i18n="sys1Title">System 1 &middot; Optimal LLM Selection</span></h4>
+            <p data-i18n="sys1Desc">Picked the best-performing LLM by training-set accuracy, using three-shot prompting.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-people-group"></i> <span data-i18n="sys2Title">System 2 &middot; Agentic AI Majority Voting</span></h4>
+            <p data-i18n="sys2Desc">Four independent LLMs evaluate each case in parallel; the majority vote decides, with ties resolved by dropping the lowest-performing model's vote.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-scale-balanced"></i> <span data-i18n="sys3Title">System 3 &middot; Agentic AI Weighted Scoring</span></h4>
+            <p data-i18n="sys3Desc">Each LLM outputs a 0&ndash;1 confidence score; the final decision is a weighted aggregation based on that model's demonstrated accuracy on the dev set.</p>
+        </div>
+    </div>
+    <div class="diagram-box">
+        <img src="case-studies/ntcir18/poster.png" alt="IMNTPU NTCIR-18 MedNLP-CHAT poster" onclick="openLightbox(this.src)">
+        <p class="diagram-caption" data-i18n="posterCaption">Full conference poster &mdash; click to zoom</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Prompt Engineering &amp; Methodology</div>
+        </div>
+        <p data-i18n="roleIntro">As part of the 5-person IMNTPU team led by Prof. Min-Yuh Day, I focused on the prompt engineering work behind our LLM-based systems.</p>
+        <ul data-i18n-html="roleList"></ul>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="finetuning">
+    <h2><i class="fas fa-sliders"></i> <span data-i18n="ftTitle">Fine-tuning: Multi-language Track</span></h2>
+    <div class="case-card">
+        <p data-i18n="ftIntro">Alongside the prompting-based systems, we fine-tuned a LLaMA 3.2 3B model directly on the MedNLP-2 Japanese and German datasets, then tested it under three configurations for the multilingual track.</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4><i class="fas fa-1"></i> <span data-i18n="ft1Title">Zero-shot Fine-tuned</span></h4>
+            <p data-i18n="ft1Desc">The fine-tuned model alone, with no prompt examples.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-2"></i> <span data-i18n="ft2Title">Three-shot, English Only</span></h4>
+            <p data-i18n="ft2Desc">Three-shot prompting layered on top of the fine-tuned model, using English examples.</p>
+        </div>
+        <div class="feature-card">
+            <h4><i class="fas fa-3"></i> <span data-i18n="ft3Title">Three-shot, Multilingual</span></h4>
+            <p data-i18n="ft3Desc">Three-shot prompting with English, Japanese, and French examples together.</p>
+        </div>
+    </div>
+    <div class="case-card" style="margin-top:20px;">
+        <p data-i18n-html="ftResult">On Legal Risk assessment, the fine-tuned multilingual system reached a <strong>0.576 Macro F1</strong> on the Japanese dataset, ahead of the GPT-4o few-shot baseline's 0.456. Overall, though, fine-tuning's gains were limited by a small 212-sample training set, so few-shot prompting with larger LLMs generally performed better across the other risk categories.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="results">
+    <h2><i class="fas fa-chart-line"></i> <span data-i18n="resultsTitle">Results</span></h2>
+    <div class="achievement-grid">
+        <div class="achievement-card">
+            <div class="achievement-icon"><i class="fas fa-layer-group"></i></div>
+            <span class="achievement-number">24</span>
+            <h4 data-i18n="res1Title">Systems Submitted</h4>
+            <p data-i18n="res1Desc">The most of any participating team, across every language track</p>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon"><i class="fas fa-triangle-exclamation"></i></div>
+            <span class="achievement-number">3</span>
+            <h4 data-i18n="res2Title">Risk Dimensions</h4>
+            <p data-i18n="res2Desc">Medical, ethical, and legal risk, evaluated per response</p>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon"><i class="fas fa-language"></i></div>
+            <span class="achievement-number">4</span>
+            <h4 data-i18n="res3Title">Languages Covered</h4>
+            <p data-i18n="res3Desc">Japanese and German source data, plus English and French translations</p>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+            <span class="achievement-number" data-i18n="res4Number">1st</span>
+            <h4 data-i18n="res4Title">Best Oral Presentation</h4>
+            <p data-i18n="res4Desc">Awarded for the MedNLP-CHAT paper</p>
+        </div>
+    </div>
+    <div class="proof-grid" style="margin-top:20px;">
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-scale-unbalanced"></i></div>
+            <h4 data-i18n="find1Title">Ethical Risk saw the biggest gains</h4>
+            <p data-i18n="find1Desc">Agentic voting improved decision consistency most on Ethical Risk, the most subjective of the three categories. Medical and Legal Risk, which follow more structured rules, gained less since a single well-prompted LLM already handled them well.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-flag"></i></div>
+            <h4 data-i18n="find2Title">Japanese systems were the most stable</h4>
+            <p data-i18n="find2Desc">Higher-quality native-language annotations led to more consistent performance than the translated English and French tracks.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-gauge-high"></i></div>
+            <h4 data-i18n="find3Title">Confidence didn't always track accuracy</h4>
+            <p data-i18n="find3Desc">Some systems stayed highly confident even when wrong, showing that trust-weighted voting can amplify overconfidence rather than correct it.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-road"></i></div>
+            <h4 data-i18n="find4Title">Future work</h4>
+            <p data-i18n="find4Desc">We proposed a Trust-Guided Agentic AI architecture, adding self-consistency filtering, dynamic trust updating, and Chain-of-Thought reasoning, since formalized in a follow-up paper.</p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="awards">
+    <h2><i class="fas fa-award"></i> <span data-i18n="awardsTitle">Awards</span></h2>
+    <div class="award-card" onclick="openLightbox('awards/medNLP_best_oral.jpg')">
+        <img src="awards/medNLP_best_oral.jpg" alt="NTCIR-18 MedNLP-CHAT Best Oral Presentation Award">
+        <h4 data-i18n="award1Title">Best Oral Presentation Award</h4>
+        <p data-i18n="award1Desc">NTCIR-18 MedNLP-CHAT Task &middot; Tokyo, Japan &middot; June 2025</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="team">
+    <h2><i class="fas fa-people-group"></i> <span data-i18n="teamTitle">Team</span></h2>
+    <div class="case-card">
+        <p data-i18n="teamIntro">The IMNTPU team, from National Taipei University's Information Management program, advised by Prof. Min-Yuh Day.</p>
+    </div>
+    <div class="team-grid">
+        <div class="team-member">
+            <img src="team/myday_photo.png" alt="Prof. Min-Yuh Day">
+            <h4 data-i18n="team1Name">Prof. Min-Yuh Day</h4>
+            <p data-i18n="team1Title">Team Advisor</p>
+        </div>
+        <div class="team-member">
+            <img src="team/jeremy_photo.png" alt="Jun-Yu Wu">
+            <h4 data-i18n="team2Name">Jun-Yu Wu</h4>
+            <p data-i18n="team2Title">Team Captain</p>
+        </div>
+        <div class="team-member">
+            <img src="team/Yun_photo2.png" alt="Cheng-Yun Wu">
+            <h4 data-i18n="team3Name">Cheng-Yun Wu</h4>
+            <p data-i18n="team3Title">MedNLP-CHAT Vice Captain</p>
+        </div>
+        <div class="team-member">
+            <img src="team/carol_photo.png" alt="Wen-Hsin Hsiao">
+            <h4 data-i18n="team4Name">Wen-Hsin Hsiao</h4>
+            <p data-i18n="team4Title">Team Vice Captain</p>
+        </div>
+        <div class="team-member">
+            <img src="team/jen_photo.png" alt="Bor-Jen Chen">
+            <h4 data-i18n="team5Name">Bor-Jen Chen</h4>
+            <p data-i18n="team5Title">Team Member</p>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:3000; justify-content:center; align-items:center;">
+    <span style="position:absolute; top:25px; right:35px; font-size:2.5rem; color:#fff; cursor:pointer;">&times;</span>
+    <img id="lightbox-img" alt="" style="max-width:92%; max-height:92%; border-radius:8px;">
 </div>
 
-<!-- JavaScript 腳本 -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html#home" data-i18n="footerHome">Home</a></p>
+            <p><a href="about.html" data-i18n="footerAbout">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="footerAwards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="footerExperiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="footerCertifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="footerConferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="footerOtherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
 <script>
-// Lightbox 函數
 function openLightbox(src) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = src;
-    lightbox.classList.add('active');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
 }
-
 function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
+    document.getElementById('lightbox').style.display = 'none';
 }
 
-// 頁面載入完成後初始化多語言系統
-document.addEventListener("DOMContentLoaded", function() {
-    // 初始化 i18next 多語言系統
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
+
+document.addEventListener('DOMContentLoaded', function () {
     i18next.use(i18nextBrowserLanguageDetector).init({
         fallbackLng: 'en',
         debug: false,
         resources: {
-            // 英文翻譯資源
             en: {
                 translation: {
-                    nav: {
-                        brand: "Yun's Portfolio",
-                        back: "← Back to Home"
-                    },
+                    backToProjects: "Back to Projects",
                     langButton: "中文",
-                    page: {
-                        title: "NTCIR-18",
-                        subtitle: "The 18th NII Testbeds and Community for Information access Research"
-                    },
-                    info: {
-                        organizer: {
-                            title: "Organizer",
-                            content: "National Institute of Informatics (NII), Japan"
-                        },
-                        date: {
-                            title: "Conference Date",
-                            content: "June 10-13, 2025"
-                        },
-                        location: {
-                            title: "Location",
-                            content: "Tokyo, Japan"
-                        },
-                        team: {
-                            title: "Participating Team",
-                            content: "IMNTPU Team, National Taipei University"
-                        }
-                    },
-                    stats: {
-                        tasks: "Tasks Participated",
-                        awards: "First Place Awards",
-                        languages: "Languages Supported",
-                        approach: "Research Approach"
-                    },
-                    introduction: {
-                        title: "Conference Introduction",
-                        about: {
-                            title: "About NTCIR-18",
-                            content: "NTCIR-18 is a biennial evaluation workshop series organized by the National Institute of Informatics (NII) to advance research in information access technologies such as information retrieval, question answering, and text summarization. The conference brings together international researchers to collaborate on cutting-edge AI and NLP challenges."
-                        },
-                        focus: {
-                            title: "Research Focus",
-                            content: "Information access technologies, multilingual AI, and specialized domain applications"
-                        },
-                        impact: {
-                            title: "Global Impact",
-                            content: "Advancing international collaboration in AI research and evaluation methodologies"
-                        },
-                        participation: {
-                            title: "Our Achievement",
-                            content: "Outstanding performance in medical AI and financial reasoning tasks"
-                        },
-                        innovation: {
-                            title: "Innovation Highlight",
-                            content: "Novel approaches combining multiple AI models and prompt engineering"
-                        }
-                    },
-                    tasks: {
-                        title: "Tasks Participated",
-                        intro: "The IMNTPU team participated in two main tasks during NTCIR-18, achieving outstanding results:",
-                        medNLP: {
-                            title: "MedNLP-CHAT",
-                            content: "Medical Natural Language Processing Dialogue System Evaluation - This task focuses on analyzing whether medical chatbot responses to patient questions contain potential medical, legal, or ethical risks. The dataset includes Japanese and German corpora with corresponding English and French translations. Our team achieved exceptional performance, winning first place in 7 out of 8 subtasks in multilingual risk assessment Joint Accuracy metrics."
-                        },
-                        finArg: {
-                            title: "FinArg-2",
-                            content: "Financial Argument Temporal Reasoning - This task focuses on temporal reasoning of statements in earnings calls and social media, requiring models to identify temporal reference points in statements and predict the validity period of statement content. Our team combined fine-tuning models and prompt engineering approaches, achieving first place in key subtasks and demonstrating strong potential in financial semantic reasoning applications."
-                        }
-                    },
-                    methodology: {
-                        title: "Research Methodology",
-                        intro: "Our research employed innovative methodologies for both tasks, combining state-of-the-art approaches in natural language processing and machine learning.",
-                        medNLP: {
-                            title: "MedNLP-CHAT Methodology",
-                            agentic: {
-                                title: "Agentic AI Framework",
-                                desc: "Multi-model collaborative approach with majority voting and weighted scoring systems"
-                            },
-                            prompt: {
-                                title: "Prompt Engineering",
-                                desc: "Three-shot prompting with GPT-4o, Claude 3.5 Sonnet, Mistral small latest"
-                            },
-                            risk: {
-                                title: "Risk Assessment",
-                                desc: "Medical, legal, and ethical risk evaluation across multiple languages"
-                            }
-                        },
-                        finArg: {
-                            title: "FinArg-2 Methodology",
-                            finetune: {
-                                title: "Model Fine-tuning",
-                                desc: "BERT, RoBERTa, DistilBERT for encoder-based tasks; GPT-4o Mini for decoder-based"
-                            },
-                            augment: {
-                                title: "Data Augmentation",
-                                desc: "Semantic variation generation to address class imbalance in financial datasets"
-                            },
-                            temporal: {
-                                title: "Temporal Reasoning",
-                                desc: "Classification of argument claims based on temporal references in financial contexts"
-                            }
-                        },
-                        tech: {
-                            title: "Technical Approach"
-                        }
-                    },
-                    results: {
-                        title: "Research Results",
-                        achievement: {
-                            title: "Outstanding Achievement",
-                            content: "The IMNTPU team achieved remarkable results in both tasks. In FinArg-2, we secured first place in key subtasks through our innovative combination of fine-tuning models and prompt engineering. For MedNLP-CHAT, our multi-model collaborative approach effectively identified potential risks, achieving first place in 7 out of 8 subtasks in multilingual risk assessment. These achievements demonstrate our team's excellence in financial semantic reasoning and medical risk assessment applications."
-                        },
-                        features: {
-                            medNLP: {
-                                title: "MedNLP Excellence",
-                                desc: "First place in 7/8 subtasks for multilingual medical risk assessment"
-                            },
-                            finArg: {
-                                title: "FinArg Innovation",
-                                desc: "Leading performance in financial temporal reasoning tasks"
-                            },
-                            multilingual: {
-                                title: "Multilingual Success",
-                                desc: "Effective cross-language performance across multiple domains"
-                            },
-                            innovation: {
-                                title: "AI Innovation",
-                                desc: "Novel ensemble approaches and prompt engineering techniques"
-                            }
-                        }
-                    },
-                    awards: {
-                        title: "Awards & Recognition",
-                        content: "We are proud to have received multiple prestigious awards for our contributions to NTCIR-18:",
-                        medNLP: {
-                            oral: {
-                                title: "Best Oral Presentation Award",
-                                subtitle: "MedNLP-CHAT Task"
-                            }
-                        },
-                        finArg: {
-                            oral: {
-                                title: "Best Oral Presentation Award",
-                                subtitle: "FinArg-2 Task"
-                            },
-                            poster: {
-                                title: "Best Poster Award",
-                                subtitle: "FinArg-2 Task"
-                            }
-                        }
-                    },
-                    team: {
-                        title: "Team Members",
-                        content: "The IMNTPU team consists of members from National Taipei University, led by Professor Min-Yuh Day:",
-                        members: {
-                            advisor: {
-                                name: "Prof. Min-Yuh Day",
-                                title: "Team Advisor, Professor at Department of Information Management, NTPU"
-                            },
-                            captain: {
-                                name: "Jun-Yu Wu",
-                                title: "Team Captain, Department of Leisure and Sport Management, NTPU"
-                            },
-                            viceCaptain: {
-                                name: "Wen-Hsin Hsiao",
-                                title: "Vice Captain, Graduate Institute of Information Management, NTPU"
-                            },
-                            medNLP: {
-                                name: "Cheng-Yun Wu",
-                                title: "MedNLP-CHAT Vice Captain, Graduate Institute of Information Management, NTPU"
-                            },
-                            finArg: {
-                                name: "Bor-Jen Chen",
-                                title: "FinArg-2 Captain, Graduate Institute of Information Management, NTPU"
-                            }
-                        }
-                    },
-                    impact: {
-                        title: "Impact & Contributions",
-                        research: {
-                            title: "Research Contribution",
-                            content: "Advancing multilingual AI and risk assessment methodologies"
-                        },
-                        innovation: {
-                            title: "Technical Innovation",
-                            content: "Novel ensemble approaches for medical and financial AI applications"
-                        },
-                        collaboration: {
-                            title: "International Collaboration",
-                            content: "Contributing to global AI research community and evaluation standards"
-                        },
-                        applications: {
-                            title: "Real-world Applications",
-                            content: "Practical solutions for medical chatbot safety and financial analysis"
-                        }
-                    }
+                    badge: "Best Oral Presentation Award · NTCIR-18 Conference",
+                    title: "IMNTPU at NTCIR-18 MedNLP-CHAT Task: Evaluating Agentic AI for Multilingual Risk Assessment in Medical Chatbots",
+                    subtitle: "A multilingual risk-classification system for medical chatbot responses, built with fine-tuned models, few-shot LLM prompting, and agentic multi-model voting",
+                    meta: "NTCIR-18 Conference · Prompt Engineering & Fine-tuning · Jun 10–13, 2025, Tokyo, Japan",
+                    authors: "Jun-Yu Wu, Cheng-Yun Wu, Bor-Jen Chen, Wen-Hsin Hsiao, Min-Yuh Day (advisor) · Information Management, National Taipei University",
+                    linkPaper: "Read the Paper",
+                    linkPoster: "View the Poster",
+                    tocOverview: "Overview",
+                    tocArchitecture: "System Architecture",
+                    tocRole: "My Role",
+                    tocFinetuning: "Fine-tuning",
+                    tocResults: "Results",
+                    tocAwards: "Awards",
+                    tocTeam: "Team",
+                    overviewTitle: "Task Overview",
+                    overviewIntro: "The NTCIR-18 MedNLP-CHAT task evaluates whether a medical chatbot's response to a patient's question carries <strong>medical, ethical, or legal risk</strong>. Our team, IMNTPU, built a multilingual risk-classification system combining fine-tuned small models, few-shot prompting with frontier LLMs, and agentic multi-model voting. We submitted 24 systems across all language tracks, the most of any participating team, and the paper won the <strong>Best Oral Presentation Award</strong>.",
+                    ov1Title: "Goal",
+                    ov1Desc: "Classify whether a chatbot's response to a patient's question poses a medical, ethical, or legal risk.",
+                    ov2Title: "Input & Output",
+                    ov2Desc: "Patient question + chatbot answer pairs, labeled with binary risk indicators; the Japanese set also includes subjective scores for fluency, helpfulness, and harmlessness.",
+                    ov3Title: "Languages",
+                    ov3Desc: "Japanese and German source datasets, each professionally translated into English and French.",
+                    ov4Title: "My Focus",
+                    ov4Desc: "Prompt engineering across models, shot counts, and temperature settings, plus co-writing the paper's methodology section.",
+                    archTitle: "System Architecture",
+                    archIntro: "We submitted three systems across every language track, each built on a shared foundation of prompt-engineered LLMs and layered with a different aggregation strategy.",
+                    sys1Title: "System 1 · Optimal LLM Selection",
+                    sys1Desc: "Picked the best-performing LLM by training-set accuracy, using three-shot prompting.",
+                    sys2Title: "System 2 · Agentic AI Majority Voting",
+                    sys2Desc: "Four independent LLMs evaluate each case in parallel; the majority vote decides, with ties resolved by dropping the lowest-performing model's vote.",
+                    sys3Title: "System 3 · Agentic AI Weighted Scoring",
+                    sys3Desc: "Each LLM outputs a 0–1 confidence score; the final decision is a weighted aggregation based on that model's demonstrated accuracy on the dev set.",
+                    posterCaption: "Full conference poster — click to zoom",
+                    roleTitle: "My Role",
+                    roleSubtitle: "Prompt Engineering & Methodology",
+                    roleIntro: "As part of the 5-person IMNTPU team led by Prof. Min-Yuh Day, I focused on the prompt engineering work behind our LLM-based systems.",
+                    roleList: "<li><strong>Model & shot-count evaluation:</strong> Tested GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Flash, and Mistral Small Latest across zero-shot through five-shot prompting to find which combination performed best on the training set.</li><li><strong>Parameter tuning:</strong> Compared different temperature settings across models to find the most stable, best-performing configuration, which we then standardized as three-shot prompting for the final systems.</li><li><strong>Prompt design:</strong> Wrote the structured evaluation prompt that walks each model through medical, ethical, and legal risk definitions before asking it to label a chatbot response.</li><li><strong>Paper writing:</strong> Co-authored the paper, writing 1–2 pages covering the prompt engineering methodology.</li>",
+                    ftTitle: "Fine-tuning: Multi-language Track",
+                    ftIntro: "Alongside the prompting-based systems, we fine-tuned a LLaMA 3.2 3B model directly on the MedNLP-2 Japanese and German datasets, then tested it under three configurations for the multilingual track.",
+                    ft1Title: "Zero-shot Fine-tuned",
+                    ft1Desc: "The fine-tuned model alone, with no prompt examples.",
+                    ft2Title: "Three-shot, English Only",
+                    ft2Desc: "Three-shot prompting layered on top of the fine-tuned model, using English examples.",
+                    ft3Title: "Three-shot, Multilingual",
+                    ft3Desc: "Three-shot prompting with English, Japanese, and French examples together.",
+                    ftResult: "On Legal Risk assessment, the fine-tuned multilingual system reached a <strong>0.576 Macro F1</strong> on the Japanese dataset, ahead of the GPT-4o few-shot baseline's 0.456. Overall, though, fine-tuning's gains were limited by a small 212-sample training set, so few-shot prompting with larger LLMs generally performed better across the other risk categories.",
+                    resultsTitle: "Results",
+                    res1Title: "Systems Submitted",
+                    res1Desc: "The most of any participating team, across every language track",
+                    res2Title: "Risk Dimensions",
+                    res2Desc: "Medical, ethical, and legal risk, evaluated per response",
+                    res3Title: "Languages Covered",
+                    res3Desc: "Japanese and German source data, plus English and French translations",
+                    res4Number: "1st",
+                    res4Title: "Best Oral Presentation",
+                    res4Desc: "Awarded for the MedNLP-CHAT paper",
+                    find1Title: "Ethical Risk saw the biggest gains",
+                    find1Desc: "Agentic voting improved decision consistency most on Ethical Risk, the most subjective of the three categories. Medical and Legal Risk, which follow more structured rules, gained less since a single well-prompted LLM already handled them well.",
+                    find2Title: "Japanese systems were the most stable",
+                    find2Desc: "Higher-quality native-language annotations led to more consistent performance than the translated English and French tracks.",
+                    find3Title: "Confidence didn't always track accuracy",
+                    find3Desc: "Some systems stayed highly confident even when wrong, showing that trust-weighted voting can amplify overconfidence rather than correct it.",
+                    find4Title: "Future work",
+                    find4Desc: "We proposed a Trust-Guided Agentic AI architecture, adding self-consistency filtering, dynamic trust updating, and Chain-of-Thought reasoning, since formalized in a follow-up paper.",
+                    awardsTitle: "Awards",
+                    award1Title: "Best Oral Presentation Award",
+                    award1Desc: "NTCIR-18 MedNLP-CHAT Task · Tokyo, Japan · June 2025",
+                    teamTitle: "Team",
+                    teamIntro: "The IMNTPU team, from National Taipei University's Information Management program, advised by Prof. Min-Yuh Day.",
+                    team1Name: "Prof. Min-Yuh Day",
+                    team1Title: "Team Advisor",
+                    team2Name: "Jun-Yu Wu",
+                    team2Title: "Team Captain",
+                    team3Name: "Cheng-Yun Wu",
+                    team3Title: "MedNLP-CHAT Vice Captain",
+                    team4Name: "Wen-Hsin Hsiao",
+                    team4Title: "Team Vice Captain",
+                    team5Name: "Bor-Jen Chen",
+                    team5Title: "Team Member",
+                    footerContact: "Contact",
+                    footerUniversity: "National Taipei University",
+                    footerLinks: "Links",
+                    footerHome: "Home",
+                    footerAbout: "About Me",
+                    footerProjects: "Projects",
+                    footerCompetitions: "Competitions",
+                    footerAwards: "Awards",
+                    footerExperiences: "Experiences",
+                    footerPublications: "Publications",
+                    footerCertifications: "Certifications",
+                    footerConferences: "Conferences",
+                    footerOtherExperiences: "Other Experiences",
+                    footerConnect: "Connect",
+                    footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
                 }
             },
-            // 繁體中文翻譯資源
             zh: {
                 translation: {
-                    nav: {
-                        brand: "Yun 的作品集",
-                        back: "← 回到首頁"
-                    },
+                    backToProjects: "返回專案作品",
                     langButton: "English",
-                    page: {
-                        title: "NTCIR-18",
-                        subtitle: "第18屆NTCIR國際資訊存取技術評估研討會"
-                    },
-                    info: {
-                        organizer: {
-                            title: "主辦機構",
-                            content: "日本國立情報研究所 (NII)"
-                        },
-                        date: {
-                            title: "會議日期",
-                            content: "2025年6月10日至13日"
-                        },
-                        location: {
-                            title: "會議地點",
-                            content: "日本東京"
-                        },
-                        team: {
-                            title: "參與團隊",
-                            content: "IMNTPU團隊，國立臺北大學"
-                        }
-                    },
-                    stats: {
-                        tasks: "參與任務",
-                        awards: "第一名獎項",
-                        languages: "支援語言",
-                        approach: "研究方法"
-                    },
-                    introduction: {
-                        title: "會議介紹",
-                        about: {
-                            title: "關於NTCIR-18",
-                            content: "NTCIR-18由日本國立情報研究所（NII）主辦，為兩年一度的國際評估研討會，致力於推動資訊檢索、問答系統與摘要等資訊存取技術研究。本研討會匯集全球研究者，共同探討前沿的AI與自然語言處理挑戰。"
-                        },
-                        focus: {
-                            title: "研究焦點",
-                            content: "資訊存取技術、多語言AI及專業領域應用"
-                        },
-                        impact: {
-                            title: "國際影響",
-                            content: "促進AI研究與評估方法的國際合作"
-                        },
-                        participation: {
-                            title: "我們的成就",
-                            content: "在醫療AI和財務推理任務中表現卓越"
-                        },
-                        innovation: {
-                            title: "創新亮點",
-                            content: "結合多模型AI與提示工程的創新方法"
-                        }
-                    },
-                    tasks: {
-                        title: "參與任務",
-                        intro: "IMNTPU團隊參與了NTCIR-18的兩個主要任務，並取得卓越成果：",
-                        medNLP: {
-                            title: "MedNLP-CHAT",
-                            content: "醫療自然語言處理對話系統評估 - 旨在分析醫療聊天機器人回應病患問題時，是否潛藏醫療、法律或倫理風險。資料涵蓋日文與德文語料，並提供相對應的英文與法文翻譯。我們的團隊表現優異，在多語言風險判斷的Joint Accuracy指標上，8個子任務中拿下7項第一。"
-                        },
-                        finArg: {
-                            title: "FinArg-2",
-                            content: "財務論證的時間推理 - 聚焦於法說會與社群媒體中的語句時效性推理，模型要能辨識語句中的時間參照點，並預測聲明內容的有效期間。團隊結合微調模型及提示工程不同方法，於關鍵子任務獲得第一名，展現在財務語意推理的應用潛力。"
-                        }
-                    },
-                    methodology: {
-                        title: "研究方法",
-                        intro: "我們的研究在兩個任務中都採用了創新的方法論，結合了自然語言處理和機器學習領域的前沿技術。",
-                        medNLP: {
-                            title: "MedNLP-CHAT 研究方法",
-                            agentic: {
-                                title: "代理AI框架",
-                                desc: "多模型協作方法，結合多數投票和加權評分系統"
-                            },
-                            prompt: {
-                                title: "提示工程",
-                                desc: "使用GPT-4o、Claude 3.5 Sonnet、Mistral small latest的三次提示技術"
-                            },
-                            risk: {
-                                title: "風險評估",
-                                desc: "跨多種語言的醫療、法律和倫理風險評估"
-                            }
-                        },
-                        finArg: {
-                            title: "FinArg-2 研究方法",
-                            finetune: {
-                                title: "模型微調",
-                                desc: "編碼器任務使用BERT、RoBERTa、DistilBERT；解碼器任務使用GPT-4o Mini"
-                            },
-                            augment: {
-                                title: "數據增強",
-                                desc: "語義變化生成以解決金融數據集中的類別不平衡問題"
-                            },
-                            temporal: {
-                                title: "時間推理",
-                                desc: "基於金融語境中時間參考的論證聲明分類"
-                            }
-                        },
-                        tech: {
-                            title: "技術方法"
-                        }
-                    },
-                    results: {
-                        title: "研究成果",
-                        achievement: {
-                            title: "卓越成就",
-                            content: "IMNTPU團隊在兩項任務中都取得了卓越成果。在FinArg-2任務中，透過創新結合微調模型及提示工程的方法，於關鍵子任務獲得第一名。在MedNLP-CHAT任務中，運用多個模型合作有效辨識潛在風險，在多語言風險判斷的Joint Accuracy指標上，8個子任務中拿下7項第一，充分展現其在醫療風險判斷上的準確性與穩定性。"
-                        },
-                        features: {
-                            medNLP: {
-                                title: "MedNLP卓越表現",
-                                desc: "在多語言醫療風險評估的8個子任務中獲得7項第一"
-                            },
-                            finArg: {
-                                title: "FinArg創新成果",
-                                desc: "在財務時間推理任務中表現領先"
-                            },
-                            multilingual: {
-                                title: "多語言成功",
-                                desc: "在多個領域中展現有效的跨語言表現"
-                            },
-                            innovation: {
-                                title: "AI創新",
-                                desc: "創新的集成方法和提示工程技術"
-                            }
-                        }
-                    },
-                    awards: {
-                        title: "獲獎紀錄",
-                        content: "我們為在NTCIR-18中獲得的多項殊榮感到驕傲：",
-                        medNLP: {
-                            oral: {
-                                title: "最佳口頭報告獎",
-                                subtitle: "MedNLP-CHAT 任務"
-                            }
-                        },
-                        finArg: {
-                            oral: {
-                                title: "最佳口頭報告獎",
-                                subtitle: "FinArg-2 任務"
-                            },
-                            poster: {
-                                title: "最佳海報獎",
-                                subtitle: "FinArg-2 任務"
-                            }
-                        }
-                    },
-                    team: {
-                        title: "團隊成員",
-                        content: "IMNTPU團隊由國立臺北大學成員組成，由戴敏育教授帶領：",
-                        members: {
-                            advisor: {
-                                name: "戴敏育教授",
-                                title: "團隊指導教授，國立臺北大學資訊管理研究所教授"
-                            },
-                            captain: {
-                                name: "吳峻宇",
-                                title: "總隊長，國立臺北大學休閒運動管理學系"
-                            },
-                            viceCaptain: {
-                                name: "蕭文欣",
-                                title: "總副隊長，國立臺北大學資訊管理研究所"
-                            },
-                            medNLP: {
-                                name: "吳承耘",
-                                title: "MedNLP-CHAT副隊長，國立臺北大學資訊管理研究所"
-                            },
-                            finArg: {
-                                name: "陳柏臻",
-                                title: "FinArg-2隊長，國立臺北大學資訊管理研究所"
-                            }
-                        }
-                    },
-                    impact: {
-                        title: "影響與貢獻",
-                        research: {
-                            title: "研究貢獻",
-                            content: "推進多語言AI和風險評估方法學"
-                        },
-                        innovation: {
-                            title: "技術創新",
-                            content: "醫療和金融AI應用的創新集成方法"
-                        },
-                        collaboration: {
-                            title: "國際合作",
-                            content: "為全球AI研究社群和評估標準做出貢獻"
-                        },
-                        applications: {
-                            title: "實際應用",
-                            content: "為醫療聊天機器人安全和金融分析提供實用解決方案"
-                        }
-                    }
+                    badge: "最佳口頭報告獎．NTCIR-18 國際研討會",
+                    title: "IMNTPU at NTCIR-18 MedNLP-CHAT Task: Evaluating Agentic AI for Multilingual Risk Assessment in Medical Chatbots",
+                    subtitle: "結合微調模型、LLM Few-shot 提示與多模型代理式投票，為醫療聊天機器人回應打造的多語言風險分類系統",
+                    meta: "NTCIR-18 國際研討會．Prompt Engineering 與模型微調．2025年6月10-13日，日本東京",
+                    authors: "吳峻宇、吳承耘、陳柏臻、蕭文欣、戴敏育教授（指導）．國立臺北大學資訊管理學系",
+                    linkPaper: "閱讀論文",
+                    linkPoster: "查看海報",
+                    tocOverview: "計畫概述",
+                    tocArchitecture: "系統架構",
+                    tocRole: "我負責的部分",
+                    tocFinetuning: "模型微調",
+                    tocResults: "研究成果",
+                    tocAwards: "獲獎紀錄",
+                    tocTeam: "團隊成員",
+                    overviewTitle: "任務概述",
+                    overviewIntro: "NTCIR-18 MedNLP-CHAT 任務評估醫療聊天機器人對病患提問的回應，是否帶有<strong>醫療、倫理或法律風險</strong>。我們的團隊 IMNTPU 打造了一套多語言風險分類系統，結合微調小型模型、以前沿LLM進行的Few-shot提示，以及多模型代理式投票。我們在所有語言賽道中共提交24套系統，為參賽隊伍中最多，論文並獲得<strong>最佳口頭報告獎</strong>。",
+                    ov1Title: "目標",
+                    ov1Desc: "判斷聊天機器人對病患提問的回應，是否帶有醫療、倫理或法律風險。",
+                    ov2Title: "輸入與輸出",
+                    ov2Desc: "病患提問與聊天機器人回答配對，標註二元風險指標；日文資料集另包含流暢度、有幫助程度、無害程度的主觀評分。",
+                    ov3Title: "語言",
+                    ov3Desc: "日文與德文為原始資料集，並各自由專業譯者翻譯成英文與法文。",
+                    ov4Title: "我的負責重點",
+                    ov4Desc: "跨模型、跨shot數、跨temperature參數的Prompt Engineering，並共同撰寫論文方法論章節。",
+                    archTitle: "系統架構",
+                    archIntro: "我們在每個語言賽道都提交了三套系統，皆建立在Prompt Engineering調校過的LLM基礎上，再疊加不同的聚合策略。",
+                    sys1Title: "System 1．最佳LLM選擇",
+                    sys1Desc: "依訓練集準確度挑選表現最佳的LLM，搭配Three-shot提示。",
+                    sys2Title: "System 2．代理式多數決投票",
+                    sys2Desc: "四個獨立LLM平行評估同一案例，由多數決定結果；平手時排除表現最差模型的投票。",
+                    sys3Title: "System 3．代理式加權評分",
+                    sys3Desc: "每個LLM輸出0至1的信心分數，最終結果依各模型在驗證集上的實測準確度加權彙總。",
+                    posterCaption: "完整研討會海報，點擊放大",
+                    roleTitle: "我負責的部分",
+                    roleSubtitle: "Prompt Engineering 與方法論",
+                    roleIntro: "身為戴敏育教授帶領的5人IMNTPU團隊成員之一，我主要負責LLM系統背後的Prompt Engineering工作。",
+                    roleList: "<li><strong>模型與shot數評估：</strong>測試GPT-4o、Claude 3.5 Sonnet、Gemini 1.5 Flash、Mistral Small Latest在Zero-shot到Five-shot提示下的表現，找出訓練集上成效最好的組合。</li><li><strong>參數調校：</strong>比較不同模型在各種temperature設定下的表現，找出最穩定、成效最佳的配置，最終將Three-shot提示訂為正式系統的標準設定。</li><li><strong>提示詞設計：</strong>撰寫結構化的評估提示詞，引導模型依序理解醫療、倫理、法律風險的定義，再對聊天機器人回應進行標註。</li><li><strong>論文撰寫：</strong>共同撰寫論文，負責1至2頁涵蓋Prompt Engineering方法論的內容。</li>",
+                    ftTitle: "模型微調：多語言賽道",
+                    ftIntro: "除了以提示詞為主的系統，我們也直接在MedNLP-2的日文與德文資料集上微調LLaMA 3.2 3B模型，並針對多語言賽道測試三種設定。",
+                    ft1Title: "Zero-shot 微調模型",
+                    ft1Desc: "單純使用微調後的模型，不提供任何提示範例。",
+                    ft2Title: "Three-shot，僅英文",
+                    ft2Desc: "在微調模型上疊加Three-shot提示，範例皆為英文。",
+                    ft3Title: "Three-shot，多語言",
+                    ft3Desc: "Three-shot提示同時包含英文、日文、法文範例。",
+                    ftResult: "在法律風險判斷任務中，微調的多語言系統在日文資料集上達到<strong>0.576 Macro F1</strong>，優於GPT-4o Few-shot基準的0.456。不過整體而言，由於訓練集僅212筆樣本規模有限，微調的成效受限，其他風險類別仍是搭配大型LLM的Few-shot提示表現較佳。",
+                    resultsTitle: "研究成果",
+                    res1Title: "提交系統數",
+                    res1Desc: "橫跨所有語言賽道，為參賽隊伍中最多",
+                    res2Title: "風險評估面向",
+                    res2Desc: "每則回應皆評估醫療、倫理、法律三項風險",
+                    res3Title: "涵蓋語言數",
+                    res3Desc: "日文與德文原始資料，加上英文與法文翻譯版本",
+                    res4Number: "第一",
+                    res4Title: "最佳口頭報告獎",
+                    res4Desc: "MedNLP-CHAT論文獲頒此獎項",
+                    find1Title: "倫理風險的提升幅度最大",
+                    find1Desc: "代理式投票在倫理風險（三項中最主觀的一項）上最能提升判斷一致性；醫療與法律風險因規則較結構化，單一調校良好的LLM已能勝任，提升幅度較小。",
+                    find2Title: "日文系統表現最穩定",
+                    find2Desc: "較高品質的原生語言標註，讓日文系統表現比翻譯而來的英文、法文賽道更穩定一致。",
+                    find3Title: "信心程度不一定反映準確度",
+                    find3Desc: "部分系統即使判斷錯誤仍維持高信心，顯示加權投票機制有可能放大過度自信，而非修正錯誤。",
+                    find4Title: "未來方向",
+                    find4Desc: "我們提出了Trust-Guided代理式AI架構，加入自我一致性篩選、動態信任更新與Chain-of-Thought推理，並已在後續論文中正式提出。",
+                    awardsTitle: "獲獎紀錄",
+                    award1Title: "最佳口頭報告獎",
+                    award1Desc: "NTCIR-18 MedNLP-CHAT任務．日本東京．2025年6月",
+                    teamTitle: "團隊成員",
+                    teamIntro: "IMNTPU團隊來自國立臺北大學資訊管理學系，由戴敏育教授指導。",
+                    team1Name: "戴敏育教授",
+                    team1Title: "團隊指導教授",
+                    team2Name: "吳峻宇",
+                    team2Title: "團隊隊長",
+                    team3Name: "吳承耘",
+                    team3Title: "MedNLP-CHAT副隊長",
+                    team4Name: "蕭文欣",
+                    team4Title: "團隊副隊長",
+                    team5Name: "陳柏臻",
+                    team5Title: "團隊成員",
+                    footerContact: "聯絡方式",
+                    footerUniversity: "國立臺北大學",
+                    footerLinks: "導覽",
+                    footerHome: "首頁",
+                    footerAbout: "關於我",
+                    footerProjects: "專案作品",
+                    footerCompetitions: "競賽經歷",
+                    footerAwards: "獲獎紀錄",
+                    footerExperiences: "經歷",
+                    footerPublications: "學術發表",
+                    footerCertifications: "證照",
+                    footerConferences: "研討會",
+                    footerOtherExperiences: "其他經歷",
+                    footerConnect: "社群媒體",
+                    footerCopyright: "© 2026 吳承耘。保留所有權利。"
                 }
             }
         }
-    }, function() {
+    }, function () {
         updateContent();
-        updateLanguageButton();
     });
-
-    // 滾動動畫觀察器
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    // 為所有需要動畫的元素添加觀察器
-    document.querySelectorAll('.fade-in').forEach(element => observer.observe(element));
 });
 
-// 語言切換功能
 function switchLanguage() {
-    const currentLang = i18next.language;
-    const newLang = currentLang.startsWith('zh') ? 'en' : 'zh';
-    
-    i18next.changeLanguage(newLang, function() {
+    const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+    i18next.changeLanguage(newLang, function () {
         updateContent();
-        updateLanguageButton();
         document.documentElement.lang = newLang;
     });
 }
 
-// 更新語言切換按鈕文字
-function updateLanguageButton() {
-    document.getElementById('lang-toggle').textContent = i18next.t('langButton');
-}
-
-// 更新頁面內容
 function updateContent() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (key) {
-            element.textContent = i18next.t(key);
-        }
+        if (key) element.textContent = i18next.t(key);
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(element => {
+        const key = element.getAttribute('data-i18n-html');
+        if (key) element.innerHTML = i18next.t(key);
     });
 }
 </script>
