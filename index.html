@@ -357,14 +357,15 @@
             font-weight: bold;
         }
 
-        /* 額外的「回到第一個」按鈕，跟下一頁箭頭疊放在同一側，
-           讓使用者可以主動選擇跳回開頭，而不是連續按到底時自動跳回 */
-        .swiper-button-first {
+        /* 「回到第一個」／「跳到最後一個」按鈕，放在下方點點那條水平線的
+           最左／最右側，讓使用者可以主動選擇跳到開頭或結尾，
+           而不是連續按到底時自動跳回 */
+        .swiper-button-first,
+        .swiper-button-last {
             position: absolute;
-            top: calc(50% + 34px);
-            right: 14px;
-            width: 36px;
-            height: 36px;
+            bottom: 14px;
+            width: 30px;
+            height: 30px;
             z-index: 10;
             cursor: pointer;
             display: flex;
@@ -375,11 +376,20 @@
             border-radius: 50%;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.85;
         }
 
-        .swiper-button-first:hover {
+        .swiper-button-first {
+            left: 6px;
+        }
+
+        .swiper-button-last {
+            right: 6px;
+        }
+
+        .swiper-button-first:hover,
+        .swiper-button-last:hover {
             background: var(--primary-green);
             color: white;
             opacity: 1;
@@ -1124,14 +1134,6 @@
             .awards-swiper .swiper-button-next,
             .awards-swiper .swiper-button-prev {
                 display: none !important;
-            }
-
-            /* 箭頭隱藏後，「回到第一個」改置中垂直對齊，獨立成一顆按鈕 */
-            .projects-swiper .swiper-button-first,
-            .certificates-swiper .swiper-button-first,
-            .awards-swiper .swiper-button-first {
-                top: 50%;
-                transform: translateY(-50%);
             }
         }
 
@@ -2144,9 +2146,10 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
-            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">&laquo;</div>
             <div class="swiper-pagination"></div>
+            <div class="swiper-button-last" title="Jump to last / 跳到最後一個">&raquo;</div>
         </div>
     </section>
 
@@ -2277,9 +2280,10 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
-            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">&laquo;</div>
             <div class="swiper-pagination"></div>
+            <div class="swiper-button-last" title="Jump to last / 跳到最後一個">&raquo;</div>
         </div>
     </section>
 
@@ -2507,9 +2511,10 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
-            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">&laquo;</div>
             <div class="swiper-pagination"></div>
+            <div class="swiper-button-last" title="Jump to last / 跳到最後一個">&raquo;</div>
         </div>
     </section>
 
@@ -3336,6 +3341,12 @@
                     certificatesSwiper.slideTo(0);
                 });
             }
+            const certificatesLastBtn = document.querySelector('.certificates-swiper .swiper-button-last');
+            if (certificatesLastBtn) {
+                certificatesLastBtn.addEventListener('click', function () {
+                    certificatesSwiper.slideTo(certificatesSwiper.slides.length - 1);
+                });
+            }
 
             // Awards Swiper
             const awardsSwiper = new Swiper('.awards-swiper', {
@@ -3378,6 +3389,12 @@
             if (awardsFirstBtn) {
                 awardsFirstBtn.addEventListener('click', function () {
                     awardsSwiper.slideTo(0);
+                });
+            }
+            const awardsLastBtn = document.querySelector('.awards-swiper .swiper-button-last');
+            if (awardsLastBtn) {
+                awardsLastBtn.addEventListener('click', function () {
+                    awardsSwiper.slideTo(awardsSwiper.slides.length - 1);
                 });
             }
 
@@ -3434,6 +3451,12 @@
             if (projectsFirstBtn) {
                 projectsFirstBtn.addEventListener('click', function () {
                     projectsSwiper.slideTo(0);
+                });
+            }
+            const projectsLastBtn = document.querySelector('.projects-swiper .swiper-button-last');
+            if (projectsLastBtn) {
+                projectsLastBtn.addEventListener('click', function () {
+                    projectsSwiper.slideTo(projectsSwiper.slides.length - 1);
                 });
             }
 
