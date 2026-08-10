@@ -884,6 +884,15 @@
             align-items: stretch;
         }
 
+        /* 拖曳滑動時，避免圖片被瀏覽器原生的「拖曳圖片」行為攔截，
+           導致滑鼠拖曳滑動卡片的手感失靈 */
+        .swiper-slide img {
+            -webkit-user-drag: none;
+            user-drag: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
         /* 增加更多細緻的響應式斷點，避免過渡時擠壓 */
 
         /* 大螢幕 (1200px+) - 顯示3個卡片 */
@@ -3248,7 +3257,9 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
+                rewind: true,
                 grabCursor: true,
+                simulateTouch: true,
                 navigation: {
                     nextEl: '.certificates-swiper .swiper-button-next',
                     prevEl: '.certificates-swiper .swiper-button-prev',
@@ -3283,7 +3294,9 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
+                rewind: true,
                 grabCursor: true,
+                simulateTouch: true,
                 navigation: {
                     nextEl: '.awards-swiper .swiper-button-next',
                     prevEl: '.awards-swiper .swiper-button-prev',
@@ -3316,6 +3329,9 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
+                rewind: true,
+                grabCursor: true,
+                simulateTouch: true,
                 navigation: {
                     nextEl: '.projects-swiper .swiper-button-next',
                     prevEl: '.projects-swiper .swiper-button-prev',
