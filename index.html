@@ -357,6 +357,35 @@
             font-weight: bold;
         }
 
+        /* 額外的「回到第一個」按鈕，跟下一頁箭頭疊放在同一側，
+           讓使用者可以主動選擇跳回開頭，而不是連續按到底時自動跳回 */
+        .swiper-button-first {
+            position: absolute;
+            top: calc(50% + 34px);
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            background: var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .swiper-button-first:hover {
+            background: var(--primary-green);
+            color: white;
+            opacity: 1;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
         /* Ensure navigation buttons are visible and functional */
         .certificates-swiper .swiper-button-next,
         .certificates-swiper .swiper-button-prev,
@@ -1095,6 +1124,14 @@
             .awards-swiper .swiper-button-next,
             .awards-swiper .swiper-button-prev {
                 display: none !important;
+            }
+
+            /* 箭頭隱藏後，「回到第一個」改置中垂直對齊，獨立成一顆按鈕 */
+            .projects-swiper .swiper-button-first,
+            .certificates-swiper .swiper-button-first,
+            .awards-swiper .swiper-button-first {
+                top: 50%;
+                transform: translateY(-50%);
             }
         }
 
@@ -2107,6 +2144,7 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
         </div>
@@ -2239,6 +2277,7 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
         </div>
@@ -2468,6 +2507,7 @@
                 </div>
             </div>
             <div class="swiper-button-next"></div>
+            <div class="swiper-button-first" title="Back to first / 回到第一個">⏮</div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
         </div>
@@ -3257,9 +3297,12 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
-                rewind: true,
                 grabCursor: true,
                 simulateTouch: true,
+                // 讓觸控板雙指左右滑動（會被瀏覽器視為 wheel 事件）也能切換卡片
+                mousewheel: {
+                    forceToAxis: true,
+                },
                 navigation: {
                     nextEl: '.certificates-swiper .swiper-button-next',
                     prevEl: '.certificates-swiper .swiper-button-prev',
@@ -3287,6 +3330,12 @@
                     }
                 }
             });
+            const certificatesFirstBtn = document.querySelector('.certificates-swiper .swiper-button-first');
+            if (certificatesFirstBtn) {
+                certificatesFirstBtn.addEventListener('click', function () {
+                    certificatesSwiper.slideTo(0);
+                });
+            }
 
             // Awards Swiper
             const awardsSwiper = new Swiper('.awards-swiper', {
@@ -3294,9 +3343,12 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
-                rewind: true,
                 grabCursor: true,
                 simulateTouch: true,
+                // 讓觸控板雙指左右滑動（會被瀏覽器視為 wheel 事件）也能切換卡片
+                mousewheel: {
+                    forceToAxis: true,
+                },
                 navigation: {
                     nextEl: '.awards-swiper .swiper-button-next',
                     prevEl: '.awards-swiper .swiper-button-prev',
@@ -3322,6 +3374,12 @@
                     }
                 }
             });
+            const awardsFirstBtn = document.querySelector('.awards-swiper .swiper-button-first');
+            if (awardsFirstBtn) {
+                awardsFirstBtn.addEventListener('click', function () {
+                    awardsSwiper.slideTo(0);
+                });
+            }
 
             // Projects Swiper - 增加更多響應式斷點
             const projectsSwiper = new Swiper('.projects-swiper', {
@@ -3329,9 +3387,12 @@
                 spaceBetween: 30,
                 centeredSlides: false,
                 loop: false,
-                rewind: true,
                 grabCursor: true,
                 simulateTouch: true,
+                // 讓觸控板雙指左右滑動（會被瀏覽器視為 wheel 事件）也能切換卡片
+                mousewheel: {
+                    forceToAxis: true,
+                },
                 navigation: {
                     nextEl: '.projects-swiper .swiper-button-next',
                     prevEl: '.projects-swiper .swiper-button-prev',
@@ -3369,6 +3430,12 @@
                     }
                 }
             });
+            const projectsFirstBtn = document.querySelector('.projects-swiper .swiper-button-first');
+            if (projectsFirstBtn) {
+                projectsFirstBtn.addEventListener('click', function () {
+                    projectsSwiper.slideTo(0);
+                });
+            }
 
             // Projects count badge
             const projectCards = document.querySelectorAll('.projects-swiper .project-card');

@@ -45,6 +45,24 @@
             backdrop-filter: blur(10px);
         }
 
+        /* 直接回首頁的連結，不受漢堡選單收合影響，隨時可見 */
+        .back-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .back-link:hover {
+            background: rgba(46, 139, 87, 0.2);
+        }
+
         .menu-items {
             display: flex;
             align-items: center;
@@ -480,6 +498,7 @@
 <body>
     <!-- 導航欄 -->
     <div class="navbar">
+        <a href="index.html#home" class="back-link" data-i18n="backToHome">← Back to Home</a>
         <div class="menu-items" id="menu-items">
             <a href="index.html#home" data-i18n="nav.home">Home</a>
             <a href="about.html" data-i18n="nav.about">About me</a>
@@ -762,6 +781,7 @@
                                 otherExperiences: "Other Experiences"
                             },
                             langButton: "中文",
+                            backToHome: "← Back to Home",
                             content: {
                                 photos: "Photos",
                                 selectEvent: "Select an Event",
@@ -804,6 +824,7 @@
                                 otherExperiences: "其他經歷"
                             },
                             langButton: "English",
+                            backToHome: "← 回到首頁",
                             content: {
                                 photos: "照片",
                                 selectEvent: "選擇活動",
