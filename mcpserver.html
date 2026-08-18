@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio MCP Server | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+.case-link-system { background: var(--primary-green); color: #fff; }
+.case-link-system:hover { background: var(--dark-green); color: #fff; }
+
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0 0 14px 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 10px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card strong { color: var(--dark-green); }
+.case-card code { background: var(--light-green); color: var(--dark-green); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+
+.role-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.role-icon {
+    width: 46px; height: 46px; min-width: 46px; border-radius: 50%;
+    background: var(--light-green); color: var(--dark-green);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+}
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
+
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box svg { display: block; width: 100%; height: auto; max-width: 880px; margin: 0 auto; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.75; margin-top: 14px; text-align: center; }
+
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green); color: var(--dark-green);
+    font-size: 0.8rem; font-weight: 600; padding: 5px 12px; border-radius: 14px;
+}
+
+.feature-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.feature-card { background: var(--card-bg); border-radius: 14px; padding: 24px 26px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.feature-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.feature-icon {
+    width: 38px; height: 38px; min-width: 38px; border-radius: 10px;
+    background: var(--light-green); color: var(--dark-green);
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.feature-header h4 { margin: 0; font-size: 1.02rem; color: var(--text-color); }
+.feature-card p { font-size: 0.9rem; margin: 0; }
+.feature-card code { background: var(--light-green); color: var(--dark-green); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+
+.note-box {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 14px 18px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.88rem;
+    color: var(--dark-green);
+    margin-top: 18px;
+}
+.note-box code { background: var(--card-bg); color: var(--dark-green); padding: 1px 6px; border-radius: 4px; }
+
+.sample-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.sample-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    font-style: italic;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.sample-card i { color: var(--primary-green); font-style: normal; opacity: 0.7; }
+
+.consider-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.consider-card { background: var(--card-bg); border-radius: 14px; padding: 20px 22px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.consider-card .consider-label { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--primary-green); font-size: 0.95rem; margin-bottom: 8px; }
+.consider-card ul { padding-left: 18px; margin: 0; font-size: 0.87rem; }
+.consider-card ul li { margin-bottom: 6px; }
+.consider-card ul li:last-child { margin-bottom: 0; }
+.consider-card strong { color: var(--dark-green); }
+
+.challenge-card { background: var(--card-bg); border-radius: 14px; padding: 26px 30px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); margin-bottom: 22px; }
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 { color: var(--text-color); font-size: 1.1rem; margin: 0 0 14px 0; display: flex; gap: 10px; align-items: baseline; }
+.challenge-card h3 .num {
+    color: #fff; background: var(--primary-green); border-radius: 50%;
+    width: 26px; height: 26px; min-width: 26px;
+    display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem;
+}
+.challenge-label { font-weight: 700; color: var(--primary-green); font-size: 0.85rem; display: block; margin-bottom: 6px; }
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+.challenge-block.solution { background: var(--light-green); border-left: 4px solid var(--primary-green); padding: 12px 16px; border-radius: 0 8px 8px 0; }
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.solution code, .challenge-card code { background: var(--card-bg); color: var(--dark-green); padding: 1px 6px; border-radius: 4px; font-size: 0.88em; }
+
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+.screenshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 22px; }
+.screenshot-card { background: var(--card-bg); border-radius: 14px; padding: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.screenshot-card img {
+    width: 100%; height: 280px; object-fit: cover; object-position: top;
+    border-radius: 8px; border: 1px solid rgba(46,139,87,0.15); cursor: zoom-in; display: block;
+}
+.screenshot-caption { font-size: 0.88rem; color: var(--text-color); margin-top: 10px; }
+.screenshot-caption strong { color: var(--dark-green); }
+
+.lightbox {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+footer { background: rgba(213, 236, 198, 0.8); padding: 40px 20px 20px; margin-top: 60px; }
+.footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card, .feature-card, .consider-card, .sample-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">🔌 <span data-i18n="badge">Featured Case Study · Developer Tool</span></span>
+    <h1 data-i18n="title">Portfolio MCP Server</h1>
+    <div class="subtitle" data-i18n="subtitle">This whole portfolio, exposed as tools any MCP-compatible AI assistant can query directly</div>
+    <div class="meta" data-i18n="meta">Solo project · Built 2026 · Live remote MCP server, no login required</div>
+    <div class="case-links">
+        <a class="case-link case-link-system" href="https://github.com/yunwcy" target="_blank"><i class="fab fa-github"></i> <span data-i18n="linkRepo">GitHub Repo</span></a>
+        <a class="case-link" href="https://yun-portfolio-mcp.onrender.com/mcp" target="_blank"><i class="fas fa-plug"></i> <span data-i18n="linkMCP">Live MCP Endpoint</span></a>
+    </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#arch" data-i18n="tocArch">Architecture</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#howto" data-i18n="tocHowto">Try It Live</a>
+        <a href="#sample" data-i18n="tocSample">Sample Questions</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="arch">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="archTitle">System Architecture</span></h2>
+    <div class="diagram-box">
+        <svg viewBox="0 0 900 620" role="img" aria-label="Four-layer architecture: three kinds of clients (Claude Desktop, Claude.ai Connector, MCP Inspector / Client SDK) connect over stdio or Streamable HTTP into one MCPServer instance, which calls into tools.py's four tool functions, which read and cache projects.json, skills.json, and resume.json through data_loader.py." style="display:block;width:100%;height:auto;max-width:880px;margin:0 auto;color:var(--text-color, #5A4A42);">
+            <defs>
+                <marker id="arrow-arch" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+                </marker>
+            </defs>
+            <g style="color:rgba(90,74,66,0.65)">
+                <rect x="60" y="30" width="230" height="64" rx="8" fill="none" stroke="currentColor"/>
+                <text x="175" y="56" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">Claude Desktop</text>
+                <text x="175" y="74" text-anchor="middle" fill="currentColor" font-size="11">local install, runs locally</text>
+
+                <rect x="335" y="30" width="230" height="64" rx="8" fill="none" stroke="var(--primary-green, #2E8B57)"/>
+                <text x="450" y="56" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">Claude.ai Connector</text>
+                <text x="450" y="74" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="11">the one you'd actually use</text>
+
+                <rect x="610" y="30" width="230" height="64" rx="8" fill="none" stroke="currentColor"/>
+                <text x="725" y="56" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">MCP Inspector /</text>
+                <text x="725" y="70" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">Client SDK</text>
+                <text x="725" y="86" text-anchor="middle" fill="currentColor" font-size="11">used for dev-time testing</text>
+
+                <rect x="90" y="150" width="260" height="60" rx="8" fill="none" stroke="currentColor"/>
+                <text x="220" y="176" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">stdio</text>
+                <text x="220" y="194" text-anchor="middle" fill="currentColor" font-size="10.5">standard I/O, local only</text>
+
+                <rect x="390" y="150" width="460" height="60" rx="8" fill="none" stroke="var(--primary-green, #2E8B57)"/>
+                <text x="620" y="176" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">Streamable HTTP · POST/GET /mcp</text>
+                <text x="620" y="194" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="10.5">a public URL, any remote client can connect</text>
+
+                <rect x="250" y="270" width="400" height="60" rx="8" fill="rgba(46,139,87,0.10)" stroke="var(--primary-green, #2E8B57)"/>
+                <text x="450" y="296" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="13" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">MCPServer instance</text>
+                <text x="450" y="314" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-size="10.5">server.py · registers 4 tools, handles the protocol handshake</text>
+
+                <rect x="300" y="368" width="300" height="56" rx="8" fill="none" stroke="currentColor"/>
+                <text x="450" y="392" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">tools.py</text>
+                <text x="450" y="410" text-anchor="middle" fill="currentColor" font-size="10.5">plain logic, no MCP dependency, unit-testable on its own</text>
+
+                <rect x="300" y="460" width="300" height="56" rx="8" fill="none" stroke="currentColor"/>
+                <text x="450" y="484" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">data_loader.py</text>
+                <text x="450" y="502" text-anchor="middle" fill="currentColor" font-size="10.5">lru_cache: read from disk once per process, not once per request</text>
+
+                <rect x="190" y="552" width="160" height="52" rx="8" fill="rgba(213,236,198,0.45)" stroke="currentColor"/>
+                <text x="270" y="583" text-anchor="middle" fill="currentColor" font-size="11.5" font-family="'SF Mono','Cascadia Code',Consolas,monospace">projects.json</text>
+
+                <rect x="370" y="552" width="160" height="52" rx="8" fill="rgba(213,236,198,0.45)" stroke="currentColor"/>
+                <text x="450" y="583" text-anchor="middle" fill="currentColor" font-size="11.5" font-family="'SF Mono','Cascadia Code',Consolas,monospace">skills.json</text>
+
+                <rect x="550" y="552" width="160" height="52" rx="8" fill="rgba(213,236,198,0.45)" stroke="currentColor"/>
+                <text x="630" y="583" text-anchor="middle" fill="currentColor" font-size="11.5" font-family="'SF Mono','Cascadia Code',Consolas,monospace">resume.json</text>
+            </g>
+            <g stroke="currentColor" fill="none" style="color:rgba(90,74,66,0.5)">
+                <line x1="175" y1="94" x2="210" y2="150" marker-end="url(#arrow-arch)"/>
+                <line x1="450" y1="94" x2="560" y2="150" marker-end="url(#arrow-arch)" style="color:var(--primary-green, #2E8B57)"/>
+                <line x1="725" y1="94" x2="680" y2="150" marker-end="url(#arrow-arch)" style="color:var(--primary-green, #2E8B57)"/>
+                <line x1="220" y1="210" x2="330" y2="270" marker-end="url(#arrow-arch)"/>
+                <line x1="620" y1="210" x2="530" y2="270" marker-end="url(#arrow-arch)" style="color:var(--primary-green, #2E8B57)"/>
+                <line x1="450" y1="330" x2="450" y2="368" marker-end="url(#arrow-arch)" style="color:var(--primary-green, #2E8B57)"/>
+                <line x1="450" y1="424" x2="450" y2="460" marker-end="url(#arrow-arch)"/>
+                <line x1="420" y1="516" x2="290" y2="552" marker-end="url(#arrow-arch)"/>
+                <line x1="450" y1="516" x2="450" y2="552" marker-end="url(#arrow-arch)"/>
+                <line x1="480" y1="516" x2="610" y2="552" marker-end="url(#arrow-arch)"/>
+            </g>
+            <g font-size="10" fill="rgba(90,74,66,0.65)">
+                <text x="700" y="130" text-anchor="middle">JSON-RPC over HTTP</text>
+                <text x="200" y="130" text-anchor="middle">JSON-RPC over stdio</text>
+                <text x="450" y="352" text-anchor="middle" fill="var(--primary-green, #2E8B57)">calls the matching tool function</text>
+                <text x="450" y="444" text-anchor="middle">reads data</text>
+            </g>
+        </svg>
+        <div class="diagram-caption" data-i18n="archCaption">Four layers: any MCP client connects over stdio (local) or Streamable HTTP (remote) to one MCPServer instance, which routes to plain, testable Python functions that read three JSON data files. Client and transport can vary, but everything underneath is the same code — local testing and the live deployment run the exact same logic.</div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Protocol &amp; Transport</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">MCP Python SDK</span>
+                <span class="tech-chip">stdio</span>
+                <span class="tech-chip">Streamable HTTP</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Application Logic</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">4 registered tools</span>
+                <span class="tech-chip">Docstring-driven routing</span>
+                <span class="tech-chip">Alias-aware fuzzy match</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">Infrastructure</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Docker</span>
+                <span class="tech-chip">Render</span>
+                <span class="tech-chip">GitHub Actions</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Data</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Flat JSON files</span>
+                <span class="tech-chip">In-process cache</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="diagram-box" style="margin-top:24px;">
+        <svg viewBox="0 0 760 660" role="img" aria-label="Docker build flow: nine Dockerfile instructions run top to bottom, with pip install -e . called out specifically because it fixed a bug where data files couldn't be found inside the container; docker build then produces an immutable image, which is used two ways — locally with docker run to verify, and by Render, which detects the Dockerfile, builds it automatically, and deploys it as the live container." style="display:block;width:100%;height:auto;max-width:760px;margin:0 auto;color:var(--text-color, #5A4A42);">
+            <defs>
+                <marker id="arrow-docker" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+                </marker>
+            </defs>
+            <g font-size="12" font-family="'SF Mono','Cascadia Code',Consolas,monospace">
+                <rect x="170" y="26" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="48" fill="currentColor">FROM python:3.12-slim</text>
+                <rect x="170" y="70" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="92" fill="currentColor">WORKDIR /app</text>
+                <rect x="170" y="114" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="136" fill="currentColor">COPY pyproject.toml README.md ./</text>
+                <rect x="170" y="158" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="180" fill="currentColor">COPY src ./src</text>
+                <rect x="170" y="202" width="420" height="34" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="190" y="224" fill="#3b6ea5" font-weight="700">RUN pip install --no-cache-dir -e .</text>
+                <rect x="170" y="246" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="268" fill="currentColor">COPY data ./data</text>
+                <rect x="170" y="290" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="312" fill="currentColor">ENV TRANSPORT=http HOST=0.0.0.0 PORT=8000</text>
+                <rect x="170" y="334" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="356" fill="currentColor">EXPOSE 8000</text>
+                <rect x="170" y="378" width="420" height="34" rx="6" fill="none" stroke="rgba(90,74,66,0.25)"/>
+                <text x="190" y="400" fill="currentColor" font-size="11">CMD uvicorn portfolio_mcp.server:app --host 0.0.0.0 --port $PORT</text>
+            </g>
+            <line x1="380" y1="412" x2="380" y2="446" stroke="rgba(90,74,66,0.5)" marker-end="url(#arrow-docker)"/>
+            <rect x="200" y="448" width="360" height="40" rx="8" fill="rgba(213,236,198,0.45)" stroke="rgba(90,74,66,0.5)"/>
+            <text x="380" y="472" text-anchor="middle" font-family="'SF Mono','Cascadia Code',Consolas,monospace" font-size="12" fill="var(--text-color, #5A4A42)">docker build -t portfolio-mcp-server .</text>
+            <line x1="380" y1="488" x2="380" y2="516" stroke="rgba(90,74,66,0.5)" marker-end="url(#arrow-docker)"/>
+            <rect x="260" y="518" width="240" height="42" rx="8" fill="rgba(46,139,87,0.10)" stroke="var(--primary-green, #2E8B57)"/>
+            <text x="380" y="544" text-anchor="middle" fill="var(--primary-green, #2E8B57)" font-weight="700" font-size="12.5">🐳 Image (immutable snapshot)</text>
+            <line x1="330" y1="560" x2="200" y2="596" stroke="rgba(90,74,66,0.5)" marker-end="url(#arrow-docker)"/>
+            <line x1="430" y1="560" x2="560" y2="596" stroke="rgba(90,74,66,0.5)" marker-end="url(#arrow-docker)"/>
+            <rect x="30" y="598" width="340" height="50" rx="8" fill="none" stroke="rgba(90,74,66,0.25)"/>
+            <text x="200" y="618" text-anchor="middle" font-family="'SF Mono','Cascadia Code',Consolas,monospace" font-size="11" fill="currentColor">docker run -p 8000:8000 \</text>
+            <text x="200" y="634" text-anchor="middle" font-family="'SF Mono','Cascadia Code',Consolas,monospace" font-size="11" fill="currentColor">portfolio-mcp-server</text>
+            <rect x="400" y="598" width="330" height="50" rx="8" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+            <text x="565" y="618" text-anchor="middle" font-size="11.5" fill="#3b6ea5" font-weight="700">Render: auto build + deploy</text>
+            <text x="565" y="634" text-anchor="middle" font-size="10.5" fill="#3b6ea5">production, $PORT injected by Render</text>
+            <text x="200" y="596" text-anchor="middle" font-size="10" fill="rgba(90,74,66,0.65)">for local verification</text>
+        </svg>
+        <div class="diagram-caption">The Dockerfile runs top to bottom and produces one immutable image. That same image is verified locally with <code>docker run</code>, then Render builds and ships it — both sides run the exact same thing.</div>
+    </div>
+
+    <div class="diagram-box" style="margin-top:24px;">
+        <svg viewBox="0 0 900 460" role="img" aria-label="Two independent CI/CD pipelines: a git push to main triggers both a GitHub Actions CI pipeline (checkout, set up Python, install dependencies, ruff lint, pytest, pass or fail) and Render's separate auto-deploy pipeline (webhook, docker build, start new container, health check, switch traffic and retire the old container) at the same time. A warning below notes that these two pipelines are independent — a failing CI run does not stop Render from deploying anyway." style="display:block;width:100%;height:auto;max-width:900px;margin:0 auto;color:var(--text-color, #5A4A42);">
+            <defs>
+                <marker id="arrow-cicd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+                </marker>
+            </defs>
+            <rect x="350" y="14" width="200" height="42" rx="8" fill="rgba(213,236,198,0.45)" stroke="currentColor"/>
+            <text x="450" y="40" text-anchor="middle" font-family="'SF Mono','Cascadia Code',Consolas,monospace" font-size="12.5" font-weight="700" fill="currentColor">git push origin main</text>
+            <line x1="420" y1="56" x2="240" y2="98" stroke="#a6740a" marker-end="url(#arrow-cicd)"/>
+            <line x1="480" y1="56" x2="660" y2="98" stroke="#3b6ea5" marker-end="url(#arrow-cicd)"/>
+            <text x="55" y="96" font-size="11.5" font-weight="700" fill="#a6740a">GitHub Actions (CI)</text>
+            <g font-size="10.5">
+                <rect x="55" y="106" width="130" height="40" rx="6" fill="rgba(166,116,10,0.10)" stroke="#a6740a"/>
+                <text x="120" y="130" text-anchor="middle" fill="#a6740a">checkout</text>
+                <rect x="200" y="106" width="130" height="40" rx="6" fill="rgba(166,116,10,0.10)" stroke="#a6740a"/>
+                <text x="265" y="130" text-anchor="middle" fill="#a6740a">set up Python 3.12</text>
+                <rect x="345" y="106" width="150" height="40" rx="6" fill="rgba(166,116,10,0.10)" stroke="#a6740a"/>
+                <text x="420" y="130" text-anchor="middle" fill="#a6740a" font-size="10" font-family="'SF Mono','Cascadia Code',Consolas,monospace">pip install -e .[dev]</text>
+                <rect x="510" y="106" width="130" height="40" rx="6" fill="rgba(166,116,10,0.10)" stroke="#a6740a"/>
+                <text x="575" y="130" text-anchor="middle" fill="#a6740a" font-family="'SF Mono','Cascadia Code',Consolas,monospace">ruff check</text>
+                <rect x="655" y="106" width="130" height="40" rx="6" fill="rgba(166,116,10,0.10)" stroke="#a6740a"/>
+                <text x="720" y="130" text-anchor="middle" fill="#a6740a" font-family="'SF Mono','Cascadia Code',Consolas,monospace">pytest</text>
+            </g>
+            <g stroke="#a6740a" fill="none">
+                <line x1="185" y1="126" x2="196" y2="126" marker-end="url(#arrow-cicd)"/>
+                <line x1="330" y1="126" x2="341" y2="126" marker-end="url(#arrow-cicd)"/>
+                <line x1="495" y1="126" x2="506" y2="126" marker-end="url(#arrow-cicd)"/>
+                <line x1="640" y1="126" x2="651" y2="126" marker-end="url(#arrow-cicd)"/>
+                <line x1="785" y1="126" x2="815" y2="126" marker-end="url(#arrow-cicd)"/>
+            </g>
+            <text x="850" y="130" text-anchor="middle" font-size="16" fill="#a6740a">✅</text>
+            <text x="55" y="196" font-size="11.5" font-weight="700" fill="#3b6ea5">Render (Auto-Deploy)</text>
+            <g font-size="10.5">
+                <rect x="55" y="206" width="130" height="44" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="120" y="232" text-anchor="middle" fill="#3b6ea5">GitHub webhook</text>
+                <rect x="200" y="206" width="130" height="44" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="265" y="232" text-anchor="middle" fill="#3b6ea5" font-family="'SF Mono','Cascadia Code',Consolas,monospace">docker build</text>
+                <rect x="345" y="206" width="150" height="44" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="420" y="228" text-anchor="middle" fill="#3b6ea5">start new container</text>
+                <rect x="510" y="206" width="130" height="44" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="575" y="232" text-anchor="middle" fill="#3b6ea3">health check</text>
+                <rect x="655" y="206" width="180" height="44" rx="6" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="745" y="224" text-anchor="middle" fill="#3b6ea5" font-size="10">switch traffic, retire</text>
+                <text x="745" y="238" text-anchor="middle" fill="#3b6ea5" font-size="10">old container</text>
+            </g>
+            <g stroke="#3b6ea5" fill="none">
+                <line x1="185" y1="228" x2="196" y2="228" marker-end="url(#arrow-cicd)"/>
+                <line x1="330" y1="228" x2="341" y2="228" marker-end="url(#arrow-cicd)"/>
+                <line x1="495" y1="228" x2="506" y2="228" marker-end="url(#arrow-cicd)"/>
+                <line x1="640" y1="228" x2="651" y2="228" marker-end="url(#arrow-cicd)"/>
+            </g>
+            <path d="M 55 270 L 55 300 L 845 300 L 845 270" fill="none" stroke="#b3261e" stroke-dasharray="2 5"/>
+            <rect x="180" y="308" width="540" height="70" rx="8" fill="rgba(179,38,30,0.08)" stroke="#b3261e"/>
+            <text x="450" y="332" text-anchor="middle" font-size="12" font-weight="700" fill="#b3261e">⚠️ These two pipelines are independent — neither waits on the other</text>
+            <text x="450" y="352" text-anchor="middle" font-size="11" fill="#b3261e">A red CI run does not stop Render from deploying the new version anyway —</text>
+            <text x="450" y="368" text-anchor="middle" font-size="11" fill="#b3261e">right now that's guarded by habit (test locally before pushing), not by the pipeline itself</text>
+        </svg>
+        <div class="diagram-caption">One <code>git push</code> triggers two pipelines: GitHub Actions only reports whether tests pass. What actually ships the new version is Render's own webhook — the two don't gate each other.</div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="howto">
+    <h2><i class="fas fa-play"></i> <span data-i18n="howtoTitle">Try It Live</span></h2>
+    <p class="case-card" style="margin-bottom:20px;" data-i18n="howtoIntro">This isn't a normal website — opening the live URL directly in a browser shows "Not Found", and that's expected. It's a protocol endpoint, not a page: an MCP client has to speak the Streamable HTTP protocol to it, not just visit the URL. Here are three ways to actually try it:</p>
+    <div class="feature-groups">
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-comments"></i></div><h4 data-i18n="howto1Title">Claude.ai — Custom Connector</h4></div>
+            <p data-i18n-html="howto1Content">Settings → Connectors → Add custom connector → paste <code>https://yun-portfolio-mcp.onrender.com/mcp</code> → enable it from the <strong>+</strong> menu in any chat, then just ask a question about my work.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-magnifying-glass"></i></div><h4 data-i18n="howto2Title">MCP Inspector (no install needed)</h4></div>
+            <p data-i18n-html="howto2Content"><code>npx @modelcontextprotocol/inspector https://yun-portfolio-mcp.onrender.com/mcp</code> — opens a local web page where you can call each tool directly and see the raw request and response.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-desktop"></i></div><h4 data-i18n="howto3Title">Claude Desktop (local + source)</h4></div>
+            <p data-i18n-html="howto3Content">Clone the repo, follow the README to run it over stdio, and add it to your own <code>claude_desktop_config.json</code>.</p>
+        </div>
+    </div>
+    <div class="note-box" data-i18n-html="howtoNote">Free-tier note: the server falls asleep after about 15 minutes idle, and the first request after that takes 30–60 seconds to wake it back up. That's a deliberate cost trade-off for a demo project, not a bug — if the first question seems slow or times out, just ask again.</div>
+
+    <div class="diagram-box" style="margin-top:24px;">
+        <svg viewBox="0 0 780 480" role="img" aria-label="Sequence diagram: between two lifelines, Client and Server, six steps happen in order — the client sends an initialize request, which the server first checks against a Host header allowlist; the server replies with its capabilities and server info; the client requests the tool list; the server returns the schema for all four tools; the client calls list_projects; the server internally calls tools.py then data_loader.py, and returns 31 JSON content blocks." style="display:block;width:100%;height:auto;max-width:780px;margin:0 auto;color:var(--text-color, #5A4A42);">
+            <defs>
+                <marker id="arrow-seq" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0,0 L10,5 L0,10 Z" fill="currentColor" />
+                </marker>
+            </defs>
+            <g stroke="currentColor" style="color:rgba(90,74,66,0.2)">
+                <line x1="130" y1="70" x2="130" y2="450" stroke-dasharray="3 5"/>
+                <line x1="640" y1="70" x2="640" y2="450" stroke-dasharray="3 5"/>
+            </g>
+            <g>
+                <rect x="60" y="30" width="140" height="40" rx="8" fill="rgba(213,236,198,0.45)" stroke="currentColor"/>
+                <text x="130" y="55" text-anchor="middle" fill="currentColor" font-size="12.5" font-weight="700" font-family="'SF Mono','Cascadia Code',Consolas,monospace">Client</text>
+                <rect x="510" y="30" width="260" height="40" rx="8" fill="rgba(59,110,165,0.10)" stroke="#3b6ea5"/>
+                <text x="640" y="55" text-anchor="middle" fill="#3b6ea5" font-size="12.5" font-weight="700">Server (Docker container on Render)</text>
+            </g>
+            <line x1="130" y1="100" x2="632" y2="100" stroke="var(--primary-green, #2E8B57)" marker-end="url(#arrow-seq)"/>
+            <text x="140" y="93" font-size="11.5" fill="var(--primary-green, #2E8B57)" font-family="'SF Mono','Cascadia Code',Consolas,monospace">① POST /mcp  { method: "initialize" }</text>
+            <rect x="500" y="112" width="270" height="34" rx="6" fill="rgba(179,38,30,0.08)" stroke="#b3261e"/>
+            <text x="635" y="133" text-anchor="middle" fill="#b3261e" font-size="11">🔒 Host header allowlist check (hit this once, see Challenges)</text>
+            <line x1="632" y1="168" x2="130" y2="168" stroke="currentColor" marker-end="url(#arrow-seq)"/>
+            <text x="620" y="161" font-size="11.5" fill="currentColor" text-anchor="end" font-family="'SF Mono','Cascadia Code',Consolas,monospace">② capabilities + serverInfo</text>
+            <line x1="130" y1="210" x2="632" y2="210" stroke="var(--primary-green, #2E8B57)" marker-end="url(#arrow-seq)"/>
+            <text x="140" y="203" font-size="11.5" fill="var(--primary-green, #2E8B57)" font-family="'SF Mono','Cascadia Code',Consolas,monospace">③ tools/list</text>
+            <line x1="632" y1="252" x2="130" y2="252" stroke="currentColor" marker-end="url(#arrow-seq)"/>
+            <text x="620" y="245" font-size="11.5" fill="currentColor" text-anchor="end" font-family="'SF Mono','Cascadia Code',Consolas,monospace">④ returns all 4 tools' name + schema</text>
+            <line x1="130" y1="300" x2="632" y2="300" stroke="var(--primary-green, #2E8B57)" marker-end="url(#arrow-seq)"/>
+            <text x="140" y="293" font-size="11.5" fill="var(--primary-green, #2E8B57)" font-family="'SF Mono','Cascadia Code',Consolas,monospace">⑤ tools/call  { name: "list_projects" }</text>
+            <rect x="500" y="312" width="270" height="46" rx="6" fill="rgba(213,236,198,0.45)" stroke="rgba(90,74,66,0.2)"/>
+            <text x="635" y="330" text-anchor="middle" fill="rgba(90,74,66,0.75)" font-size="10.5">internally calls</text>
+            <text x="635" y="346" text-anchor="middle" fill="rgba(90,74,66,0.75)" font-size="10.5" font-family="'SF Mono','Cascadia Code',Consolas,monospace">tools.py → data_loader.py</text>
+            <line x1="632" y1="400" x2="130" y2="400" stroke="currentColor" marker-end="url(#arrow-seq)"/>
+            <text x="620" y="393" font-size="11.5" fill="currentColor" text-anchor="end" font-family="'SF Mono','Cascadia Code',Consolas,monospace">⑥ 31 content blocks (one per project)</text>
+            <text x="130" y="440" text-anchor="middle" fill="rgba(90,74,66,0.65)" font-size="11">Claude receives the result and starts writing an answer</text>
+        </svg>
+        <div class="diagram-caption">Asking "what projects has this person worked on?" is actually six protocol round-trips under the hood — not one single request-response.</div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="sample">
+    <h2><i class="fas fa-comment-dots"></i> <span data-i18n="sampleTitle">Try Asking</span></h2>
+    <div class="sample-grid">
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample1">"What projects has this person worked on?"</span></div>
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample2">"Has she built anything with RAG or vector search?"</span></div>
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample3">"Tell me about her master's thesis."</span></div>
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample4">"Does she have any iOS development experience?"</span></div>
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample5">"Give me a one-paragraph summary of her background."</span></div>
+        <div class="sample-card"><i class="fas fa-quote-left"></i><span data-i18n="sample6">"What's IM Your Buddy, and what was her role in it?"</span></div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <ul data-i18n-html="considerCost"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <ul data-i18n-html="considerSpeed"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <ul data-i18n-html="considerAccuracy"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Stability</span></div>
+            <ul data-i18n-html="considerStability"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Solo Developer</div>
+        </div>
+        <p data-i18n="roleIntro">Built entirely on my own, end to end:</p>
+        <ul data-i18n-html="roleList"></ul>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">The MCP SDK's API had already moved on from the tutorials</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c1Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">The Docker image couldn't find its own data files</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c2Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">The live deployment returned 421 "Invalid Host header"</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c3Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c3Solution"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="demo">
+    <h2><i class="fas fa-desktop"></i> <span data-i18n="demoTitle">It Actually Works</span></h2>
+    <p data-i18n="demoIntro" style="text-align:center; margin-bottom:24px; opacity:0.8; font-size:0.95rem;">Two real questions asked through the Claude.ai Connector, answered live from the MCP server, not staged screenshots.</p>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/mcpserver/demo1.png" alt="Asking whether this person has iOS development experience, answered via the MCP connector" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d1Caption"></div>
+        </div>
+        <div class="screenshot-card">
+            <img src="case-studies/mcpserver/demo2.png" alt="Asking what this person's featured projects are, answered via the MCP connector" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d2Caption"></div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html#home" data-i18n="footerHome">Home</a></p>
+            <p><a href="about.html" data-i18n="footerAbout">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="footerAwards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="footerExperiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="footerCertifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="footerConferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="footerOtherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Featured Case Study · Developer Tool",
+                title: "Portfolio MCP Server",
+                subtitle: "This whole portfolio, exposed as tools any MCP-compatible AI assistant can query directly",
+                meta: "Solo project · Built 2026 · Live remote MCP server, no login required",
+                linkRepo: "GitHub Repo",
+                linkMCP: "Live MCP Endpoint",
+                tocProblem: "Problem",
+                tocArch: "Architecture",
+                tocTech: "Tech Stack",
+                tocHowto: "Try It Live",
+                tocSample: "Sample Questions",
+                tocConsiderations: "Trade-offs",
+                tocRole: "My Role",
+                tocChallenges: "Challenges",
+
+                problemTitle: "Problem Background",
+                problemContent: "<p>I wanted to actually understand how <a href=\"https://modelcontextprotocol.io\" target=\"_blank\">MCP (Model Context Protocol)</a> works, not just read about it — and I wanted a more useful way for an AI assistant (or a recruiter using one) to look through my work than clicking through a static site.</p><p>So I built <strong>Portfolio MCP Server</strong>. It turns my portfolio's projects, skills, and resume into a small set of MCP tools. Any MCP-aware AI assistant — Claude Desktop, Claude.ai's Connectors, or anything else that speaks the protocol — can call these tools directly and answer questions about my work with real, current data instead of guessing.</p>",
+
+                archTitle: "System Architecture",
+                archCaption: "Four layers: any MCP client connects over stdio (local) or Streamable HTTP (remote) to one MCPServer instance, which routes to plain, testable Python functions that read three JSON data files. Client and transport can vary, but everything underneath is the same code — local testing and the live deployment run the exact same logic.",
+                techTitle: "Tech Stack",
+                techGroup1: "Protocol & Transport",
+                techGroup2: "Application Logic",
+                techGroup3: "Infrastructure",
+                techGroup4: "Data",
+
+                howtoTitle: "Try It Live",
+                howtoIntro: "This isn't a normal website — opening the live URL directly in a browser shows \"Not Found\", and that's expected. It's a protocol endpoint, not a page: an MCP client has to speak the Streamable HTTP protocol to it, not just visit the URL. Here are three ways to actually try it:",
+                howto1Title: "Claude.ai — Custom Connector",
+                howto1Content: "Settings → Connectors → Add custom connector → paste <code>https://yun-portfolio-mcp.onrender.com/mcp</code> → enable it from the <strong>+</strong> menu in any chat, then just ask a question about my work.",
+                howto2Title: "MCP Inspector (no install needed)",
+                howto2Content: "<code>npx @modelcontextprotocol/inspector https://yun-portfolio-mcp.onrender.com/mcp</code> — opens a local web page where you can call each tool directly and see the raw request and response.",
+                howto3Title: "Claude Desktop (local + source)",
+                howto3Content: "Clone the repo, follow the README to run it over stdio, and add it to your own <code>claude_desktop_config.json</code>.",
+                howtoNote: "Free-tier note: the server falls asleep after about 15 minutes idle, and the first request after that takes 30–60 seconds to wake it back up. That's a deliberate cost trade-off for a demo project, not a bug — if the first question seems slow or times out, just ask again.",
+
+                sampleTitle: "Try Asking",
+                sample1: "\"What projects has this person worked on?\"",
+                sample2: "\"Has she built anything with RAG or vector search?\"",
+                sample3: "\"Tell me about her master's thesis.\"",
+                sample4: "\"Does she have any iOS development experience?\"",
+                sample5: "\"Give me a one-paragraph summary of her background.\"",
+                sample6: "\"What's IM Your Buddy, and what was her role in it?\"",
+
+                considerTitle: "Engineering Trade-offs",
+                considerCostLabel: "Cost",
+                considerCost: "<li><strong>Render's free tier</strong> for hosting — $0/month, no credit card required.</li><li><strong>This server never calls an LLM itself</strong> — it only reads and returns local JSON, so whoever connects (their Claude, their tokens) pays for any inference, never me.</li>",
+                considerSpeedLabel: "Speed",
+                considerSpeed: "<li><strong>In-process caching</strong> (<code>lru_cache</code>, Python's built-in memoization) — the JSON data is read from disk once per process, not once per request.</li><li><strong>Trade-off accepted:</strong> a free-tier cold start (30–60s) after 15 minutes idle, in exchange for zero hosting cost on a low-traffic demo.</li>",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "<li><strong>Alias-aware fuzzy matching</strong> — a query like \"NTPU OPE Assistant\" or a competition's full name resolves to the right project even though neither string is the project's actual id.</li><li>Every one of the 31 portfolio entries carries at least one real, working link — enforced by a test, not just a convention.</li>",
+                considerStabilityLabel: "Stability",
+                considerStability: "<li><strong>Read-only, no auth needed</strong> — every byte served is already public on this site, so there's nothing to protect and nothing that can be changed.</li><li><strong>Host-header allowlisting</strong> (protects against DNS-rebinding attacks) kept switched on rather than disabled, scoped to just the domains this server actually answers on.</li>",
+
+                roleTitle: "My Role",
+                roleSubtitle: "Solo Developer",
+                roleIntro: "Built entirely on my own, end to end:",
+                roleList: "<li>Pulled my own portfolio's project, skill, and resume content out into clean, structured JSON.</li><li>Implemented all 4 MCP tools and wrote their docstrings — the docstrings are what an AI assistant actually reads to decide when to call each one.</li><li>Built and containerized the server with Docker, and set up GitHub Actions to lint and test on every push.</li><li>Deployed it to Render over Streamable HTTP, debugged two real issues after going live (see Challenges), and checked the whole thing end to end with a real MCP client, not just local tests.</li>",
+
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "The MCP SDK's API had already moved on from the tutorials",
+                c1Problem: "Every tutorial and older reference uses <code>from mcp.server.fastmcp import FastMCP</code> — but the SDK version that <code>pip install mcp</code> actually installs today replaced that with <code>mcp.server.mcpserver.MCPServer</code>, a different import path and class name entirely.",
+                c1Solution: "Read the installed package's actual source instead of trusting the tutorial, and built against the current API — <code>MCPServer</code>, <code>@server.tool()</code>, <code>streamable_http_app()</code> — and wrote it down in the README so the next person hitting this doesn't have to rediscover it from scratch.",
+                c2Title: "The Docker image couldn't find its own data files",
+                c2Problem: "Worked fine in every local test, then failed inside the container with \"No such file or directory: data/projects.json\". A normal <code>pip install .</code> flattens the <code>src/portfolio_mcp/</code> folder layout into site-packages, which silently broke the relative-path logic that had found the data folder in every dev environment.",
+                c2Solution: "Switched the Docker build to an editable install (<code>pip install -e .</code>) instead — since the whole repo is already copied into the image, this keeps the on-disk layout identical to local dev rather than needing a separate packaging step for the data files.",
+                c3Title: "The live deployment returned 421 \"Invalid Host header\"",
+                c3Problem: "After deploying to Render, every request — even from Claude.ai's own Connector — was rejected. The MCP SDK turns on DNS-rebinding protection by default, checking the <code>Host</code> header against an allowlist that starts empty, so it silently rejected Render's own hostname too.",
+                c3Solution: "Kept the protection turned on (instead of disabling it) and explicitly allowlisted the deployed hostname, made configurable through an env var for future redeploys — plus a regression test that exercises the same check so it can't silently break again.",
+
+                tocDemo: "Demo",
+                demoTitle: "It Actually Works",
+                demoIntro: "Two real questions asked through the Claude.ai Connector, answered live from the MCP server, not staged screenshots.",
+                d1Caption: "<strong>Asked \"Does he have iOS development experience?\"</strong> The client first shows \"Used Yun Portfolio MCP integration, loaded tools\", then correctly pulls specific details from the Personal Finance Dashboard App project data, Swift, SwiftUI, Swift Charts, the Yahoo Finance API integration, CryptoKit encryption, Face ID, to answer, not a guess from training data.",
+                d2Caption: "<strong>Asked \"What are his featured projects?\"</strong> It correctly lists all 6 flagship projects (IM Your Buddy, Lab Handover, Knovyra, Personal Finance Dashboard App, the master's thesis, AIIT NTPU), each with a working link, pulled straight from <code>projects.json</code>, not generated from memory.",
+
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerAbout: "About Me",
+                footerExperiences: "Experiences",
+                footerPublications: "Publications",
+                footerCertifications: "Certifications",
+                footerProjects: "Projects",
+                footerCompetitions: "Competitions",
+                footerConferences: "Conferences",
+                footerAwards: "Awards",
+                footerOtherExperiences: "Other Experiences",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "精選案例．開發者工具",
+                title: "Portfolio MCP Server",
+                subtitle: "把整個作品集包成 MCP tools，讓任何支援 MCP 的 AI 助理都能直接查詢",
+                meta: "個人專案．2026 年開發．線上遠端 MCP server，不需登入",
+                linkRepo: "GitHub Repo",
+                linkMCP: "線上 MCP 服務網址",
+                tocProblem: "問題背景",
+                tocArch: "系統架構",
+                tocTech: "技術堆疊",
+                tocHowto: "實際體驗",
+                tocSample: "可以問的問題",
+                tocConsiderations: "工程權衡",
+                tocRole: "我的角色",
+                tocChallenges: "挑戰與解法",
+
+                problemTitle: "問題背景",
+                problemContent: "<p>我想真正搞懂 <a href=\"https://modelcontextprotocol.io\" target=\"_blank\">MCP（Model Context Protocol）</a>是怎麼運作的，不只是看文件而已，同時也想讓 AI 助理（或用 AI 助理的招募方）有比「一頁一頁點開靜態網頁」更好的方式來了解我做過什麼。</p><p>所以我做了 <strong>Portfolio MCP Server</strong>：把我作品集裡的專案、技能、履歷資料，包成幾個簡單的 MCP tools。任何支援 MCP 的 AI 助理，像 Claude Desktop、Claude.ai 的 Connector，或其他懂這個協定的工具，都可以直接呼叫這些 tools，用真實、即時的資料回答關於我的問題，而不是憑印象亂猜。</p>",
+
+                archTitle: "系統架構",
+                archCaption: "四層架構：任何 MCP client 透過 stdio（本機）或 Streamable HTTP（遠端）連上同一個 MCPServer 執行個體，再路由到單純、可測試的 Python function，讀取三個 JSON 資料檔。Client 跟連線方式可以不一樣，但底下跑的是同一份程式碼，本機測試跟正式上線的邏輯完全一致。",
+                techTitle: "技術堆疊",
+                techGroup1: "協定與傳輸",
+                techGroup2: "應用邏輯",
+                techGroup3: "基礎架構",
+                techGroup4: "資料",
+
+                howtoTitle: "實際體驗",
+                howtoIntro: "這不是一般的網站，直接在瀏覽器打開這個網址會看到「Not Found」，這是正常的。它是一個協定端點，不是一個網頁：MCP client 必須用 Streamable HTTP 協定跟它溝通，不能只是用瀏覽器打開網址。有三種方式可以實際試用：",
+                howto1Title: "Claude.ai — 自訂 Connector",
+                howto1Content: "設定 → Connectors → 新增自訂 connector → 貼上 <code>https://yun-portfolio-mcp.onrender.com/mcp</code> → 在任何對話的 <strong>+</strong> 選單啟用它，然後直接問一個關於我的問題。",
+                howto2Title: "MCP Inspector（免安裝）",
+                howto2Content: "<code>npx @modelcontextprotocol/inspector https://yun-portfolio-mcp.onrender.com/mcp</code>，會打開一個本機網頁，可以直接呼叫每個 tool、看原始的請求跟回應內容。",
+                howto3Title: "Claude Desktop（本機＋原始碼）",
+                howto3Content: "clone repo，照 README 用 stdio 模式跑起來，加進自己的 <code>claude_desktop_config.json</code>。",
+                howtoNote: "免費方案小提醒：伺服器閒置約 15 分鐘會休眠，之後第一個請求要 30～60 秒喚醒。這是 demo 專案刻意接受的成本取捨，不是壞掉，如果第一次問感覺很慢或逾時，再問一次就好。",
+
+                sampleTitle: "可以試著問問看",
+                sample1: "「這個人做過哪些專案？」",
+                sample2: "「她有沒有做過跟 RAG 或向量搜尋相關的東西？」",
+                sample3: "「介紹一下她的碩士論文。」",
+                sample4: "「她有 iOS 開發經驗嗎？」",
+                sample5: "「用一段話幫我總結她的背景。」",
+                sample6: "「IM Your Buddy 是什麼？她在裡面負責什麼？」",
+
+                considerTitle: "工程權衡",
+                considerCostLabel: "成本",
+                considerCost: "<li>用 <strong>Render 免費方案</strong>架站，每月 $0，不需信用卡。</li><li><strong>這個 server 本身不呼叫任何 LLM</strong>，只讀取並回傳本機 JSON，所以連上來的人（他們自己的 Claude、他們自己的 tokens）才會產生推論成本，不會花到我的錢。</li>",
+                considerSpeedLabel: "速度",
+                considerSpeed: "<li><strong>Process 內快取</strong>（<code>lru_cache</code>，Python 內建的暫存機制）：JSON 資料整個 process 生命週期只從硬碟讀一次，不是每個請求都重讀。</li><li><strong>接受的取捨：</strong>免費方案閒置 15 分鐘後的冷啟動（30～60 秒），換取低流量 demo 專案零主機成本。</li>",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "<li><strong>支援別名的模糊比對</strong>：像「NTPU OPE Assistant」或某個競賽的全名，就算跟專案真正的 id 完全不同，也能正確對應到對的專案。</li><li>31 筆作品集資料，每一筆都至少附一個真的能打開的連結，這是用測試強制驗證的，不只是一個約定。</li>",
+                considerStabilityLabel: "穩定性",
+                considerStability: "<li><strong>唯讀、不需要驗證機制</strong>：回傳的每一個字都已經是這個網站上的公開資訊，沒有需要保護的東西，也沒有任何東西可以被改動。</li><li><strong>Host header 允許清單</strong>（防止 DNS rebinding 攻擊）刻意保留而不是關掉，只允許這個 server 實際會回應的網域。</li>",
+
+                roleTitle: "我的角色",
+                roleSubtitle: "獨立開發者",
+                roleIntro: "從頭到尾全部自己完成：",
+                roleList: "<li>把自己作品集網站上的專案、技能、履歷內容，整理成結構乾淨的 JSON。</li><li>實作全部 4 個 MCP tools 並寫好對應的 docstring，docstring 正是 AI 助理判斷「這個問題該不該呼叫這個工具」時實際會讀的內容。</li><li>用 Docker 把 server 容器化，並設定 GitHub Actions 讓每次 push 都自動 lint 加測試。</li><li>透過 Streamable HTTP 部署到 Render，上線後實際除錯了兩個真實發生的問題（見下方挑戰），並用真正的 MCP client 完整驗證過整個流程，不只是本機測試。</li>",
+
+                challengesTitle: "遇到的問題與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "MCP SDK 的 API 已經跟教學文件對不起來",
+                c1Problem: "幾乎所有教學跟舊文件都寫 <code>from mcp.server.fastmcp import FastMCP</code>，但現在 <code>pip install mcp</code> 實際裝到的版本，已經把它換成完全不同 import 路徑跟類別名稱的 <code>mcp.server.mcpserver.MCPServer</code>。",
+                c1Solution: "不完全信任教學文件，直接讀已安裝套件的原始碼，改用當下真正能裝到的 API（<code>MCPServer</code>、<code>@server.tool()</code>、<code>streamable_http_app()</code>）實作，並寫進 README，讓下一個踩到同樣問題的人不用從頭重新摸索。",
+                c2Title: "Docker image 裡讀不到自己的資料檔",
+                c2Problem: "本機每次測試都正常，包進容器後卻報錯「No such file or directory: data/projects.json」。正常的 <code>pip install .</code> 會把 <code>src/portfolio_mcp/</code> 的目錄結構「壓平」進 site-packages，悄悄弄壞了在本機每個開發環境都行得通的相對路徑邏輯。",
+                c2Solution: "把 Docker 裡的安裝方式改成 editable install（<code>pip install -e .</code>），反正整個 repo 都已經複製進 image 裡了，這樣可以讓磁碟上的目錄結構跟本機開發時完全一致，不用另外寫一套資料打包機制。",
+                c3Title: "正式上線後回傳 421「Invalid Host header」",
+                c3Problem: "部署到 Render 後，所有請求，包含 Claude.ai 自己的 Connector，全部被拒絕。MCP SDK 預設就開啟了 DNS rebinding 防護，會檢查 <code>Host</code> header 是否在允許清單裡，但清單預設是空的，連 Render 自己的網域名稱都被悄悄擋掉。",
+                c3Solution: "保留這個防護機制（沒有直接關掉），改成明確把部署網域加進允許清單，並用環境變數讓之後改名或換網域時不用改程式碼，另外補了一個測試直接驗證同一段檢查邏輯，避免之後又悄悄壞掉。",
+
+                tocDemo: "實際成果",
+                demoTitle: "真的能用",
+                demoIntro: "以下兩個問題是透過 Claude.ai 的 Connector 實際問的，回答是MCP server即時回覆的內容，不是排練過的截圖。",
+                d1Caption: "<strong>問了「他有iOS開發經驗嗎？」</strong>Client先顯示「Used Yun Portfolio MCP integration, loaded tools」，接著正確從Personal Finance Dashboard App專案資料裡，撈出Swift、SwiftUI、Swift Charts、Yahoo Finance API整合、CryptoKit加密、Face ID這些具體技術細節來回答，不是憑訓練資料裡的印象亂猜。",
+                d2Caption: "<strong>問了「他有哪些精選作品？」</strong>正確列出全部6個旗艦專案（IM Your Buddy、Lab Handover、Knovyra、Personal Finance Dashboard App、碩士論文、AIIT NTPU），每項都附上正確的連結，資料直接來自 <code>projects.json</code>，不是憑空生成的。",
+
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerAbout: "關於我",
+                footerExperiences: "經歷",
+                footerPublications: "學術發表",
+                footerCertifications: "證照",
+                footerProjects: "專案作品",
+                footerCompetitions: "競賽經歷",
+                footerConferences: "研討會",
+                footerAwards: "獲獎紀錄",
+                footerOtherExperiences: "其他經歷",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+</body>
+</html>
