@@ -429,5 +429,451 @@
           <p data-i18n="disclaimer">This site is for academic and personal portfolio use only.</p>
         </div>
     </footer>
+<!--
+  問答小精靈 widget — drop this block near the end of <body>, before the
+  closing tag, on any page you want it to appear (e.g. index.html and
+  about.html). Self-contained: no build step, no dependency beyond your
+  page already loading Noto Serif TC (it does, site-wide).
+
+  Wiring: talks to the /chat endpoint on your Render-deployed
+  portfolio-mcp-server. Update CHAT_API_URL below if that URL ever
+  changes. OPENAI_API_KEY is already set on Render, so this is live.
+
+  Language: reads document.documentElement.lang (your i18next script
+  already sets this on every page) to pick the widget's own UI strings.
+  The actual AI replies are language-agnostic — the model answers in
+  whatever language the visitor typed in.
+
+  Avatar: uses images/QA_fairy.png for both the launcher button and the
+  fairy's avatar next to its replies in the message thread.
+-->
+<style>
+  :root {
+    --chat-accent: var(--primary-green, #2E8B57);
+    --chat-accent-dark: var(--dark-green, #1e5d3a);
+    --chat-ink: var(--text-color, #5A4A42);
+    --chat-bg: rgba(255, 255, 255, 0.97);
+  }
+
+  #ywc-chat-launcher {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2000;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--chat-accent);
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    animation: ywc-launcher-pulse 2.4s ease-out 1s 3;
+    overflow: hidden;
+    padding: 0;
+  }
+  #ywc-chat-launcher:hover {
+    background: var(--chat-accent-dark);
+    transform: scale(1.08);
+    box-shadow: 0 8px 26px rgba(30, 93, 58, 0.45);
+  }
+  #ywc-chat-launcher:active { transform: scale(0.96); }
+  #ywc-chat-launcher .ywc-genie-icon {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+    transition: transform 0.2s ease;
+  }
+  #ywc-chat-launcher .ywc-genie-close {
+    display: none; font-size: 1.6rem; line-height: 1; font-weight: 700; color: #fff;
+  }
+  #ywc-chat-launcher.ywc-open .ywc-genie-icon { display: none; }
+  #ywc-chat-launcher.ywc-open .ywc-genie-close { display: block; }
+
+  @keyframes ywc-launcher-pulse {
+    0% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 0 rgba(46, 139, 87, 0.45); }
+    70% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 14px rgba(46, 139, 87, 0); }
+    100% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 0 rgba(46, 139, 87, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ywc-chat-launcher { animation: none; }
+  }
+
+  #ywc-chat-panel {
+    position: fixed;
+    right: 22px;
+    bottom: 90px;
+    z-index: 2000;
+    width: min(360px, calc(100vw - 44px));
+    height: min(520px, calc(100vh - 140px));
+    background: var(--chat-bg);
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Noto Serif TC', serif;
+    color: var(--chat-ink);
+  }
+  #ywc-chat-panel.ywc-open { display: flex; }
+
+  .ywc-chat-header {
+    background: var(--chat-accent);
+    color: #fff;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .ywc-chat-header h3 { margin: 0; font-size: 1rem; font-weight: 700; }
+  .ywc-chat-header p { margin: 2px 0 0; font-size: 0.72rem; opacity: 0.85; }
+  .ywc-chat-close {
+    background: none; border: none; color: #fff; font-size: 1.3rem;
+    cursor: pointer; line-height: 1; padding: 4px;
+  }
+
+  .ywc-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(213, 236, 198, 0.25), rgba(255, 255, 255, 0));
+  }
+  .ywc-msg-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+    align-self: flex-start;
+    max-width: 88%;
+  }
+  .ywc-avatar {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(46, 139, 87, 0.25);
+    flex-shrink: 0;
+  }
+  .ywc-msg {
+    max-width: 85%;
+    padding: 9px 13px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .ywc-msg-row .ywc-msg { max-width: 100%; }
+  .ywc-msg.ywc-user {
+    align-self: flex-end;
+    background: var(--chat-accent);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .ywc-msg.ywc-bot {
+    background: #fff;
+    border: 1px solid rgba(90, 74, 66, 0.15);
+    border-bottom-left-radius: 4px;
+  }
+  .ywc-msg.ywc-error {
+    background: rgba(179, 38, 30, 0.08);
+    border: 1px solid rgba(179, 38, 30, 0.3);
+    color: #8a281f;
+  }
+  .ywc-msg.ywc-typing { opacity: 0.65; font-style: italic; }
+
+  .ywc-chat-suggestions {
+    padding: 0 14px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ywc-suggestion-chip {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(46, 139, 87, 0.35);
+    background: rgba(213, 236, 198, 0.45);
+    color: var(--chat-accent-dark);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-suggestion-chip:hover { background: rgba(213, 236, 198, 0.8); }
+
+  .ywc-chat-inputrow {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid rgba(90, 74, 66, 0.12);
+    flex-shrink: 0;
+    background: #fff;
+  }
+  .ywc-chat-input {
+    flex: 1;
+    resize: none;
+    border: 1px solid rgba(90, 74, 66, 0.25);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: var(--chat-ink);
+    max-height: 80px;
+  }
+  .ywc-chat-input:focus { outline: none; border-color: var(--chat-accent); }
+  .ywc-chat-send {
+    border: none;
+    background: var(--chat-accent);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ywc-chat-send:not(:disabled):hover { background: var(--chat-accent-dark); }
+
+  @media (max-width: 480px) {
+    #ywc-chat-panel { right: 12px; left: 12px; width: auto; bottom: 84px; }
+    #ywc-chat-launcher { right: 12px; bottom: 12px; }
+  }
+</style>
+
+<button id="ywc-chat-launcher" type="button" aria-label="Ask about Yun's portfolio" title="問問看">
+  <img class="ywc-genie-icon" src="images/QA_fairy.png" alt="">
+  <span class="ywc-genie-close">×</span>
+</button>
+
+<div id="ywc-chat-panel" role="dialog" aria-label="Portfolio Q&A">
+  <div class="ywc-chat-header">
+    <div>
+      <h3 id="ywc-header-title">問答小精靈</h3>
+      <p id="ywc-header-sub">關於 Yun 的作品集，直接問我</p>
+    </div>
+    <button class="ywc-chat-close" id="ywc-chat-close" aria-label="Close">×</button>
+  </div>
+  <div class="ywc-chat-messages" id="ywc-chat-messages"></div>
+  <div class="ywc-chat-suggestions" id="ywc-chat-suggestions"></div>
+  <div class="ywc-chat-inputrow">
+    <textarea id="ywc-chat-input" class="ywc-chat-input" rows="1"></textarea>
+    <button id="ywc-chat-send" class="ywc-chat-send" type="button">送出</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---- Configuration ----------------------------------------------------
+  var CHAT_API_URL = "https://yun-portfolio-mcp.onrender.com/chat";
+  var AVATAR_SRC = "images/QA_fairy.png";
+  var MAX_HISTORY_MESSAGES = 12; // matches the server's own cap; trimmed client-side too
+
+  // ---- i18n (widget chrome only — replies are language-agnostic) --------
+  var STRINGS = {
+    zh: {
+      launcher: "問問看",
+      title: "問答小精靈",
+      subtitle: "關於 Yun 的作品集，直接問我",
+      placeholder: "想知道什麼呢？例如：她做過哪些 AI 專案？",
+      send: "送出",
+      greeting: "嗨！我是這個作品集的問答小精靈 🧞 想知道 Yun 做過什麼、會什麼技術，或她的背景，都可以直接問我。",
+      typing: "思考中…",
+      suggestions: [
+        "這個人做過哪些專案？",
+        "她有 iOS 開發經驗嗎？",
+        "介紹一下她的碩士論文",
+      ],
+      errors: {
+        rate_limited: "問太多次了，休息一下再問吧！",
+        not_configured: "小精靈還在設定中，晚點再回來問我吧。",
+        network: "連不上小精靈，檢查一下網路或稍後再試。",
+        default: "抱歉，暫時無法回答，請稍後再試一次。",
+      },
+    },
+    en: {
+      launcher: "Ask me",
+      title: "Portfolio Genie",
+      subtitle: "Ask me anything about Yun's work",
+      placeholder: "e.g. What AI projects has she built?",
+      send: "Send",
+      greeting: "Hi! I'm the Q&A genie for this portfolio 🧞 Ask me about Yun's projects, skills, or background.",
+      typing: "Thinking…",
+      suggestions: [
+        "What projects has this person worked on?",
+        "Does she have iOS development experience?",
+        "Tell me about her master's thesis.",
+      ],
+      errors: {
+        rate_limited: "That's a lot of questions — take a short break and try again soon!",
+        not_configured: "The genie isn't fully set up yet — check back later.",
+        network: "Couldn't reach the genie — check your connection and try again.",
+        default: "Sorry, I couldn't get an answer just now. Please try again in a moment.",
+      },
+    },
+  };
+
+  function currentLang() {
+    var htmlLang = (document.documentElement.lang || "").toLowerCase();
+    return htmlLang.indexOf("zh") === 0 ? "zh" : "en";
+  }
+
+  var lang = currentLang();
+  var t = STRINGS[lang];
+
+  // ---- Element refs -------------------------------------------------------
+  var launcher = document.getElementById("ywc-chat-launcher");
+  var panel = document.getElementById("ywc-chat-panel");
+  var closeBtn = document.getElementById("ywc-chat-close");
+  var messagesEl = document.getElementById("ywc-chat-messages");
+  var suggestionsEl = document.getElementById("ywc-chat-suggestions");
+  var inputEl = document.getElementById("ywc-chat-input");
+  var sendBtn = document.getElementById("ywc-chat-send");
+  var headerTitle = document.getElementById("ywc-header-title");
+  var headerSub = document.getElementById("ywc-header-sub");
+
+  var history = []; // [{role, content}, ...] sent back to the server each turn
+  var opened = false;
+  var sending = false;
+
+  function applyStrings() {
+    lang = currentLang();
+    t = STRINGS[lang];
+    launcher.title = t.launcher;
+    headerTitle.textContent = t.title;
+    headerSub.textContent = t.subtitle;
+    inputEl.placeholder = t.placeholder;
+    sendBtn.textContent = t.send;
+  }
+
+  function renderSuggestions() {
+    suggestionsEl.innerHTML = "";
+    t.suggestions.forEach(function (q) {
+      var chip = document.createElement("button");
+      chip.className = "ywc-suggestion-chip";
+      chip.type = "button";
+      chip.textContent = q;
+      chip.addEventListener("click", function () {
+        inputEl.value = q;
+        sendMessage();
+      });
+      suggestionsEl.appendChild(chip);
+    });
+  }
+
+  // Bot/typing messages get an avatar and are wrapped in a flex row so the
+  // image sits next to the bubble; user/error messages render as before.
+  function appendMessage(text, kind) {
+    var bubble = document.createElement("div");
+    bubble.className = "ywc-msg ywc-" + kind;
+    bubble.textContent = text;
+
+    if (kind === "bot" || kind === "typing") {
+      var row = document.createElement("div");
+      row.className = "ywc-msg-row";
+      var avatar = document.createElement("img");
+      avatar.className = "ywc-avatar";
+      avatar.src = AVATAR_SRC;
+      avatar.alt = "";
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return row;
+    }
+
+    messagesEl.appendChild(bubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return bubble;
+  }
+
+  function openPanel() {
+    opened = true;
+    panel.classList.add("ywc-open");
+    launcher.classList.add("ywc-open");
+    launcher.setAttribute("aria-expanded", "true");
+    if (messagesEl.children.length === 0) {
+      appendMessage(t.greeting, "bot");
+      renderSuggestions();
+    }
+    inputEl.focus();
+  }
+
+  function closePanel() {
+    opened = false;
+    panel.classList.remove("ywc-open");
+    launcher.classList.remove("ywc-open");
+    launcher.setAttribute("aria-expanded", "false");
+  }
+
+  launcher.addEventListener("click", function () {
+    applyStrings();
+    if (opened) { closePanel(); } else { openPanel(); }
+  });
+  closeBtn.addEventListener("click", closePanel);
+
+  inputEl.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener("click", sendMessage);
+
+  function errorMessageFor(errCode) {
+    return (t.errors && t.errors[errCode]) || t.errors.default;
+  }
+
+  function sendMessage() {
+    var message = inputEl.value.trim();
+    if (!message || sending) return;
+
+    suggestionsEl.innerHTML = "";
+    appendMessage(message, "user");
+    inputEl.value = "";
+    inputEl.style.height = "auto";
+
+    var typingRow = appendMessage(t.typing, "typing");
+    sending = true;
+    sendBtn.disabled = true;
+
+    fetch(CHAT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message, history: history.slice(-MAX_HISTORY_MESSAGES) }),
+    })
+      .then(function (resp) {
+        return resp.json().then(function (data) { return { ok: resp.ok, data: data }; });
+      })
+      .then(function (result) {
+        typingRow.remove();
+        if (!result.ok) {
+          appendMessage(errorMessageFor(result.data && result.data.error), "error");
+          return;
+        }
+        var reply = (result.data && result.data.reply) || t.errors.default;
+        appendMessage(reply, "bot");
+        history.push({ role: "user", content: message });
+        history.push({ role: "assistant", content: reply });
+      })
+      .catch(function () {
+        typingRow.remove();
+        appendMessage(errorMessageFor("network"), "error");
+      })
+      .finally(function () {
+        sending = false;
+        sendBtn.disabled = false;
+      });
+  }
+
+  applyStrings();
+})();
+</script>
+
 </body>
 </html>
