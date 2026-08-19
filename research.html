@@ -594,6 +594,24 @@
   }
   .ywc-chat-header h3 { margin: 0; font-size: 1rem; font-weight: 700; }
   .ywc-chat-header p { margin: 2px 0 0; font-size: 0.72rem; opacity: 0.85; }
+  .ywc-chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ywc-lang-toggle {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-lang-toggle:hover { background: rgba(255, 255, 255, 0.32); }
   .ywc-chat-close {
     background: none; border: none; color: #fff; font-size: 1.3rem;
     cursor: pointer; line-height: 1; padding: 4px;
@@ -722,7 +740,10 @@
       <h3 id="ywc-header-title">問答小精靈</h3>
       <p id="ywc-header-sub">關於 Yun 的作品集，直接問我</p>
     </div>
-    <button class="ywc-chat-close" id="ywc-chat-close" aria-label="Close">×</button>
+    <div class="ywc-chat-header-actions">
+      <button class="ywc-lang-toggle" id="ywc-lang-toggle" type="button">EN</button>
+      <button class="ywc-chat-close" id="ywc-chat-close" aria-label="Close">×</button>
+    </div>
   </div>
   <div class="ywc-chat-messages" id="ywc-chat-messages"></div>
   <div class="ywc-chat-suggestions" id="ywc-chat-suggestions"></div>
@@ -783,7 +804,10 @@
     },
   };
 
+  var langOverride = null; // set by the widget's own 中/EN toggle; null = follow the page
+
   function currentLang() {
+    if (langOverride) return langOverride;
     var htmlLang = (document.documentElement.lang || "").toLowerCase();
     return htmlLang.indexOf("zh") === 0 ? "zh" : "en";
   }
@@ -801,6 +825,7 @@
   var sendBtn = document.getElementById("ywc-chat-send");
   var headerTitle = document.getElementById("ywc-header-title");
   var headerSub = document.getElementById("ywc-header-sub");
+  var langToggleBtn = document.getElementById("ywc-lang-toggle");
 
   var history = []; // [{role, content}, ...] sent back to the server each turn
   var opened = false;
@@ -814,6 +839,7 @@
     headerSub.textContent = t.subtitle;
     inputEl.placeholder = t.placeholder;
     sendBtn.textContent = t.send;
+    if (langToggleBtn) langToggleBtn.textContent = lang === "zh" ? "EN" : "中文";
   }
 
   function renderSuggestions() {
@@ -881,6 +907,14 @@
     if (opened) { closePanel(); } else { openPanel(); }
   });
   closeBtn.addEventListener("click", closePanel);
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      langOverride = currentLang() === "zh" ? "en" : "zh";
+      applyStrings();
+      renderSuggestions();
+    });
+  }
 
   inputEl.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
