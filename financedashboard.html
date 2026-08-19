@@ -1204,8 +1204,8 @@ document.addEventListener('DOMContentLoaded', function () {
     right: 22px;
     bottom: 22px;
     z-index: 2000;
-    width: 58px;
-    height: 58px;
+    width: 76px;
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1247,10 +1247,10 @@ document.addEventListener('DOMContentLoaded', function () {
   #ywc-chat-panel {
     position: fixed;
     right: 22px;
-    bottom: 90px;
+    bottom: 108px;
     z-index: 2000;
-    width: min(360px, calc(100vw - 44px));
-    height: min(520px, calc(100vh - 140px));
+    width: min(400px, calc(100vw - 44px));
+    height: min(600px, calc(100vh - 120px));
     background: var(--chat-bg);
     border-radius: 16px;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
@@ -1261,6 +1261,60 @@ document.addEventListener('DOMContentLoaded', function () {
     color: var(--chat-ink);
   }
   #ywc-chat-panel.ywc-open { display: flex; }
+
+  .ywc-teaser {
+    position: fixed;
+    right: 22px;
+    bottom: 108px;
+    z-index: 1999;
+    max-width: 200px;
+    background: var(--chat-bg);
+    color: var(--chat-ink);
+    border-radius: 14px;
+    padding: 10px 26px 10px 14px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(46, 139, 87, 0.25);
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .ywc-teaser::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    bottom: -7px;
+    width: 14px;
+    height: 14px;
+    background: var(--chat-bg);
+    border-right: 1px solid rgba(46, 139, 87, 0.25);
+    border-bottom: 1px solid rgba(46, 139, 87, 0.25);
+    transform: rotate(45deg);
+  }
+  .ywc-teaser.ywc-show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .ywc-teaser-close {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--chat-ink);
+    opacity: 0.55;
+    cursor: pointer;
+    padding: 4px;
+    font-family: inherit;
+  }
+  .ywc-teaser-close:hover { opacity: 1; }
 
   .ywc-chat-header {
     background: var(--chat-accent);
@@ -1403,10 +1457,16 @@ document.addEventListener('DOMContentLoaded', function () {
   .ywc-chat-send:not(:disabled):hover { background: var(--chat-accent-dark); }
 
   @media (max-width: 480px) {
-    #ywc-chat-panel { right: 12px; left: 12px; width: auto; bottom: 84px; }
+    #ywc-chat-panel { right: 12px; left: 12px; width: auto; bottom: 100px; }
     #ywc-chat-launcher { right: 12px; bottom: 12px; }
+    .ywc-teaser { right: 12px; bottom: 100px; max-width: 170px; }
   }
 </style>
+
+<div id="ywc-teaser" class="ywc-teaser" role="status">
+  <button type="button" id="ywc-teaser-close" class="ywc-teaser-close" aria-label="Dismiss">×</button>
+  <span id="ywc-teaser-text"></span>
+</div>
 
 <button id="ywc-chat-launcher" type="button" aria-label="Ask about Yun's portfolio" title="問問看">
   <img class="ywc-genie-icon" src="images/QA_fairy.png" alt="">
@@ -1448,6 +1508,7 @@ document.addEventListener('DOMContentLoaded', function () {
       placeholder: "想知道什麼呢？例如：她做過哪些 AI 專案？",
       send: "送出",
       greeting: "嗨！我是這個作品集的問答小精靈 🧞 想知道 Yun 做過什麼、會什麼技術，或她的背景，都可以直接問我。",
+      teaser: "有問題想問我嗎？👋 點我就能問！",
       typing: "思考中…",
       suggestions: [
         "這個人做過哪些專案？",
@@ -1468,6 +1529,7 @@ document.addEventListener('DOMContentLoaded', function () {
       placeholder: "e.g. What AI projects has she built?",
       send: "Send",
       greeting: "Hi! I'm the Q&A genie for this portfolio 🧞 Ask me about Yun's projects, skills, or background.",
+      teaser: "Got a question? 👋 Click to ask!",
       typing: "Thinking…",
       suggestions: [
         "What projects has this person worked on?",
@@ -1506,9 +1568,49 @@ document.addEventListener('DOMContentLoaded', function () {
   var headerSub = document.getElementById("ywc-header-sub");
   var langToggleBtn = document.getElementById("ywc-lang-toggle");
 
+  var teaserEl = document.getElementById("ywc-teaser");
+  var teaserTextEl = document.getElementById("ywc-teaser-text");
+  var teaserCloseBtn = document.getElementById("ywc-teaser-close");
+  var TEASER_SESSION_KEY = "ywc_teaser_shown_v1";
+
   var history = []; // [{role, content}, ...] sent back to the server each turn
   var opened = false;
   var sending = false;
+
+  function hideTeaser() {
+    if (teaserEl) teaserEl.classList.remove("ywc-show");
+  }
+
+  // Shows a small "ask me something" bubble once per browser session (not on
+  // every page nav), auto-hiding after a few seconds. Purely client-side —
+  // no server involved, so this works fine on GitHub Pages' static hosting.
+  function maybeShowTeaser() {
+    if (!teaserEl || !teaserTextEl) return;
+    var alreadyShown = false;
+    try { alreadyShown = !!sessionStorage.getItem(TEASER_SESSION_KEY); } catch (e) {}
+    if (alreadyShown) return;
+    setTimeout(function () {
+      if (opened) return;
+      teaserTextEl.textContent = t.teaser;
+      teaserEl.classList.add("ywc-show");
+      try { sessionStorage.setItem(TEASER_SESSION_KEY, "1"); } catch (e) {}
+      setTimeout(hideTeaser, 8000);
+    }, 1500);
+  }
+
+  if (teaserEl) {
+    teaserEl.addEventListener("click", function () {
+      hideTeaser();
+      applyStrings();
+      openPanel();
+    });
+  }
+  if (teaserCloseBtn) {
+    teaserCloseBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      hideTeaser();
+    });
+  }
 
   function applyStrings() {
     lang = currentLang();
@@ -1583,6 +1685,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   launcher.addEventListener("click", function () {
     applyStrings();
+    hideTeaser();
     if (opened) { closePanel(); } else { openPanel(); }
   });
   closeBtn.addEventListener("click", closePanel);
@@ -1650,6 +1753,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   applyStrings();
+  maybeShowTeaser();
 })();
 </script>
 
