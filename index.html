@@ -640,6 +640,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
         }
 
         .cert-card:hover {
@@ -673,6 +674,10 @@
             font-size: 0.85rem;
             color: var(--text-color);
             line-height: 1.4;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
         }
 
         /* Projects Card - 響應式固定數量顯示版本 */
@@ -1091,6 +1096,14 @@
                 max-width: 300px;
                 height: auto;
                 min-height: 350px;
+                overflow: visible;
+            }
+
+            /* Card grows to fit on mobile, so no need to clamp/truncate text */
+            .cert-card p {
+                display: block;
+                -webkit-line-clamp: unset;
+                overflow: visible;
             }
         }
 
