@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CiteGrain | Yun</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#2E8B57">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Yun">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.4.14/i18next.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/7.0.2/i18nextBrowserLanguageDetector.min.js"></script>
+<style>
+:root {
+    --primary-green: #2E8B57;
+    --light-green: rgba(213, 236, 198, 0.8);
+    --dark-green: #1e5d3a;
+    --text-color: #5A4A42;
+    --card-bg: rgba(255, 255, 255, 0.92);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; max-width: 100vw; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-color);
+    background: linear-gradient(135deg, rgba(213, 236, 198, 0.5), rgba(220, 233, 190, 0.5), rgba(180, 218, 144, 0.5), rgba(212, 228, 175, 0.5), rgba(202, 226, 167, 0.5));
+    line-height: 1.7;
+    min-height: 100vh;
+}
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+.back-link {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.back-link:hover { background: rgba(46, 139, 87, 0.15); }
+.language-btn {
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.language-btn:hover { background: var(--dark-green); }
+
+/* Hero */
+.case-hero {
+    padding: 130px 20px 30px;
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+.case-badge {
+    display: inline-block;
+    background: var(--primary-green);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.case-hero h1 {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+}
+.case-hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.case-hero .meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 22px;
+}
+.case-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.case-link:hover { background: var(--primary-green); color: #fff; }
+.case-link-system { background: var(--primary-green); color: #fff; }
+.case-link-system:hover { background: var(--dark-green); color: #fff; }
+
+/* Quick section nav */
+.case-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 26px auto 0;
+    max-width: 900px;
+}
+.case-toc a {
+    font-size: 0.82rem;
+    color: var(--primary-green);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1.5px solid rgba(46, 139, 87, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.case-toc a:hover { background: var(--primary-green); border-color: var(--primary-green); color: #fff; }
+
+/* Content sections */
+.case-section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+.case-section h2 {
+    font-size: 1.7rem;
+    color: var(--primary-green);
+    border-bottom: 3px solid var(--primary-green);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.case-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.case-card p { margin: 0 0 14px 0; }
+.case-card p:last-child { margin-bottom: 0; }
+.case-card ul, .case-card ol { padding-left: 22px; margin: 0 0 14px 0; }
+.case-card ul li, .case-card ol li { margin-bottom: 10px; }
+.case-card ul li:last-child, .case-card ol li:last-child { margin-bottom: 0; }
+.case-card strong { color: var(--dark-green); }
+
+/* Role header */
+.role-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.role-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 50%;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.role-title { font-weight: 700; color: var(--text-color); font-size: 1.1rem; }
+
+/* Diagram */
+.diagram-box {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+.diagram-box:last-child { margin-bottom: 0; }
+.diagram-box img { max-width: 100%; height: auto; border-radius: 8px; cursor: zoom-in; }
+.diagram-caption { font-size: 0.85rem; opacity: 0.7; margin-top: 12px; }
+
+/* Flow steps (upload path / query path, plain-text pipeline) */
+.flow-row { margin-bottom: 18px; }
+.flow-row:last-child { margin-bottom: 0; }
+.flow-row-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.flow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.flow-step {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 10px;
+}
+.flow-arrow { color: var(--primary-green); opacity: 0.6; font-size: 0.9rem; }
+
+/* Tech stack chips */
+.tech-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 24px; }
+.tech-group h4 { color: var(--dark-green); font-size: 0.95rem; margin: 0 0 10px 0; }
+.tech-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-chip {
+    background: var(--light-green);
+    color: var(--dark-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+}
+
+/* Feature cards */
+.feature-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.feature-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.feature-header h4 { margin: 0; font-size: 1.02rem; color: var(--text-color); }
+.feature-card ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+.feature-card ul li { margin-bottom: 8px; }
+.feature-card ul li:last-child { margin-bottom: 0; }
+.feature-card ul li strong { color: var(--dark-green); }
+
+/* Engineering considerations (cost / speed / accuracy / stability) */
+.consider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+.consider-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px 22px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.consider-card .consider-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+.consider-card ul { padding-left: 18px; margin: 0; font-size: 0.87rem; }
+.consider-card ul li { margin-bottom: 6px; }
+.consider-card ul li:last-child { margin-bottom: 0; }
+.consider-card strong { color: var(--dark-green); }
+
+/* Challenge cards */
+.challenge-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 26px 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 22px;
+}
+.challenge-card:last-child { margin-bottom: 0; }
+.challenge-card h3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin: 0 0 14px 0;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+.challenge-card h3 .num {
+    color: #fff;
+    background: var(--primary-green);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+.challenge-label {
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+.challenge-block { margin-bottom: 16px; }
+.challenge-block:last-child { margin-bottom: 0; }
+.challenge-block p { margin: 0; }
+.challenge-block.solution {
+    background: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+}
+.challenge-block.solution p { color: var(--dark-green); }
+.challenge-block.solution code, .challenge-card code {
+    background: var(--card-bg);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+.case-card code {
+    background: var(--light-green);
+    color: var(--dark-green);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+
+/* Impact / proof-point cards */
+.impact-intro {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin: 0 0 22px 0;
+}
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+.proof-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.proof-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--light-green);
+    color: var(--dark-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+}
+.proof-card h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--text-color); }
+.proof-card p { margin: 0; font-size: 0.9rem; }
+.proof-card strong { color: var(--dark-green); }
+
+/* Demo screenshot */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 22px;
+}
+.screenshot-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.screenshot-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(46,139,87,0.15);
+    cursor: zoom-in;
+    display: block;
+}
+.screenshot-caption {
+    font-size: 0.88rem;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+.screenshot-caption strong { color: var(--dark-green); }
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img { max-width: 92%; max-height: 92%; border-radius: 8px; }
+.lightbox .close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: #fff; cursor: pointer; }
+
+/* Scroll reveal */
+.fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+footer {
+    background: rgba(213, 236, 198, 0.8);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+.footer-column h3 { color: var(--primary-green); font-size: 1.05rem; margin-bottom: 12px; }
+.footer-column p, .footer-column a { font-size: 0.9rem; margin: 6px 0; text-decoration: none; color: var(--text-color); }
+.footer-column a { color: var(--primary-green); }
+.footer-column a:hover { text-decoration: underline; }
+.footer-bottom { text-align: center; margin-top: 25px; padding-top: 18px; border-top: 1px solid rgba(46,139,87,0.2); font-size: 0.85rem; }
+
+@media (max-width: 600px) {
+    .case-hero { padding-top: 110px; }
+    .case-hero h1 { font-size: 1.6rem; }
+    .case-card, .challenge-card, .feature-card, .consider-card, .proof-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="navbar">
+    <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backToProjects">Back to Projects</span></a>
+    <button class="language-btn" id="lang-toggle" onclick="switchLanguage()" data-i18n="langButton">中文</button>
+</div>
+
+<div class="case-hero">
+    <span class="case-badge">📄 <span data-i18n="badge">Case Study · Solo Project</span></span>
+    <h1 data-i18n="title">CiteGrain — Long-Document Traceable QA System</h1>
+    <div class="subtitle" data-i18n="subtitle">Academic-PDF question answering, cited back to page and section, inside a hard 10,000-token context</div>
+    <div class="meta" data-i18n="meta">Solo project · Built 2026 · Runs entirely local except one text-only model call</div>
+    <div class="case-links">
+        <a class="case-link case-link-system" href="https://github.com/Yunwcy/citegrain" target="_blank"><i class="fab fa-github"></i> <span data-i18n="linkGithub">GitHub Repository</span></a>
+    </div>
+    <div class="case-toc">
+        <a href="#problem" data-i18n="tocProblem">Problem</a>
+        <a href="#flow" data-i18n="tocFlow">System Flow</a>
+        <a href="#techstack" data-i18n="tocTech">Tech Stack</a>
+        <a href="#tables" data-i18n="tocTables">Chunking &amp; Tables</a>
+        <a href="#considerations" data-i18n="tocConsiderations">Trade-offs</a>
+        <a href="#role" data-i18n="tocRole">My Role</a>
+        <a href="#features" data-i18n="tocFeatures">Features</a>
+        <a href="#challenges" data-i18n="tocChallenges">Challenges</a>
+        <a href="#impact" data-i18n="tocImpact">Results</a>
+        <a href="#demo" data-i18n="tocDemo">Demo</a>
+    </div>
+</div>
+
+<section class="case-section fade-in" id="problem">
+    <h2><i class="fas fa-lightbulb"></i> <span data-i18n="problemTitle">Problem Background</span></h2>
+    <div class="case-card" data-i18n-html="problemContent"></div>
+</section>
+
+<section class="case-section fade-in" id="flow">
+    <h2><i class="fas fa-diagram-project"></i> <span data-i18n="flowTitle">System Flow</span></h2>
+    <div class="diagram-box">
+        <img src="case-studies/citegrain/architecture.svg" alt="CiteGrain system architecture diagram" onclick="openLightbox(this.src)">
+        <div class="diagram-caption" data-i18n="flowCaption">Five layers: Client (document panel, chat, sources panel) / Proxy (nginx: static files, API forwarding, health check) / Services (Documents, Q&amp;A, Metrics, MCP) / Core (Parsing, Chunking, Routing, Retrieval, Tables, Summary — the actual assignment) / Data (local files + local ONNX embedding + gpt-4o-mini as the one external call)</div>
+    </div>
+    <div class="case-card">
+        <div class="flow-row">
+            <div class="flow-row-label"><i class="fas fa-upload"></i> <span data-i18n="flowUploadLabel">Upload path · once · ~11s</span></div>
+            <div class="flow-steps">
+                <span class="flow-step" data-i18n="flowStep1">Read PDF</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep2">Find sections</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep3">Rebuild tables</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep4">Chunk</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep5">Index</span>
+            </div>
+        </div>
+        <div class="flow-row">
+            <div class="flow-row-label"><i class="fas fa-comment-dots"></i> <span data-i18n="flowQueryLabel">Query path · every question · first token ~1s</span></div>
+            <div class="flow-steps">
+                <span class="flow-step" data-i18n="flowStep6">Route</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep7">Retrieve</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep8">Pack evidence</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep9">Generate</span><span class="flow-arrow">→</span>
+                <span class="flow-step" data-i18n="flowStep10">Resolve citations</span>
+            </div>
+        </div>
+        <p style="margin-top:18px;margin-bottom:0;" data-i18n="flowNote">Offline indexing is tested explicitly: upload and indexing still succeed when the external model is unavailable — only answer generation needs the API.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="techstack">
+    <h2><i class="fas fa-layer-group"></i> <span data-i18n="techTitle">Tech Stack</span></h2>
+    <div class="tech-groups">
+        <div class="tech-group">
+            <h4 data-i18n="techGroup1">Language Model &amp; Retrieval</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">gpt-4o-mini (text-only)</span>
+                <span class="tech-chip">multilingual-MiniLM-L12-v2 (ONNX, local)</span>
+                <span class="tech-chip">BM25 + jieba segmentation</span>
+                <span class="tech-chip">RRF rank fusion (k=60)</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup2">Backend</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">FastAPI + uvicorn (async)</span>
+                <span class="tech-chip">PyMuPDF</span>
+                <span class="tech-chip">Server-Sent Events</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup3">Frontend &amp; Interfaces</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">React · Vite · Tailwind</span>
+                <span class="tech-chip">MCP server (4 tools)</span>
+                <span class="tech-chip">Swagger / OpenAPI docs</span>
+            </div>
+        </div>
+        <div class="tech-group">
+            <h4 data-i18n="techGroup4">Deployment &amp; Observability</h4>
+            <div class="tech-chips">
+                <span class="tech-chip">Docker Compose</span>
+                <span class="tech-chip">nginx reverse proxy</span>
+                <span class="tech-chip">Prometheus + Grafana</span>
+            </div>
+        </div>
+    </div>
+    <div class="case-card" style="margin-top:20px;">
+        <p data-i18n="embeddingNote">The embedding model was picked by benchmark, not by default: four candidates were timed on the same four queries, and <strong>multilingual-MiniLM-L12-v2</strong> ranked first on all of them (11.7s vs. 26.4s for bge-zh and 60.2s for e5-small) — bge-zh and e5-small placed 8th and 4th specifically on the Chinese-language queries.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="tables">
+    <h2><i class="fas fa-table-cells"></i> <span data-i18n="tablesTitle">Structure-Aware Chunking &amp; Table Verification</span></h2>
+    <div class="case-card">
+        <p data-i18n="tablesIntro">A fixed-length chunking baseline (break the document into equal-size blocks, ignore structure) scored <strong>0% top-3 retrieval accuracy</strong> in this project's own ablation test — it breaks semantic boundaries, can split a table down the middle, and loses the section metadata citations depend on. Two problems had to be solved properly instead.</p>
+        <p data-i18n="tablesChunkingTitle"><strong>Section detection uses four cascading fallbacks.</strong> A single rule will eventually miss, so each method only runs when the previous one fails: (1) the PDF's built-in outline/table of contents, (2) heading numbering patterns like "3.1", (3) visually larger font size, (4) a fixed-length split as the last resort. One of the four test papers had no built-in outline at all and was recovered by the numbering rule — every table is also kept atomic and is never split across chunks, since a partial table can produce a convincing but incorrect answer.</p>
+        <p data-i18n="tablesRecoveryTitle"><strong>Table reconstruction had to be built from scratch.</strong> Both of the PDF library's built-in table strategies failed on real papers: the line-based one found nothing, and the text-alignment one read a full page of prose as a 61×9 table. The fix was geometric — use the layout's horizontal rule lines as a table's top and bottom anchors, cluster text by vertical position into rows, and split columns at the horizontal gaps between them.</p>
+        <p data-i18n="tablesValidationTitle"><strong>Reconstructed tables are verified before they're trusted.</strong> Two checks run before a rebuilt table is allowed into the index: the numbers in the rebuilt cells must exactly conserve the numbers in the source region (a numeric multiset check), and no two rows may share the same key or the later one would silently overwrite the earlier one. If either check fails, the structured cells are discarded entirely and the table falls back to raw text — <strong>an unverified cell value is never indexed for deterministic lookup.</strong></p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="considerations">
+    <h2><i class="fas fa-scale-balanced"></i> <span data-i18n="considerTitle">Engineering Trade-offs</span></h2>
+    <div class="consider-grid">
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-coins"></i> <span data-i18n="considerCostLabel">Cost</span></div>
+            <ul data-i18n-html="considerCost"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-gauge-high"></i> <span data-i18n="considerSpeedLabel">Speed</span></div>
+            <ul data-i18n-html="considerSpeed"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-bullseye"></i> <span data-i18n="considerAccuracyLabel">Accuracy</span></div>
+            <ul data-i18n-html="considerAccuracy"></ul>
+        </div>
+        <div class="consider-card">
+            <div class="consider-label"><i class="fas fa-shield-halved"></i> <span data-i18n="considerStabilityLabel">Reliability</span></div>
+            <ul data-i18n-html="considerStability"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="role">
+    <h2><i class="fas fa-user-check"></i> <span data-i18n="roleTitle">My Role</span></h2>
+    <div class="case-card">
+        <div class="role-header">
+            <div class="role-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="role-title" data-i18n="roleSubtitle">Solo Full-Stack &amp; AI Engineer</div>
+        </div>
+        <p data-i18n="roleContent">Built entirely alone, end to end: PDF layout analysis and the four-level cascading section detector, geometric table reconstruction with numeric-conservation validation, hybrid vector + BM25 retrieval with RRF fusion, the dynamic token-aware context-budget packer, query routing across four question types, the section-level map-reduce summarization pipeline, the FastAPI backend and React frontend, the nginx/Docker Compose deployment, the Prometheus/Grafana observability stack, an MCP server exposing four tools, the 76-test automated suite, and the reproducible evaluation, load-test, and report-generation scripts (plus the CI check that fails the build if a documented number doesn't match its generator script). No collaborators.</p>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="features">
+    <h2><i class="fas fa-star"></i> <span data-i18n="featuresTitle">Features</span></h2>
+    <div class="feature-groups">
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-magnifying-glass"></i></div><h4 data-i18n="f1Title">Hybrid Retrieval</h4></div>
+            <ul data-i18n-html="f1List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-table"></i></div><h4 data-i18n="f2Title">Verified Table Reconstruction</h4></div>
+            <ul data-i18n-html="f2List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-route"></i></div><h4 data-i18n="f3Title">Query Routing</h4></div>
+            <ul data-i18n-html="f3List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-sitemap"></i></div><h4 data-i18n="f4Title">Hierarchical Summarization</h4></div>
+            <ul data-i18n-html="f4List"></ul>
+        </div>
+        <div class="feature-card">
+            <div class="feature-header"><div class="feature-icon"><i class="fas fa-quote-right"></i></div><h4 data-i18n="f5Title">Traceable Citations</h4></div>
+            <ul data-i18n-html="f5List"></ul>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="challenges">
+    <h2><i class="fas fa-screwdriver-wrench"></i> <span data-i18n="challengesTitle">Challenges &amp; Solutions</span></h2>
+
+    <div class="challenge-card">
+        <h3><span class="num">1</span> <span data-i18n="c1Title">The PDF library's built-in table detection failed both ways</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c1Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c1Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">2</span> <span data-i18n="c2Title">A "sound" fix to filter footnote superscripts made tables worse</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c2Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c2Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">3</span> <span data-i18n="c3Title">An assumption about throttling was wrong by 17×</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c3Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c3Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">4</span> <span data-i18n="c4Title">"Summarize this document" can't be answered by ordinary retrieval</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c4Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c4Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">5</span> <span data-i18n="c5Title">An early summarizer quietly dropped the numbers that mattered most</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c5Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c5Solution"></p>
+        </div>
+    </div>
+
+    <div class="challenge-card">
+        <h3><span class="num">6</span> <span data-i18n="c6Title">A fluent, fully-cited answer was still wrong</span></h3>
+        <div class="challenge-block">
+            <span class="challenge-label" data-i18n="problemLabel">Problem</span>
+            <p data-i18n-html="c6Problem"></p>
+        </div>
+        <div class="challenge-block solution">
+            <span class="challenge-label" data-i18n="solutionLabel">Solution</span>
+            <p data-i18n-html="c6Solution"></p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="impact">
+    <h2><i class="fas fa-chart-line"></i> <span data-i18n="impactTitle">Evaluation Results</span></h2>
+    <p class="impact-intro" data-i18n="impactIntro">Every number below comes from a script that can be rerun (<code>eval.py</code>, <code>loadtest.py</code>, <code>report.py</code>), and a CI check fails the build if a documented number and its generator ever drift apart — nothing here is a hand-typed estimate.</p>
+    <div class="proof-grid">
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+            <h4 data-i18n="p1Title">Retrieval accuracy: 0% → 100%</h4>
+            <p data-i18n="p1Content">On 12 test questions (half Chinese, half English), the fixed-length baseline found the correct section in its top 8 results 0% of the time. Adding section-aware chunking alone brought that to 83%; adding hybrid retrieval and table handling on top reached 100% (12/12).</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-table-cells"></i></div>
+            <h4 data-i18n="p2Title">Table fidelity: 13/13, zero wrong cells indexed</h4>
+            <p data-i18n="p2Content">17 tables were detected across four test papers; all 13 numeric tables passed both conservation checks and were indexed, the 2 that failed validation fell back to raw text, and zero incorrect cell values ever entered the index.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-quote-left"></i></div>
+            <h4 data-i18n="p3Title">100% citation rate on real answers</h4>
+            <p data-i18n="p3Content">Every one of 233 answered queries carried a citation — zero answers with no traceable source. Separately, 47 queries were correctly refused when the uploaded document didn't cover the question, rather than answered anyway.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-gauge-high"></i></div>
+            <h4 data-i18n="p4Title">Retrieval itself is fast; the model is the bottleneck</h4>
+            <p data-i18n="p4Content">Finding the right chunks takes 19ms at the median. End-to-end latency (~3.5s at 1 concurrent user) is dominated by waiting on the language model to generate its answer (~2.2s), not by the retrieval this project actually built.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-globe"></i></div>
+            <h4 data-i18n="p5Title">Generalizes past the assigned paper</h4>
+            <p data-i18n="p5Content">Beyond the assigned LightRAG paper, the same pipeline was verified on Attention Is All You Need, BERT, and RAG — spanning single- and double-column layouts, and papers with and without a built-in PDF outline.</p>
+        </div>
+        <div class="proof-card">
+            <div class="proof-icon"><i class="fas fa-coins"></i></div>
+            <h4 data-i18n="p6Title">US$0.000847 per question, 0 external calls while indexing</h4>
+            <p data-i18n="p6Content">Median context usage is 2,736 of the available 6,000 evidence tokens. Parsing, chunking, and embedding a document never touch an external API — only the final answer-generation step does.</p>
+        </div>
+    </div>
+</section>
+
+<section class="case-section fade-in" id="demo">
+    <h2><i class="fas fa-play"></i> <span data-i18n="demoTitle">Demo</span></h2>
+    <p data-i18n="demoIntro" style="text-align:center; margin-bottom:24px; opacity:0.8; font-size:0.95rem;">A real query against the assigned LightRAG paper, answered entirely from a table the system reconstructed and verified.</p>
+    <div class="screenshot-grid">
+        <div class="screenshot-card">
+            <img src="case-studies/citegrain/demo.png" alt="CiteGrain answering a question about LightRAG's ablation study, with citations to the source table" onclick="openLightbox(this.src)">
+            <div class="screenshot-caption" data-i18n-html="d1Caption"></div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" alt="">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 data-i18n="footerContact">Contact</h3>
+            <p>✉️ <a href="mailto:yunwcy.im@gmail.com">yunwcy.im@gmail.com</a></p>
+            <p>📍 <span data-i18n="footerUniversity">National Taipei University</span></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerLinks">Links</h3>
+            <p><a href="index.html#home" data-i18n="footerHome">Home</a></p>
+            <p><a href="about.html" data-i18n="footerAbout">About Me</a></p>
+            <p><a href="index.html#projects" data-i18n="footerProjects">Projects</a></p>
+            <p><a href="index.html#competitions" data-i18n="footerCompetitions">Competitions</a></p>
+            <p><a href="index.html#awards" data-i18n="footerAwards">Awards</a></p>
+            <p><a href="index.html#experiences" data-i18n="footerExperiences">Experiences</a></p>
+            <p><a href="index.html#publications" data-i18n="footerPublications">Publications</a></p>
+            <p><a href="index.html#certifications" data-i18n="footerCertifications">Certifications</a></p>
+            <p><a href="index.html#conferences" data-i18n="footerConferences">Conferences</a></p>
+            <p><a href="index.html#other-experiences" data-i18n="footerOtherExperiences">Other Experiences</a></p>
+        </div>
+        <div class="footer-column">
+            <h3 data-i18n="footerConnect">Connect</h3>
+            <p><a href="https://github.com/yunwcy" target="_blank">GitHub</a></p>
+            <p><a href="https://www.linkedin.com/in/cheng-yun-wu-143530356" target="_blank">LinkedIn</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="footerCopyright">© 2026 Cheng-Yun Wu. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
+
+setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 2000);
+
+document.addEventListener('DOMContentLoaded', function () {
+    i18next.use(i18nextBrowserLanguageDetector).init({
+        fallbackLng: 'en',
+        debug: false,
+        resources: {
+            en: { translation: {
+                backToProjects: "Back to Projects",
+                langButton: "中文",
+                badge: "Case Study · Solo Project",
+                title: "CiteGrain — Long-Document Traceable QA System",
+                subtitle: "Academic-PDF question answering, cited back to page and section, inside a hard 10,000-token context",
+                meta: "Solo project · Built 2026 · Runs entirely local except one text-only model call",
+                linkGithub: "GitHub Repository",
+                tocProblem: "Problem",
+                tocFlow: "System Flow",
+                tocTech: "Tech Stack",
+                tocTables: "Chunking & Tables",
+                tocConsiderations: "Trade-offs",
+                tocRole: "My Role",
+                tocFeatures: "Features",
+                tocChallenges: "Challenges",
+                tocImpact: "Results",
+                tocDemo: "Demo",
+                problemTitle: "Problem Background",
+                problemContent: "<p>Most long-document QA demos assume a large context window and just pour the whole document in. This project was scoped around three explicit constraints instead, and nearly every architectural choice traces back to one of them:</p><ul><li><strong>Traceable evidence has to be built locally</strong> — extract text with page coordinates, preserve section boundaries, and reconstruct table cells and layout, so a citation stays attached to real page + section provenance.</li><li><strong>The model itself stays text-only</strong> — it only ever receives prepared plain text, all model access is isolated to a single client module, and parsing, indexing, and embedding all run locally (one external-call boundary, enforced by tests).</li><li><strong>Everything has to work inside a 10,000-token context</strong> — handle a roughly 38,000-token paper by selecting only the evidence a specific query actually needs, and preserving whole tables for the questions that require them.</li></ul><p><strong>CiteGrain</strong> is a complete, tested answer to those three constraints: a document QA system that parses academic PDFs locally, packs only the relevant evidence into a hard 10K-token ceiling per query, and can prove — through 76 automated tests, reproducible evaluation scripts, and an independent cross-check against the source papers — that what it retrieves is both traceable and correct.</p>",
+                flowTitle: "System Flow",
+                flowCaption: "Five layers: Client (document panel, chat, sources panel) / Proxy (nginx: static files, API forwarding, health check) / Services (Documents, Q&A, Metrics, MCP) / Core (Parsing, Chunking, Routing, Retrieval, Tables, Summary — the actual assignment) / Data (local files + local ONNX embedding + gpt-4o-mini as the one external call)",
+                flowUploadLabel: "Upload path · once · ~11s",
+                flowStep1: "Read PDF",
+                flowStep2: "Find sections",
+                flowStep3: "Rebuild tables",
+                flowStep4: "Chunk",
+                flowStep5: "Index",
+                flowQueryLabel: "Query path · every question · first token ~1s",
+                flowStep6: "Route",
+                flowStep7: "Retrieve",
+                flowStep8: "Pack evidence",
+                flowStep9: "Generate",
+                flowStep10: "Resolve citations",
+                flowNote: "Offline indexing is tested explicitly: upload and indexing still succeed when the external model is unavailable — only answer generation needs the API.",
+                techTitle: "Tech Stack",
+                techGroup1: "Language Model & Retrieval",
+                techGroup2: "Backend",
+                techGroup3: "Frontend & Interfaces",
+                techGroup4: "Deployment & Observability",
+                embeddingNote: "The embedding model was picked by benchmark, not by default: four candidates were timed on the same four queries, and <strong>multilingual-MiniLM-L12-v2</strong> ranked first on all of them (11.7s vs. 26.4s for bge-zh and 60.2s for e5-small) — bge-zh and e5-small placed 8th and 4th specifically on the Chinese-language queries.",
+                tablesTitle: "Structure-Aware Chunking & Table Verification",
+                tablesIntro: "A fixed-length chunking baseline (break the document into equal-size blocks, ignore structure) scored <strong>0% top-3 retrieval accuracy</strong> in this project's own ablation test — it breaks semantic boundaries, can split a table down the middle, and loses the section metadata citations depend on. Two problems had to be solved properly instead.",
+                tablesChunkingTitle: "<strong>Section detection uses four cascading fallbacks.</strong> A single rule will eventually miss, so each method only runs when the previous one fails: (1) the PDF's built-in outline/table of contents, (2) heading numbering patterns like \"3.1\", (3) visually larger font size, (4) a fixed-length split as the last resort. One of the four test papers had no built-in outline at all and was recovered by the numbering rule — every table is also kept atomic and is never split across chunks, since a partial table can produce a convincing but incorrect answer.",
+                tablesRecoveryTitle: "<strong>Table reconstruction had to be built from scratch.</strong> Both of the PDF library's built-in table strategies failed on real papers: the line-based one found nothing, and the text-alignment one read a full page of prose as a 61×9 table. The fix was geometric — use the layout's horizontal rule lines as a table's top and bottom anchors, cluster text by vertical position into rows, and split columns at the horizontal gaps between them.",
+                tablesValidationTitle: "<strong>Reconstructed tables are verified before they're trusted.</strong> Two checks run before a rebuilt table is allowed into the index: the numbers in the rebuilt cells must exactly conserve the numbers in the source region (a numeric multiset check), and no two rows may share the same key or the later one would silently overwrite the earlier one. If either check fails, the structured cells are discarded entirely and the table falls back to raw text — <strong>an unverified cell value is never indexed for deterministic lookup.</strong>",
+                considerTitle: "Engineering Trade-offs",
+                considerCostLabel: "Cost",
+                considerCost: "<li><strong>gpt-4o-mini, temperature 0.</strong> The only paid API call in the whole pipeline, kept to a small model with low output variance to reduce both cost and evaluation noise.</li><li><strong>Local ONNX embedding.</strong> A 220MB multilingual model runs on the same machine, so indexing a document costs $0 in API calls no matter how many times it happens.</li><li><strong>No vector database.</strong> A document is roughly 90 chunks, so exact NumPy search is already fast enough at this scale — one less paid service to run.</li>",
+                considerSpeedLabel: "Speed",
+                considerSpeedContent: "",
+                considerSpeed: "<li><strong>Trade-off:</strong> hybrid retrieval plus agentic-style multi-stage matching trades some latency for completeness — response speed is the lowest-rated dimension in the project's own survey.</li><li><strong>Separate inference sessions</strong> for indexing vs. querying, added after load testing showed the two paths were not actually isolated (see Challenge 3).</li><li><strong>SSE token streaming</strong> means the first token appears in about 1 second even though full generation takes longer, cutting perceived latency.</li>",
+                considerAccuracyLabel: "Accuracy",
+                considerAccuracy: "<li><strong>Multi-stage retrieval:</strong> semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking, so both meaning and exact terms (like a regulation number or metric name) get caught.</li><li><strong>Why it matters:</strong> retrieval accuracy is the project's highest-scoring dimension after these additions — 12/12 test questions found their correct section.</li><li><strong>Numeric conservation checks</strong> on rebuilt tables mean a wrong cell value structurally cannot enter the index.</li>",
+                considerStabilityLabel: "Reliability",
+                considerStability: "<li><strong>Unverified table cells are never indexed</strong> — a failed validation falls back to raw text instead of silently shipping a wrong number.</li><li><strong>Offline indexing is tested explicitly:</strong> upload and indexing succeed even when the external model is down; only generation needs it.</li><li><strong>Three-layer verification:</strong> system assertions catch structural failures, reproducible eval scripts measure what each design change actually adds, and an independent cross-check against the source paper caught 3 errors the first two layers missed.</li>",
+                roleTitle: "My Role",
+                roleSubtitle: "Solo Full-Stack & AI Engineer",
+                roleContent: "Built entirely alone, end to end: PDF layout analysis and the four-level cascading section detector, geometric table reconstruction with numeric-conservation validation, hybrid vector + BM25 retrieval with RRF fusion, the dynamic token-aware context-budget packer, query routing across four question types, the section-level map-reduce summarization pipeline, the FastAPI backend and React frontend, the nginx/Docker Compose deployment, the Prometheus/Grafana observability stack, an MCP server exposing four tools, the 76-test automated suite, and the reproducible evaluation, load-test, and report-generation scripts (plus the CI check that fails the build if a documented number doesn't match its generator script). No collaborators.",
+                featuresTitle: "Features",
+                f1Title: "Hybrid Retrieval",
+                f1List: "<li>Semantic vector search (local ONNX embedding) fused with BM25 keyword search (jieba-segmented for Chinese) via Reciprocal Rank Fusion, so phrasing differences and exact proper nouns are both covered.</li><li>Only once a table is linearized row by row do its column names become literally matchable by keyword search.</li>",
+                f2Title: "Verified Table Reconstruction",
+                f2List: "<li>Tables are rebuilt geometrically from layout rule lines, not from the PDF library's unreliable built-in detectors.</li><li>Every rebuilt table must pass a numeric-conservation check and a unique-key check before it's trusted for indexing; a failed table falls back to raw text instead of risking a wrong number.</li>",
+                f3Title: "Query Routing",
+                f3List: "<li>Summary, comparison, table-lookup, and general QA questions each take their own path, all hard-capped at the same 6,000-token evidence budget.</li><li>A table-lookup question can resolve to a deterministic cell value rather than a model-generated guess.</li>",
+                f4Title: "Hierarchical Summarization",
+                f4List: "<li>\"Summarize this document\" is answered by section-level map-reduce (13 sections → 13 parallel partial summaries → 1 merged summary), not by retrieving the chunks nearest to the word \"summary\".</li><li>Summaries are prepared in the background after upload and cached — only the final merge step is language-specific.</li>",
+                f5Title: "Traceable Citations",
+                f5List: "<li>Every answer carries a page number and section citation that can be expanded to the original passage in the sources panel.</li><li>The retrieval budget is calculated dynamically per query from actual token counts, so system prompt + question + context + answer never exceeds the 10K ceiling even for high-token-density input like Chinese or emoji.</li>",
+                challengesTitle: "Challenges & Solutions",
+                problemLabel: "Problem",
+                solutionLabel: "Solution",
+                c1Title: "The PDF library's built-in table detection failed both ways",
+                c1Problem: "The proposal was to use the PDF library's built-in table detection. Measured against the actual test papers, one built-in strategy found no tables at all, and the other read an entire page of ordinary prose as a single 61×9 table.",
+                c1Solution: "Rebuilt table detection geometrically instead, anchored on the layout's own horizontal rule lines rather than trusting either built-in strategy.",
+                c2Title: "A \"sound\" fix to filter footnote superscripts made tables worse",
+                c2Problem: "The idea was to filter out footnote superscripts so they'd stop being misread as table values — the reasoning sounded correct and the code was implemented correctly.",
+                c2Solution: "Measured the actual effect instead of trusting the reasoning: the number of parseable tables dropped from 13 to 10, and one table vanished entirely. The change was reverted completely.",
+                c3Title: "An assumption about throttling was wrong by 17×",
+                c3Problem: "The working assumption, written down before measuring, was: \"the two paths are throttled separately, so uploads will not affect queries.\"",
+                c3Solution: "Load testing measured query latency jumping from 44ms to 733ms under concurrent load with an upload in progress. The throttling was indeed separate — the actual cause was a shared inference session. Switching to separate ONNX inference sessions for indexing vs. querying brought query latency back down to 84ms.",
+                c4Title: "\"Summarize this document\" can't be answered by ordinary retrieval",
+                c4Problem: "Treating a summary request as an ordinary query retrieves the chunks most semantically similar to the word \"summary\" itself — the result can look reasonable while actually covering only a subset of the document, so full coverage can't be guaranteed.",
+                c4Solution: "Built a dedicated section-level map-reduce pipeline: group sections by length, generate partial summaries for each in parallel, then merge into one final summary — prepared in the background after upload and cached, so it doesn't slow down the question itself.",
+                c5Title: "An early summarizer quietly dropped the numbers that mattered most",
+                c5Problem: "The first version of the summarization prompt replaced a concrete number like \"610,000 tokens versus fewer than 100\" with a vague phrase like \"far cheaper\" — technically fluent, but no longer verifiable against the source.",
+                c5Solution: "The summarization prompt now explicitly requires key numeric evidence to be preserved verbatim rather than paraphrased away.",
+                c6Title: "A fluent, fully-cited answer was still wrong",
+                c6Problem: "An answer to an ablation-study question was fluent and carried proper citations, but the cited evidence actually came from the baseline block instead of the ablated variant the question asked about. Neither the retrieval-accuracy checks nor the citation-presence checks caught this on their own — a citation identifies where evidence came from, not whether that evidence actually answers the question.",
+                c6Solution: "Added a third, independent verification layer: manually checking each required test question against the source paper and an external reference, one value at a time. This layer caught this error plus two others that the first two layers had both missed.",
+                impactTitle: "Evaluation Results",
+                impactIntro: "Every number below comes from a script that can be rerun (<code>eval.py</code>, <code>loadtest.py</code>, <code>report.py</code>), and a CI check fails the build if a documented number and its generator ever drift apart — nothing here is a hand-typed estimate.",
+                p1Title: "Retrieval accuracy: 0% → 100%",
+                p1Content: "On 12 test questions (half Chinese, half English), the fixed-length baseline found the correct section in its top 8 results 0% of the time. Adding section-aware chunking alone brought that to 83%; adding hybrid retrieval and table handling on top reached 100% (12/12).",
+                p2Title: "Table fidelity: 13/13, zero wrong cells indexed",
+                p2Content: "17 tables were detected across four test papers; all 13 numeric tables passed both conservation checks and were indexed, the 2 that failed validation fell back to raw text, and zero incorrect cell values ever entered the index.",
+                p3Title: "100% citation rate on real answers",
+                p3Content: "Every one of 233 answered queries carried a citation — zero answers with no traceable source. Separately, 47 queries were correctly refused when the uploaded document didn't cover the question, rather than answered anyway.",
+                p4Title: "Retrieval itself is fast; the model is the bottleneck",
+                p4Content: "Finding the right chunks takes 19ms at the median. End-to-end latency (~3.5s at 1 concurrent user) is dominated by waiting on the language model to generate its answer (~2.2s), not by the retrieval this project actually built.",
+                p5Title: "Generalizes past the assigned paper",
+                p5Content: "Beyond the assigned LightRAG paper, the same pipeline was verified on Attention Is All You Need, BERT, and RAG — spanning single- and double-column layouts, and papers with and without a built-in PDF outline.",
+                p6Title: "US$0.000847 per question, 0 external calls while indexing",
+                p6Content: "Median context usage is 2,736 of the available 6,000 evidence tokens. Parsing, chunking, and embedding a document never touch an external API — only the final answer-generation step does.",
+                demoTitle: "Demo",
+                demoIntro: "A real query against the assigned LightRAG paper, answered entirely from a table the system reconstructed and verified.",
+                d1Caption: "<strong>\"How did the different LightRAG ablation versions perform?\"</strong> The answer is a full table pulled straight from the paper, reconstructed and numerically verified rather than retyped from memory, with every number traceable to its source: page 8, the Ablation Studies (RQ2) table. Below the table, a plain-language interpretation walks through what the LightRAG, -High, -Low, and -Origin variants each show, still citing back to the same source passages on the right.",
+                footerContact: "Contact",
+                footerUniversity: "National Taipei University",
+                footerLinks: "Links",
+                footerHome: "Home",
+                footerAbout: "About Me",
+                footerExperiences: "Experiences",
+                footerPublications: "Publications",
+                footerCertifications: "Certifications",
+                footerProjects: "Projects",
+                footerCompetitions: "Competitions",
+                footerConferences: "Conferences",
+                footerAwards: "Awards",
+                footerOtherExperiences: "Other Experiences",
+                footerConnect: "Connect",
+                footerCopyright: "© 2026 Cheng-Yun Wu. All rights reserved."
+            }},
+            zh: { translation: {
+                backToProjects: "返回專案作品",
+                langButton: "English",
+                badge: "案例研究．個人專案",
+                title: "CiteGrain — 受限脈絡下的長文件可追溯問答系統",
+                subtitle: "面向學術PDF的問答系統，回答附頁碼與章節來源，全程在10,000 tokens的脈絡上限內運作",
+                meta: "個人專案．2026 年開發．全程本機執行，僅一處為純文字的外部模型呼叫",
+                linkGithub: "GitHub 原始碼",
+                tocProblem: "問題背景",
+                tocFlow: "系統流程",
+                tocTech: "技術堆疊",
+                tocTables: "切分與表格",
+                tocConsiderations: "工程權衡",
+                tocRole: "我的角色",
+                tocFeatures: "功能特色",
+                tocChallenges: "挑戰與解法",
+                tocImpact: "量測結果",
+                tocDemo: "Demo",
+                problemTitle: "問題背景",
+                problemContent: "<p>多數長文件問答的作品集示範，都假設模型有很大的脈絡視窗，直接把整份文件塞進去。這個專案反而是圍繞三項明確的約束來設計，幾乎每個架構決策都能追溯回其中一項：</p><ul><li><strong>可追溯的證據必須在本機建立</strong>——擷取文字時保留頁碼座標、保留章節邊界、還原表格儲存格與版面，讓每個引用都能對應回真實的頁碼與章節出處。</li><li><strong>模型本身只能做文字進、文字出</strong>——只傳送準備好的純文字，所有模型存取都收斂在單一client模組，解析、索引、向量化全部在本機完成（只有一處對外呼叫邊界，並以測試強制驗證）。</li><li><strong>所有運作都要壓在10,000 tokens的脈絡上限內</strong>——處理一篇約38,000 tokens的論文，靠的是只挑出該次提問真正需要的證據，並為需要的問題保留完整表格。</li></ul><p><strong>CiteGrain</strong>是針對這三項約束交出的完整、通過測試的答案：一套在本機解析學術PDF、每次查詢都只把相關證據壓進10K tokens硬上限的文件問答系統，並且能透過76項自動化測試、可重跑的評估腳本，以及對照原始論文的獨立交叉核對，證明它檢索出來的東西既可追溯、也是正確的。</p>",
+                flowTitle: "系統流程",
+                flowCaption: "五層架構：客戶端（文件面板、對話區、來源面板）／代理層（nginx：靜態檔、API轉送、健康檢查）／服務層（文件、問答、指標、MCP）／核心處理層（解析、切分、路由、檢索、表格、摘要——這份作業真正的內容）／資料與外部層（本機檔案＋本機ONNX向量化＋gpt-4o-mini作為唯一的外部呼叫）",
+                flowUploadLabel: "上傳路徑・僅一次・約11秒",
+                flowStep1: "讀取PDF",
+                flowStep2: "找出章節",
+                flowStep3: "重建表格",
+                flowStep4: "切分",
+                flowStep5: "建立索引",
+                flowQueryLabel: "查詢路徑・每次提問・首個字元約1秒",
+                flowStep6: "路由",
+                flowStep7: "檢索",
+                flowStep8: "組裝證據",
+                flowStep9: "生成回答",
+                flowStep10: "解析引用",
+                flowNote: "離線索引有明確測試：即使外部模型無法使用，上傳與索引仍能成功完成——只有生成回答這一步需要呼叫API。",
+                techTitle: "技術堆疊",
+                techGroup1: "語言模型與檢索",
+                techGroup2: "後端",
+                techGroup3: "前端與對外介面",
+                techGroup4: "部署與可觀測性",
+                embeddingNote: "向量化模型是靠實測選出來的，不是預設值：四個候選模型用同樣四個查詢計時，<strong>multilingual-MiniLM-L12-v2</strong>在全部查詢中都排名第一（11.7秒，相比bge-zh的26.4秒與e5-small的60.2秒）——bge-zh與e5-small在中文查詢上分別只排到第8名與第4名。",
+                tablesTitle: "結構感知切分與表格驗證",
+                tablesIntro: "固定長度切塊的基準做法（把文件切成等長區塊、不管結構）在這個專案自己的消融測試中，<strong>Top-3檢索準確率只有0%</strong>——它會打斷語意邊界、可能把一張表格從中間切開，也會丟失引用所需要的章節metadata。有兩個問題必須認真解決。",
+                tablesChunkingTitle: "<strong>章節偵測用四層級聯備援。</strong>單一規則遲早會漏抓，所以每個方法只在前一個失敗時才啟動：①PDF內建的大綱／目錄、②像「3.1」這樣的標題編號規則、③視覺上較大的字級、④最後手段的固定長度切分。四篇測試論文中有一篇完全沒有內建大綱，靠編號規則救回來——每個表格也都保持不可分割，絕不跨chunk切開，因為不完整的表格容易產生看起來合理但其實錯誤的答案。",
+                tablesRecoveryTitle: "<strong>表格重建必須從零開始做。</strong>PDF函式庫內建的兩種表格策略在真實論文上都失敗：以線條為基礎的策略完全找不到表格，以文字對齊為基礎的策略則把一整頁的散文讀成一張61×9的表格。解法回歸幾何：用版面上的橫線當作表格的上下邊界錨點，依垂直位置把文字群聚成列，再依水平間隔切分欄位。",
+                tablesValidationTitle: "<strong>重建的表格要先驗證過才會被信任。</strong>一張重建的表格要通過兩項檢查才能進索引：重建儲存格裡的數字必須跟原始區域的數字完全守恆（數值多重集檢查），且不能有兩列共用同一個鍵，否則後面的會悄悄覆蓋前面的。任一項檢查失敗，結構化儲存格就整個捨棄，該表格退回成原始文字——<strong>沒通過驗證的儲存格數值絕不會被放進確定性查表的索引裡。</strong>",
+                considerTitle: "工程權衡",
+                considerCostLabel: "成本",
+                considerCost: "<li><strong>gpt-4o-mini，溫度設為0。</strong>整條pipeline裡唯一付費的API呼叫，選用小型模型並降低輸出變異度，同時壓低成本與評估雜訊。</li><li><strong>本機ONNX向量化。</strong>220MB的多語言模型在同一台機器上執行，不管索引多少次文件，API呼叫成本都是$0。</li><li><strong>沒有向量資料庫。</strong>一份文件大約90個片段，用NumPy做精確搜尋在這個量級已經夠快，也少維護一個外部付費服務。</li>",
+                considerSpeedLabel: "速度",
+                considerSpeed: "<li><strong>取捨：</strong>混合檢索加上多階段比對用一點延遲換取完整性——回應速度是專案自身問卷中評分最低的一個維度。</li><li><strong>索引與查詢用各自獨立的推論工作階段</strong>，是負載測試發現兩條路徑其實沒有真的隔離之後才加上去的（見挑戰三）。</li><li><strong>SSE逐字串流</strong>讓第一個字元約1秒內就出現，即使完整生成需要更久，體感延遲仍明顯降低。</li>",
+                considerAccuracyLabel: "準確性",
+                considerAccuracy: "<li><strong>多階段檢索：</strong>語意搜尋＋關鍵字搜尋＋查詢改寫＋HyDE＋RRF＋LLM重排序，同時捕捉語意跟精確詞彙（像法規編號或指標名稱）。</li><li><strong>成效：</strong>加上這些之後檢索準確度是專案裡評分最高的維度——12題測試問題全部（12/12）都找到正確章節。</li><li><strong>重建表格的數值守恆檢查</strong>讓錯誤的儲存格數值在結構上就不可能進到索引裡。</li>",
+                considerStabilityLabel: "可靠性",
+                considerStability: "<li><strong>未通過驗證的表格儲存格絕不索引</strong>——驗證失敗就退回原始文字，不會悄悄送出錯誤數字。</li><li><strong>離線索引有明確測試：</strong>即使外部模型無法使用，上傳與索引仍能成功；只有生成回答這步需要它。</li><li><strong>三層驗證策略：</strong>系統斷言抓結構性失敗、可重跑的評估腳本量測每個設計改動實際帶來的效果、對照原始論文的獨立交叉核對抓到了前兩層都漏掉的3個錯誤。</li>",
+                roleTitle: "我的角色",
+                roleSubtitle: "獨立全端與AI工程師",
+                roleContent: "從零到有獨立完成：PDF版面分析與四層級聯章節偵測器、含數值守恆驗證的幾何表格重建、混合向量＋BM25檢索與RRF融合、動態token感知的脈絡預算組裝器、跨四種問題類型的查詢路由、章節層級的map-reduce摘要管線、FastAPI後端與React前端、nginx／Docker Compose部署、Prometheus／Grafana可觀測性堆疊、對外開放四個工具的MCP server、76項自動化測試，以及可重跑的評估、壓力測試、報表產生腳本（外加CI檢查：文件裡的數字跟產生腳本對不上就直接失敗）。沒有協作者。",
+                featuresTitle: "功能特色",
+                f1Title: "混合檢索",
+                f1List: "<li>語意向量搜尋（本機ONNX向量化）與BM25關鍵字搜尋（中文先用jieba斷詞）透過Reciprocal Rank Fusion融合，同時涵蓋用詞差異與精確專有名詞。</li><li>表格要先逐列線性化之後，欄位名稱才真正能被關鍵字搜尋比對到。</li>",
+                f2Title: "經驗證的表格重建",
+                f2List: "<li>表格是依版面橫線幾何還原出來的，不是依賴PDF函式庫不可靠的內建偵測器。</li><li>每張重建的表格都要通過數值守恆檢查與唯一鍵檢查才會被信任進索引；驗證失敗的表格會退回原始文字，而不是冒著送出錯誤數字的風險。</li>",
+                f3Title: "查詢路由",
+                f3List: "<li>摘要、比較、查表、一般問答四種問題各自走自己的路徑，但都統一受限於同一個6,000 tokens的證據預算上限。</li><li>查表類問題可以直接解析成確定性的儲存格數值，而不是模型生成的猜測。</li>",
+                f4Title: "階層式摘要",
+                f4List: "<li>「幫我摘要這份文件」是用章節層級的map-reduce回答的（13個章節→13份平行的分段摘要→1份合併摘要），而不是去檢索跟「摘要」這個詞最相似的片段。</li><li>摘要在上傳後於背景預先產生並快取——只有最後的合併步驟才是語言相關的。</li>",
+                f5Title: "可追溯引用",
+                f5List: "<li>每個回答都附頁碼與章節引用，可以在來源面板展開看到原文段落。</li><li>檢索預算依每次查詢的實際token數動態計算，即使遇到中文或emoji這類高token密度的輸入，system prompt＋問題＋脈絡＋答案的總量也不會超過10K上限。</li>",
+                challengesTitle: "挑戰與解法",
+                problemLabel: "問題",
+                solutionLabel: "解法",
+                c1Title: "PDF函式庫內建的表格偵測兩種策略都失敗",
+                c1Problem: "原本的提案是直接用PDF函式庫內建的表格偵測功能。實際拿測試論文一量測，一種內建策略完全找不到任何表格，另一種則把一整頁普通的散文讀成一張61×9的表格。",
+                c1Solution: "改成用幾何方式重建表格偵測，錨定在版面本身的橫線上，不再信任任何一種內建策略。",
+                c2Title: "一個「合理」的過濾修正反而讓表格變更差",
+                c2Problem: "構想是過濾掉腳註上標數字，讓它們不再被誤讀成表格數值——推理聽起來完全合理，程式碼也寫得沒有問題。",
+                c2Solution: "沒有直接相信推理，而是實測改動的實際效果：可解析的表格數量從13張掉到10張，還有一張整個消失。這個改動被完全復原。",
+                c3Title: "一個關於節流的假設，實測差了17倍",
+                c3Problem: "動手量測之前先寫下的工作假設是：「上傳跟查詢兩條路徑各自節流，所以上傳不會影響查詢」。",
+                c3Solution: "負載測試實測出：上傳進行中時，查詢延遲從44毫秒跳到733毫秒。節流本身確實是分開的——真正原因是共用了同一個推論工作階段。把索引跟查詢改成各自獨立的ONNX推論工作階段後，查詢延遲回到84毫秒。",
+                c4Title: "「幫我摘要這份文件」沒辦法靠一般檢索回答",
+                c4Problem: "把摘要請求當成一般查詢處理，檢索到的會是語意上跟「摘要」這個詞本身最相似的片段——結果可能看起來合理，實際上卻只涵蓋文件的一小部分，無法保證涵蓋全文。",
+                c4Solution: "另外建了一套章節層級的map-reduce管線：依長度分組章節、平行產生各段的部分摘要、再合併成一份完整摘要——在上傳後於背景預先準備並快取，不會拖慢實際提問的速度。",
+                c5Title: "早期的摘要版本悄悄丟掉了最關鍵的數字",
+                c5Problem: "第一版摘要prompt把「610,000 tokens versus fewer than 100」這種具體數字換成「far cheaper」這類模糊說法——讀起來很流暢，但已經沒辦法回頭對照原文驗證。",
+                c5Solution: "摘要prompt現在明確要求關鍵數值證據必須逐字保留，不能被改寫成模糊描述。",
+                c6Title: "一個流暢、附完整引用的答案其實是錯的",
+                c6Problem: "一題消融實驗相關的答案文字流暢、也附上了正確格式的引用，但引用的證據其實來自baseline那個區塊，而不是題目問的消融變體版本。單靠檢索準確度檢查跟「有沒有附引用」的檢查都沒抓到這個問題——引用只能證明證據來自哪裡，沒辦法證明那個證據真的回答了問題。",
+                c6Solution: "加了第三層獨立驗證：把每個必答的測試題目，一個數值一個數值地對照原始論文與外部參考資料手動核對。這一層抓到了這個錯誤，外加前兩層都沒抓到的另外兩個錯誤。",
+                impactTitle: "量測結果",
+                impactIntro: "以下每個數字都來自可重跑的腳本（<code>eval.py</code>、<code>loadtest.py</code>、<code>report.py</code>），CI會檢查文件裡的數字跟產生它的腳本是否一致，對不上就直接讓建置失敗——沒有一個數字是手打上去的。",
+                p1Title: "檢索準確度：0% → 100%",
+                p1Content: "12題測試問題（中英文各半），固定長度切塊的基準做法在前8名結果中找到正確章節的比率是0%。單獨加上章節感知切分就提升到83%；再加上混合檢索與表格處理，達到100%（12/12）。",
+                p2Title: "表格保真度：13/13，零錯誤儲存格進索引",
+                p2Content: "四篇測試論文共偵測到17張表格；13張數值型表格全數通過雙重驗證並進入索引，2張驗證失敗的退回成原始文字，零個錯誤的儲存格數值曾經進入索引。",
+                p3Title: "實際作答的引用率100%",
+                p3Content: "233筆有實際作答的查詢，每一筆都附上引用來源——零筆無來源作答。另外47筆查詢在文件未涵蓋該問題時被正確拒答，而不是硬答一個答案。",
+                p4Title: "檢索本身很快，模型才是瓶頸",
+                p4Content: "找到正確片段的中位時間是19毫秒。端到端延遲（1併發時約3.5秒）主要卡在等待語言模型生成答案（約2.2秒），而不是這個專案真正打造的檢索環節。",
+                p5Title: "不只是為指定論文特化",
+                p5Content: "除了作業指定的LightRAG論文外，同一套pipeline也在Attention Is All You Need、BERT、RAG三篇論文上驗證過——涵蓋單欄與雙欄排版，以及有無PDF內建大綱的情況。",
+                p6Title: "每題US$0.000847，索引階段0次外部呼叫",
+                p6Content: "脈絡用量中位數是6,000可用證據tokens中的2,736。解析、切分、向量化文件的過程完全不會呼叫外部API——只有最後生成答案這一步才會。",
+                demoTitle: "Demo",
+                demoIntro: "針對作業指定的LightRAG論文提出的一個真實問題，答案完全來自系統重建並驗證過的表格。",
+                d1Caption: "<strong>「LightRAG 各個消融版本的效能如何？」</strong>答案是一張直接取自論文的完整表格，是重建並經過數值驗證的，不是憑記憶重打的，每個數字都可以追回出處：第8頁的Ablation Studies（RQ2）表格。表格下方接著一段白話解讀，逐一說明LightRAG、-High、-Low、-Origin這幾個版本各自的表現，右側同樣附上可展開的原文出處。",
+                footerContact: "聯絡方式",
+                footerUniversity: "國立臺北大學",
+                footerLinks: "導覽",
+                footerHome: "首頁",
+                footerAbout: "關於我",
+                footerExperiences: "經歷",
+                footerPublications: "學術發表",
+                footerCertifications: "證照",
+                footerProjects: "專案作品",
+                footerCompetitions: "競賽經歷",
+                footerConferences: "研討會",
+                footerAwards: "獲獎紀錄",
+                footerOtherExperiences: "其他經歷",
+                footerConnect: "社群媒體",
+                footerCopyright: "© 2026 吳承耘。保留所有權利。"
+            }}
+        }
+    }, function () {
+        updateContent();
+    });
+
+    function updateContent() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (key) el.textContent = i18next.t(key);
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (key) el.innerHTML = i18next.t(key);
+        });
+        document.documentElement.lang = i18next.language.startsWith('zh') ? 'zh' : 'en';
+    }
+
+    window.switchLanguage = function () {
+        const newLang = i18next.language.startsWith('zh') ? 'en' : 'zh';
+        i18next.changeLanguage(newLang, updateContent);
+    };
+});
+</script>
+<!--
+  問答小精靈 widget — drop this block near the end of <body>, before the
+  closing tag, on any page you want it to appear (e.g. index.html and
+  about.html). Self-contained: no build step, no dependency beyond your
+  page already loading Noto Serif TC (it does, site-wide).
+
+  Wiring: talks to the /chat endpoint on your Render-deployed
+  portfolio-mcp-server. Update CHAT_API_URL below if that URL ever
+  changes. OPENAI_API_KEY is already set on Render, so this is live.
+
+  Language: reads document.documentElement.lang (your i18next script
+  already sets this on every page) to pick the widget's own UI strings.
+  The actual AI replies are language-agnostic — the model answers in
+  whatever language the visitor typed in.
+
+  Avatar: uses images/QA_fairy.png for both the launcher button and the
+  fairy's avatar next to its replies in the message thread.
+-->
+<style>
+  :root {
+    --chat-accent: var(--primary-green, #2E8B57);
+    --chat-accent-dark: var(--dark-green, #1e5d3a);
+    --chat-ink: var(--text-color, #5A4A42);
+    --chat-bg: rgba(255, 255, 255, 0.97);
+  }
+
+  #ywc-chat-launcher {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 2000;
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--chat-accent);
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    animation: ywc-launcher-pulse 2.4s ease-out 1s 3;
+    overflow: hidden;
+    padding: 0;
+  }
+  #ywc-chat-launcher:hover {
+    background: var(--chat-accent-dark);
+    transform: scale(1.08);
+    box-shadow: 0 8px 26px rgba(30, 93, 58, 0.45);
+  }
+  #ywc-chat-launcher:active { transform: scale(0.96); }
+  #ywc-chat-launcher .ywc-genie-icon {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;
+    transition: transform 0.2s ease;
+  }
+  #ywc-chat-launcher .ywc-genie-close {
+    display: none; font-size: 1.6rem; line-height: 1; font-weight: 700; color: #fff;
+  }
+  #ywc-chat-launcher.ywc-open .ywc-genie-icon { display: none; }
+  #ywc-chat-launcher.ywc-open .ywc-genie-close { display: block; }
+
+  @keyframes ywc-launcher-pulse {
+    0% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 0 rgba(46, 139, 87, 0.45); }
+    70% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 14px rgba(46, 139, 87, 0); }
+    100% { box-shadow: 0 6px 20px rgba(30, 93, 58, 0.35), 0 0 0 0 rgba(46, 139, 87, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ywc-chat-launcher { animation: none; }
+  }
+
+  #ywc-chat-panel {
+    position: fixed;
+    right: 22px;
+    bottom: 108px;
+    z-index: 2000;
+    width: min(400px, calc(100vw - 44px));
+    height: min(600px, calc(100vh - 120px));
+    background: var(--chat-bg);
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Noto Serif TC', serif;
+    color: var(--chat-ink);
+  }
+  #ywc-chat-panel.ywc-open { display: flex; }
+
+  .ywc-teaser {
+    position: fixed;
+    right: 22px;
+    bottom: 108px;
+    z-index: 1999;
+    max-width: 200px;
+    background: var(--chat-bg);
+    color: var(--chat-ink);
+    border-radius: 14px;
+    padding: 10px 26px 10px 14px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(46, 139, 87, 0.25);
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .ywc-teaser::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    bottom: -7px;
+    width: 14px;
+    height: 14px;
+    background: var(--chat-bg);
+    border-right: 1px solid rgba(46, 139, 87, 0.25);
+    border-bottom: 1px solid rgba(46, 139, 87, 0.25);
+    transform: rotate(45deg);
+  }
+  .ywc-teaser.ywc-show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .ywc-teaser-close {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--chat-ink);
+    opacity: 0.55;
+    cursor: pointer;
+    padding: 4px;
+    font-family: inherit;
+  }
+  .ywc-teaser-close:hover { opacity: 1; }
+
+  .ywc-chat-header {
+    background: var(--chat-accent);
+    color: #fff;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .ywc-chat-header h3 { margin: 0; font-size: 1rem; font-weight: 700; }
+  .ywc-chat-header p { margin: 2px 0 0; font-size: 0.72rem; opacity: 0.85; }
+  .ywc-chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ywc-lang-toggle {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-lang-toggle:hover { background: rgba(255, 255, 255, 0.32); }
+  .ywc-chat-close {
+    background: none; border: none; color: #fff; font-size: 1.3rem;
+    cursor: pointer; line-height: 1; padding: 4px;
+  }
+
+  .ywc-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(213, 236, 198, 0.25), rgba(255, 255, 255, 0));
+  }
+  .ywc-msg-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+    align-self: flex-start;
+    max-width: 88%;
+  }
+  .ywc-avatar {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(46, 139, 87, 0.25);
+    flex-shrink: 0;
+  }
+  .ywc-msg {
+    max-width: 85%;
+    padding: 9px 13px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .ywc-msg-row .ywc-msg { max-width: 100%; }
+  .ywc-msg.ywc-user {
+    align-self: flex-end;
+    background: var(--chat-accent);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .ywc-msg.ywc-bot {
+    background: #fff;
+    border: 1px solid rgba(90, 74, 66, 0.15);
+    border-bottom-left-radius: 4px;
+  }
+  .ywc-msg.ywc-error {
+    background: rgba(179, 38, 30, 0.08);
+    border: 1px solid rgba(179, 38, 30, 0.3);
+    color: #8a281f;
+  }
+  .ywc-msg.ywc-typing { opacity: 0.65; font-style: italic; }
+
+  .ywc-chat-suggestions {
+    padding: 0 14px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .ywc-suggestion-chip {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(46, 139, 87, 0.35);
+    background: rgba(213, 236, 198, 0.45);
+    color: var(--chat-accent-dark);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-suggestion-chip:hover { background: rgba(213, 236, 198, 0.8); }
+
+  .ywc-chat-inputrow {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid rgba(90, 74, 66, 0.12);
+    flex-shrink: 0;
+    background: #fff;
+  }
+  .ywc-chat-input {
+    flex: 1;
+    resize: none;
+    border: 1px solid rgba(90, 74, 66, 0.25);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: var(--chat-ink);
+    max-height: 80px;
+  }
+  .ywc-chat-input:focus { outline: none; border-color: var(--chat-accent); }
+  .ywc-chat-send {
+    border: none;
+    background: var(--chat-accent);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .ywc-chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ywc-chat-send:not(:disabled):hover { background: var(--chat-accent-dark); }
+
+  @media (max-width: 480px) {
+    #ywc-chat-panel { right: 12px; left: 12px; width: auto; bottom: 100px; }
+    #ywc-chat-launcher { right: 12px; bottom: 12px; }
+    .ywc-teaser { right: 12px; bottom: 100px; max-width: 170px; }
+  }
+</style>
+
+<div id="ywc-teaser" class="ywc-teaser" role="status">
+  <button type="button" id="ywc-teaser-close" class="ywc-teaser-close" aria-label="Dismiss">×</button>
+  <span id="ywc-teaser-text"></span>
+</div>
+
+<button id="ywc-chat-launcher" type="button" aria-label="Ask about Yun's portfolio" title="問問看">
+  <img class="ywc-genie-icon" src="images/QA_fairy.png" alt="">
+  <span class="ywc-genie-close">×</span>
+</button>
+
+<div id="ywc-chat-panel" role="dialog" aria-label="Portfolio Q&A">
+  <div class="ywc-chat-header">
+    <div>
+      <h3 id="ywc-header-title">問答小精靈</h3>
+      <p id="ywc-header-sub">關於 Yun 的作品集，直接問我</p>
+    </div>
+    <div class="ywc-chat-header-actions">
+      <button class="ywc-lang-toggle" id="ywc-lang-toggle" type="button">EN</button>
+      <button class="ywc-chat-close" id="ywc-chat-close" aria-label="Close">×</button>
+    </div>
+  </div>
+  <div class="ywc-chat-messages" id="ywc-chat-messages"></div>
+  <div class="ywc-chat-suggestions" id="ywc-chat-suggestions"></div>
+  <div class="ywc-chat-inputrow">
+    <textarea id="ywc-chat-input" class="ywc-chat-input" rows="1"></textarea>
+    <button id="ywc-chat-send" class="ywc-chat-send" type="button">送出</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---- Configuration ----------------------------------------------------
+  var CHAT_API_URL = "https://yun-portfolio-mcp.onrender.com/chat";
+  var AVATAR_SRC = "images/QA_fairy.png";
+  var MAX_HISTORY_MESSAGES = 12; // matches the server's own cap; trimmed client-side too
+
+  // ---- i18n (widget chrome only — replies are language-agnostic) --------
+  var STRINGS = {
+    zh: {
+      launcher: "問問看",
+      title: "問答小精靈",
+      subtitle: "關於 Yun 的作品集，直接問我",
+      placeholder: "想知道什麼呢？例如：她做過哪些 AI 專案？",
+      send: "送出",
+      greeting: "嗨！我是這個作品集的問答小精靈 🧞 想知道 Yun 做過什麼、會什麼技術，或她的背景，都可以直接問我。",
+      teaser: "有問題想問我嗎？👋 點我就能問！",
+      typing: "思考中…",
+      suggestions: [
+        "這個人做過哪些專案？",
+        "她有 iOS 開發經驗嗎？",
+        "介紹一下她的碩士論文",
+      ],
+      errors: {
+        rate_limited: "問太多次了，休息一下再問吧！",
+        not_configured: "小精靈還在設定中，晚點再回來問我吧。",
+        network: "連不上小精靈，檢查一下網路或稍後再試。",
+        default: "抱歉，暫時無法回答，請稍後再試一次。",
+      },
+    },
+    en: {
+      launcher: "Ask me",
+      title: "Portfolio Genie",
+      subtitle: "Ask me anything about Yun's work",
+      placeholder: "e.g. What AI projects has she built?",
+      send: "Send",
+      greeting: "Hi! I'm the Q&A genie for this portfolio 🧞 Ask me about Yun's projects, skills, or background.",
+      teaser: "Got a question? 👋 Click to ask!",
+      typing: "Thinking…",
+      suggestions: [
+        "What projects has this person worked on?",
+        "Does she have iOS development experience?",
+        "Tell me about her master's thesis.",
+      ],
+      errors: {
+        rate_limited: "That's a lot of questions — take a short break and try again soon!",
+        not_configured: "The genie isn't fully set up yet — check back later.",
+        network: "Couldn't reach the genie — check your connection and try again.",
+        default: "Sorry, I couldn't get an answer just now. Please try again in a moment.",
+      },
+    },
+  };
+
+  var langOverride = null; // set by the widget's own 中/EN toggle; null = follow the page
+
+  function currentLang() {
+    if (langOverride) return langOverride;
+    var htmlLang = (document.documentElement.lang || "").toLowerCase();
+    return htmlLang.indexOf("zh") === 0 ? "zh" : "en";
+  }
+
+  var lang = currentLang();
+  var t = STRINGS[lang];
+
+  // ---- Element refs -------------------------------------------------------
+  var launcher = document.getElementById("ywc-chat-launcher");
+  var panel = document.getElementById("ywc-chat-panel");
+  var closeBtn = document.getElementById("ywc-chat-close");
+  var messagesEl = document.getElementById("ywc-chat-messages");
+  var suggestionsEl = document.getElementById("ywc-chat-suggestions");
+  var inputEl = document.getElementById("ywc-chat-input");
+  var sendBtn = document.getElementById("ywc-chat-send");
+  var headerTitle = document.getElementById("ywc-header-title");
+  var headerSub = document.getElementById("ywc-header-sub");
+  var langToggleBtn = document.getElementById("ywc-lang-toggle");
+
+  var teaserEl = document.getElementById("ywc-teaser");
+  var teaserTextEl = document.getElementById("ywc-teaser-text");
+  var teaserCloseBtn = document.getElementById("ywc-teaser-close");
+  var TEASER_SESSION_KEY = "ywc_teaser_shown_v1";
+
+  var history = []; // [{role, content}, ...] sent back to the server each turn
+  var opened = false;
+  var sending = false;
+
+  function hideTeaser() {
+    if (teaserEl) teaserEl.classList.remove("ywc-show");
+  }
+
+  // Shows a small "ask me something" bubble once per browser session (not on
+  // every page nav), auto-hiding after a few seconds. Purely client-side —
+  // no server involved, so this works fine on GitHub Pages' static hosting.
+  function maybeShowTeaser() {
+    if (!teaserEl || !teaserTextEl) return;
+    var alreadyShown = false;
+    try { alreadyShown = !!sessionStorage.getItem(TEASER_SESSION_KEY); } catch (e) {}
+    if (alreadyShown) return;
+    setTimeout(function () {
+      if (opened) return;
+      teaserTextEl.textContent = t.teaser;
+      teaserEl.classList.add("ywc-show");
+      try { sessionStorage.setItem(TEASER_SESSION_KEY, "1"); } catch (e) {}
+      setTimeout(hideTeaser, 8000);
+    }, 1500);
+  }
+
+  if (teaserEl) {
+    teaserEl.addEventListener("click", function () {
+      hideTeaser();
+      applyStrings();
+      openPanel();
+    });
+  }
+  if (teaserCloseBtn) {
+    teaserCloseBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      hideTeaser();
+    });
+  }
+
+  function applyStrings() {
+    lang = currentLang();
+    t = STRINGS[lang];
+    launcher.title = t.launcher;
+    headerTitle.textContent = t.title;
+    headerSub.textContent = t.subtitle;
+    inputEl.placeholder = t.placeholder;
+    sendBtn.textContent = t.send;
+    if (langToggleBtn) langToggleBtn.textContent = lang === "zh" ? "EN" : "中文";
+  }
+
+  function renderSuggestions() {
+    suggestionsEl.innerHTML = "";
+    t.suggestions.forEach(function (q) {
+      var chip = document.createElement("button");
+      chip.className = "ywc-suggestion-chip";
+      chip.type = "button";
+      chip.textContent = q;
+      chip.addEventListener("click", function () {
+        inputEl.value = q;
+        sendMessage();
+      });
+      suggestionsEl.appendChild(chip);
+    });
+  }
+
+  // Bot/typing messages get an avatar and are wrapped in a flex row so the
+  // image sits next to the bubble; user/error messages render as before.
+  function appendMessage(text, kind) {
+    var bubble = document.createElement("div");
+    bubble.className = "ywc-msg ywc-" + kind;
+    bubble.textContent = text;
+
+    if (kind === "bot" || kind === "typing") {
+      var row = document.createElement("div");
+      row.className = "ywc-msg-row";
+      var avatar = document.createElement("img");
+      avatar.className = "ywc-avatar";
+      avatar.src = AVATAR_SRC;
+      avatar.alt = "";
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return row;
+    }
+
+    messagesEl.appendChild(bubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return bubble;
+  }
+
+  function openPanel() {
+    opened = true;
+    panel.classList.add("ywc-open");
+    launcher.classList.add("ywc-open");
+    launcher.setAttribute("aria-expanded", "true");
+    if (messagesEl.children.length === 0) {
+      appendMessage(t.greeting, "bot");
+      renderSuggestions();
+    }
+    inputEl.focus();
+  }
+
+  function closePanel() {
+    opened = false;
+    panel.classList.remove("ywc-open");
+    launcher.classList.remove("ywc-open");
+    launcher.setAttribute("aria-expanded", "false");
+  }
+
+  launcher.addEventListener("click", function () {
+    applyStrings();
+    hideTeaser();
+    if (opened) { closePanel(); } else { openPanel(); }
+  });
+  closeBtn.addEventListener("click", closePanel);
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      langOverride = currentLang() === "zh" ? "en" : "zh";
+      applyStrings();
+      renderSuggestions();
+    });
+  }
+
+  inputEl.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  sendBtn.addEventListener("click", sendMessage);
+
+  function errorMessageFor(errCode) {
+    return (t.errors && t.errors[errCode]) || t.errors.default;
+  }
+
+  function sendMessage() {
+    var message = inputEl.value.trim();
+    if (!message || sending) return;
+
+    suggestionsEl.innerHTML = "";
+    appendMessage(message, "user");
+    inputEl.value = "";
+    inputEl.style.height = "auto";
+
+    var typingRow = appendMessage(t.typing, "typing");
+    sending = true;
+    sendBtn.disabled = true;
+
+    fetch(CHAT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message, history: history.slice(-MAX_HISTORY_MESSAGES) }),
+    })
+      .then(function (resp) {
+        return resp.json().then(function (data) { return { ok: resp.ok, data: data }; });
+      })
+      .then(function (result) {
+        typingRow.remove();
+        if (!result.ok) {
+          appendMessage(errorMessageFor(result.data && result.data.error), "error");
+          return;
+        }
+        var reply = (result.data && result.data.reply) || t.errors.default;
+        appendMessage(reply, "bot");
+        history.push({ role: "user", content: message });
+        history.push({ role: "assistant", content: reply });
+      })
+      .catch(function () {
+        typingRow.remove();
+        appendMessage(errorMessageFor("network"), "error");
+      })
+      .finally(function () {
+        sending = false;
+        sendBtn.disabled = false;
+      });
+  }
+
+  applyStrings();
+  maybeShowTeaser();
+})();
+</script>
+
+</body>
+</html>
