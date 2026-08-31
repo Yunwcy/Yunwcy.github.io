@@ -590,10 +590,10 @@ footer {
 <section class="case-section fade-in" id="tables">
     <h2><i class="fas fa-table-cells"></i> <span data-i18n="tablesTitle">Structure-Aware Chunking &amp; Table Verification</span></h2>
     <div class="case-card">
-        <p data-i18n="tablesIntro">A fixed-length chunking baseline (break the document into equal-size blocks, ignore structure) scored <strong>0% top-3 retrieval accuracy</strong> in this project's own ablation test — it breaks semantic boundaries, can split a table down the middle, and loses the section metadata citations depend on. Two problems had to be solved properly instead.</p>
-        <p data-i18n="tablesChunkingTitle"><strong>Section detection uses four cascading fallbacks.</strong> A single rule will eventually miss, so each method only runs when the previous one fails: (1) the PDF's built-in outline/table of contents, (2) heading numbering patterns like "3.1", (3) visually larger font size, (4) a fixed-length split as the last resort. One of the four test papers had no built-in outline at all and was recovered by the numbering rule — every table is also kept atomic and is never split across chunks, since a partial table can produce a convincing but incorrect answer.</p>
-        <p data-i18n="tablesRecoveryTitle"><strong>Table reconstruction had to be built from scratch.</strong> Both of the PDF library's built-in table strategies failed on real papers: the line-based one found nothing, and the text-alignment one read a full page of prose as a 61×9 table. The fix was geometric — use the layout's horizontal rule lines as a table's top and bottom anchors, cluster text by vertical position into rows, and split columns at the horizontal gaps between them.</p>
-        <p data-i18n="tablesValidationTitle"><strong>Reconstructed tables are verified before they're trusted.</strong> Two checks run before a rebuilt table is allowed into the index: the numbers in the rebuilt cells must exactly conserve the numbers in the source region (a numeric multiset check), and no two rows may share the same key or the later one would silently overwrite the earlier one. If either check fails, the structured cells are discarded entirely and the table falls back to raw text — <strong>an unverified cell value is never indexed for deterministic lookup.</strong></p>
+        <p data-i18n-html="tablesIntro"></p>
+        <p data-i18n-html="tablesChunkingTitle"></p>
+        <p data-i18n-html="tablesRecoveryTitle"></p>
+        <p data-i18n-html="tablesValidationTitle"></p>
     </div>
 </section>
 
@@ -626,7 +626,7 @@ footer {
             <div class="role-icon"><i class="fas fa-user-gear"></i></div>
             <div class="role-title" data-i18n="roleSubtitle">Solo Full-Stack &amp; AI Engineer</div>
         </div>
-        <p data-i18n="roleContent">Built entirely alone, end to end: PDF layout analysis and the four-level cascading section detector, geometric table reconstruction with numeric-conservation validation, hybrid vector + BM25 retrieval with RRF fusion, the dynamic token-aware context-budget packer, query routing across four question types, the section-level map-reduce summarization pipeline, the FastAPI backend and React frontend, the nginx/Docker Compose deployment, the Prometheus/Grafana observability stack, an MCP server exposing four tools, the 76-test automated suite, and the reproducible evaluation, load-test, and report-generation scripts (plus the CI check that fails the build if a documented number doesn't match its generator script). No collaborators.</p>
+        <ul data-i18n-html="roleContent"></ul>
     </div>
 </section>
 
@@ -734,7 +734,7 @@ footer {
 
 <section class="case-section fade-in" id="impact">
     <h2><i class="fas fa-chart-line"></i> <span data-i18n="impactTitle">Evaluation Results</span></h2>
-    <p class="impact-intro" data-i18n="impactIntro">Every number below comes from a script that can be rerun (<code>eval.py</code>, <code>loadtest.py</code>, <code>report.py</code>), and a CI check fails the build if a documented number and its generator ever drift apart — nothing here is a hand-typed estimate.</p>
+    <p class="impact-intro" data-i18n-html="impactIntro"></p>
     <div class="proof-grid">
         <div class="proof-card">
             <div class="proof-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
@@ -889,28 +889,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 tablesValidationTitle: "<strong>Reconstructed tables are verified before they're trusted.</strong> Two checks run before a rebuilt table is allowed into the index: the numbers in the rebuilt cells must exactly conserve the numbers in the source region (a numeric multiset check), and no two rows may share the same key or the later one would silently overwrite the earlier one. If either check fails, the structured cells are discarded entirely and the table falls back to raw text — <strong>an unverified cell value is never indexed for deterministic lookup.</strong>",
                 considerTitle: "Engineering Trade-offs",
                 considerCostLabel: "Cost",
-                considerCost: "<li><strong>gpt-4o-mini, temperature 0.</strong> The only paid API call in the whole pipeline, kept to a small model with low output variance to reduce both cost and evaluation noise.</li><li><strong>Local ONNX embedding.</strong> A 220MB multilingual model runs on the same machine, so indexing a document costs $0 in API calls no matter how many times it happens.</li><li><strong>No vector database.</strong> A document is roughly 90 chunks, so exact NumPy search is already fast enough at this scale — one less paid service to run.</li>",
+                considerCost: "<li><strong>gpt-4o-mini, temp 0</strong> — the only paid call in the pipeline, chosen for low cost and low output variance.</li><li><strong>Local ONNX embedding</strong> — a 220MB model on the same machine, so indexing costs $0 in API calls.</li><li><strong>No vector database</strong> — ~90 chunks per document, exact NumPy search is already fast enough.</li>",
                 considerSpeedLabel: "Speed",
                 considerSpeedContent: "",
-                considerSpeed: "<li><strong>Trade-off:</strong> hybrid retrieval plus agentic-style multi-stage matching trades some latency for completeness — response speed is the lowest-rated dimension in the project's own survey.</li><li><strong>Separate inference sessions</strong> for indexing vs. querying, added after load testing showed the two paths were not actually isolated (see Challenge 3).</li><li><strong>SSE token streaming</strong> means the first token appears in about 1 second even though full generation takes longer, cutting perceived latency.</li>",
+                considerSpeed: "<li><strong>Trade-off:</strong> hybrid retrieval trades some latency for completeness — speed is the survey's lowest-rated dimension.</li><li><strong>Separate inference sessions</strong> for indexing vs. querying, added once load testing exposed a shared session (Challenge 3).</li><li><strong>SSE streaming</strong> surfaces the first token in ~1s, cutting perceived latency.</li>",
                 considerAccuracyLabel: "Accuracy",
-                considerAccuracy: "<li><strong>Multi-stage retrieval:</strong> semantic search + keyword search + query rewriting + HyDE + RRF + LLM reranking, so both meaning and exact terms (like a regulation number or metric name) get caught.</li><li><strong>Why it matters:</strong> retrieval accuracy is the project's highest-scoring dimension after these additions — 12/12 test questions found their correct section.</li><li><strong>Numeric conservation checks</strong> on rebuilt tables mean a wrong cell value structurally cannot enter the index.</li>",
+                considerAccuracy: "<li><strong>Multi-stage retrieval:</strong> semantic + keyword + query rewriting + HyDE + RRF + reranking — catches both meaning and exact terms.</li><li><strong>Result:</strong> the highest-scoring dimension — 12/12 test questions found the right section.</li><li><strong>Numeric conservation checks</strong> mean a wrong table cell structurally can't enter the index.</li>",
                 considerStabilityLabel: "Reliability",
-                considerStability: "<li><strong>Unverified table cells are never indexed</strong> — a failed validation falls back to raw text instead of silently shipping a wrong number.</li><li><strong>Offline indexing is tested explicitly:</strong> upload and indexing succeed even when the external model is down; only generation needs it.</li><li><strong>Three-layer verification:</strong> system assertions catch structural failures, reproducible eval scripts measure what each design change actually adds, and an independent cross-check against the source paper caught 3 errors the first two layers missed.</li>",
+                considerStability: "<li><strong>Unverified table cells are never indexed</strong> — a failed check falls back to raw text, not a silent wrong number.</li><li><strong>Offline indexing is tested explicitly</strong> — only answer generation needs the external model.</li><li><strong>Three-layer verification</strong> caught 3 errors the first two layers missed.</li>",
                 roleTitle: "My Role",
                 roleSubtitle: "Solo Full-Stack & AI Engineer",
-                roleContent: "Built entirely alone, end to end: PDF layout analysis and the four-level cascading section detector, geometric table reconstruction with numeric-conservation validation, hybrid vector + BM25 retrieval with RRF fusion, the dynamic token-aware context-budget packer, query routing across four question types, the section-level map-reduce summarization pipeline, the FastAPI backend and React frontend, the nginx/Docker Compose deployment, the Prometheus/Grafana observability stack, an MCP server exposing four tools, the 76-test automated suite, and the reproducible evaluation, load-test, and report-generation scripts (plus the CI check that fails the build if a documented number doesn't match its generator script). No collaborators.",
+                roleContent: "<li><strong>Core pipeline:</strong> PDF layout analysis, the four-level cascading section detector, and geometric table reconstruction with numeric-conservation validation.</li><li><strong>Retrieval &amp; generation:</strong> hybrid vector + BM25 retrieval with RRF fusion, the dynamic token-aware context-budget packer, query routing across four question types, and the section-level map-reduce summarization pipeline.</li><li><strong>Full delivery:</strong> the FastAPI backend, React frontend, nginx/Docker Compose deployment, Prometheus/Grafana observability stack, and an MCP server exposing four tools.</li><li><strong>Verification:</strong> the 76-test automated suite, reproducible evaluation/load-test/report scripts, and a CI check that fails the build if a documented number ever drifts from its generator.</li><li><strong>AI-native workflow:</strong> built with AI coding tools handling implementation, while every architectural decision, verification design, and correctness call was mine.</li>",
                 featuresTitle: "Features",
                 f1Title: "Hybrid Retrieval",
-                f1List: "<li>Semantic vector search (local ONNX embedding) fused with BM25 keyword search (jieba-segmented for Chinese) via Reciprocal Rank Fusion, so phrasing differences and exact proper nouns are both covered.</li><li>Only once a table is linearized row by row do its column names become literally matchable by keyword search.</li>",
+                f1List: "<li><strong>Semantic vector search</strong> (local ONNX embedding) fused with <strong>BM25 keyword search</strong> via Reciprocal Rank Fusion, so phrasing differences and exact proper nouns are both covered.</li><li>Only once a table is <strong>linearized row by row</strong> do its column names become matchable by keyword search.</li>",
                 f2Title: "Verified Table Reconstruction",
-                f2List: "<li>Tables are rebuilt geometrically from layout rule lines, not from the PDF library's unreliable built-in detectors.</li><li>Every rebuilt table must pass a numeric-conservation check and a unique-key check before it's trusted for indexing; a failed table falls back to raw text instead of risking a wrong number.</li>",
+                f2List: "<li>Tables are <strong>rebuilt geometrically</strong> from layout rule lines, not the PDF library's unreliable built-in detectors.</li><li>Every table must pass a <strong>numeric-conservation check</strong> and a <strong>unique-key check</strong> before indexing; a failed table falls back to raw text.</li>",
                 f3Title: "Query Routing",
-                f3List: "<li>Summary, comparison, table-lookup, and general QA questions each take their own path, all hard-capped at the same 6,000-token evidence budget.</li><li>A table-lookup question can resolve to a deterministic cell value rather than a model-generated guess.</li>",
+                f3List: "<li>Summary, comparison, table-lookup, and QA questions each take their own path, all hard-capped at the same <strong>6,000-token</strong> evidence budget.</li><li>A table-lookup question resolves to a <strong>deterministic cell value</strong>, not a model-generated guess.</li>",
                 f4Title: "Hierarchical Summarization",
-                f4List: "<li>\"Summarize this document\" is answered by section-level map-reduce (13 sections → 13 parallel partial summaries → 1 merged summary), not by retrieving the chunks nearest to the word \"summary\".</li><li>Summaries are prepared in the background after upload and cached — only the final merge step is language-specific.</li>",
+                f4List: "<li>\"Summarize this document\" is answered by <strong>section-level map-reduce</strong> (13 sections → 13 partial summaries → 1 merged summary), not by retrieving chunks nearest to the word \"summary\".</li><li>Summaries are <strong>prepared in the background</strong> after upload and cached.</li>",
                 f5Title: "Traceable Citations",
-                f5List: "<li>Every answer carries a page number and section citation that can be expanded to the original passage in the sources panel.</li><li>The retrieval budget is calculated dynamically per query from actual token counts, so system prompt + question + context + answer never exceeds the 10K ceiling even for high-token-density input like Chinese or emoji.</li>",
+                f5List: "<li>Every answer carries a <strong>page number and section citation</strong>, expandable to the original passage in the sources panel.</li><li>The retrieval budget is <strong>calculated dynamically</strong> per query, so the total never exceeds the <strong>10K ceiling</strong> even for high-density input like Chinese or emoji.</li>",
                 challengesTitle: "Challenges & Solutions",
                 problemLabel: "Problem",
                 solutionLabel: "Solution",
@@ -1013,27 +1013,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 tablesValidationTitle: "<strong>重建的表格要先驗證過才會被信任。</strong>一張重建的表格要通過兩項檢查才能進索引：重建儲存格裡的數字必須跟原始區域的數字完全守恆（數值多重集檢查），且不能有兩列共用同一個鍵，否則後面的會悄悄覆蓋前面的。任一項檢查失敗，結構化儲存格就整個捨棄，該表格退回成原始文字——<strong>沒通過驗證的儲存格數值絕不會被放進確定性查表的索引裡。</strong>",
                 considerTitle: "工程權衡",
                 considerCostLabel: "成本",
-                considerCost: "<li><strong>gpt-4o-mini，溫度設為0。</strong>整條pipeline裡唯一付費的API呼叫，選用小型模型並降低輸出變異度，同時壓低成本與評估雜訊。</li><li><strong>本機ONNX向量化。</strong>220MB的多語言模型在同一台機器上執行，不管索引多少次文件，API呼叫成本都是$0。</li><li><strong>沒有向量資料庫。</strong>一份文件大約90個片段，用NumPy做精確搜尋在這個量級已經夠快，也少維護一個外部付費服務。</li>",
+                considerCost: "<li><strong>gpt-4o-mini，溫度0</strong>——唯一付費呼叫，兼顧成本與輸出穩定度。</li><li><strong>本機ONNX向量化</strong>——220MB模型跑在同一台機器，索引成本永遠是$0。</li><li><strong>沒有向量資料庫</strong>——約90個片段的量級，NumPy精確搜尋已經夠快。</li>",
                 considerSpeedLabel: "速度",
-                considerSpeed: "<li><strong>取捨：</strong>混合檢索加上多階段比對用一點延遲換取完整性——回應速度是專案自身問卷中評分最低的一個維度。</li><li><strong>索引與查詢用各自獨立的推論工作階段</strong>，是負載測試發現兩條路徑其實沒有真的隔離之後才加上去的（見挑戰三）。</li><li><strong>SSE逐字串流</strong>讓第一個字元約1秒內就出現，即使完整生成需要更久，體感延遲仍明顯降低。</li>",
+                considerSpeed: "<li><strong>取捨：</strong>混合檢索用一點延遲換完整性，回應速度是問卷評分最低的維度。</li><li><strong>索引與查詢用各自獨立的推論階段</strong>，是負載測試發現共用階段的問題後才加上的（見挑戰三）。</li><li><strong>SSE串流</strong>讓第一個字約1秒內出現，降低體感延遲。</li>",
                 considerAccuracyLabel: "準確性",
-                considerAccuracy: "<li><strong>多階段檢索：</strong>語意搜尋＋關鍵字搜尋＋查詢改寫＋HyDE＋RRF＋LLM重排序，同時捕捉語意跟精確詞彙（像法規編號或指標名稱）。</li><li><strong>成效：</strong>加上這些之後檢索準確度是專案裡評分最高的維度——12題測試問題全部（12/12）都找到正確章節。</li><li><strong>重建表格的數值守恆檢查</strong>讓錯誤的儲存格數值在結構上就不可能進到索引裡。</li>",
+                considerAccuracy: "<li><strong>多階段檢索：</strong>語意＋關鍵字＋查詢改寫＋HyDE＋RRF＋重排序，同時捕捉語意與精確詞彙。</li><li><strong>成效：</strong>評分最高的維度，12/12題都找到正確章節。</li><li><strong>數值守恆檢查</strong>讓錯誤儲存格結構上就不可能進索引。</li>",
                 considerStabilityLabel: "可靠性",
-                considerStability: "<li><strong>未通過驗證的表格儲存格絕不索引</strong>——驗證失敗就退回原始文字，不會悄悄送出錯誤數字。</li><li><strong>離線索引有明確測試：</strong>即使外部模型無法使用，上傳與索引仍能成功；只有生成回答這步需要它。</li><li><strong>三層驗證策略：</strong>系統斷言抓結構性失敗、可重跑的評估腳本量測每個設計改動實際帶來的效果、對照原始論文的獨立交叉核對抓到了前兩層都漏掉的3個錯誤。</li>",
+                considerStability: "<li><strong>未驗證的表格儲存格絕不索引</strong>——失敗就退回原始文字，不會悄悄送出錯誤數字。</li><li><strong>離線索引明確測試過</strong>——只有生成答案需要外部模型。</li><li><strong>三層驗證</strong>抓到前兩層漏掉的3個錯誤。</li>",
                 roleTitle: "我的角色",
                 roleSubtitle: "獨立全端與AI工程師",
-                roleContent: "從零到有獨立完成：PDF版面分析與四層級聯章節偵測器、含數值守恆驗證的幾何表格重建、混合向量＋BM25檢索與RRF融合、動態token感知的脈絡預算組裝器、跨四種問題類型的查詢路由、章節層級的map-reduce摘要管線、FastAPI後端與React前端、nginx／Docker Compose部署、Prometheus／Grafana可觀測性堆疊、對外開放四個工具的MCP server、76項自動化測試，以及可重跑的評估、壓力測試、報表產生腳本（外加CI檢查：文件裡的數字跟產生腳本對不上就直接失敗）。沒有協作者。",
+                roleContent: "<li><strong>核心處理管線：</strong>PDF版面分析、四層級聯章節偵測器、含數值守恆驗證的幾何表格重建。</li><li><strong>檢索與生成：</strong>混合向量＋BM25檢索與RRF融合、動態token感知的脈絡預算組裝器、跨四種問題類型的查詢路由、章節層級的map-reduce摘要管線。</li><li><strong>完整交付：</strong>FastAPI後端、React前端、nginx／Docker Compose部署、Prometheus／Grafana可觀測性堆疊、對外開放四個工具的MCP server。</li><li><strong>驗證：</strong>76項自動化測試、可重跑的評估／壓力測試／報表產生腳本，以及文件數字跟產生腳本對不上就讓建置失敗的CI檢查。</li><li><strong>AI Native開發方式：</strong>用AI輔助工具處理實作細節，架構決策、驗證設計與正確性判斷全部由自己主導。</li>",
                 featuresTitle: "功能特色",
                 f1Title: "混合檢索",
-                f1List: "<li>語意向量搜尋（本機ONNX向量化）與BM25關鍵字搜尋（中文先用jieba斷詞）透過Reciprocal Rank Fusion融合，同時涵蓋用詞差異與精確專有名詞。</li><li>表格要先逐列線性化之後，欄位名稱才真正能被關鍵字搜尋比對到。</li>",
+                f1List: "<li><strong>語意向量搜尋</strong>（本機ONNX向量化）與<strong>BM25關鍵字搜尋</strong>透過Reciprocal Rank Fusion融合，同時涵蓋用詞差異與精確專有名詞。</li><li>表格要先<strong>逐列線性化</strong>之後，欄位名稱才真正能被關鍵字搜尋比對到。</li>",
                 f2Title: "經驗證的表格重建",
-                f2List: "<li>表格是依版面橫線幾何還原出來的，不是依賴PDF函式庫不可靠的內建偵測器。</li><li>每張重建的表格都要通過數值守恆檢查與唯一鍵檢查才會被信任進索引；驗證失敗的表格會退回原始文字，而不是冒著送出錯誤數字的風險。</li>",
+                f2List: "<li>表格是依版面橫線<strong>幾何還原</strong>出來的，不是依賴PDF函式庫不可靠的內建偵測器。</li><li>每張表格都要通過<strong>數值守恆檢查</strong>與<strong>唯一鍵檢查</strong>才會被信任進索引；驗證失敗就退回原始文字。</li>",
                 f3Title: "查詢路由",
-                f3List: "<li>摘要、比較、查表、一般問答四種問題各自走自己的路徑，但都統一受限於同一個6,000 tokens的證據預算上限。</li><li>查表類問題可以直接解析成確定性的儲存格數值，而不是模型生成的猜測。</li>",
+                f3List: "<li>摘要、比較、查表、一般問答四種問題各自走自己的路徑，但都統一受限於同一個<strong>6,000 tokens</strong>的證據預算上限。</li><li>查表類問題可以直接解析成<strong>確定性的儲存格數值</strong>，而不是模型生成的猜測。</li>",
                 f4Title: "階層式摘要",
-                f4List: "<li>「幫我摘要這份文件」是用章節層級的map-reduce回答的（13個章節→13份平行的分段摘要→1份合併摘要），而不是去檢索跟「摘要」這個詞最相似的片段。</li><li>摘要在上傳後於背景預先產生並快取——只有最後的合併步驟才是語言相關的。</li>",
+                f4List: "<li>「幫我摘要這份文件」是用<strong>章節層級的map-reduce</strong>回答的（13個章節→13份分段摘要→1份合併摘要），而不是去檢索跟「摘要」這個詞最相似的片段。</li><li>摘要在上傳後<strong>於背景預先產生並快取</strong>。</li>",
                 f5Title: "可追溯引用",
-                f5List: "<li>每個回答都附頁碼與章節引用，可以在來源面板展開看到原文段落。</li><li>檢索預算依每次查詢的實際token數動態計算，即使遇到中文或emoji這類高token密度的輸入，system prompt＋問題＋脈絡＋答案的總量也不會超過10K上限。</li>",
+                f5List: "<li>每個回答都附<strong>頁碼與章節引用</strong>，可以在來源面板展開看到原文段落。</li><li>檢索預算<strong>依每次查詢動態計算</strong>，即使遇到中文或emoji這類高密度輸入，總量也不會超過<strong>10K上限</strong>。</li>",
                 challengesTitle: "挑戰與解法",
                 problemLabel: "問題",
                 solutionLabel: "解法",
